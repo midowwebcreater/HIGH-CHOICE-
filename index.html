@@ -3,374 +3,243 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>High Choice — Premium Watches Store</title>
-  <meta name="description" content="High Choice — Handpicked original luxury watches. WhatsApp: +91 7869288078" />
+  <title>High Choice — Premium Watches</title>
+  <meta name="description" content="High Choice – handpicked luxury watches. WhatsApp: +91 7869288078" />
   <link rel="icon" href="favicon.png" />
-  <!-- Tailwind CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    :root{ --gold:#d4af37; --muted:rgba(255,255,255,0.78); }
-    body { background: linear-gradient(180deg,#040404,#070707); color:#eef0f2; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; }
-    .glass { background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); border:1px solid rgba(255,255,255,0.03); backdrop-filter: blur(6px); }
-    .gold-text { background: linear-gradient(90deg,#f7e27d,var(--gold)); -webkit-background-clip:text; color:transparent; font-weight:800; }
-    .tilt { transform-style: preserve-3d; transition: transform .18s ease-out; will-change: transform; }
-    .img-blank { display:flex; align-items:center; justify-content:center; color:#6b6b6b; background:linear-gradient(180deg,#0b0b0b,#0f0f0f); }
-    @keyframes bob { 0%{transform:translateY(0)}50%{transform:translateY(-8px)}100%{transform:translateY(0)} }
+    :root{
+      --bg:#040404; --panel:#0f0f0f; --muted:#bfbfbf; --gold:#d4af37;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background:linear-gradient(180deg,var(--bg),#070707);
+      color:#eee;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+    }
+    .container{max-width:1200px;margin:0 auto;padding:20px;}
+
+    /* Header */
+    header{display:flex;align-items:center;justify-content:space-between;padding:18px 0}
+    .brand{display:flex;gap:12px;align-items:center}
+    .brand img{width:56px;height:56px;object-fit:cover;border-radius:8px;display:block}
+    .brand h1{margin:0;font-size:18px;color:var(--gold);letter-spacing:0.6px}
+    nav{display:flex;gap:14px;align-items:center}
+    nav a{color:var(--muted);text-decoration:none;padding:8px 12px;border-radius:8px;font-size:14px}
+    .btn-wa{background:linear-gradient(90deg,var(--gold),#f7e27d);color:#000;padding:8px 12px;border-radius:8px;font-weight:700;text-decoration:none}
+
+    /* Hero */
+    .hero{display:grid;grid-template-columns:1fr 480px;gap:28px;align-items:center;margin-top:18px}
+    .hero .eyebrow{color:var(--muted);text-transform:uppercase;font-weight:700;font-size:12px;margin-bottom:10px}
+    .hero h2{font-size:36px;line-height:1.02;margin:0 0 12px;font-weight:800}
+    .hero p{color:var(--muted);margin-bottom:20px;max-width:560px}
+    .hero .actions{display:flex;gap:12px}
+
+    /* Featured (video) */
+    .stage{height:420px;border-radius:18px;overflow:hidden;display:flex;align-items:center;justify-content:center;background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent);border:1px solid rgba(255,255,255,0.03)}
+    .featured-card{width:360px;height:360px;border-radius:16px;overflow:hidden;display:flex;align-items:center;justify-content:center;background:#000;position:relative;transform-style:preserve-3d;transition:transform .18s ease}
+    .featured-card video, .featured-card img{width:100%;height:100%;object-fit:cover;display:block}
+    .featured-badge{position:absolute;left:16px;top:16px;background:rgba(0,0,0,0.5);padding:8px 12px;border-radius:12px;color:#fff;font-weight:700;border:1px solid rgba(255,255,255,0.04)}
+
+    /* Products grid */
+    .section{margin-top:40px}
+    .section h3{margin:0 0 12px;font-size:20px}
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .card{background:var(--panel);padding:12px;border-radius:12px;border:1px solid rgba(255,255,255,0.03);transition:transform .25s ease,box-shadow .25s ease}
+    .card:hover{transform:translateY(-8px);box-shadow:0 18px 40px rgba(0,0,0,0.6)}
+    .thumb{height:220px;border-radius:10px;overflow:hidden;background:#070707;display:flex;align-items:center;justify-content:center}
+    .thumb img{width:100%;height:100%;object-fit:cover}
+    .meta{padding:10px}
+    .meta h4{margin:0;font-size:16px}
+    .meta p{color:var(--muted);font-size:13px;margin:6px 0}
+    .price{color:var(--gold);font-weight:800;font-size:18px}
+
+    /* Footer & contact */
+    .contact{margin-top:30px;padding:18px;border-radius:12px;background:linear-gradient(180deg,rgba(255,255,255,0.01),transparent);border:1px solid rgba(255,255,255,0.02);display:flex;align-items:center;justify-content:space-between;gap:12px}
+    .contact p{margin:0;color:var(--muted)}
+    footer{margin-top:28px;text-align:center;color:var(--muted);font-size:13px}
+
+    /* Floating WA */
+    .wa-float{position:fixed;right:18px;bottom:18px;background:linear-gradient(180deg,#25d366,#128c7e);padding:12px 14px;border-radius:999px;color:#fff;font-weight:700;z-index:60;box-shadow:0 18px 40px rgba(0,0,0,0.5)}
+
+    /* Responsive */
+    @media (max-width:1000px){.hero{grid-template-columns:1fr 360px}.grid{grid-template-columns:repeat(2,1fr)}}
+    @media (max-width:720px){.hero{grid-template-columns:1fr}.stage{height:320px}.grid{grid-template-columns:1fr}}
   </style>
 </head>
-<body class="antialiased">
+<body>
+  <div class="container">
 
-  <div class="max-w-[1200px] mx-auto px-4">
-
-    <!-- HEADER -->
-    <header class="flex items-center justify-between py-5 sticky top-4 z-50">
-      <div class="flex items-center gap-3">
-        <img src="logo.png" alt="High Choice" class="w-14 h-14 object-cover rounded-md shadow-sm" onerror="this.style.display='none'">
+    <!-- header -->
+    <header>
+      <div class="brand">
+        <img src="logo.png" alt="High Choice logo" onerror="this.style.display='none'">
         <div>
-          <div class="text-xl font-extrabold" style="color:var(--gold)">High Choice</div>
-          <div class="text-xs text-gray-400">Premium Original Watches</div>
+          <h1>High Choice</h1>
+          <div style="color:var(--muted);font-size:12px">Premium Original Watches</div>
         </div>
       </div>
 
-      <nav class="hidden md:flex items-center gap-6">
-        <a href="#home" class="text-gray-300 hover:text-white">Home</a>
-        <a href="#products" class="text-gray-300 hover:text-white">Watches</a>
-        <a href="#about" class="text-gray-300 hover:text-white">About</a>
-        <a href="https://wa.me/917869288078" class="inline-flex items-center gap-2 px-4 py-2 rounded-md font-semibold"
-           style="background: linear-gradient(90deg, rgba(212,175,55,0.95), rgba(247,226,125,0.9)); color:#000">WhatsApp</a>
+      <nav>
+        <a href="#home">Home</a>
+        <a href="#products">Watches</a>
+        <a href="#about">About</a>
+        <a class="btn-wa" href="https://wa.me/917869288078" target="_blank">WhatsApp</a>
       </nav>
-
-      <div class="md:hidden">
-        <button id="mobileMenuBtn" class="p-2 bg-white/5 rounded-md">Menu</button>
-      </div>
     </header>
 
-    <!-- HERO -->
-    <section id="home" class="grid md:grid-cols-2 gap-8 items-center py-8">
-      <div class="space-y-6">
-        <div class="text-sm uppercase font-bold text-gray-400">Limited Curations</div>
-        <h1 class="text-4xl md:text-5xl font-extrabold leading-tight">
-          Original Luxury Timepieces
-          <span class="block gold-text">Handpicked • Verified • Warranty</span>
-        </h1>
-        <p class="text-gray-300 max-w-xl">
-          High Choice sources authenticated original watches — showroom quality, verified documentation, and white-glove aftercare.
-        </p>
+    <!-- hero -->
+    <main id="home" class="hero">
+      <div>
+        <div class="eyebrow">Limited Curations</div>
+        <h2>Original Luxury Timepieces<br><span style="color:var(--gold)">Handpicked • Verified • Warranty</span></h2>
+        <p>High Choice sources authenticated original watches — showroom quality, verified documentation, and white-glove aftercare.</p>
 
-        <div class="flex gap-3">
-          <a href="#products" class="px-5 py-3 rounded-md font-semibold" style="background:linear-gradient(90deg,var(--gold),#f7e27d);color:#000">Shop Collection</a>
-          <a href="https://wa.me/917869288078" class="px-5 py-3 rounded-md border border-white/6 text-gray-200">Book via WhatsApp</a>
+        <div class="actions" style="margin-top:18px">
+          <a class="btn-wa" href="#products" style="text-decoration:none;margin-right:8px">Shop Collection</a>
+          <a href="https://wa.me/917869288078" class="btn-wa" style="background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--muted);text-decoration:none">Book via WhatsApp</a>
         </div>
 
-        <div class="text-sm text-gray-400 mt-3">Call/WhatsApp: <strong>+91 7869288078</strong></div>
+        <div style="margin-top:12px;color:var(--muted);font-size:13px">Call/WhatsApp: <strong>+91 7869288078</strong></div>
       </div>
 
-      <div class="glass rounded-xl p-6 flex items-center justify-center" style="height:380px;">
-        <!-- featured product area -->
-        <div id="featured" class="w-[300px] h-[300px] tilt rounded-xl shadow-2xl flex items-center justify-center overflow-hidden" style="animation:bob 4s ease-in-out infinite;">
-          <div id="featuredInner" class="w-full h-full"></div>
+      <div class="stage glass">
+        <div class="featured-badge">Featured</div>
+        <div id="featuredCard" class="featured-card" aria-hidden="false">
+          <!-- Video mockup: Featured1.mp4 (autoplay muted loop). Fallback to image if video not found. -->
+          <video id="featuredVideo" autoplay muted loop playsinline poster="watch1.jpg" style="display:block">
+            <source src="Featured1.mp4" type="video/mp4">
+            <!-- fallback image -->
+            <img src="watch1.jpg" alt="Featured watch">
+          </video>
         </div>
       </div>
-    </section>
+    </main>
 
-    <!-- PRODUCTS -->
-    <section id="products" class="py-8">
-      <div class="flex items-center justify-between mb-6">
-        <h2 class="text-2xl font-bold">Featured Watches</h2>
-        <div class="text-sm text-gray-400">Prices: ₹2,500 — ₹4,500</div>
+    <!-- Featured Watches -->
+    <section id="products" class="section">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+        <h3>Featured Watches</h3>
+        <div style="color:var(--muted)">Prices: ₹2,500 — ₹4,500</div>
       </div>
 
-      <div id="productGrid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        <!-- JS will populate cards here by detecting watch1..watch50 in repo root -->
-      </div>
-    </section>
-
-    <!-- CART SUMMARY (floating) -->
-    <div id="cartSummary" class="fixed right-6 bottom-6 z-50 w-80 bg-[#0c0c0c] border border-white/6 rounded-xl p-4 shadow-2xl hidden">
-      <div class="flex items-center justify-between mb-3">
-        <div class="font-semibold">Cart</div>
-        <button id="clearCart" class="text-xs text-gray-300">Clear</button>
-      </div>
-      <div id="cartItems" class="max-h-44 overflow-auto space-y-3 text-sm"></div>
-      <div class="mt-3 flex items-center justify-between">
-        <div class="font-bold">Total</div>
-        <div id="cartTotal" class="font-bold" style="color:var(--gold)">₹ 0</div>
-      </div>
-      <div class="mt-3 flex gap-2">
-        <a id="checkoutBtn" class="flex-1 text-center px-3 py-2 rounded-md text-black font-semibold" style="background:linear-gradient(90deg,var(--gold),#f7e27d)" href="#">Checkout</a>
-        <button id="closeCart" class="px-3 py-2 rounded-md border border-white/6">Close</button>
-      </div>
-    </div>
-
-    <!-- CONTACT / FOOTER -->
-    <footer id="contact" class="mt-12 py-10">
-      <div class="glass rounded-xl p-6 flex flex-col md:flex-row items-center justify-between gap-4">
-        <div>
-          <h3 class="font-bold text-xl">Contact & Appointments</h3>
-          <p class="text-gray-300">Book showroom visits, request authentication reports or chat on WhatsApp for fast assistance.</p>
-        </div>
-        <div class="flex gap-3">
-          <a href="https://wa.me/917869288078" target="_blank" class="px-4 py-3 rounded-md font-semibold" style="background:linear-gradient(90deg,var(--gold),#f7e27d);color:#000">Chat on WhatsApp</a>
-          <a href="tel:+917869288078" class="px-4 py-3 rounded-md border border-white/6">Call</a>
-        </div>
-      </div>
-
-      <div class="text-center text-gray-400 mt-6">© <span id="year"></span> High Choice • All Rights Reserved</div>
-    </footer>
-
-    <!-- floating WA button (small) -->
-    <a id="waFloating" href="https://wa.me/917869288078" class="fixed right-6 bottom-6 md:right-10 md:bottom-10 z-40 inline-flex items-center gap-3 bg-gradient-to-b from-green-500 to-green-600 px-4 py-2 rounded-full shadow-2xl">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M21 12.04c0-4.97-4.02-9-9-9s-9 4.03-9 9c0 1.59.41 3.09 1.13 4.41L3 21l4.7-1.22A8.93 8.93 0 0 0 12 21c4.98 0 9-4.03 9-8.96z" fill="#fff"/></svg>
-      <span class="font-semibold">Chat</span>
-    </a>
-
-  </div>
-
-  <!-- SCRIPTS -->
-  <script>
-    document.getElementById('year').innerText = new Date().getFullYear();
-
-    // === Utility functions ===
-    function prettifyFileName(name) {
-      const noExt = name.replace(/\.[^/.]+$/, '');
-      // if name matches "watch<number>" then use "Watch #n" else replace underscores/dashes with spaces and capitalize
-      const m = noExt.match(/^watch(\d+)$/i);
-      if (m) return 'Watch ' + m[1];
-      return noExt.replace(/[-_]+/g,' ').split(' ').map(s=> s.charAt(0).toUpperCase()+s.slice(1)).join(' ');
-    }
-
-    // deterministic price in ₹2500-₹4500 range based on index (stable)
-    function deterministicPrice(i){
-      return 2500 + ((i * 373) % 2001); // 2500..4500
-    }
-
-    // attempt to load image (returns Promise)
-    function tryLoad(src){
-      return new Promise((resolve,reject)=>{
-        const img = new Image();
-        img.onload = ()=> resolve(src);
-        img.onerror = ()=> reject(src);
-        img.src = src;
-      });
-    }
-
-    // try common extensions for a base name (root folder)
-    async function findImageForBase(base){
-      const exts = ['jpg','jpeg','png','webp'];
-      for(const e of exts){
-        const path = `${base}.${e}`;
-        try {
-          await tryLoad(path);
-          return path;
-        } catch(e){}
-      }
-      throw new Error('not found');
-    }
-
-    // scan watch1..watch50 in root and return array of product objects
-    async function scanProducts(){
-      const products = [];
-      const max = 50;
-      for(let i=1;i<=max;i++){
-        const base = `watch${i}`;
-        try {
-          const src = await findImageForBase(base);
-          products.push({
-            id: i,
-            src,
-            title: prettifyFileName(base),
-            price: deterministicPrice(i)
-          });
-        } catch(e){
-          // not found — continue
-        }
-      }
-      return products;
-    }
-
-    // Render featured area
-    function renderFeatured(product){
-      const container = document.getElementById('featuredInner');
-      container.innerHTML = '';
-      if(!product){
-        container.innerHTML = `<div class="img-blank">No featured product</div>`;
-        return;
-      }
-      const img = document.createElement('img');
-      img.src = product.src;
-      img.alt = product.title;
-      img.className = 'object-cover w-full h-full';
-      container.appendChild(img);
-    }
-
-    // Render product grid
-    function renderGrid(products){
-      const grid = document.getElementById('productGrid');
-      grid.innerHTML = '';
-      if(products.length===0){
-        grid.innerHTML = `<div class="p-6 text-gray-400">No product images found. Upload images named <code>watch1.jpg</code>, <code>watch2.png</code> ... in the same folder as index.html</div>`;
-        return;
-      }
-      products.forEach(p=>{
-        const card = document.createElement('div');
-        card.className = 'product-card glass rounded-xl p-4 fade-in';
-        card.setAttribute('data-id', p.id);
-        card.innerHTML = `
-          <div class="relative rounded-lg overflow-hidden h-56 bg-[#0b0b0b]">
-            <img src="${p.src}" alt="${p.title}" class="w-full h-full object-cover">
-            <div class="absolute right-3 top-3 bg-black/50 text-xs text-gray-200 px-2 py-1 rounded">Featured</div>
-          </div>
-          <div class="mt-3">
-            <h3 class="font-semibold text-lg">${p.title}</h3>
-            <p class="text-xs text-gray-400 mt-1">Premium • Verified</p>
-            <div class="mt-3 flex items-center justify-between">
-              <div class="text-xl font-bold" style="color:var(--gold)">₹ ${p.price}</div>
-              <div class="flex gap-2">
-                <button class="add-to-cart px-3 py-2 bg-white/5 rounded-md text-sm">Add</button>
-                <button class="buy-now px-3 py-2 rounded-md text-sm" style="background:linear-gradient(90deg,var(--gold),#f7e27d);color:#000">Buy</button>
+      <div class="grid" id="grid">
+        <!-- Product 1 -->
+        <article class="card">
+          <div class="thumb"><img src="watch1.jpg" alt="Rolex Submariner"></div>
+          <div class="meta">
+            <h4>Rolex Submariner</h4>
+            <p>Original • Automatic • Verified</p>
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-top:10px">
+              <div class="price">₹ 4,499</div>
+              <div style="display:flex;gap:8px">
+                <a class="btn-wa" href="https://wa.me/917869288078?text=I%20want%20Rolex%20Submariner">Buy</a>
               </div>
             </div>
           </div>
-        `;
-        grid.appendChild(card);
-      });
-    }
+        </article>
 
-    // === Cart logic ===
-    (function cartModule(){
-      let products = []; // will be filled by loader
-      const cart = [];
+        <!-- Product 2 -->
+        <article class="card">
+          <div class="thumb"><img src="watch2.jpg" alt="Rado Captain Cook"></div>
+          <div class="meta">
+            <h4>Rado Captain Cook</h4>
+            <p>Original • Sapphire • Polished</p>
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-top:10px">
+              <div class="price">₹ 2,999</div>
+              <div><a class="btn-wa" href="https://wa.me/917869288078?text=I%20want%20Rado%20Captain%20Cook">Buy</a></div>
+            </div>
+          </div>
+        </article>
 
-      function renderCart(){
-        const container = document.getElementById('cartItems');
-        container.innerHTML = '';
-        let total = 0;
-        cart.forEach(item=>{
-          total += item.price * item.qty;
-          const div = document.createElement('div');
-          div.className = 'flex items-center justify-between';
-          div.innerHTML = `<div class="text-sm">${item.title} <span class="text-gray-400 text-xs">×${item.qty}</span></div>
-                           <div class="text-sm font-semibold">₹ ${item.price*item.qty}</div>`;
-          container.appendChild(div);
-        });
-        document.getElementById('cartTotal').innerText = '₹ ' + total;
-      }
+        <!-- Product 3 -->
+        <article class="card">
+          <div class="thumb"><img src="watch3.jpg" alt="Omega Seamaster"></div>
+          <div class="meta">
+            <h4>Omega Seamaster</h4>
+            <p>Original • Diver Edition</p>
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-top:10px">
+              <div class="price">₹ 3,499</div>
+              <div><a class="btn-wa" href="https://wa.me/917869288078?text=I%20want%20Omega%20Seamaster">Buy</a></div>
+            </div>
+          </div>
+        </article>
 
-      function showCart(){ document.getElementById('cartSummary').classList.remove('hidden'); }
-      function hideCart(){ document.getElementById('cartSummary').classList.add('hidden'); }
+        <!-- Product 4 -->
+        <article class="card">
+          <div class="thumb"><img src="watch4.jpg" alt="Tag Heuer Carrera"></div>
+          <div class="meta">
+            <h4>Tag Heuer Carrera</h4>
+            <p>Original • Chronograph</p>
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-top:10px">
+              <div class="price">₹ 3,999</div>
+              <div><a class="btn-wa" href="https://wa.me/917869288078?text=I%20want%20Tag%20Heuer%20Carrera">Buy</a></div>
+            </div>
+          </div>
+        </article>
 
-      // attach handlers after grid render
-      function attachHandlers(){
-        // add-to-cart
-        document.querySelectorAll('.add-to-cart').forEach(btn=>{
-          btn.addEventListener('click', (e)=>{
-            const card = e.target.closest('.product-card');
-            const id = Number(card.getAttribute('data-id'));
-            const prod = products.find(p=>p.id===id);
-            if(!prod) return;
-            const found = cart.find(c=>c.id===id);
-            if(found) found.qty++;
-            else cart.push({...prod, qty:1});
-            renderCart();
-            showCart();
-          });
-        });
+      </div>
+    </section>
 
-        // buy-now
-        document.querySelectorAll('.buy-now').forEach(btn=>{
-          btn.addEventListener('click', (e)=>{
-            const card = e.target.closest('.product-card');
-            const id = Number(card.getAttribute('data-id'));
-            const prod = products.find(p=>p.id===id);
-            if(!prod) return;
-            const text = encodeURIComponent(`Hi, I want to buy ${prod.title} (₹${prod.price}).`);
-            window.open(`https://wa.me/917869288078?text=${text}`, '_blank');
-          });
-        });
+    <!-- contact -->
+    <div class="contact">
+      <div>
+        <strong>Contact & Appointments</strong>
+        <p style="margin:6px 0 0;color:var(--muted)">Book showroom visits, request authentication reports or chat on WhatsApp for fast assistance.</p>
+      </div>
+      <div style="display:flex;gap:10px;align-items:center">
+        <a class="btn-wa" href="https://wa.me/917869288078">Chat on WhatsApp</a>
+        <a href="tel:+917869288078" style="padding:8px 12px;border:1px solid rgba(255,255,255,0.06);border-radius:8px;color:var(--muted);text-decoration:none">Call</a>
+      </div>
+    </div>
 
-        // clicking a product sets featured image
-        document.querySelectorAll('.product-card').forEach(card=>{
-          card.addEventListener('click', (e)=>{
-            // avoid clicks on buttons
-            if(e.target.tagName.toLowerCase() === 'button') return;
-            const id = Number(card.getAttribute('data-id'));
-            const prod = products.find(p=>p.id===id);
-            if(prod) renderFeatured(prod);
-          });
-        });
+    <footer>
+      © <span id="yr"></span> High Choice • All Rights Reserved
+    </footer>
 
-        // cart UI
-        document.getElementById('clearCart').addEventListener('click', ()=>{ cart.length=0; renderCart(); hideCart(); });
-        document.getElementById('closeCart').addEventListener('click', hideCart);
-        document.getElementById('checkoutBtn').addEventListener('click', ()=>{
-          if(cart.length === 0){ alert('Cart is empty'); return; }
-          let msg = 'Order%20Details%0A';
-          let total=0;
-          cart.forEach(i=>{
-            msg += `${encodeURIComponent(i.title)}%20x${i.qty}%20=₹${i.price*i.qty}%0A`;
-            total += i.price*i.qty;
-          });
-          msg += `%0ATotal:%20₹${total}`;
-          window.open(`https://wa.me/917869288078?text=${msg}`, '_blank');
-        });
-      }
+    <!-- small WA float -->
+    <a class="wa-float" href="https://wa.me/917869288078" target="_blank">Chat</a>
+  </div>
 
-      // Expose a method to set products
-      window.__cartModuleSetProducts = function(plist){
-        products = plist;
-        attachHandlers();
-      };
-    })();
+  <script>
+    document.getElementById('yr').textContent = new Date().getFullYear();
 
-    // === Tilt effect for featured ===
+    // featured card tilt (mouse & touch)
     (function(){
-      const el = document.getElementById('featured');
-      if(!el) return;
-      el.addEventListener('mousemove', (e)=>{
-        const r = el.getBoundingClientRect();
-        const cx = r.left + r.width/2;
-        const cy = r.top + r.height/2;
-        const dx = e.clientX - cx;
-        const dy = e.clientY - cy;
-        const rx = (-dy/20).toFixed(2);
-        const ry = (dx/20).toFixed(2);
-        el.style.transform = `perspective(800px) rotateX(${rx}deg) rotateY(${ry}deg)`;
-      });
-      el.addEventListener('mouseleave', ()=> el.style.transform = 'perspective(800px) rotateX(0deg) rotateY(0deg)');
-    })();
-
-    // === Main loader: detect watch1..watch50 and render ===
-    (async function main(){
-      // show temporary message
-      const grid = document.getElementById('productGrid');
-      grid.innerHTML = `<div class="p-6 text-gray-400">Scanning for product images (watch1..watch50) in root folder...</div>`;
-
-      const products = await scanProducts(); // uses findImageForBase
-      // build product list with stable fields
-      const productList = products.map(p => ({
-        id: p.id,
-        src: p.src,
-        title: prettifyFileName(p.src.replace(/\.[^/.]+$/, '')),
-        price: deterministicPrice(p.id)
-      }));
-
-      // if no products found, show hint
-      if(productList.length === 0){
-        grid.innerHTML = `<div class="p-6 text-gray-400">No product images found. Upload images to the same folder as index.html and name them <code>watch1.jpg</code>, <code>watch2.png</code>, etc.</div>`;
-        document.getElementById('featuredInner').innerHTML = `<div class="img-blank">Upload watch1.jpg ...</div>`;
-        return;
+      const card = document.getElementById('featuredCard');
+      if(!card) return;
+      function setTransform(x,y){
+        const rx = (-y/20).toFixed(2);
+        const ry = (x/20).toFixed(2);
+        card.style.transform = `perspective(900px) rotateX(${rx}deg) rotateY(${ry}deg)`;
       }
-
-      // render initial featured as first product
-      renderFeatured(productList[0]);
-      // render grid
-      renderGrid(productList);
-
-      // pass products to cart module
-      if(window.__cartModuleSetProducts) window.__cartModuleSetProducts(productList);
+      card.addEventListener('mousemove', e=>{
+        const r = card.getBoundingClientRect();
+        setTransform(e.clientX - (r.left + r.width/2), e.clientY - (r.top + r.height/2));
+      });
+      card.addEventListener('mouseleave', ()=> card.style.transform = 'perspective(900px) rotateX(0deg) rotateY(0deg)');
+      // touch
+      card.addEventListener('touchmove', e=>{
+        const t = e.touches[0];
+        const r = card.getBoundingClientRect();
+        setTransform(t.clientX - (r.left + r.width/2), t.clientY - (r.top + r.height/2));
+      });
+      card.addEventListener('touchend', ()=> card.style.transform = 'perspective(900px) rotateX(0deg) rotateY(0deg)');
     })();
 
+    // try to autoplay video; if not found, keep poster
+    (function(){
+      const v = document.getElementById('featuredVideo');
+      if(!v) return;
+      v.addEventListener('error', ()=> {
+        // video missing or blocked — fallback already present (img tag)
+        console.warn('Featured video not available or blocked.');
+      });
+      // some browsers restrict autoplay unless muted — video is muted so should play
+      v.play().catch(()=>{/* ignore */});
+    })();
   </script>
-
 </body>
 </html>
