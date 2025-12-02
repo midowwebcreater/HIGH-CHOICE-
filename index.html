@@ -3,57 +3,87 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>High Choice — Premium Luxury Watches</title>
-  <meta name="description" content="High Choice — Original luxury watches. Contact: +91 7869288078" />
-  <link rel="icon" href="favicon.ico" />
+  <title>High Choice — Premium Watches</title>
+  <meta name="description" content="High Choice — Handpicked original luxury watches. WhatsApp: +91 7869288078" />
+  <link rel="icon" href="favicon.png" />
 
-  <!-- Fonts & libs -->
+  <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 
   <style>
     :root{
-      --bg:#060606; --panel:#0f1112; --muted:#bdbdbd; --accent:#d4af37; --glass:rgba(255,255,255,0.03);
-      --radius:18px; --max:1280px; color-scheme:dark;
+      --bg:#050505;
+      --panel:#0f1112;
+      --muted:#bdbdbd;
+      --accent:#d4af37;
+      --glass: rgba(255,255,255,0.03);
+      --radius:18px;
+      --max:1300px;
     }
     *{box-sizing:border-box}
-    body{margin:0;font-family:'Inter'; background:#050505; color:#eee; display:flex;justify-content:center;padding:28px}
+    html,body{height:100%;margin:0}
+    body{
+      font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto;
+      background:linear-gradient(180deg,#040404 0%,#0b0b0b 100%);
+      color:#eee;display:flex;justify-content:center;padding:28px;
+    }
     .site{width:100%;max-width:var(--max)}
 
-    header{display:flex;align-items:center;justify-content:space-between;padding:18px;border-radius:14px;background:rgba(255,255,255,0.02);backdrop-filter:blur(6px)}
-    .brand{display:flex;align-items:center;gap:14px}
-    .brand img{width:64px;height:64px;border-radius:12px;object-fit:cover}
-    .brand h1{font-size:20px;margin:0;color:var(--accent)}
-    nav button{background:transparent;border:1px solid rgba(255,255,255,0.05);padding:10px 14px;border-radius:10px;color:var(--muted);cursor:pointer}
-    .cta{background:rgba(212,175,55,0.15);border:1px solid rgba(212,175,55,0.25);color:var(--accent);padding:10px 16px;border-radius:12px;font-weight:700}
+    /* Header */
+    header{
+      display:flex;align-items:center;justify-content:space-between;padding:18px;border-radius:14px;
+      background:linear-gradient(180deg,rgba(255,255,255,0.01),transparent);
+      border:1px solid rgba(255,255,255,0.02);
+      backdrop-filter: blur(6px);
+      position:sticky;top:12px;z-index:30;
+      margin-bottom:18px;
+    }
+    .brand{display:flex;gap:12px;align-items:center}
+    .brand img{width:60px;height:60px;border-radius:12px;object-fit:cover}
+    .brand h1{font-size:20px;color:var(--accent);margin:0;letter-spacing:0.6px}
+    nav{display:flex;gap:10px}
+    nav button{background:transparent;border:1px solid rgba(255,255,255,0.04);color:var(--muted);padding:10px 14px;border-radius:10px;cursor:pointer}
+    .btn-cta{background:linear-gradient(90deg,rgba(212,175,55,0.16),rgba(212,175,55,0.06));border:1px solid rgba(212,175,55,0.22);color:var(--accent);padding:10px 16px;border-radius:12px;font-weight:700}
 
-    .hero{display:grid;grid-template-columns:1fr 420px;gap:28px;align-items:center;margin-top:20px}
-    .hero-card{padding:32px;border-radius:18px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.05)}
-    .eyebrow{color:var(--muted);text-transform:uppercase;font-weight:800;font-size:12px;margin-bottom:10px}
-    .hero-title{font-size:34px;margin:0 0 12px;font-weight:800}
-    .hero-desc{color:var(--muted);margin-bottom:18px}
+    /* Hero */
+    .hero{display:grid;grid-template-columns:1fr 480px;gap:28px;align-items:center;margin-bottom:26px}
+    .hero-card{padding:28px;border-radius:18px;background:var(--glass);border:1px solid rgba(255,255,255,0.02);box-shadow:0 16px 60px rgba(0,0,0,0.6)}
+    .eyebrow{color:var(--muted);text-transform:uppercase;font-weight:800;font-size:12px;margin-bottom:8px}
+    .hero-title{font-size:34px;line-height:1.02;margin:0 0 12px;font-weight:800}
+    .hero-desc{color:var(--muted);margin-bottom:16px}
+    .hero-actions{display:flex;gap:12px}
+    .hero .small{color:var(--muted);font-size:13px;margin-top:12px}
 
-    .stage{height:420px;border-radius:18px;overflow:hidden;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,0.02)}
-    .floating-card{width:320px;height:320px;border-radius:20px;display:flex;align-items:center;justify-content:center;transform-style:preserve-3d;transition:0.2s;box-shadow:0 24px 80px rgba(0,0,0,0.6)}
-    .floating-card img{width:270px;height:270px;border-radius:16px;object-fit:cover}
-    .label-badge{position:absolute;left:20px;top:20px;background:rgba(0,0,0,0.5);padding:8px 14px;border-radius:10px;color:#fff}
+    /* Floating 3D stage */
+    .stage{height:420px;border-radius:18px;overflow:hidden;display:flex;align-items:center;justify-content:center;background:linear-gradient(180deg,rgba(255,255,255,0.01),transparent);border:1px solid rgba(255,255,255,0.02)}
+    .floating{width:360px;height:360px;border-radius:20px;display:flex;align-items:center;justify-content:center;transform-style:preserve-3d;transition:transform .18s ease;box-shadow:0 30px 90px rgba(0,0,0,0.6);background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent)}
+    .floating img{width:320px;height:320px;object-fit:cover;border-radius:16px}
+    .badge{position:absolute;left:22px;top:22px;background:rgba(0,0,0,0.6);padding:8px 12px;border-radius:10px;border:1px solid rgba(255,255,255,0.03);color:#fff;font-weight:700}
 
-    .section{padding:30px 0}
-    .section-title{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}
-    .products-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-    .product{background:rgba(255,255,255,0.03);border-radius:12px;padding:10px;border:1px solid rgba(255,255,255,0.05);transition:0.3s}
-    .product:hover{transform:translateY(-10px);box-shadow:0 15px 40px rgba(0,0,0,0.5)}
-    .product-visual{height:220px;border-radius:10px;overflow:hidden;display:flex;align-items:center;justify-content:center;background:#111}
-    .product-visual img{width:100%;height:100%;object-fit:cover}
-    .meta{padding:12px}
-    .meta h3{margin:0;font-size:16px}
-    .meta p{color:var(--muted);font-size:13px;margin:6px 0}
-    .price{color:var(--accent);font-weight:800}
+    /* Products */
+    .section{padding:20px 0}
+    .section-title{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
+    .section-title h2{margin:0;font-size:22px}
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .card{background:linear-gradient(180deg,rgba(255,255,255,0.01),transparent);border-radius:14px;padding:12px;border:1px solid rgba(255,255,255,0.02);transition:transform .25s ease,box-shadow .25s ease}
+    .card:hover{transform:translateY(-10px);box-shadow:0 18px 48px rgba(0,0,0,0.6)}
+    .thumb{height:220px;border-radius:12px;overflow:hidden;background:#0b0b0b;display:flex;align-items:center;justify-content:center}
+    .thumb img{width:100%;height:100%;object-fit:cover}
+    .info{padding:10px}
+    .info h3{margin:0;font-size:16px}
+    .info p{margin:6px 0;color:var(--muted);font-size:13px}
+    .price{font-weight:800;color:var(--accent);font-size:18px}
 
-    .whatsapp{position:fixed;right:20px;bottom:24px;background:linear-gradient(180deg,#25d366,#128c7e);padding:14px;border-radius:50px;display:flex;align-items:center;color:#fff;font-weight:700;gap:10px;z-index:999}
-    .whatsapp img{width:22px}
+    /* WhatsApp floating */
+    .wa{position:fixed;right:20px;bottom:20px;background:linear-gradient(180deg,#25d366,#128c7e);padding:12px 16px;border-radius:50px;color:#fff;font-weight:700;display:flex;align-items:center;gap:10px;box-shadow:0 18px 50px rgba(0,0,0,0.5);z-index:50;text-decoration:none}
+    .wa img{width:20px;height:20px}
 
-    footer{text-align:center;color:var(--muted);padding:20px;margin-top:20px;border-radius:12px;background:rgba(255,255,255,0.02)}
+    /* Footer */
+    footer{margin-top:28px;padding:18px;border-radius:12px;background:linear-gradient(180deg,rgba(255,255,255,0.01),transparent);border:1px solid rgba(255,255,255,0.02);text-align:center;color:var(--muted)}
+
+    /* Responsive */
+    @media (max-width:1100px){.hero{grid-template-columns:1fr 380px}.grid{grid-template-columns:repeat(2,1fr)}}
+    @media (max-width:720px){.hero{grid-template-columns:1fr}.stage{height:320px}.floating{width:260px;height:260px}.grid{grid-template-columns:1fr}}
   </style>
 </head>
 <body>
@@ -61,7 +91,7 @@
 
     <header>
       <div class="brand">
-        <img src="logo.png" alt="High Choice">
+        <img src="logo.png" alt="High Choice logo">
         <div>
           <h1>High Choice</h1>
           <div style="color:var(--muted);font-size:12px">Premium Original Watches</div>
@@ -69,80 +99,108 @@
       </div>
 
       <nav>
-        <button onclick="scrollToSection('home')">Home</button>
-        <button onclick="scrollToSection('products')">Products</button>
-        <button class="cta" onclick="scrollToSection('contact')">Contact</button>
+        <button onclick="scrollTo('home')">Home</button>
+        <button onclick="scrollTo('products')">Products</button>
+        <button class="btn-cta" onclick="scrollTo('contact')">Contact</button>
       </nav>
     </header>
 
+    <!-- HERO -->
     <main>
       <section class="hero" id="home">
         <div class="hero-card">
-          <div class="eyebrow">Limited Curations</div>
+          <div class="eyebrow">Curated Selection</div>
           <h2 class="hero-title">Original Luxury Timepieces — Handpicked</h2>
-          <p class="hero-desc">High Choice brings authenticated original watches with warranty & expert verification.</p>
+          <p class="hero-desc">High Choice sources authenticated original watches with free inspection reports, warranty & concierge support.</p>
 
-          <button class="cta" onclick="scrollToSection('products')">Explore Collection</button>
+          <div class="hero-actions" style="margin-top:14px">
+            <button class="btn-cta" onclick="scrollTo('products')">Explore Collection</button>
+            <a class="btn-cta" href="https://wa.me/917869288078" style="text-decoration:none;margin-left:8px">Book Via WhatsApp</a>
+          </div>
 
-          <p style="margin-top:16px;color:var(--muted)">Call/WhatsApp: <b>+91 7869288078</b></p>
+          <div class="small">Call/WhatsApp: <strong>+91 7869288078</strong></div>
         </div>
 
-        <div class="stage">
-          <div class="label-badge">Featured</div>
-          <div class="floating-card" id="floatingCard">
-            <img src="watch-hero.jpg" alt="">
+        <div class="stage" aria-hidden="false">
+          <div class="badge">Featured</div>
+          <div class="floating" id="floatCard">
+            <img src="watch-hero.jpg" alt="Featured watch">
           </div>
         </div>
       </section>
 
+      <!-- PRODUCTS -->
       <section class="section" id="products">
         <div class="section-title">
           <h2>Featured Watches</h2>
-          <div style="color:var(--muted)">Demo pieces — replace with your images</div>
+          <div style="color:var(--muted)">All prices listed between ₹2,500 - ₹4,500</div>
         </div>
 
-        <div class="products-grid">
-
-          <div class="product">
-            <div class="product-visual">
-              <img src="rolex1.jpg" alt="">
-            </div>
-            <div class="meta">
+        <div class="grid">
+          <!-- demo items (replace images as needed) -->
+          <article class="card">
+            <div class="thumb"><img src="product1.jpg" alt="Watch 1"></div>
+            <div class="info">
               <h3>Rolex Submariner</h3>
-              <p>Original • Automatic</p>
-              <div class="price">₹ 1,49,999</div>
+              <p>Original • Automatic • Verified</p>
+              <div class="price">₹ 4,499</div>
             </div>
-          </div>
+          </article>
 
-          <div class="product">
-            <div class="product-visual">
-              <img src="rado1.jpg" alt="">
-            </div>
-            <div class="meta">
+          <article class="card">
+            <div class="thumb"><img src="product2.jpg" alt="Watch 2"></div>
+            <div class="info">
               <h3>Rado Captain Cook</h3>
-              <p>Original • Sapphire</p>
-              <div class="price">₹ 89,999</div>
+              <p>Original • Sapphire • Polished</p>
+              <div class="price">₹ 2,999</div>
             </div>
-          </div>
+          </article>
 
-          <div class="product">
-            <div class="product-visual">
-              <img src="omega1.jpg" alt="">
-            </div>
-            <div class="meta">
+          <article class="card">
+            <div class="thumb"><img src="product3.jpg" alt="Watch 3"></div>
+            <div class="info">
               <h3>Omega Seamaster</h3>
               <p>Original • Diver Edition</p>
-              <div class="price">₹ 2,10,000</div>
+              <div class="price">₹ 3,499</div>
             </div>
-          </div>
+          </article>
 
+          <article class="card">
+            <div class="thumb"><img src="product4.jpg" alt="Watch 4"></div>
+            <div class="info">
+              <h3>Tag Heuer Carrera</h3>
+              <p>Original • Chronograph</p>
+              <div class="price">₹ 3,999</div>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="thumb"><img src="product5.jpg" alt="Watch 5"></div>
+            <div class="info">
+              <h3>Seiko Prospex</h3>
+              <p>Original • Robust Build</p>
+              <div class="price">₹ 2,499</div>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="thumb"><img src="product6.jpg" alt="Watch 6"></div>
+            <div class="info">
+              <h3>Citizen Promaster</h3>
+              <p>Original • Eco-Drive</p>
+              <div class="price">₹ 2,799</div>
+            </div>
+          </article>
         </div>
       </section>
 
+      <!-- CONTACT -->
       <section class="section" id="contact">
-        <h2>Contact & Appointments</h2>
-        <p style="color:var(--muted)">Book visits or request authentication. Quick WhatsApp support.</p>
-        <a class="cta" href="https://wa.me/917869288078">Chat on WhatsApp</a>
+        <div style="padding:20px;border-radius:12px;background:var(--panel);border:1px solid rgba(255,255,255,0.02);">
+          <h2 style="margin:0 0 8px">Contact & Appointments</h2>
+          <p style="color:var(--muted);margin:0 0 12px">Book showroom visits, request authentication reports, or chat on WhatsApp for quick assistance.</p>
+          <a class="btn-cta" href="https://wa.me/917869288078">Chat on WhatsApp</a>
+        </div>
       </section>
     </main>
 
@@ -150,27 +208,63 @@
       © <span id="yr"></span> High Choice • All Rights Reserved
     </footer>
 
-    <a class="whatsapp" href="https://wa.me/917869288078">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg">
+    <!-- WhatsApp -->
+    <a class="wa" href="https://wa.me/917869288078" target="_blank" rel="noopener">
+      <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 448 512'><path fill='%23fff' d='M380.9 97.1C339 55.1 286.4 32 231.1 32 103.5 32 0 135.6 0 263.2c0 46.3 12 91.4 34.8 131.5L0 480l88.1-23.1c38.9 21.4 83 32.7 127.8 32.7 127.6 0 231.1-103.6 231.1-231.2 0-55.4-23.1-108.9-69.9-150.6zM231.1 438.3c-37.3 0-74.5-10.2-106.7-29.4l-7.6-4.5-52.3 13.7 13.9-50.8-4.9-8.1C57.2 321 48 293.9 48 263.2 48 162 136.9 73 238 73c59.2 0 115 28.9 152 78.9 36.4 49 45.1 108.9 24.9 162.6-20.7 54.1-67.5 93.1-122.8 106.8-18 4.3-34.8 6.6-51 6.6z'/></svg>" alt="WhatsApp">
       Chat
     </a>
 
   </div>
 
   <script>
-    document.getElementById('yr').innerText = new Date().getFullYear();
-    function scrollToSection(id){ document.getElementById(id).scrollIntoView({behavior:'smooth'}); }
+    // Year
+    document.getElementById('yr').textContent = new Date().getFullYear();
 
-    // 3D tilt
-    const card = document.getElementById('floatingCard');
-    card.addEventListener('mousemove', e=>{
-      const rect = card.getBoundingClientRect();
-      const x = e.clientX - rect.left - rect.width/2;
-      const y = e.clientY - rect.top - rect.height/2;
-      card.style.transform = `perspective(800px) rotateX(${-y/20}deg) rotateY(${x/20}deg)`;
-    });
-    card.addEventListener('mouseleave', ()=> card.style.transform="perspective(800px)");
+    // Simple scroll helper
+    function scrollTo(id){
+      document.getElementById(id).scrollIntoView({behavior:'smooth',block:'start'});
+    }
+
+    // Floating card tilt (mouse + touch)
+    (function(){
+      const card = document.getElementById('floatCard') || document.querySelector('.floating');
+      if(!card) return;
+      function setTransform(x,y){
+        const rx = (-y/20).toFixed(2);
+        const ry = (x/20).toFixed(2);
+        card.style.transform = `perspective(900px) rotateX(${rx}deg) rotateY(${ry}deg) translateZ(6px)`;
+      }
+      function reset(){
+        card.style.transform = 'perspective(900px) rotateX(0deg) rotateY(0deg)';
+      }
+      card.addEventListener('mousemove', (e)=>{
+        const r = card.getBoundingClientRect();
+        const cx = r.left + r.width/2;
+        const cy = r.top + r.height/2;
+        setTransform(e.clientX - cx, e.clientY - cy);
+      });
+      card.addEventListener('mouseleave', reset);
+      // touch support
+      card.addEventListener('touchmove', (e)=>{
+        const touch = e.touches[0];
+        const r = card.getBoundingClientRect();
+        const cx = r.left + r.width/2;
+        const cy = r.top + r.height/2;
+        setTransform(touch.clientX - cx, touch.clientY - cy);
+      });
+      card.addEventListener('touchend', reset);
+      // subtle float animation
+      let t = 0;
+      function bob(){
+        t += 0.02;
+        const y = Math.sin(t) * 6;
+        card.style.transform += ` translateY(${y}px)`;
+        requestAnimationFrame(bob);
+      }
+      // start bobbing without breaking tilt transforms (lightweight)
+      // (note: bob appends small translateY; tilt will override when interacting)
+      requestAnimationFrame(bob);
+    })();
   </script>
-
 </body>
-</html>
+            </html>
