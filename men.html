@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>HIGH CHOICE | Men's Luxury Watches</title>
+  <style>
+    body {font-family:'Helvetica Neue',Arial,sans-serif;margin:0;padding:0;background:#f8f9fa;color:#222;}
+    header {background:#000;color:#fff;padding:20px;text-align:center;font-size:1.8rem;letter-spacing:2px;}
+    nav {display:flex;justify-content:center;background:#111;}
+    nav a {color:#fff;padding:15px 25px;text-decoration:none;text-transform:uppercase;font-weight:600;}
+    nav a:hover {background:#444;}
+    .container {display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;padding:30px;}
+    .card {background:#fff;border-radius:10px;box-shadow:0 5px 15px rgba(0,0,0,0.1);overflow:hidden;transition:transform 0.3s;}
+    .card:hover {transform:translateY(-5px);}
+    .card img {width:100%;height:250px;object-fit:cover;}
+    .card h3 {margin:15px;font-size:1.2rem;}
+    .card p {margin:0 15px 15px;color:#555;}
+    .card button {display:block;width:90%;margin:10px auto 20px;padding:12px;background:#000;color:#fff;border:none;border-radius:5px;font-weight:bold;cursor:pointer;}
+    .card button:hover {background:#444;}
+    footer {background:#000;color:#fff;text-align:center;padding:20px;margin-top:40px;}
+  </style>
+</head>
+<body>
+  <header>HIGH CHOICE - Men's Luxury Watches</header>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="women.html">Women</a>
+    <a href="kids.html">Kids</a>
+  </nav>
+
+  <section class="container">
+    <!-- Rolex -->
+    <div class="card">
+      <img src="images/rolex_submariner.jpg" alt="Rolex Submariner">
+      <h3>Rolex Submariner</h3>
+      <p>₹4299</p>
+      <button onclick="openOrder('Rolex Submariner','4299')">Buy Now</button>
+    </div>
+
+    <!-- Maserati -->
+    <div class="card">
+      <img src="images/maserati_watch.jpg" alt="Maserati">
+      <h3>Maserati Classic</h3>
+      <p>₹3199</p>
+      <button onclick="openOrder('Maserati Classic','3199')">Buy Now</button>
+    </div>
+
+    <!-- Omega -->
+    <div class="card">
+      <img src="images/omega_watch.jpg" alt="Omega">
+      <h3>Omega Seamaster</h3>
+      <p>₹2399</p>
+      <button onclick="openOrder('Omega Seamaster','2399')">Buy Now</button>
+    </div>
+
+    <!-- Armani -->
+    <div class="card">
+      <img src="images/armani_watch.jpg" alt="Armani">
+      <h3>Armani Premium</h3>
+      <p>₹1599</p>
+      <button onclick="openOrder('Armani Premium','1599')">Buy Now</button>
+    </div>
+
+    <!-- Patek Philippe -->
+    <div class="card">
+      <img src="images/patekphilippe_watch.jpg" alt="Patek Philippe">
+      <h3>Patek Philippe Luxury</h3>
+      <p>₹4999</p>
+      <button onclick="openOrder('Patek Philippe Luxury','4999')">Buy Now</button>
+    </div>
+
+    <!-- Audemars Piguet -->
+    <div class="card">
+      <img src="images/audemars_watch.jpg" alt="Audemars Piguet">
+      <h3>Audemars Piguet Royal Oak</h3>
+      <p>₹1999</p>
+      <button onclick="openOrder('Audemars Piguet Royal Oak','1999')">Buy Now</button>
+    </div>
+
+    <!-- Cartier -->
+    <div class="card">
+      <img src="images/cartier_watch.jpg" alt="Cartier">
+      <h3>Cartier Santos</h3>
+      <p>₹3499</p>
+      <button onclick="openOrder('Cartier Santos','3499')">Buy Now</button>
+    </div>
+
+    <!-- Tissot -->
+    <div class="card">
+      <img src="images/tissot_watch.jpg" alt="Tissot">
+      <h3>Tissot Classic</h3>
+      <p>₹2799</p>
+      <button onclick="openOrder('Tissot Classic','2799')">Buy Now</button>
+    </div>
+
+    <!-- Rado -->
+    <div class="card">
+      <img src="images/rado_centrix.jpg" alt="Rado Centrix">
+      <h3>Rado Centrix</h3>
+      <p>₹2699</p>
+      <button onclick="openOrder('Rado Centrix','2699')">Buy Now</button>
+    </div>
+
+    <!-- Longines -->
+    <div class="card">
+      <img src="images/longines_master_moonphase.jpg" alt="Longines Master Collection">
+      <h3>Longines Master Collection Moonphase</h3>
+      <p>₹2499</p>
+      <button onclick="openOrder('Longines Master Collection Moonphase','2499')">Buy Now</button>
+    </div>
+
+    <!-- G-Shock -->
+    <div class="card">
+      <img src="images/gshock_watch.jpg" alt="G-Shock">
+      <h3>G-Shock Premium</h3>
+      <p>₹1999</p>
+      <button onclick="openOrder('G-Shock Premium','1999')">Buy Now</button>
+    </div>
+  </section>
+
+  <footer>© 2025 HIGH CHOICE</footer>
+
+  <script>
+    function openOrder(productName, price) {
+      const name = prompt("Enter your Name:");
+      const phone = prompt("Enter your Phone:");
+      const address = prompt("Enter your Address:");
+      const city = prompt("Enter your City:");
+      const pincode = prompt("Enter your Pincode:");
+      const payment = prompt("Payment Method (Prepaid/COD):");
+
+      let message = `Order Details:%0AProduct: ${productName}%0APrice: ₹${price}%0AName: ${name}%0APhone: ${phone}%0AAddress: ${address}, ${city}, ${pincode}%0APayment: ${payment}`;
+
+      if(payment && payment.toLowerCase() === "prepaid"){
+        message += `%0AUPI ID: 7869288078@kotak811`;
+      }
+
+      window.open(`https://wa.me/917869288078?text=${message}`, "_blank");
+    }
+  </script>
+</body>
+</html>
