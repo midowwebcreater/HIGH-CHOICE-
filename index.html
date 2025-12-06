@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>HIGH CHOICE — Ultra Premium 3D Watches</title>
+<title>HIGH CHOICE — Premium Watches</title>
 <meta name="description" content="HIGH CHOICE — Cinematic 3D mockups • Premium watches • COD & UPI" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;600;800&family=Playfair+Display:wght@500;700&display=swap" rel="stylesheet">
@@ -15,30 +15,36 @@
   :root{
     --gold:#c7a16a;
     --gold-soft:#e6c88a;
-    --bg:#040405;
-    --panel:#0b0b0b;
+    --bg:#050506;
     --muted:#bfc6c8;
     --glass: rgba(255,255,255,0.03);
   }
   *{box-sizing:border-box}
-  html,body{height:100%;margin:0;background:radial-gradient(900px 500px at 10% 15%, rgba(199,161,106,0.06), transparent), linear-gradient(180deg,var(--bg),#020203);color:#fff;font-family:Inter,system-ui,Arial}
-  img{max-width:100%;display:block}
+  html,body{height:100%;margin:0;background:
+    radial-gradient(900px 500px at 10% 15%, rgba(199,161,106,0.04), transparent),
+    linear-gradient(180deg,var(--bg),#020203);
+    color:#fff;font-family:Inter,system-ui,Arial;-webkit-font-smoothing:antialiased}
   a{color:inherit;text-decoration:none}
+  img{max-width:100%;display:block}
 
-  /* Header */
-  header{position:fixed;left:0;right:0;top:0;z-index:120;display:flex;align-items:center;padding:14px 28px;background:linear-gradient(180deg,rgba(2,2,2,0.6),transparent);backdrop-filter:blur(6px);border-bottom:1px solid rgba(255,255,255,0.03)}
+/* ---------- Header ---------- */
+  header{
+    position:fixed;left:0;right:0;top:0;z-index:120;
+    display:flex;align-items:center;padding:14px 28px;background:linear-gradient(180deg,rgba(2,2,2,0.6),transparent);
+    backdrop-filter: blur(6px);border-bottom:1px solid rgba(255,255,255,0.03)
+  }
   .logo{font-weight:900;color:var(--gold);font-family:"Playfair Display",serif;letter-spacing:1px}
-  nav{margin-left:auto;display:flex;gap:10px;align-items:center}
-  nav a{padding:8px 12px;border-radius:10px;color:var(--muted);font-weight:700}
+  nav{margin-left:auto;display:flex;gap:12px;align-items:center}
+  nav a{padding:8px 12px;border-radius:8px;color:var(--muted);font-weight:700}
   nav a.cta{background:linear-gradient(90deg,var(--gold),var(--gold-soft));color:#071018;font-weight:900}
 
-  /* Main */
+/* ---------- Main layout ---------- */
   main{padding-top:86px}
-  .wrap{max-width:1280px;margin:0 auto;padding:36px}
-  .grid{display:grid;grid-template-columns:1fr 560px;gap:36px;align-items:center}
-  @media(max-width:1000px){ .grid{grid-template-columns:1fr;padding:20px} }
+  .container{max-width:1280px;margin:0 auto;padding:28px}
+  .layout{display:grid;grid-template-columns:1fr 560px;gap:36px;align-items:center}
+  @media(max-width:1000px){ .layout{grid-template-columns:1fr;padding:20px} }
 
-  /* Left content */
+/* ---------- Left content ---------- */
   .eyebrow{color:var(--gold);font-weight:900;letter-spacing:2px;margin-bottom:8px}
   h1{font-family:"Playfair Display",serif;font-size:46px;margin:6px 0;color:var(--gold);line-height:1.02}
   p.lead{color:var(--muted);max-width:560px;line-height:1.6;margin-top:12px}
@@ -47,32 +53,31 @@
   .btn.primary{background:linear-gradient(90deg,var(--gold),var(--gold-soft));color:#071018}
   .btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.04);color:var(--muted)}
 
-  /* Viewer */
-  #viewer{height:640px;border-radius:18px;overflow:hidden;background:linear-gradient(180deg,#020202,#0b0b0b);border:1px solid rgba(255,255,255,0.03);display:flex;align-items:center;justify-content:center;position:relative;box-shadow:0 60px 180px rgba(0,0,0,0.8)}
+/* ---------- 3D Viewer ---------- */
+  #viewer{height:640px;border-radius:18px;overflow:hidden;background:linear-gradient(180deg,#060606,#0b0b0b);border:1px solid rgba(255,255,255,0.03);display:flex;align-items:center;justify-content:center;position:relative;box-shadow:0 60px 180px rgba(0,0,0,0.8)}
   canvas#scene{width:100%;height:100%;display:block}
   .viewer-ui{position:absolute;left:18px;bottom:18px;display:flex;gap:10px;flex-direction:column;z-index:40}
   .pill{background:var(--glass);padding:8px 12px;border-radius:999px;border:1px solid rgba(255,255,255,0.02);color:var(--muted);font-weight:700}
 
-  /* strip */
-  .strip-wrap{margin-top:30px}
-  .strip-title{color:var(--gold);text-align:center;font-weight:900;margin-bottom:12px}
+/* ---------- Featured strip ---------- */
+  .stripWrap{margin-top:36px}
+  .stripTitle{color:var(--gold);text-align:center;font-weight:900;margin-bottom:12px}
   .strip{overflow:hidden;padding:12px 6px}
-  .strip-inner{display:flex;gap:18px;align-items:center;will-change:transform}
-  .mock{width:260px;height:260px;border-radius:18px;background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.03);display:flex;align-items:center;justify-content:center;position:relative;flex-shrink:0;box-shadow:0 20px 60px rgba(0,0,0,0.6);transition:transform .28s, box-shadow .28s}
-  .mock:hover{transform:translateY(-10px) scale(1.03);box-shadow:0 40px 120px rgba(0,0,0,0.75)}
+  .stripInner{display:flex;gap:18px;align-items:center;will-change:transform}
+  .mock{width:260px;height:260px;border-radius:18px;background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.03);display:flex;align-items:center;justify-content:center;position:relative;flex-shrink:0;box-shadow:0 20px 60px rgba(0,0,0,0.6);transition:transform .28s,box-shadow .28s}
+  .mock:hover{transform:translateY(-12px) scale(1.03);box-shadow:0 40px 120px rgba(0,0,0,0.75)}
   .mock img{max-width:86%;max-height:86%;object-fit:contain;border-radius:12px}
   .brandBadge{position:absolute;left:10px;top:10px;background:linear-gradient(90deg,var(--gold),var(--gold-soft));color:#071018;padding:6px 10px;border-radius:8px;font-weight:900;font-size:12px}
 
-  /* footer */
+/* ---------- Footer ---------- */
   footer{padding:28px;text-align:center;color:var(--muted);margin-top:26px;border-top:1px solid rgba(255,255,255,0.03)}
 
-  /* small */
+/* ---------- Responsive ---------- */
   @media(max-width:800px){ #viewer{height:420px} .mock{width:190px;height:190px} h1{font-size:32px} }
   .grain{pointer-events:none;position:fixed;inset:0;mix-blend-mode:overlay;opacity:0.04;background-image:radial-gradient(rgba(255,255,255,0.02) 1px, transparent 1px);background-size:20px 20px}
 </style>
 </head>
 <body>
-
 <div class="grain" aria-hidden="true"></div>
 
 <header>
@@ -88,14 +93,13 @@
 </header>
 
 <main>
-  <div class="wrap">
-    <div class="grid">
-      <!-- LEFT: text -->
+  <div class="container">
+    <div class="layout">
+      <!-- LEFT -->
       <section>
         <div class="eyebrow">CINEMATIC 3D</div>
         <h1>High Choice — International Premium Watches</h1>
-        <p class="lead">Ultra-premium 3D mockups, showroom lighting, and trusted checkout flow. Click a mockup to open product page and place order via WhatsApp. This demo uses high-quality watch images from Unsplash and supports GLB 3D models.</p>
-
+        <p class="lead">Ultra-premium 3D mockups, showroom lighting and trusted checkout. Click any mockup to open product details and quick WhatsApp checkout. Demo images below are live Unsplash photos so the page works immediately.</p>
         <div class="ctaRow">
           <a class="btn primary" href="mens.html">Shop Men</a>
           <a class="btn ghost" href="brand.html?brand=Rolex">Explore Rolex</a>
@@ -105,67 +109,63 @@
       <!-- RIGHT: 3D viewer -->
       <section id="viewer" aria-label="3D viewer">
         <canvas id="scene"></canvas>
-        <div class="viewer-ui">
+        <div class="viewer-ui" aria-hidden="true">
           <div class="pill">Drag to rotate</div>
           <div class="pill">Scroll to zoom</div>
         </div>
       </section>
     </div>
 
-    <!-- featured strip -->
-    <div class="strip-wrap">
-      <div class="strip-title">Featured — High Choice Picks</div>
+    <!-- Featured strip -->
+    <div class="stripWrap">
+      <div class="stripTitle">Featured — Handpicked</div>
       <div class="strip">
-        <div class="strip-inner" id="stripInner" tabindex="0" aria-roledescription="carousel">
-          <!-- populated by JS -->
-        </div>
+        <div class="stripInner" id="stripInner" tabindex="0" aria-roledescription="carousel"></div>
       </div>
     </div>
 
-    <footer>© 2025 HIGH CHOICE • WhatsApp: <a href="https://wa.me/917020966879" style="color:var(--gold)">@+91 70209 66879</a></footer>
+    <footer>© 2025 HIGH CHOICE • WhatsApp: <a href="https://wa.me/917020966879" style="color:var(--gold)">+91 70209 66879</a></footer>
   </div>
 </main>
 
-<!-- three.js + extras -->
+<!-- three.js & extras -->
 <script src="https://unpkg.com/three@0.152.2/build/three.min.js"></script>
 <script src="https://unpkg.com/three@0.152.2/examples/js/loaders/GLTFLoader.js"></script>
-<script src="https://unpkg.com/three@0.152.2/examples/js/controls/OrbitControls.js"></script>
 <script src="https://unpkg.com/three@0.152.2/examples/js/postprocessing/EffectComposer.js"></script>
 <script src="https://unpkg.com/three@0.152.2/examples/js/postprocessing/RenderPass.js"></script>
 <script src="https://unpkg.com/three@0.152.2/examples/js/postprocessing/UnrealBloomPass.js"></script>
 
 <script>
-/* -------------------------
-   Demo product data (uses Unsplash image links so demo works without upload)
-   Replace later with your products.js or local images.
---------------------------*/
-const PRODUCTS_DEMO = {
+/* ---------------- DEMO PRODUCTS (Unsplash images) ----------------
+   These demo images are high-quality and will display without local uploads.
+   Replace 'image' values with local paths (assets/images/...) when ready.
+*/
+const DEMO_PRODUCTS = {
   "Rolex":[
-    {slug:"rolex-yachtmaster", name:"Rolex Yachtmaster Automatic", price:249900, image:"https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&w=1000&q=80"},
-    {slug:"rolex-submariner", name:"Rolex Submariner", price:159900, image:"https://images.unsplash.com/photo-1518544889289-f1c1a3a4e9c5?auto=format&w=1000&q=80"}
+    {slug:"rolex-yachtmaster", name:"Rolex Yachtmaster", price:249900, image:"https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&w=1200&q=90"},
+    {slug:"rolex-submariner", name:"Rolex Submariner", price:159900, image:"https://images.unsplash.com/photo-1518544889289-f1c1a3a4e9c5?auto=format&w=1200&q=90"}
   ],
   "Omega":[
-    {slug:"omega-speedmaster", name:"Omega Speedmaster", price:429900, image:"https://images.unsplash.com/photo-1522312346375-d1a52e2b99b3?auto=format&w=1000&q=80"}
+    {slug:"omega-speedmaster", name:"Omega Speedmaster", price:429900, image:"https://images.unsplash.com/photo-1522312346375-d1a52e2b99b3?auto=format&w=1200&q=90"},
+    {slug:"omega-seamaster", name:"Omega Seamaster", price:189900, image:"https://images.unsplash.com/photo-1524749292158-c90489c5afd2?auto=format&w=1200&q=90"}
   ],
   "G-Shock":[
-    {slug:"gshock-ga2100", name:"G-Shock GA2100", price:129900, image:"https://images.unsplash.com/photo-1524749292158-c90489c5afd2?auto=format&w=1000&q=80"}
+    {slug:"gshock-ga2100", name:"G-Shock GA2100", price:129900, image:"https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?auto=format&w=1200&q=90"}
   ]
 };
 
-const PRODUCTS = (typeof PRODUCTS !== 'undefined') ? PRODUCTS : PRODUCTS_DEMO;
+const PRODUCTS = (typeof PRODUCTS !== 'undefined') ? PRODUCTS : DEMO_PRODUCTS;
 
-/* -------------------------
-   Populate strip (first model of each brand)
---------------------------*/
+/* ---------------- populate strip ---------------- */
 (function populateStrip(){
-  const strip = document.getElementById('stripInner');
+  const wrap = document.getElementById('stripInner');
   const picks = [];
   Object.keys(PRODUCTS).forEach(b=>{
     const list = PRODUCTS[b];
     if(list && list.length) picks.push({brand:b, item:list[0]});
   });
-  const repeated = [...picks, ...picks, ...picks]; // repeat for smooth loop
-  strip.innerHTML = repeated.map(p=>{
+  const repeated = [...picks, ...picks, ...picks];
+  wrap.innerHTML = repeated.map(p=>{
     const it = p.item;
     const img = it.image;
     return `<a class="mock" href="product.html?brand=${encodeURIComponent(p.brand)}&slug=${encodeURIComponent(it.slug)}" title="${it.name}">
@@ -175,70 +175,70 @@ const PRODUCTS = (typeof PRODUCTS !== 'undefined') ? PRODUCTS : PRODUCTS_DEMO;
   }).join('');
 })();
 
-/* -------------------------
-   Strip auto-scroll + drag
---------------------------*/
-(function stripLoop(){
-  const strip = document.getElementById('stripInner');
+/* ---------------- strip auto-scroll + drag ---------------- */
+(function stripAuto(){
+  const inner = document.getElementById('stripInner');
   let pos = 0, speed = 0.6;
   function loop(){
     pos += speed;
-    const max = strip.scrollWidth/3;
+    const max = inner.scrollWidth / 3;
     if(pos > max) pos = 0;
-    strip.style.transform = `translateX(${-pos}px)`;
+    inner.style.transform = `translateX(${-pos}px)`;
     requestAnimationFrame(loop);
   }
   requestAnimationFrame(loop);
 
-  // pointer drag
-  let isDown=false, startX=0, last=0;
-  strip.addEventListener('pointerdown', e=>{ isDown=true; startX=e.clientX; last=pos; strip.style.cursor='grabbing'; });
-  window.addEventListener('pointerup', ()=>{ isDown=false; strip.style.cursor='grab'; });
-  window.addEventListener('pointermove', e=>{ if(!isDown) return; const dx = e.clientX - startX; pos = Math.max(0, last - dx); });
+  let down=false, startX=0, last=0;
+  inner.addEventListener('pointerdown', e=>{ down=true; startX=e.clientX; last=pos; inner.style.cursor='grabbing'; });
+  window.addEventListener('pointerup', ()=>{ down=false; inner.style.cursor='grab'; });
+  window.addEventListener('pointermove', e=>{ if(!down) return; const dx = e.clientX - startX; pos = Math.max(0, last - dx); });
 })();
 
-/* -------------------------
-   THREE.JS 3D viewer (cinematic)
---------------------------*/
+/* ---------------- 3D viewer (three.js) ---------------- */
 (function(){
   const canvas = document.getElementById('scene');
   const viewer = document.getElementById('viewer');
   if(!canvas) return;
 
+  // Renderer
   const renderer = new THREE.WebGLRenderer({canvas, antialias:true, alpha:true});
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio||1,2));
   renderer.setSize(viewer.clientWidth, viewer.clientHeight, false);
   renderer.outputEncoding = THREE.sRGBEncoding;
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
   renderer.toneMappingExposure = 1;
 
+  // Scene & Camera
   const scene = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(36, viewer.clientWidth / viewer.clientHeight, 0.1, 1000);
-  camera.position.set(0, 0, 3.2);
+  const camera = new THREE.PerspectiveCamera(36, viewer.clientWidth/viewer.clientHeight, 0.1, 1000);
+  camera.position.set(0,0,3.2);
 
-  // lights
+  // Lights
   const hemi = new THREE.HemisphereLight(0xffffff, 0x080808, 0.35); scene.add(hemi);
-  const key = new THREE.DirectionalLight(0xfff3d1, 1.2); key.position.set(5, 6, 4); scene.add(key);
-  const rim = new THREE.DirectionalLight(0xffe6b3, 0.45); rim.position.set(-5, 4, -6); scene.add(rim);
-  const fill = new THREE.AmbientLight(0x404040, 0.8); scene.add(fill);
+  const key = new THREE.DirectionalLight(0xfff3d1, 1.2); key.position.set(5,6,4); scene.add(key);
+  const rim = new THREE.DirectionalLight(0xffe6b3, 0.45); rim.position.set(-5,4,-6); scene.add(rim);
+  scene.add(new THREE.AmbientLight(0x404040, 0.7));
 
-  // floor for subtle reflection
-  const floorGeo = new THREE.PlaneGeometry(8, 8);
+  // Floor
+  const floorGeo = new THREE.PlaneGeometry(8,8);
   const floorMat = new THREE.MeshStandardMaterial({color:0x000000, metalness:0.25, roughness:0.6});
   const floor = new THREE.Mesh(floorGeo, floorMat); floor.rotation.x = -Math.PI/2; floor.position.y = -1.05; scene.add(floor);
 
-  // model root
+  // Root
   const root = new THREE.Group(); scene.add(root);
 
-  // postprocessing - bloom
-  const composer = new THREE.EffectComposer(renderer);
-  const renderPass = new THREE.RenderPass(scene, camera);
-  composer.addPass(renderPass);
-  const bloomPass = new THREE.UnrealBloomPass(new THREE.Vector2(viewer.clientWidth, viewer.clientHeight), 0.5, 0.6, 0.1);
-  bloomPass.threshold = 0.0; bloomPass.strength = 0.5; bloomPass.radius = 0.4;
-  composer.addPass(bloomPass);
+  // Postprocessing bloom (if available)
+  let composer = null;
+  try {
+    composer = new THREE.EffectComposer(renderer);
+    const renderPass = new THREE.RenderPass(scene, camera);
+    composer.addPass(renderPass);
+    const bloom = new THREE.UnrealBloomPass(new THREE.Vector2(viewer.clientWidth, viewer.clientHeight), 0.5, 0.6, 0.1);
+    bloom.threshold = 0.0; bloom.strength = 0.5; bloom.radius = 0.4;
+    composer.addPass(bloom);
+  } catch(e){ composer = null; }
 
-  // load GLB or fallback plane
+  // Load GLB model if present, else fallback image plane
   const loader = new THREE.GLTFLoader();
   let modelLoaded = false;
   loader.load('assets/models/watch.glb', function(gltf){
@@ -254,61 +254,54 @@ const PRODUCTS = (typeof PRODUCTS !== 'undefined') ? PRODUCTS : PRODUCTS_DEMO;
     root.add(obj);
     modelLoaded = true;
   }, undefined, function(err){
-    // fallback: textured plane using hero or demo image
-    const img = 'assets/images/hero-demo.jpg' || 'https://images.unsplash.com/photo-1518544889289-f1c1a3a4e9c5?auto=format&w=1200&q=90';
-    const tex = new THREE.TextureLoader().load(img);
+    // fallback to Unsplash hero image
+    const url = 'https://images.unsplash.com/photo-1518544889289-f1c1a3a4e9c5?auto=format&w=1400&q=90';
+    const tex = new THREE.TextureLoader().load(url);
     tex.encoding = THREE.sRGBEncoding;
-    const geo = new THREE.PlaneGeometry(1.9, 1.9);
+    const geo = new THREE.PlaneGeometry(1.9,1.9);
     const mat = new THREE.MeshStandardMaterial({map:tex, metalness:0.18, roughness:0.45});
-    const mesh = new THREE.Mesh(geo, mat);
-    mesh.rotation.y = -0.15;
+    const mesh = new THREE.Mesh(geo, mat); mesh.rotation.y = -0.18;
     root.add(mesh);
     modelLoaded = true;
   });
 
-  // subtle interaction: drag to rotate, wheel to zoom
-  let pointerDown=false, lastX=0;
-  viewer.addEventListener('pointerdown', (e)=>{ pointerDown=true; lastX=e.clientX; viewer.style.cursor='grabbing'; });
-  window.addEventListener('pointerup', ()=>{ pointerDown=false; viewer.style.cursor='default'; });
-  window.addEventListener('pointermove', (e)=>{ if(!pointerDown) return; const dx=(e.clientX-lastX)/200; root.rotation.y += dx; lastX=e.clientX; });
+  // Interaction: drag to rotate, wheel to zoom
+  let dragging=false, prevX=0, targetY=0, targetX=0;
+  viewer.addEventListener('pointerdown', e=>{ dragging=true; prevX=e.clientX; viewer.style.cursor='grabbing'; });
+  window.addEventListener('pointerup', ()=>{ dragging=false; viewer.style.cursor='default'; });
+  window.addEventListener('pointermove', e=>{ if(!dragging) return; const dx=(e.clientX - prevX)/200; targetY += dx; prevX = e.clientX; });
 
-  viewer.addEventListener('wheel', (e)=>{ e.preventDefault(); camera.position.z += e.deltaY * 0.002; camera.position.z = Math.min(Math.max(camera.position.z, 1.5), 6); }, {passive:false});
+  viewer.addEventListener('wheel', e=>{ e.preventDefault(); camera.position.z += e.deltaY * 0.002; camera.position.z = Math.min(Math.max(camera.position.z, 1.6), 6); }, {passive:false});
 
-  // animate loop
+  // Animate
   let last = performance.now();
   function animate(){
     const now = performance.now();
     const dt = (now - last)/1000; last = now;
-    // gentle automatic rotation
+    // auto-rotate
     root.rotation.y += dt * 0.12;
+    // ease toward pointer
+    root.rotation.y += (targetY - root.rotation.y) * 0.08;
+    root.rotation.x += (targetX - root.rotation.x) * 0.06;
     root.rotation.z = Math.sin(now*0.0006) * 0.015;
-    // render
-    composer.render();
+    if(composer) composer.render();
+    else renderer.render(scene,camera);
     requestAnimationFrame(animate);
   }
   animate();
 
-  // resize
+  // Resize
   window.addEventListener('resize', ()=>{
     const w = viewer.clientWidth, h = viewer.clientHeight;
     renderer.setSize(w,h,false);
-    composer.setSize(w,h);
+    if(composer) composer.setSize(w,h);
     camera.aspect = w/h; camera.updateProjectionMatrix();
   });
 
-  // entrance scale animation via GSAP
+  // subtle entrance via GSAP
   root.scale.setScalar(0.96);
   gsap.to(root.scale, {x:1,y:1,z:1,duration:1.2,ease:"power3.out"});
 })();
 </script>
-
-<!-- subtle entrance + micro animations -->
-<script>
-gsap.from("h1", {y:26, opacity:0, duration:1, delay:0.12, ease:"power3.out"});
-gsap.from(".lead", {y:18, opacity:0, duration:0.9, delay:0.22});
-gsap.from(".ctaRow .btn", {y:16, opacity:0, duration:0.9, delay:0.32, stagger:0.08});
-gsap.from(".strip-title", {y:10, opacity:0, duration:0.9, delay:0.45});
-</script>
-
 </body>
 </html>
