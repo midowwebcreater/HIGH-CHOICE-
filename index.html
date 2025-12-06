@@ -3,107 +3,101 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>HIGH CHOICE — Premium Watches</title>
+<title>HIGH CHOICE — Premium Watches (Pro 3D)</title>
 
-<!-- Preload (optional hero video) -->
+<!-- CDN libs -->
 <link rel="preload" href="videos/Featured1.mp4" as="video">
+<!-- GSAP for smooth UI animation -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 
 <style>
-  /* ---------- THEME COLORS ---------- */
   :root{
-    --gold: #c7a16a;
-    --gold-soft: #e6c88a;
-    --bg-dark: #030303;
-    --panel: #0b0b0b;
-    --muted: #bdbdbd;
+    --gold:#c7a16a;
+    --gold-2:#e6c88a;
+    --bg-900:#030303;
+    --panel:#0b0b0b;
+    --muted:#c3c3c3;
+    --glass: rgba(255,255,255,0.03);
   }
-
-  /* ---------- GLOBAL ---------- */
   *{box-sizing:border-box}
-  html,body{height:100%;margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;color:#fff;background:linear-gradient(180deg,var(--bg-dark),#070707);-webkit-font-smoothing:antialiased}
+  html,body{height:100%;margin:0;background:linear-gradient(180deg,#000 0%, #070707 100%);color:#fff;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial}
   a{color:inherit}
-  img{max-width:100%;display:block}
+  img{display:block;max-width:100%}
+  /* Grain overlay */
+  .grain{pointer-events:none;position:fixed;inset:0;mix-blend-mode:overlay;opacity:0.05;background-image:
+    radial-gradient(rgba(255,255,255,0.02) 1px, transparent 1px);
+    background-size:20px 20px;z-index:10000}
 
-  /* ---------- HEADER ---------- */
-  header{
-    position:fixed;left:0;right:0;top:0;z-index:120;
-    display:flex;align-items:center;gap:18px;padding:14px 28px;
-    background:linear-gradient(180deg,rgba(3,3,3,0.65),transparent);
-    backdrop-filter: blur(6px);
-    border-bottom:1px solid rgba(255,255,255,0.03);
-  }
+  /* Header */
+  header{position:fixed;left:0;right:0;top:0;height:72px;display:flex;align-items:center;padding:12px 28px;z-index:120;
+    background:linear-gradient(180deg, rgba(0,0,0,0.55), transparent);backdrop-filter: blur(6px);border-bottom:1px solid rgba(255,255,255,0.03)}
   .logo{font-weight:900;color:var(--gold);letter-spacing:1px;font-size:18px}
-  nav{margin-left:auto;display:flex;gap:10px;align-items:center}
-  nav a{padding:8px 12px;border-radius:8px;text-decoration:none;font-weight:700;color:var(--muted);transition:all .18s}
-  nav a:hover{color:#fff;transform:translateY(-2px)}
-  nav a.cta{background:linear-gradient(90deg,var(--gold),var(--gold-soft));color:#071018;border:0}
+  nav{margin-left:auto;display:flex;gap:12px;align-items:center}
+  nav a{padding:9px 12px;border-radius:8px;text-decoration:none;color:var(--muted);font-weight:700;transition:all .18s;display:inline-block}
+  nav a:hover{color:#fff;transform:translateY(-3px)}
+  nav .cta{background:linear-gradient(90deg,var(--gold),var(--gold-2));color:#071018;font-weight:900}
 
-  /* ---------- HERO ---------- */
-  .hero{
-    min-height:88vh;padding-top:84px;display:grid;grid-template-columns:1fr 560px;gap:36px;align-items:center;position:relative;overflow:hidden;padding-left:36px;padding-right:36px;
-  }
-  .hero-left{max-width:820px}
-  .eyebrow{color:var(--gold);font-weight:800;letter-spacing:2px;margin-bottom:8px}
-  h1{font-size:48px;margin:6px 0;color:var(--gold);line-height:1.02;font-family:Georgia, "Playfair Display", serif}
-  p.lead{color:var(--muted);margin-top:12px;max-width:520px;line-height:1.6}
+  /* Layout */
+  main{padding-top:84px}
+  .container{max-width:1240px;margin:0 auto;padding:28px}
+  .layout{display:grid;grid-template-columns:1fr 540px;gap:32px;align-items:center}
+  @media(max-width:1000px){ .layout{grid-template-columns:1fr;gap:20px;padding:12px} }
 
-  .hero-cta{display:flex;gap:12px;margin-top:18px}
+  /* Hero left */
+  .eyebrow{color:var(--gold);font-weight:900;letter-spacing:2px}
+  h1{font-family: "Playfair Display", Georgia, serif;font-size:44px;color:var(--gold);margin:8px 0 6px;line-height:1.02}
+  p.lead{color:var(--muted);max-width:560px;line-height:1.6;margin:0}
+
+  .ctaRow{margin-top:18px;display:flex;gap:12px;flex-wrap:wrap}
   .btn{
-    padding:12px 18px;border-radius:999px;font-weight:800;text-decoration:none;display:inline-flex;align-items:center;gap:10px;
-    box-shadow:0 8px 30px rgba(0,0,0,0.5);
+    display:inline-flex;align-items:center;gap:10px;padding:12px 18px;border-radius:999px;font-weight:900;text-decoration:none;
+    transition:transform .18s, box-shadow .18s;
+    box-shadow: 0 12px 40px rgba(4,4,4,0.6);
   }
-  .btn.primary{background:linear-gradient(90deg,var(--gold),var(--gold-soft));color:#071018}
-  .btn.ghost{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.04);color:var(--muted)}
+  .btn.primary{background:linear-gradient(90deg,var(--gold),var(--gold-2));color:#071018}
+  .btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--muted)}
+  .btn:hover{transform:translateY(-4px);box-shadow:0 24px 70px rgba(2,2,2,0.7)}
 
-  /* ---------- 3D VIEWER ---------- */
-  #viewer{width:100%;height:560px;border-radius:20px;overflow:hidden;background:linear-gradient(180deg,#030303,#0b0b0b);display:flex;align-items:center;justify-content:center;box-shadow:0 40px 130px rgba(4,4,4,0.8);border:1px solid rgba(255,255,255,0.03)}
-  canvas#scene-canvas{width:100%;height:100%;display:block}
+  .tagline{margin-top:12px;color:var(--muted);font-size:13px}
 
-  /* small cue */
-  .tagline{margin-top:10px;color:var(--muted);font-size:13px}
+  /* 3D viewer (right) */
+  #viewer{height:640px;border-radius:20px;overflow:hidden;background:linear-gradient(180deg,#060606,#0b0b0b);display:flex;align-items:center;justify-content:center;
+    border:1px solid rgba(255,255,255,0.03);box-shadow:0 60px 180px rgba(0,0,0,0.8)}
+  canvas#scene{width:100%;height:100%;display:block;outline:0}
 
-  /* ---------- STRIP (auto scroll) ---------- */
-  .strip-wrap{padding:28px 36px 80px}
-  .strip-title{color:var(--gold);text-align:center;margin-bottom:10px}
-  .strip{
-    overflow:hidden;padding:12px 6px;
-  }
-  .strip-inner{
-    display:flex;gap:22px;align-items:center;will-change:transform;
-  }
+  /* subtle hud overlay in viewer */
+  .viewer-ui{position:absolute;right:36px;bottom:36px;z-index:80;display:flex;flex-direction:column;gap:10px;align-items:flex-end}
+  .viewer-ui .pill{background:rgba(0,0,0,0.5);padding:8px 12px;border-radius:999px;border:1px solid rgba(255,255,255,0.03);color:var(--muted);font-weight:700}
+
+  /* strip */
+  .stripWrap{margin-top:36px}
+  .stripTitle{color:var(--gold);text-align:center;margin-bottom:12px;font-weight:800}
+  .strip{overflow:hidden;padding:12px 6px}
+  .stripInner{display:flex;gap:20px;align-items:center;will-change:transform}
   .mock{
-    width:260px;height:260px;border-radius:16px;background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.03);display:flex;align-items:center;justify-content:center;position:relative;flex-shrink:0;
-    transform-origin:center center;transition:transform .28s cubic-bezier(.2,.9,.2,1), box-shadow .28s;
-    box-shadow:0 20px 40px rgba(0,0,0,0.6);
+    width:260px;height:260px;border-radius:18px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    border:1px solid rgba(255,255,255,0.03);display:flex;align-items:center;justify-content:center;position:relative;flex-shrink:0;
+    box-shadow:0 20px 60px rgba(0,0,0,0.6);transition:transform .28s ease, box-shadow .28s;
   }
+  .mock:hover{transform:translateY(-12px) scale(1.03);box-shadow:0 40px 120px rgba(0,0,0,0.75)}
   .mock img{max-width:86%;max-height:86%;object-fit:contain;border-radius:12px}
-  .mock:hover{transform:translateY(-10px) scale(1.02);box-shadow:0 32px 80px rgba(0,0,0,0.75)}
-  .mock .badge{position:absolute;left:12px;top:12px;background:rgba(0,0,0,0.55);padding:6px 10px;border-radius:8px;color:var(--gold);font-weight:800;font-size:12px;border:1px solid rgba(255,255,255,0.03)}
+  .mock .brandBadge{position:absolute;left:12px;top:12px;background:linear-gradient(90deg,var(--gold),var(--gold-2));padding:6px 10px;border-radius:8px;color:#071018;font-weight:900;font-size:12px}
+  @media(max-width:800px){ .mock{width:180px;height:180px} }
 
-  /* ---------- FOOTER ---------- */
-  footer{padding:28px;text-align:center;color:var(--muted);border-top:1px solid rgba(255,255,255,0.03);margin-top:24px}
+  /* footer */
+  footer{padding:28px;text-align:center;color:var(--muted);margin-top:40px;border-top:1px solid rgba(255,255,255,0.03)}
 
-  /* ---------- RESPONSIVE ---------- */
-  @media (max-width:1100px){
-    .hero{grid-template-columns:1fr;gap:24px;padding-left:20px;padding-right:20px}
-    #viewer{height:420px}
-    .mock{width:200px;height:200px}
-    h1{font-size:36px}
-  }
-  @media (max-width:520px){
-    .mock{width:160px;height:160px}
-    h1{font-size:26px}
-  }
-
-  /* slight grain overlay for premium feel */
-  .grain{pointer-events:none;position:fixed;inset:0;mix-blend-mode:overlay;opacity:0.06;background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"><rect width="20" height="20" fill="%23000000" /><circle cx="1" cy="1" r="0.6" fill="%23ffffff" /></svg>')}
+  /* helper for hidden */
+  .hidden{display:none}
 </style>
 </head>
 <body>
 
+<div class="grain" aria-hidden="true"></div>
+
 <header>
   <div class="logo">HIGH CHOICE</div>
-  <nav>
+  <nav aria-label="Main navigation">
     <a href="index.html">Home</a>
     <a href="mens.html">Men</a>
     <a href="womens.html">Women</a>
@@ -115,191 +109,224 @@
 </header>
 
 <main>
-  <!-- HERO -->
-  <section class="hero" role="region" aria-label="Hero — High Choice">
-    <div class="hero-left">
-      <div class="eyebrow">PREMIUM LUXURY</div>
-      <h1>High Choice — Curated Luxury Watches</h1>
-      <p class="lead">Experience showroom-quality 3D mockups, cinematic lighting, and premium product presentation. Scroll to explore featured mockups — click any watch to view details and quick checkout via WhatsApp.</p>
+  <div class="container">
+    <div class="layout">
+      <section aria-label="Hero content" class="heroLeft">
+        <div class="eyebrow">PREMIUM LUXURY</div>
+        <h1>High Choice — Curated Luxury Watches</h1>
+        <p class="lead">Experience cinematic 3D watch mockups, premium lighting, and high-finish presentation. Click a mockup to view details — checkout via WhatsApp with COD / Prepaid.</p>
 
-      <div class="hero-cta">
-        <a class="btn primary" href="mens.html">Shop Men</a>
-        <a class="btn ghost" href="brand.html?brand=Rolex">Explore Rolex</a>
+        <div class="ctaRow">
+          <a class="btn primary" href="mens.html" id="shopMen">Shop Men</a>
+          <a class="btn ghost" href="brand.html?brand=Rolex" id="exploreRolex">Explore Rolex</a>
+        </div>
+
+        <div class="tagline">Cinematic 3D • Ultra-premium • COD & UPI available</div>
+      </section>
+
+      <section id="viewer" aria-label="3D viewer area">
+        <canvas id="scene" aria-hidden="false"></canvas>
+        <div class="viewer-ui" aria-hidden="true">
+          <div class="pill">Drag to rotate</div>
+          <div class="pill">Scroll to zoom</div>
+        </div>
+      </section>
+    </div>
+
+    <!-- mockup strip -->
+    <div class="stripWrap">
+      <div class="stripTitle">Featured Mockups — Drag to explore</div>
+      <div class="strip" aria-roledescription="carousel">
+        <div class="stripInner" id="stripInner" tabindex="0"></div>
       </div>
-
-      <div class="tagline">Cinematic 3D • Ultra-premium • COD & UPI payments</div>
     </div>
 
-    <div id="viewer" aria-hidden="false" aria-label="3D watch viewer">
-      <canvas id="scene-canvas" role="img" aria-label="3D watch preview"></canvas>
-    </div>
-  </section>
-
-  <!-- mockup strip -->
-  <section class="strip-wrap" aria-label="Featured mockups">
-    <h3 class="strip-title">Featured Mockups — Drag to explore</h3>
-    <div class="strip" id="stripRoot">
-      <div class="strip-inner" id="stripInner" tabindex="0" aria-roledescription="carousel"></div>
-    </div>
-  </section>
-
-  <footer>© 2025 HIGH CHOICE • WhatsApp: <a href="https://wa.me/917020966879" style="color:var(--gold);text-decoration:none">+91 70209 66879</a></footer>
+    <footer>© 2025 HIGH CHOICE • WhatsApp: <a href="https://wa.me/917020966879" style="color:var(--gold);text-decoration:none">+91 70209 66879</a></footer>
+  </div>
 </main>
 
-<div class="grain" aria-hidden="true"></div>
-
-<!-- three.js -->
+<!-- three.js + extras -->
 <script src="https://unpkg.com/three@0.152.2/build/three.min.js"></script>
 <script src="https://unpkg.com/three@0.152.2/examples/js/loaders/GLTFLoader.js"></script>
+<script src="https://unpkg.com/three@0.152.2/examples/js/controls/OrbitControls.js"></script>
+<script src="https://unpkg.com/three@0.152.2/examples/js/postprocessing/EffectComposer.js"></script>
+<script src="https://unpkg.com/three@0.152.2/examples/js/postprocessing/RenderPass.js"></script>
+<script src="https://unpkg.com/three@0.152.2/examples/js/postprocessing/UnrealBloomPass.js"></script>
 
+<!-- If you have a global products.js include it above this file; otherwise fallback is used -->
 <script>
-/* ========= Data source =========
-   If you already have a separate products.js that defines `PRODUCTS`, this code will use it.
-   If not, it falls back to a short sample list that still demonstrates the UI.
-*/
-const FALLBACK_PRODUCTS = {
-  "Rolex": [
-    { slug: "rolex-yachtmaster", name: "Rolex yachtmaster automatic", price: 2499, image: "assets/images/products/rolex-yachtmaster.jpg" },
-    { slug: "rolex-submariner-shift", name: "Rolex submariner shift", price: 1599, image: "assets/images/products/rolex-submariner-shift.jpg" }
+/* ========= DATA SOURCE ========= */
+const FALLBACK = {
+  "Rolex":[
+    {slug:"rolex-yachtmaster", name:"Rolex yachtmaster automatic", price:2499, image:"assets/images/products/rolex-yachtmaster.jpg"},
+    {slug:"rolex-submariner", name:"Rolex Submariner", price:1599, image:"assets/images/products/rolex-submariner-shift.jpg"}
   ],
-  "Omega": [
-    { slug: "omega-speedmaster", name: "Omega Speedmaster", price: 4299, image: "assets/images/products/omega-speedmaster.jpg" },
-    { slug: "omega-seamaster", name: "Omega Seamaster", price: 1899, image: "assets/images/products/omega-seemaster.jpg" }
+  "Omega":[
+    {slug:"omega-speedmaster", name:"Omega Speedmaster", price:4299, image:"assets/images/products/omega-speedmaster.jpg"}
   ],
-  "G-Shock": [
-    { slug: "gshock-ga2100", name: "G-Shock GA2100", price: 1299, image: "assets/images/products/gshock-ga2100.jpg" }
+  "G-Shock":[
+    {slug:"gshock-ga2100", name:"G-Shock GA2100", price:1299, image:"assets/images/products/gshock-ga2100.jpg"}
   ]
 };
+const PRODUCTS = (typeof PRODUCTS !== 'undefined') ? PRODUCTS : FALLBACK;
+</script>
 
-const DATA = (typeof PRODUCTS !== 'undefined') ? PRODUCTS : FALLBACK_PRODUCTS;
-
-/* ========= Populate strip ========= */
+<script>
+/* ========= POPULATE STRIP ========= */
 (function populateStrip(){
-  const stripInner = document.getElementById('stripInner');
-  // pick featured: first item of each brand
+  const strip = document.getElementById('stripInner');
   const picks = [];
-  Object.keys(DATA).forEach(brand=>{
-    const list = DATA[brand];
-    if(list && list.length) picks.push({brand, item: list[0]});
+  Object.keys(PRODUCTS).forEach(b=>{
+    const list = PRODUCTS[b];
+    if(list && list.length) picks.push({brand:b, item:list[0]});
   });
-  // repeat picks to make a long strip
-  const repeated = [...picks, ...picks, ...picks];
-  stripInner.innerHTML = repeated.map(p=>{
+  const repeated = [...picks, ...picks, ...picks]; // repeat for smooth loop
+  strip.innerHTML = repeated.map(p=>{
     const it = p.item;
     const img = it.image || 'assets/images/hero-watch.jpg';
     return `<a class="mock" href="product.html?brand=${encodeURIComponent(p.brand)}&slug=${encodeURIComponent(it.slug)}" title="${it.name}">
-      <div class="badge">${p.brand}</div>
+      <div class="brandBadge">${p.brand}</div>
       <img src="${img}" alt="${it.name}">
     </a>`;
   }).join('');
 })();
 
-/* ========= Auto-scroll loop + pointer drag ========= */
-(function stripScroll(){
-  const stripInner = document.getElementById('stripInner');
+/* ========= STRIP AUTO-SCROLL + DRAG ========= */
+(function stripLoop(){
+  const strip = document.getElementById('stripInner');
   let pos = 0;
-  let speed = 0.5; // px per frame
+  const speed = 0.6;
   function loop(){
     pos += speed;
-    // when translate passes width/3 reset for smooth loop (we repeated content)
-    const max = stripInner.scrollWidth/3;
+    const max = strip.scrollWidth/3;
     if(pos > max) pos = 0;
-    stripInner.style.transform = `translateX(${-pos}px)`;
+    strip.style.transform = `translateX(${-pos}px)`;
     requestAnimationFrame(loop);
   }
   requestAnimationFrame(loop);
 
-  // drag support
-  let isDown=false,startX=0,lastPos=0;
-  stripInner.addEventListener('pointerdown',(e)=>{
-    isDown = true; stripInner.style.cursor='grabbing'; startX = e.clientX; lastPos = pos;
-  });
-  window.addEventListener('pointerup',()=>{ isDown=false; stripInner.style.cursor='grab'; });
-  window.addEventListener('pointermove',(e)=>{
-    if(!isDown) return;
-    const dx = e.clientX - startX;
-    pos = Math.max(0, lastPos - dx); // invert drag direction
-  });
+  // drag
+  let dragging=false, startX=0, last=0;
+  strip.addEventListener('pointerdown', e=>{ dragging=true; startX=e.clientX; last=pos; strip.style.cursor='grabbing'; });
+  window.addEventListener('pointerup', ()=>{ dragging=false; strip.style.cursor='grab'; });
+  window.addEventListener('pointermove', e=>{ if(!dragging) return; const dx = e.clientX - startX; pos = Math.max(0, last - dx); });
 })();
+</script>
 
-/* ========= 3D viewer (three.js) ========= */
+<script>
+/* ========= THREE.JS SCENE (PRO) ========= */
 (function(){
-  const canvas = document.getElementById('scene-canvas');
+  const canvas = document.getElementById('scene');
   const viewer = document.getElementById('viewer');
-  if(!canvas) return;
-
+  // Renderer
   const renderer = new THREE.WebGLRenderer({canvas, antialias:true, alpha:true});
   renderer.setPixelRatio(Math.min(window.devicePixelRatio||1,2));
   renderer.setSize(viewer.clientWidth, viewer.clientHeight, false);
   renderer.outputEncoding = THREE.sRGBEncoding;
+  renderer.toneMapping = THREE.ACESFilmicToneMapping;
+  renderer.toneMappingExposure = 1;
 
+  // Scene & Camera
   const scene = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(38, viewer.clientWidth/viewer.clientHeight, 0.1, 1000);
-  camera.position.set(0,0,3.2);
+  const camera = new THREE.PerspectiveCamera(35, viewer.clientWidth/viewer.clientHeight, 0.1, 1000);
+  camera.position.set(0, 0, 3.2);
 
-  // cinematic lights
-  const hemi = new THREE.HemisphereLight(0xffffff, 0x080808, 0.35); scene.add(hemi);
-  const key = new THREE.DirectionalLight(0xfff3d1, 1.2); key.position.set(4,6,4); scene.add(key);
-  const rim = new THREE.DirectionalLight(0xffe6b3, 0.45); rim.position.set(-4,4,-6); scene.add(rim);
+  // Lights - cinematic
+  const hemi = new THREE.HemisphereLight(0xffffff, 0x080808, 0.4); scene.add(hemi);
+  const key = new THREE.DirectionalLight(0xfff3d1, 1.2); key.position.set(5,6,4); scene.add(key);
+  const rim = new THREE.DirectionalLight(0xffe6b3, 0.45); rim.position.set(-5,4,-6); scene.add(rim);
+  const fill = new THREE.AmbientLight(0x404040, 0.8); scene.add(fill);
 
-  // gold reflective floor (subtle)
-  const floorGeo = new THREE.PlaneGeometry(8,8);
-  const floorMat = new THREE.MeshStandardMaterial({color:0x000000, metalness:0.2, roughness:0.65, envMapIntensity:0.3});
-  const floor = new THREE.Mesh(floorGeo, floorMat); floor.rotation.x = -Math.PI/2; floor.position.y = -1.1; scene.add(floor);
+  // Floor (subtle reflective)
+  const floorGeo = new THREE.PlaneGeometry(10, 10);
+  const floorMat = new THREE.MeshStandardMaterial({color:0x000000, metalness:0.2, roughness:0.6});
+  const floor = new THREE.Mesh(floorGeo, floorMat); floor.rotation.x = -Math.PI/2; floor.position.y = -1.05; scene.add(floor);
 
+  // Root group for model
   const root = new THREE.Group(); scene.add(root);
 
-  // try load GLB model; else fallback to textured plane
+  // Post-processing bloom (subtle)
+  const composer = new THREE.EffectComposer(renderer);
+  const renderPass = new THREE.RenderPass(scene, camera);
+  composer.addPass(renderPass);
+  const bloomPass = new THREE.UnrealBloomPass(new THREE.Vector2(viewer.clientWidth, viewer.clientHeight), 0.6, 0.8, 0.1);
+  bloomPass.threshold = 0.0; bloomPass.strength = 0.6; bloomPass.radius = 0.4;
+  composer.addPass(bloomPass);
+
+  // Load model or fallback plane
   const loader = new THREE.GLTFLoader();
-  let modelLoaded = false;
-  loader.load('assets/models/watch.glb', gltf=>{
-    const g = gltf.scene;
-    g.traverse(n=>{ if(n.isMesh){ n.castShadow=true; n.receiveShadow=true; if(n.material) { n.material.metalness = n.material.metalness ?? 0.6; n.material.roughness = n.material.roughness ?? 0.35 } }});
+  let modelLoaded=false;
+  loader.load('assets/models/watch.glb', function(gltf){
+    const obj = gltf.scene;
+    obj.traverse(n=>{ if(n.isMesh){ n.castShadow=true; n.receiveShadow=true; if(n.material){ n.material.metalness = n.material.metalness ?? 0.6; n.material.roughness = n.material.roughness ?? 0.35 } }});
     // center & scale
-    const box = new THREE.Box3().setFromObject(g);
+    const box = new THREE.Box3().setFromObject(obj);
     const size = box.getSize(new THREE.Vector3()).length();
     const center = box.getCenter(new THREE.Vector3());
-    g.position.sub(center);
-    const scale = 1.1 / size;
-    g.scale.setScalar(scale);
-    root.add(g);
+    obj.position.sub(center);
+    const scale = 1.05 / size;
+    obj.scale.setScalar(scale);
+    root.add(obj);
     modelLoaded = true;
-  }, undefined, err=>{
-    // fallback image plane
-    const texLoader = new THREE.TextureLoader();
-    const tex = texLoader.load('assets/images/hero-watch.jpg');
+  }, undefined, function(err){
+    // fallback to image plane with slight tilt
+    const tex = new THREE.TextureLoader().load('assets/images/hero-watch.jpg', ()=>{ renderer.render(scene,camera); });
     tex.encoding = THREE.sRGBEncoding;
-    const geo = new THREE.PlaneGeometry(1.9,1.9);
+    const geo = new THREE.PlaneGeometry(1.9, 1.9);
     const mat = new THREE.MeshStandardMaterial({map:tex, metalness:0.18, roughness:0.45});
-    const mesh = new THREE.Mesh(geo, mat);
-    mesh.rotation.y = -0.2;
+    const mesh = new THREE.Mesh(geo, mat); mesh.rotation.y = -0.25;
     root.add(mesh);
     modelLoaded = true;
   });
 
-  // subtle animation / idle rotation
-  let last = performance.now();
-  function animate(){
-    const now = performance.now();
-    const dt = (now - last)/1000; last = now;
-    root.rotation.y += dt * 0.12; // slow rotate
-    root.rotation.z = Math.sin(now*0.0006) * 0.02;
-    renderer.render(scene,camera);
-    requestAnimationFrame(animate);
-  }
-  animate();
+  // subtle idle motion + parallax mapping using pointer
+  let pointerDown=false, lastX=0, lastY=0, targetRotY=0, targetRotX=0;
+  viewer.addEventListener('pointerdown', (e)=>{ pointerDown=true; lastX=e.clientX; lastY=e.clientY; viewer.style.cursor='grabbing'; });
+  window.addEventListener('pointerup', ()=>{ pointerDown=false; viewer.style.cursor='default'; });
+  window.addEventListener('pointermove', (e)=>{ if(!pointerDown) return; const dx = (e.clientX - lastX) / 200; const dy = (e.clientY - lastY) / 600; targetRotY += dx; targetRotX += dy; lastX = e.clientX; lastY = e.clientY; });
 
-  // pointer interaction: drag to rotate, wheel to zoom
-  let isDown=false, px=0;
-  viewer.addEventListener('pointerdown', (e)=>{ isDown=true; px = e.clientX; viewer.style.cursor='grabbing'; });
-  window.addEventListener('pointerup', ()=>{ isDown=false; viewer.style.cursor='grab'; });
-  window.addEventListener('pointermove', (e)=>{ if(!isDown) return; const dx = (e.clientX - px) / 200; root.rotation.y += dx; px = e.clientX; });
-
+  // wheel zoom
   viewer.addEventListener('wheel', (e)=>{ e.preventDefault(); camera.position.z += e.deltaY * 0.002; camera.position.z = Math.min(Math.max(camera.position.z, 1.6), 6); }, {passive:false});
 
-  // responsive
-  window.addEventListener('resize', ()=>{ renderer.setSize(viewer.clientWidth, viewer.clientHeight, false); camera.aspect = viewer.clientWidth/viewer.clientHeight; camera.updateProjectionMatrix(); });
+  // Animation loop (using composer for bloom)
+  let last = performance.now();
+  const animate = function(){
+    const now = performance.now();
+    const dt = (now - last) / 1000; last = now;
+    // auto rotate slowly
+    root.rotation.y += dt * 0.12;
+    // ease towards target pointer rotation
+    root.rotation.y += (targetRotY - root.rotation.y) * 0.08;
+    root.rotation.x += (targetRotX - root.rotation.x) * 0.06;
+    root.rotation.z = Math.sin(now * 0.0006) * 0.015;
+    // render with composer (bloom)
+    composer.render();
+    requestAnimationFrame(animate);
+  };
+  animate();
+
+  // resize handling
+  window.addEventListener('resize', ()=>{
+    const w = viewer.clientWidth, h = viewer.clientHeight;
+    renderer.setSize(w,h,false);
+    composer.setSize(w,h);
+    camera.aspect = w/h; camera.updateProjectionMatrix();
+  });
+
+  // initial subtle entrance animation for root (scale from 0.92 to 1)
+  root.scale.setScalar(0.96);
+  gsap.to(root.scale, {x:1, y:1, z:1, duration:1.2, ease:"power3.out"});
+
 })();
 </script>
+
+<!-- Entrance animations for text + buttons -->
+<script>
+gsap.from("h1", {y:24, opacity:0, duration:0.9, delay:0.15, ease:"power3.out"});
+gsap.from(".lead", {y:18, opacity:0, duration:0.9, delay:0.25, ease:"power3.out"});
+gsap.from(".ctaRow .btn", {y:18, opacity:0, duration:0.9, delay:0.35, stagger:0.08, ease:"power3.out"});
+gsap.from(".stripTitle", {y:8, opacity:0, duration:0.9, delay:0.45, ease:"power3.out"});
+</script>
+
 </body>
 </html>
