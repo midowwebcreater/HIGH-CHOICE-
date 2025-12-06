@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>HIGH CHOICE | About Us</title>
+  <style>
+    body {font-family:'Helvetica Neue',Arial,sans-serif;margin:0;padding:0;background:#f8f9fa;color:#222;}
+    header {background:#000;color:#fff;padding:20px;text-align:center;font-size:1.8rem;letter-spacing:2px;}
+    nav {display:flex;justify-content:center;background:#111;}
+    nav a {color:#fff;padding:15px 25px;text-decoration:none;text-transform:uppercase;font-weight:600;}
+    nav a:hover {background:#444;}
+    .content {max-width:900px;margin:40px auto;padding:20px;background:#fff;border-radius:10px;box-shadow:0 5px 15px rgba(0,0,0,0.1);}
+    .content h2 {font-size:1.6rem;margin-bottom:20px;color:#000;}
+    .content p {line-height:1.6;color:#555;margin-bottom:15px;}
+    footer {background:#000;color:#fff;text-align:center;padding:20px;margin-top:40px;}
+  </style>
+</head>
+<body>
+  <header>HIGH CHOICE</header>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="men.html">Men</a>
+    <a href="women.html">Women</a>
+    <a href="kids.html">Kids</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+
+  <div class="content">
+    <h2>About HIGH CHOICE</h2>
+    <p>HIGH CHOICE is your destination for premium, international-quality luxury watches. We bring together the world’s most iconic brands — from Rolex and Omega to Cartier and Dior — under one roof, offering timeless elegance and modern sophistication.</p>
+    <p>Our mission is simple: to deliver a seamless shopping experience with instant booking, secure UPI payments, and trusted COD options. Every product is carefully curated to reflect the highest standards of craftsmanship and style.</p>
+    <p>At HIGH CHOICE, we believe luxury should be accessible, transparent, and effortless. Whether you’re looking for a statement piece or a gift for someone special, our collections are designed to impress and inspire.</p>
+    <p>Step into the world of HIGH CHOICE — where every watch tells a story of prestige, precision, and passion.</p>
+  </div>
+
+  <footer>© 2025 HIGH CHOICE. All Rights Reserved.</footer>
+
+  <script>
+    function openOrder(productName, price) {
+      const name = prompt("Enter your Name:");
+      const phone = prompt("Enter your Phone:");
+      const address = prompt("Enter your Address:");
+      const city = prompt("Enter your City:");
+      const pincode = prompt("Enter your Pincode:");
+      const payment = prompt("Payment Method (Prepaid/COD):");
+
+      let message = `Order Details:%0AProduct: ${productName}%0APrice: ₹${price}%0AName: ${name}%0APhone: ${phone}%0AAddress: ${address}, ${city}, ${pincode}%0APayment: ${payment}`;
+
+      if(payment && payment.toLowerCase() === "prepaid"){
+        message += `%0AUPI ID: 7869288078@kotak811`;
+      }
+
+      window.open(`https://wa.me/917869288078?text=${message}`, "_blank");
+    }
+  </script>
+</body>
+</html>
