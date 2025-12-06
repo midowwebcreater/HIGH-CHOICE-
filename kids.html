@@ -2,109 +2,73 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>HIGH CHOICE | Kids Watches</title>
+  <title>HIGH CHOICE | Kids’ Brands</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
-    body {font-family:'Helvetica Neue',Arial,sans-serif;margin:0;padding:0;background:#f8f9fa;color:#222;}
-    header {background:#000;color:#fff;padding:20px;text-align:center;font-size:1.8rem;letter-spacing:2px;}
-    nav {display:flex;justify-content:center;background:#111;}
-    nav a {color:#fff;padding:15px 25px;text-decoration:none;text-transform:uppercase;font-weight:600;}
-    nav a:hover {background:#444;}
-    .container {display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;padding:30px;}
-    .card {background:#fff;border-radius:10px;box-shadow:0 5px 15px rgba(0,0,0,0.1);overflow:hidden;transition:transform 0.3s;}
-    .card:hover {transform:translateY(-5px);}
-    .card img {width:100%;height:250px;object-fit:cover;}
-    .card h3 {margin:15px;font-size:1.2rem;}
-    .card p {margin:0 15px 15px;color:#555;}
-    .card button {display:block;width:90%;margin:10px auto 20px;padding:12px;background:#000;color:#fff;border:none;border-radius:5px;font-weight:bold;cursor:pointer;}
-    .card button:hover {background:#444;}
-    footer {background:#000;color:#fff;text-align:center;padding:20px;margin-top:40px;}
+    :root{
+      --bg:#0a0a0c; --text:#e6e6ea; --muted:#a7abb3;
+      --border:rgba(255,255,255,0.09); --accent:#7c5cff; --cyan:#00e0ff; --gold:#f5c56d;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Inter,Arial,sans-serif;background:var(--bg);color:var(--text)}
+
+    /* Header */
+    header{position:sticky;top:0;background:linear-gradient(to bottom, rgba(10,10,12,0.85), rgba(10,10,12,0.55));
+      border-bottom:1px solid var(--border);backdrop-filter:blur(10px)}
+    .top{max-width:1100px;margin:0 auto;padding:16px 20px;display:flex;justify-content:space-between;align-items:center}
+    nav{display:flex;gap:10px}
+    nav a{color:var(--text);text-decoration:none;font-weight:700;padding:10px 12px;border-radius:10px;border:1px solid transparent;position:relative;overflow:hidden}
+    nav a::before{content:"";position:absolute;inset:0;background:linear-gradient(135deg, rgba(124,92,255,0.18), rgba(0,224,255,0.18));opacity:0;transition:.25s}
+    nav a:hover{border-color:var(--border)}
+    nav a:hover::before{opacity:1}
+
+    /* Page */
+    .wrap{max-width:1100px;margin:24px auto;padding:0 20px}
+    h1{font-size:1.8rem;margin:0 0 12px;font-weight:900;
+      background:linear-gradient(90deg,#fff,#00e0ff,#7c5cff,#f5c56d);
+      -webkit-background-clip:text;color:transparent}
+    p{color:var(--muted);margin:0 0 18px}
+
+    /* Grid */
+    .grid{display:grid;gap:18px;grid-template-columns:repeat(2,1fr)}
+    @media (max-width:620px){.grid{grid-template-columns:1fr}}
+    .card{border:1px solid var(--border);border-radius:14px;overflow:hidden;
+      background:linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
+      cursor:pointer;transition:transform .25s ease, box-shadow .25s ease}
+    .card:hover{transform:translateY(-6px) rotateX(3deg) rotateY(-3deg);
+      box-shadow:0 14px 28px rgba(0,0,0,0.35)}
+    .thumb{height:150px;background:linear-gradient(135deg, rgba(124,92,255,0.25), rgba(0,224,255,0.25))}
+    .card h3{margin:14px;font-weight:900}
+
+    /* Footer */
+    footer{margin-top:26px;border-top:1px solid var(--border);padding:20px;text-align:center;color:#cfd2d8;
+      background:linear-gradient(to top, rgba(10,10,12,0.85), rgba(10,10,12,0.55))}
   </style>
 </head>
 <body>
-  <header>HIGH CHOICE - Kids Watches</header>
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="men.html">Men</a>
-    <a href="women.html">Women</a>
-  </nav>
-
-  <section class="container">
-    <!-- Casio Kids Model 1 -->
-    <div class="card">
-      <img src="images/casio_kids_1.jpg" alt="Casio Kids Model 1">
-      <h3>Casio Kids Model 1</h3>
-      <p>₹999</p>
-      <button onclick="openOrder('Casio Kids Model 1','999')">Buy Now</button>
+  <header>
+    <div class="top">
+      <strong>HIGH CHOICE</strong>
+      <nav>
+        <a href="index.html">HOME</a>
+        <a href="men.html">MEN</a>
+        <a href="women.html">WOMEN</a>
+        <a href="about.html">ABOUT</a>
+        <a href="contact.html">CONTACT</a>
+      </nav>
     </div>
+  </header>
 
-    <!-- Casio Kids Model 2 -->
-    <div class="card">
-      <img src="images/casio_kids_2.jpg" alt="Casio Kids Model 2">
-      <h3>Casio Kids Model 2</h3>
-      <p>₹1199</p>
-      <button onclick="openOrder('Casio Kids Model 2','1199')">Buy Now</button>
-    </div>
+  <main class="wrap">
+    <h1>Kids’ Brands</h1>
+    <p>Select a brand to view all models with prices.</p>
 
-    <!-- Casio Kids Model 3 -->
-    <div class="card">
-      <img src="images/casio_kids_3.jpg" alt="Casio Kids Model 3">
-      <h3>Casio Kids Model 3</h3>
-      <p>₹1399</p>
-      <button onclick="openOrder('Casio Kids Model 3','1399')">Buy Now</button>
-    </div>
+    <section class="grid">
+      <a class="card" href="casio_kids.html"><div class="thumb"></div><h3>Casio Kids</h3></a>
+      <a class="card" href="gshock_kids.html"><div class="thumb"></div><h3>G‑Shock Kids</h3></a>
+    </section>
+  </main>
 
-    <!-- Casio Kids Model 4 -->
-    <div class="card">
-      <img src="images/casio_kids_4.jpg" alt="Casio Kids Model 4">
-      <h3>Casio Kids Model 4</h3>
-      <p>₹1599</p>
-      <button onclick="openOrder('Casio Kids Model 4','1599')">Buy Now</button>
-    </div>
-
-    <!-- Casio Kids Model 5 -->
-    <div class="card">
-      <img src="images/casio_kids_5.jpg" alt="Casio Kids Model 5">
-      <h3>Casio Kids Model 5</h3>
-      <p>₹1799</p>
-      <button onclick="openOrder('Casio Kids Model 5','1799')">Buy Now</button>
-    </div>
-
-    <!-- Casio Kids Model 6 -->
-    <div class="card">
-      <img src="images/casio_kids_6.jpg" alt="Casio Kids Model 6">
-      <h3>Casio Kids Model 6</h3>
-      <p>₹1999</p>
-      <button onclick="openOrder('Casio Kids Model 6','1999')">Buy Now</button>
-    </div>
-
-    <!-- G-Shock Kids -->
-    <div class="card">
-      <img src="images/gshock_kids.jpg" alt="G-Shock Kids">
-      <h3>G-Shock Kids</h3>
-      <p>₹1999</p>
-      <button onclick="openOrder('G-Shock Kids','1999')">Buy Now</button>
-    </div>
-  </section>
-
-  <footer>© 2025 HIGH CHOICE</footer>
-
-  <script>
-    function openOrder(productName, price) {
-      const name = prompt("Enter your Name:");
-      const phone = prompt("Enter your Phone:");
-      const address = prompt("Enter your Address:");
-      const city = prompt("Enter your City:");
-      const pincode = prompt("Enter your Pincode:");
-      const payment = prompt("Payment Method (Prepaid/COD):");
-
-      let message = `Order Details:%0AProduct: ${productName}%0APrice: ₹${price}%0AName: ${name}%0APhone: ${phone}%0AAddress: ${address}, ${city}, ${pincode}%0APayment: ${payment}`;
-
-      if(payment && payment.toLowerCase() === "prepaid"){
-        message += `%0AUPI ID: 7869288078@kotak811`;
-      }
-
-      window.open(`https://wa.me/917869288078?text=${message}`, "_blank");
-    }
-  </script>
+  <footer>© 2025 HIGH CHOICE. All Rights Reserved.</footer>
 </body>
 </html>
