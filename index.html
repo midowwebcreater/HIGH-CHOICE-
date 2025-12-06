@@ -3,92 +3,72 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>HIGH CHOICE — Premium Watches (Pro 3D)</title>
+<title>HIGH CHOICE — Ultra Premium 3D Watches</title>
+<meta name="description" content="HIGH CHOICE — Cinematic 3D mockups • Premium watches • COD & UPI" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;600;800&family=Playfair+Display:wght@500;700&display=swap" rel="stylesheet">
 
-<!-- CDN libs -->
-<link rel="preload" href="videos/Featured1.mp4" as="video">
-<!-- GSAP for smooth UI animation -->
+<!-- GSAP -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 
 <style>
   :root{
     --gold:#c7a16a;
-    --gold-2:#e6c88a;
-    --bg-900:#030303;
+    --gold-soft:#e6c88a;
+    --bg:#040405;
     --panel:#0b0b0b;
-    --muted:#c3c3c3;
+    --muted:#bfc6c8;
     --glass: rgba(255,255,255,0.03);
   }
   *{box-sizing:border-box}
-  html,body{height:100%;margin:0;background:linear-gradient(180deg,#000 0%, #070707 100%);color:#fff;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial}
-  a{color:inherit}
-  img{display:block;max-width:100%}
-  /* Grain overlay */
-  .grain{pointer-events:none;position:fixed;inset:0;mix-blend-mode:overlay;opacity:0.05;background-image:
-    radial-gradient(rgba(255,255,255,0.02) 1px, transparent 1px);
-    background-size:20px 20px;z-index:10000}
+  html,body{height:100%;margin:0;background:radial-gradient(900px 500px at 10% 15%, rgba(199,161,106,0.06), transparent), linear-gradient(180deg,var(--bg),#020203);color:#fff;font-family:Inter,system-ui,Arial}
+  img{max-width:100%;display:block}
+  a{color:inherit;text-decoration:none}
 
   /* Header */
-  header{position:fixed;left:0;right:0;top:0;height:72px;display:flex;align-items:center;padding:12px 28px;z-index:120;
-    background:linear-gradient(180deg, rgba(0,0,0,0.55), transparent);backdrop-filter: blur(6px);border-bottom:1px solid rgba(255,255,255,0.03)}
-  .logo{font-weight:900;color:var(--gold);letter-spacing:1px;font-size:18px}
-  nav{margin-left:auto;display:flex;gap:12px;align-items:center}
-  nav a{padding:9px 12px;border-radius:8px;text-decoration:none;color:var(--muted);font-weight:700;transition:all .18s;display:inline-block}
-  nav a:hover{color:#fff;transform:translateY(-3px)}
-  nav .cta{background:linear-gradient(90deg,var(--gold),var(--gold-2));color:#071018;font-weight:900}
+  header{position:fixed;left:0;right:0;top:0;z-index:120;display:flex;align-items:center;padding:14px 28px;background:linear-gradient(180deg,rgba(2,2,2,0.6),transparent);backdrop-filter:blur(6px);border-bottom:1px solid rgba(255,255,255,0.03)}
+  .logo{font-weight:900;color:var(--gold);font-family:"Playfair Display",serif;letter-spacing:1px}
+  nav{margin-left:auto;display:flex;gap:10px;align-items:center}
+  nav a{padding:8px 12px;border-radius:10px;color:var(--muted);font-weight:700}
+  nav a.cta{background:linear-gradient(90deg,var(--gold),var(--gold-soft));color:#071018;font-weight:900}
 
-  /* Layout */
-  main{padding-top:84px}
-  .container{max-width:1240px;margin:0 auto;padding:28px}
-  .layout{display:grid;grid-template-columns:1fr 540px;gap:32px;align-items:center}
-  @media(max-width:1000px){ .layout{grid-template-columns:1fr;gap:20px;padding:12px} }
+  /* Main */
+  main{padding-top:86px}
+  .wrap{max-width:1280px;margin:0 auto;padding:36px}
+  .grid{display:grid;grid-template-columns:1fr 560px;gap:36px;align-items:center}
+  @media(max-width:1000px){ .grid{grid-template-columns:1fr;padding:20px} }
 
-  /* Hero left */
-  .eyebrow{color:var(--gold);font-weight:900;letter-spacing:2px}
-  h1{font-family: "Playfair Display", Georgia, serif;font-size:44px;color:var(--gold);margin:8px 0 6px;line-height:1.02}
-  p.lead{color:var(--muted);max-width:560px;line-height:1.6;margin:0}
-
+  /* Left content */
+  .eyebrow{color:var(--gold);font-weight:900;letter-spacing:2px;margin-bottom:8px}
+  h1{font-family:"Playfair Display",serif;font-size:46px;margin:6px 0;color:var(--gold);line-height:1.02}
+  p.lead{color:var(--muted);max-width:560px;line-height:1.6;margin-top:12px}
   .ctaRow{margin-top:18px;display:flex;gap:12px;flex-wrap:wrap}
-  .btn{
-    display:inline-flex;align-items:center;gap:10px;padding:12px 18px;border-radius:999px;font-weight:900;text-decoration:none;
-    transition:transform .18s, box-shadow .18s;
-    box-shadow: 0 12px 40px rgba(4,4,4,0.6);
-  }
-  .btn.primary{background:linear-gradient(90deg,var(--gold),var(--gold-2));color:#071018}
-  .btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--muted)}
-  .btn:hover{transform:translateY(-4px);box-shadow:0 24px 70px rgba(2,2,2,0.7)}
+  .btn{padding:12px 18px;border-radius:999px;font-weight:900;display:inline-flex;align-items:center;gap:10px;cursor:pointer}
+  .btn.primary{background:linear-gradient(90deg,var(--gold),var(--gold-soft));color:#071018}
+  .btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.04);color:var(--muted)}
 
-  .tagline{margin-top:12px;color:var(--muted);font-size:13px}
-
-  /* 3D viewer (right) */
-  #viewer{height:640px;border-radius:20px;overflow:hidden;background:linear-gradient(180deg,#060606,#0b0b0b);display:flex;align-items:center;justify-content:center;
-    border:1px solid rgba(255,255,255,0.03);box-shadow:0 60px 180px rgba(0,0,0,0.8)}
-  canvas#scene{width:100%;height:100%;display:block;outline:0}
-
-  /* subtle hud overlay in viewer */
-  .viewer-ui{position:absolute;right:36px;bottom:36px;z-index:80;display:flex;flex-direction:column;gap:10px;align-items:flex-end}
-  .viewer-ui .pill{background:rgba(0,0,0,0.5);padding:8px 12px;border-radius:999px;border:1px solid rgba(255,255,255,0.03);color:var(--muted);font-weight:700}
+  /* Viewer */
+  #viewer{height:640px;border-radius:18px;overflow:hidden;background:linear-gradient(180deg,#020202,#0b0b0b);border:1px solid rgba(255,255,255,0.03);display:flex;align-items:center;justify-content:center;position:relative;box-shadow:0 60px 180px rgba(0,0,0,0.8)}
+  canvas#scene{width:100%;height:100%;display:block}
+  .viewer-ui{position:absolute;left:18px;bottom:18px;display:flex;gap:10px;flex-direction:column;z-index:40}
+  .pill{background:var(--glass);padding:8px 12px;border-radius:999px;border:1px solid rgba(255,255,255,0.02);color:var(--muted);font-weight:700}
 
   /* strip */
-  .stripWrap{margin-top:36px}
-  .stripTitle{color:var(--gold);text-align:center;margin-bottom:12px;font-weight:800}
+  .strip-wrap{margin-top:30px}
+  .strip-title{color:var(--gold);text-align:center;font-weight:900;margin-bottom:12px}
   .strip{overflow:hidden;padding:12px 6px}
-  .stripInner{display:flex;gap:20px;align-items:center;will-change:transform}
-  .mock{
-    width:260px;height:260px;border-radius:18px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-    border:1px solid rgba(255,255,255,0.03);display:flex;align-items:center;justify-content:center;position:relative;flex-shrink:0;
-    box-shadow:0 20px 60px rgba(0,0,0,0.6);transition:transform .28s ease, box-shadow .28s;
-  }
-  .mock:hover{transform:translateY(-12px) scale(1.03);box-shadow:0 40px 120px rgba(0,0,0,0.75)}
+  .strip-inner{display:flex;gap:18px;align-items:center;will-change:transform}
+  .mock{width:260px;height:260px;border-radius:18px;background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.03);display:flex;align-items:center;justify-content:center;position:relative;flex-shrink:0;box-shadow:0 20px 60px rgba(0,0,0,0.6);transition:transform .28s, box-shadow .28s}
+  .mock:hover{transform:translateY(-10px) scale(1.03);box-shadow:0 40px 120px rgba(0,0,0,0.75)}
   .mock img{max-width:86%;max-height:86%;object-fit:contain;border-radius:12px}
-  .mock .brandBadge{position:absolute;left:12px;top:12px;background:linear-gradient(90deg,var(--gold),var(--gold-2));padding:6px 10px;border-radius:8px;color:#071018;font-weight:900;font-size:12px}
-  @media(max-width:800px){ .mock{width:180px;height:180px} }
+  .brandBadge{position:absolute;left:10px;top:10px;background:linear-gradient(90deg,var(--gold),var(--gold-soft));color:#071018;padding:6px 10px;border-radius:8px;font-weight:900;font-size:12px}
 
   /* footer */
-  footer{padding:28px;text-align:center;color:var(--muted);margin-top:40px;border-top:1px solid rgba(255,255,255,0.03)}
+  footer{padding:28px;text-align:center;color:var(--muted);margin-top:26px;border-top:1px solid rgba(255,255,255,0.03)}
 
-  /* helper for hidden */
-  .hidden{display:none}
+  /* small */
+  @media(max-width:800px){ #viewer{height:420px} .mock{width:190px;height:190px} h1{font-size:32px} }
+  .grain{pointer-events:none;position:fixed;inset:0;mix-blend-mode:overlay;opacity:0.04;background-image:radial-gradient(rgba(255,255,255,0.02) 1px, transparent 1px);background-size:20px 20px}
 </style>
 </head>
 <body>
@@ -97,51 +77,52 @@
 
 <header>
   <div class="logo">HIGH CHOICE</div>
-  <nav aria-label="Main navigation">
+  <nav aria-label="Main nav">
     <a href="index.html">Home</a>
     <a href="mens.html">Men</a>
     <a href="womens.html">Women</a>
     <a href="kids.html">Kids</a>
     <a href="360.html">360°</a>
-    <a href="brand.html?brand=Rolex">Rolex</a>
     <a class="cta" href="contact.html">WhatsApp</a>
   </nav>
 </header>
 
 <main>
-  <div class="container">
-    <div class="layout">
-      <section aria-label="Hero content" class="heroLeft">
-        <div class="eyebrow">PREMIUM LUXURY</div>
-        <h1>High Choice — Curated Luxury Watches</h1>
-        <p class="lead">Experience cinematic 3D watch mockups, premium lighting, and high-finish presentation. Click a mockup to view details — checkout via WhatsApp with COD / Prepaid.</p>
+  <div class="wrap">
+    <div class="grid">
+      <!-- LEFT: text -->
+      <section>
+        <div class="eyebrow">CINEMATIC 3D</div>
+        <h1>High Choice — International Premium Watches</h1>
+        <p class="lead">Ultra-premium 3D mockups, showroom lighting, and trusted checkout flow. Click a mockup to open product page and place order via WhatsApp. This demo uses high-quality watch images from Unsplash and supports GLB 3D models.</p>
 
         <div class="ctaRow">
-          <a class="btn primary" href="mens.html" id="shopMen">Shop Men</a>
-          <a class="btn ghost" href="brand.html?brand=Rolex" id="exploreRolex">Explore Rolex</a>
+          <a class="btn primary" href="mens.html">Shop Men</a>
+          <a class="btn ghost" href="brand.html?brand=Rolex">Explore Rolex</a>
         </div>
-
-        <div class="tagline">Cinematic 3D • Ultra-premium • COD & UPI available</div>
       </section>
 
-      <section id="viewer" aria-label="3D viewer area">
-        <canvas id="scene" aria-hidden="false"></canvas>
-        <div class="viewer-ui" aria-hidden="true">
+      <!-- RIGHT: 3D viewer -->
+      <section id="viewer" aria-label="3D viewer">
+        <canvas id="scene"></canvas>
+        <div class="viewer-ui">
           <div class="pill">Drag to rotate</div>
           <div class="pill">Scroll to zoom</div>
         </div>
       </section>
     </div>
 
-    <!-- mockup strip -->
-    <div class="stripWrap">
-      <div class="stripTitle">Featured Mockups — Drag to explore</div>
-      <div class="strip" aria-roledescription="carousel">
-        <div class="stripInner" id="stripInner" tabindex="0"></div>
+    <!-- featured strip -->
+    <div class="strip-wrap">
+      <div class="strip-title">Featured — High Choice Picks</div>
+      <div class="strip">
+        <div class="strip-inner" id="stripInner" tabindex="0" aria-roledescription="carousel">
+          <!-- populated by JS -->
+        </div>
       </div>
     </div>
 
-    <footer>© 2025 HIGH CHOICE • WhatsApp: <a href="https://wa.me/917020966879" style="color:var(--gold);text-decoration:none">+91 70209 66879</a></footer>
+    <footer>© 2025 HIGH CHOICE • WhatsApp: <a href="https://wa.me/917020966879" style="color:var(--gold)">@+91 70209 66879</a></footer>
   </div>
 </main>
 
@@ -153,26 +134,29 @@
 <script src="https://unpkg.com/three@0.152.2/examples/js/postprocessing/RenderPass.js"></script>
 <script src="https://unpkg.com/three@0.152.2/examples/js/postprocessing/UnrealBloomPass.js"></script>
 
-<!-- If you have a global products.js include it above this file; otherwise fallback is used -->
 <script>
-/* ========= DATA SOURCE ========= */
-const FALLBACK = {
+/* -------------------------
+   Demo product data (uses Unsplash image links so demo works without upload)
+   Replace later with your products.js or local images.
+--------------------------*/
+const PRODUCTS_DEMO = {
   "Rolex":[
-    {slug:"rolex-yachtmaster", name:"Rolex yachtmaster automatic", price:2499, image:"assets/images/products/rolex-yachtmaster.jpg"},
-    {slug:"rolex-submariner", name:"Rolex Submariner", price:1599, image:"assets/images/products/rolex-submariner-shift.jpg"}
+    {slug:"rolex-yachtmaster", name:"Rolex Yachtmaster Automatic", price:249900, image:"https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&w=1000&q=80"},
+    {slug:"rolex-submariner", name:"Rolex Submariner", price:159900, image:"https://images.unsplash.com/photo-1518544889289-f1c1a3a4e9c5?auto=format&w=1000&q=80"}
   ],
   "Omega":[
-    {slug:"omega-speedmaster", name:"Omega Speedmaster", price:4299, image:"assets/images/products/omega-speedmaster.jpg"}
+    {slug:"omega-speedmaster", name:"Omega Speedmaster", price:429900, image:"https://images.unsplash.com/photo-1522312346375-d1a52e2b99b3?auto=format&w=1000&q=80"}
   ],
   "G-Shock":[
-    {slug:"gshock-ga2100", name:"G-Shock GA2100", price:1299, image:"assets/images/products/gshock-ga2100.jpg"}
+    {slug:"gshock-ga2100", name:"G-Shock GA2100", price:129900, image:"https://images.unsplash.com/photo-1524749292158-c90489c5afd2?auto=format&w=1000&q=80"}
   ]
 };
-const PRODUCTS = (typeof PRODUCTS !== 'undefined') ? PRODUCTS : FALLBACK;
-</script>
 
-<script>
-/* ========= POPULATE STRIP ========= */
+const PRODUCTS = (typeof PRODUCTS !== 'undefined') ? PRODUCTS : PRODUCTS_DEMO;
+
+/* -------------------------
+   Populate strip (first model of each brand)
+--------------------------*/
 (function populateStrip(){
   const strip = document.getElementById('stripInner');
   const picks = [];
@@ -183,7 +167,7 @@ const PRODUCTS = (typeof PRODUCTS !== 'undefined') ? PRODUCTS : FALLBACK;
   const repeated = [...picks, ...picks, ...picks]; // repeat for smooth loop
   strip.innerHTML = repeated.map(p=>{
     const it = p.item;
-    const img = it.image || 'assets/images/hero-watch.jpg';
+    const img = it.image;
     return `<a class="mock" href="product.html?brand=${encodeURIComponent(p.brand)}&slug=${encodeURIComponent(it.slug)}" title="${it.name}">
       <div class="brandBadge">${p.brand}</div>
       <img src="${img}" alt="${it.name}">
@@ -191,11 +175,12 @@ const PRODUCTS = (typeof PRODUCTS !== 'undefined') ? PRODUCTS : FALLBACK;
   }).join('');
 })();
 
-/* ========= STRIP AUTO-SCROLL + DRAG ========= */
+/* -------------------------
+   Strip auto-scroll + drag
+--------------------------*/
 (function stripLoop(){
   const strip = document.getElementById('stripInner');
-  let pos = 0;
-  const speed = 0.6;
+  let pos = 0, speed = 0.6;
   function loop(){
     pos += speed;
     const max = strip.scrollWidth/3;
@@ -205,57 +190,57 @@ const PRODUCTS = (typeof PRODUCTS !== 'undefined') ? PRODUCTS : FALLBACK;
   }
   requestAnimationFrame(loop);
 
-  // drag
-  let dragging=false, startX=0, last=0;
-  strip.addEventListener('pointerdown', e=>{ dragging=true; startX=e.clientX; last=pos; strip.style.cursor='grabbing'; });
-  window.addEventListener('pointerup', ()=>{ dragging=false; strip.style.cursor='grab'; });
-  window.addEventListener('pointermove', e=>{ if(!dragging) return; const dx = e.clientX - startX; pos = Math.max(0, last - dx); });
+  // pointer drag
+  let isDown=false, startX=0, last=0;
+  strip.addEventListener('pointerdown', e=>{ isDown=true; startX=e.clientX; last=pos; strip.style.cursor='grabbing'; });
+  window.addEventListener('pointerup', ()=>{ isDown=false; strip.style.cursor='grab'; });
+  window.addEventListener('pointermove', e=>{ if(!isDown) return; const dx = e.clientX - startX; pos = Math.max(0, last - dx); });
 })();
-</script>
 
-<script>
-/* ========= THREE.JS SCENE (PRO) ========= */
+/* -------------------------
+   THREE.JS 3D viewer (cinematic)
+--------------------------*/
 (function(){
   const canvas = document.getElementById('scene');
   const viewer = document.getElementById('viewer');
-  // Renderer
+  if(!canvas) return;
+
   const renderer = new THREE.WebGLRenderer({canvas, antialias:true, alpha:true});
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio||1,2));
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
   renderer.setSize(viewer.clientWidth, viewer.clientHeight, false);
   renderer.outputEncoding = THREE.sRGBEncoding;
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
   renderer.toneMappingExposure = 1;
 
-  // Scene & Camera
   const scene = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(35, viewer.clientWidth/viewer.clientHeight, 0.1, 1000);
+  const camera = new THREE.PerspectiveCamera(36, viewer.clientWidth / viewer.clientHeight, 0.1, 1000);
   camera.position.set(0, 0, 3.2);
 
-  // Lights - cinematic
-  const hemi = new THREE.HemisphereLight(0xffffff, 0x080808, 0.4); scene.add(hemi);
-  const key = new THREE.DirectionalLight(0xfff3d1, 1.2); key.position.set(5,6,4); scene.add(key);
-  const rim = new THREE.DirectionalLight(0xffe6b3, 0.45); rim.position.set(-5,4,-6); scene.add(rim);
+  // lights
+  const hemi = new THREE.HemisphereLight(0xffffff, 0x080808, 0.35); scene.add(hemi);
+  const key = new THREE.DirectionalLight(0xfff3d1, 1.2); key.position.set(5, 6, 4); scene.add(key);
+  const rim = new THREE.DirectionalLight(0xffe6b3, 0.45); rim.position.set(-5, 4, -6); scene.add(rim);
   const fill = new THREE.AmbientLight(0x404040, 0.8); scene.add(fill);
 
-  // Floor (subtle reflective)
-  const floorGeo = new THREE.PlaneGeometry(10, 10);
-  const floorMat = new THREE.MeshStandardMaterial({color:0x000000, metalness:0.2, roughness:0.6});
+  // floor for subtle reflection
+  const floorGeo = new THREE.PlaneGeometry(8, 8);
+  const floorMat = new THREE.MeshStandardMaterial({color:0x000000, metalness:0.25, roughness:0.6});
   const floor = new THREE.Mesh(floorGeo, floorMat); floor.rotation.x = -Math.PI/2; floor.position.y = -1.05; scene.add(floor);
 
-  // Root group for model
+  // model root
   const root = new THREE.Group(); scene.add(root);
 
-  // Post-processing bloom (subtle)
+  // postprocessing - bloom
   const composer = new THREE.EffectComposer(renderer);
   const renderPass = new THREE.RenderPass(scene, camera);
   composer.addPass(renderPass);
-  const bloomPass = new THREE.UnrealBloomPass(new THREE.Vector2(viewer.clientWidth, viewer.clientHeight), 0.6, 0.8, 0.1);
-  bloomPass.threshold = 0.0; bloomPass.strength = 0.6; bloomPass.radius = 0.4;
+  const bloomPass = new THREE.UnrealBloomPass(new THREE.Vector2(viewer.clientWidth, viewer.clientHeight), 0.5, 0.6, 0.1);
+  bloomPass.threshold = 0.0; bloomPass.strength = 0.5; bloomPass.radius = 0.4;
   composer.addPass(bloomPass);
 
-  // Load model or fallback plane
+  // load GLB or fallback plane
   const loader = new THREE.GLTFLoader();
-  let modelLoaded=false;
+  let modelLoaded = false;
   loader.load('assets/models/watch.glb', function(gltf){
     const obj = gltf.scene;
     obj.traverse(n=>{ if(n.isMesh){ n.castShadow=true; n.receiveShadow=true; if(n.material){ n.material.metalness = n.material.metalness ?? 0.6; n.material.roughness = n.material.roughness ?? 0.35 } }});
@@ -269,43 +254,41 @@ const PRODUCTS = (typeof PRODUCTS !== 'undefined') ? PRODUCTS : FALLBACK;
     root.add(obj);
     modelLoaded = true;
   }, undefined, function(err){
-    // fallback to image plane with slight tilt
-    const tex = new THREE.TextureLoader().load('assets/images/hero-watch.jpg', ()=>{ renderer.render(scene,camera); });
+    // fallback: textured plane using hero or demo image
+    const img = 'assets/images/hero-demo.jpg' || 'https://images.unsplash.com/photo-1518544889289-f1c1a3a4e9c5?auto=format&w=1200&q=90';
+    const tex = new THREE.TextureLoader().load(img);
     tex.encoding = THREE.sRGBEncoding;
     const geo = new THREE.PlaneGeometry(1.9, 1.9);
     const mat = new THREE.MeshStandardMaterial({map:tex, metalness:0.18, roughness:0.45});
-    const mesh = new THREE.Mesh(geo, mat); mesh.rotation.y = -0.25;
+    const mesh = new THREE.Mesh(geo, mat);
+    mesh.rotation.y = -0.15;
     root.add(mesh);
     modelLoaded = true;
   });
 
-  // subtle idle motion + parallax mapping using pointer
-  let pointerDown=false, lastX=0, lastY=0, targetRotY=0, targetRotX=0;
-  viewer.addEventListener('pointerdown', (e)=>{ pointerDown=true; lastX=e.clientX; lastY=e.clientY; viewer.style.cursor='grabbing'; });
+  // subtle interaction: drag to rotate, wheel to zoom
+  let pointerDown=false, lastX=0;
+  viewer.addEventListener('pointerdown', (e)=>{ pointerDown=true; lastX=e.clientX; viewer.style.cursor='grabbing'; });
   window.addEventListener('pointerup', ()=>{ pointerDown=false; viewer.style.cursor='default'; });
-  window.addEventListener('pointermove', (e)=>{ if(!pointerDown) return; const dx = (e.clientX - lastX) / 200; const dy = (e.clientY - lastY) / 600; targetRotY += dx; targetRotX += dy; lastX = e.clientX; lastY = e.clientY; });
+  window.addEventListener('pointermove', (e)=>{ if(!pointerDown) return; const dx=(e.clientX-lastX)/200; root.rotation.y += dx; lastX=e.clientX; });
 
-  // wheel zoom
-  viewer.addEventListener('wheel', (e)=>{ e.preventDefault(); camera.position.z += e.deltaY * 0.002; camera.position.z = Math.min(Math.max(camera.position.z, 1.6), 6); }, {passive:false});
+  viewer.addEventListener('wheel', (e)=>{ e.preventDefault(); camera.position.z += e.deltaY * 0.002; camera.position.z = Math.min(Math.max(camera.position.z, 1.5), 6); }, {passive:false});
 
-  // Animation loop (using composer for bloom)
+  // animate loop
   let last = performance.now();
-  const animate = function(){
+  function animate(){
     const now = performance.now();
-    const dt = (now - last) / 1000; last = now;
-    // auto rotate slowly
+    const dt = (now - last)/1000; last = now;
+    // gentle automatic rotation
     root.rotation.y += dt * 0.12;
-    // ease towards target pointer rotation
-    root.rotation.y += (targetRotY - root.rotation.y) * 0.08;
-    root.rotation.x += (targetRotX - root.rotation.x) * 0.06;
-    root.rotation.z = Math.sin(now * 0.0006) * 0.015;
-    // render with composer (bloom)
+    root.rotation.z = Math.sin(now*0.0006) * 0.015;
+    // render
     composer.render();
     requestAnimationFrame(animate);
-  };
+  }
   animate();
 
-  // resize handling
+  // resize
   window.addEventListener('resize', ()=>{
     const w = viewer.clientWidth, h = viewer.clientHeight;
     renderer.setSize(w,h,false);
@@ -313,19 +296,18 @@ const PRODUCTS = (typeof PRODUCTS !== 'undefined') ? PRODUCTS : FALLBACK;
     camera.aspect = w/h; camera.updateProjectionMatrix();
   });
 
-  // initial subtle entrance animation for root (scale from 0.92 to 1)
+  // entrance scale animation via GSAP
   root.scale.setScalar(0.96);
-  gsap.to(root.scale, {x:1, y:1, z:1, duration:1.2, ease:"power3.out"});
-
+  gsap.to(root.scale, {x:1,y:1,z:1,duration:1.2,ease:"power3.out"});
 })();
 </script>
 
-<!-- Entrance animations for text + buttons -->
+<!-- subtle entrance + micro animations -->
 <script>
-gsap.from("h1", {y:24, opacity:0, duration:0.9, delay:0.15, ease:"power3.out"});
-gsap.from(".lead", {y:18, opacity:0, duration:0.9, delay:0.25, ease:"power3.out"});
-gsap.from(".ctaRow .btn", {y:18, opacity:0, duration:0.9, delay:0.35, stagger:0.08, ease:"power3.out"});
-gsap.from(".stripTitle", {y:8, opacity:0, duration:0.9, delay:0.45, ease:"power3.out"});
+gsap.from("h1", {y:26, opacity:0, duration:1, delay:0.12, ease:"power3.out"});
+gsap.from(".lead", {y:18, opacity:0, duration:0.9, delay:0.22});
+gsap.from(".ctaRow .btn", {y:16, opacity:0, duration:0.9, delay:0.32, stagger:0.08});
+gsap.from(".strip-title", {y:10, opacity:0, duration:0.9, delay:0.45});
 </script>
 
 </body>
