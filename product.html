@@ -1,66 +1,206 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<title>Product – High Choice</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Product — High Choice</title>
 <style>
-body { margin: 0; background: #000; color: #fff; font-family: Poppins, sans-serif; }
-.container { padding: 20px; }
-img { width: 100%; border-radius: 12px; }
-.title { font-size: 26px; font-weight: 700; margin: 15px 0; color: gold; }
-.price { font-size: 22px; margin: 10px 0; }
-.desc { opacity: 0.8; line-height: 1.6; }
-.btn { background: gold; color: #000; padding: 15px; width: 100%; border-radius: 10px; text-align: center; font-weight: 700; font-size: 18px; margin-top: 20px; }
+  :root{--gold:#c7a16a;--bg:#000;--muted:#bbb}
+  body{margin:0;background:var(--bg);color:#fff;font-family:Inter,system-ui,Arial}
+  header{display:flex;justify-content:space-between;align-items:center;padding:14px 18px;background:linear-gradient(180deg,rgba(0,0,0,0.6),transparent);position:sticky;top:0}
+  .brand{color:var(--gold);font-weight:800}
+  .wrap{max-width:1000px;margin:30px auto;padding:18px;display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start}
+  .img-box{background:#0b0b0b;padding:16px;border-radius:12px;border:1px solid rgba(255,255,255,0.03);text-align:center}
+  .img-box img{width:100%;border-radius:10px}
+  .info h1{color:var(--gold);margin:0 0 8px}
+  .price{font-size:22px;color:#b0ff9a;margin-bottom:10px}
+  .desc{color:var(--muted);line-height:1.6}
+  .buy{display:inline-block;padding:14px 18px;border-radius:10px;background:var(--gold);color:#071018;font-weight:800;margin-top:18px;text-decoration:none}
+  /* modal */
+  .modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,0.7);z-index:60}
+  .modal.open{display:flex}
+  .card{width:92%;max-width:520px;background:#fff;color:#071018;border-radius:12px;padding:18px;text-align:left}
+  .field{margin:8px 0}
+  .field label{display:block;font-size:13px;color:#333;margin-bottom:6px}
+  .field input,.field textarea, .select{width:100%;padding:10px;border-radius:8px;border:1px solid #ddd;font-size:15px}
+  .row{display:flex;gap:8px}
+  .pay-box{background:#f6f6f6;padding:12px;border-radius:8px;margin-top:8px}
+  .qr{width:220px;margin:10px auto;display:block}
+  .confirm{display:inline-block;padding:10px 14px;border-radius:8px;background:#0bb870;color:#fff;text-decoration:none;font-weight:800}
+  .close{display:inline-block;padding:8px 12px;border-radius:8px;background:#eee;color:#111;text-decoration:none;margin-left:8px}
 </style>
 </head>
-
 <body>
-<div class="container">
-  <img id="pimg">
-  <div class="title" id="pname"></div>
-  <div class="price" id="pprice"></div>
-  <p class="desc" id="pdesc"></p>
 
-  <div class="btn" onclick="buy()">Buy Now</div>
+<header><div class="brand">HIGH CHOICE</div><nav><a href="index.html" style="color:#bbb">Home</a></nav></header>
+
+<div class="wrap">
+  <div class="img-box"><img id="prodImg" src="assets/images/hero-watch.jpg" alt="product"></div>
+  <div class="info">
+    <h1 id="prodName">Product Name</h1>
+    <div class="price">₹ <span id="prodPrice">0</span></div>
+    <div class="desc" id="prodDesc">Premium watch description.</div>
+
+    <a id="buyNow" class="buy" href="#">Buy Now</a>
+  </div>
 </div>
 
+<!-- Checkout Modal -->
+<div id="checkoutModal" class="modal" aria-hidden="true">
+  <div class="card" role="dialog" aria-modal="true" aria-labelledby="checkoutTitle">
+    <h2 id="checkoutTitle" style="margin-top:0">Checkout</h2>
+
+    <div class="field"><label>Full Name</label><input id="c_name" placeholder="Full name"></div>
+    <div class="field"><label>Mobile Number</label><input id="c_mobile" placeholder="10 digit mobile"></div>
+    <div class="field"><label>Alternate Mobile (optional)</label><input id="c_alt" placeholder="Alternate number"></div>
+    <div class="field"><label>Full Address</label><textarea id="c_address" rows="2" placeholder="House no, street, area"></textarea></div>
+    <div class="row">
+      <div style="flex:1" class="field"><label>City</label><input id="c_city" placeholder="City"></div>
+      <div style="width:130px" class="field"><label>Pincode</label><input id="c_pin" placeholder="Pincode"></div>
+    </div>
+
+    <div class="field"><label>Product</label><input id="c_product" readonly></div>
+    <div class="field"><label>Price (₹)</label><input id="c_price" readonly></div>
+
+    <div style="margin-top:8px">
+      <label style="font-weight:700">Payment Method</label>
+      <div style="margin-top:8px;display:flex;gap:10px">
+        <label style="background:#fff;padding:8px 12px;border-radius:8px;cursor:pointer"><input type="radio" name="payment" value="COD" checked> COD</label>
+        <label style="background:#fff;padding:8px 12px;border-radius:8px;cursor:pointer"><input type="radio" name="payment" value="PREPAID"> Prepaid (UPI)</label>
+      </div>
+    </div>
+
+    <div id="upiArea" style="display:none" class="pay-box">
+      <div style="font-weight:700">Pay via UPI</div>
+      <div style="margin-top:8px;color:#333">UPI ID: <strong>7869288078@kotak811</strong></div>
+      <img id="upiQR" class="qr" src="">
+      <div style="text-align:center;"><a id="paidBtn" class="confirm" href="#">I HAVE PAID</a><a id="cancelBtn" class="close" href="#">Cancel</a></div>
+    </div>
+
+    <div style="margin-top:12px;text-align:right">
+      <a id="placeOrder" class="confirm" href="#">Place Order</a>
+      <a id="closeModal" class="close" href="#">Close</a>
+    </div>
+  </div>
+</div>
+
+<script src="products.js"></script>
 <script>
-// init supabase
-const supabaseUrl = "https://vkapzhbghyjzhscxsxnh.supabase.co";
-const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZrYXB6aGJnaHlqemhzY3hzeG5oIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjQ5ODQ0MjgsImV4cCI6MjA4MDU2MDQyOH0.izm4PRrrRS7cVsP7KCQIXls12QuzBb8YCCNtKLYDIak";
+  // merchant details
+  const MERCHANT_UPI = '7869288078@kotak811';
+  const MERCHANT_WA = '917020966879'; // without + sign for wa.me
 
-const sb = supabase.createClient(supabaseUrl, supabaseKey);
+  // helper to read query params
+  function qp(k){ return new URLSearchParams(location.search).get(k) }
 
-// load product
-async function loadProduct() {
-  const pid = localStorage.getItem("product_id");
+  // get brand + slug params
+  const brand = qp('brand') || qp('b') || 'Rolex';
+  const slug = qp('slug');
 
-  let { data } = await sb.from("products").select("*").eq("id", pid).single();
+  // find product in PRODUCTS
+  function findProduct(brand, slug){
+    const list = PRODUCTS[brand] || PRODUCTS['WomenOthers'] || PRODUCTS['Kids'] || [];
+    return list.find(p=>p.slug === slug) || list[0];
+  }
+  const product = findProduct(brand, slug);
 
-  document.getElementById("pname").innerText = data.name;
-  document.getElementById("pprice").innerText = "₹" + data.price;
-  document.getElementById("pdesc").innerText = data.description;
-  document.getElementById("pimg").src = data.image;
-}
+  // fill UI
+  document.getElementById('prodName').innerText = product.name;
+  document.getElementById('prodPrice').innerText = Number(product.price).toLocaleString();
+  document.getElementById('prodDesc').innerText = "Premium quality watch • Showroom finish • 1 year service warranty.";
+  document.getElementById('prodImg').src = product.image || 'assets/images/hero-watch.jpg';
 
-loadProduct();
+  // modal elements
+  const modal = document.getElementById('checkoutModal');
+  const buyNow = document.getElementById('buyNow');
+  const closeModal = document.getElementById('closeModal');
+  const placeOrder = document.getElementById('placeOrder');
+  const upiArea = document.getElementById('upiArea');
+  const upiQR = document.getElementById('upiQR');
+  const paidBtn = document.getElementById('paidBtn');
+  const cancelBtn = document.getElementById('cancelBtn');
 
-// Buy Now → WhatsApp + UPI QR Auto Amount
-function buy() {
-  const name = document.getElementById("pname").innerText;
-  const price = document.getElementById("pprice").innerText.replace("₹","");
+  // open modal
+  buyNow.addEventListener('click', e=>{
+    e.preventDefault();
+    document.getElementById('c_product').value = product.name;
+    document.getElementById('c_price').value = product.price;
+    modal.classList.add('open');
+    modal.setAttribute('aria-hidden','false');
+  });
+  closeModal.addEventListener('click', e=>{ e.preventDefault(); modal.classList.remove('open'); modal.setAttribute('aria-hidden','true'); });
 
-  let link =
-    "https://wa.me/7020966879?text=" +
-    encodeURIComponent(
-      `Hi, I want to order:\nProduct: ${name}\nPrice: ₹${price}`
-    );
+  // payment radio change
+  document.querySelectorAll('input[name="payment"]').forEach(r=>{
+    r.addEventListener('change', ()=>{
+      if(r.value === 'PREPAID' && r.checked){
+        upiArea.style.display = 'block';
+        generateQR(product.price);
+      } else if (r.value === 'COD' && r.checked){
+        upiArea.style.display = 'none';
+      }
+    });
+  });
 
-  window.location = link;
-}
+  // generate UPI URI + QR using Google Chart
+  function generateQR(amount){
+    const upiUri = `upi://pay?pa=${encodeURIComponent(MERCHANT_UPI)}&pn=${encodeURIComponent('HIGH CHOICE')}&am=${encodeURIComponent(amount)}&cu=INR`;
+    const qrUrl = 'https://chart.googleapis.com/chart?cht=qr&chs=360x360&chl=' + encodeURIComponent(upiUri);
+    upiQR.src = qrUrl;
+    paidBtn.href = '#';
+    paidBtn.onclick = function(ev){
+      ev.preventDefault();
+      // here we open WhatsApp confirm with note "Paid"
+      sendWhatsApp(true);
+    }
+    cancelBtn.onclick = function(ev){ ev.preventDefault(); upiArea.style.display = 'none'; document.querySelector('input[value="COD"]').checked = true; }
+  }
+
+  // Place order = open whatsapp with message
+  placeOrder.addEventListener('click', function(e){
+    e.preventDefault();
+    // validate fields
+    const name = document.getElementById('c_name').value.trim();
+    const mobile = document.getElementById('c_mobile').value.trim();
+    const alt = document.getElementById('c_alt').value.trim();
+    const address = document.getElementById('c_address').value.trim();
+    const city = document.getElementById('c_city').value.trim();
+    const pin = document.getElementById('c_pin').value.trim();
+    const payMethod = document.querySelector('input[name="payment"]:checked').value;
+
+    if(!name){ alert('Enter name'); return }
+    if(!/^\d{10}$/.test(mobile)){ alert('Enter valid 10 digit mobile'); return }
+    if(!address){ alert('Enter address'); return }
+    if(!city){ alert('Enter city'); return }
+    if(!/^\d{6}$/.test(pin)){ alert('Enter valid 6 digit pincode'); return }
+
+    // if prepaid selected but no confirm payment yet -> show QR and require paid confirmation OR allow sending order with note 'prepaid - pending'
+    if(payMethod === 'PREPAID' && upiArea.style.display === 'none'){
+      // generate QR and let user confirm
+      upiArea.style.display = 'block';
+      generateQR(product.price);
+      return;
+    }
+
+    sendWhatsApp(false); // false = not 'I have paid' click
+  });
+
+  // compose and open WhatsApp message
+  function sendWhatsApp(isPaid){
+    const name = encodeURIComponent(document.getElementById('c_name').value.trim());
+    const mobile = encodeURIComponent(document.getElementById('c_mobile').value.trim());
+    const alt = encodeURIComponent(document.getElementById('c_alt').value.trim());
+    const address = encodeURIComponent(document.getElementById('c_address').value.trim());
+    const city = encodeURIComponent(document.getElementById('c_city').value.trim());
+    const pin = encodeURIComponent(document.getElementById('c_pin').value.trim());
+    const productName = encodeURIComponent(document.getElementById('c_product').value);
+    const price = encodeURIComponent(document.getElementById('c_price').value);
+    const payMethod = encodeURIComponent(document.querySelector('input[name="payment"]:checked').value);
+
+    let msg = `NEW ORDER REQUEST - HIGH CHOICE%0A%0ACustomer Details:%0AName: ${name}%0AMobile: ${mobile}%0AAlt: ${alt}%0AAddress: ${address}%0ALandmark/City: ${city}%0APincode: ${pin}%0A%0AProduct Details:%0AProduct: ${productName}%0APrice: ₹${price}%0A%0APayment Method: ${payMethod}`;
+    if(isPaid) msg += `%0A%0APayment Status: PAID (Customer clicked I HAVE PAID via UPI)`;
+    // open WhatsApp
+    const waUrl = `https://wa.me/${MERCHANT_WA}?text=${msg}`;
+    window.open(waUrl, '_blank');
+  }
+
 </script>
-
-</body>
-</html>
+</body></html>
