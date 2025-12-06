@@ -1,360 +1,807 @@
+<!-- === PART 1 of 3: HTML + CSS (copy this as the top of your index.html) === -->
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>High Choice — Luxury Timepieces</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>HIGH CHOICE — Premium Collection</title>
+  <meta name="description" content="HIGH CHOICE — Luxury e-commerce demo with 3D hero, Supabase-backed products and realtime updates." />
+
   <style>
+    /* ---- Dark Luxury Theme ---- */
     :root{
-      --bg:#0b0b0d; --card:#121214; --border:#2a2a2e; --text:#f6f6f6; --muted:#a3a3a3;
-      --gold:#d1b97a; --accent:#4ef0e4; --ok:#25D366;
+      --bg:#070607;
+      --panel:#0f0f10;
+      --muted:#a9a09b;
+      --gold:#d4af37;
+      --gold-weak:rgba(212,175,55,0.14);
+      --accent:#f5e7c8;
+      --glass: rgba(255,255,255,0.03);
+      --card-shadow: 0 6px 24px rgba(0,0,0,0.7);
+      --radius:14px;
+      --serif: "Georgia", "Times New Roman", Times, serif;
+      --sans: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      --max-width:1200px;
     }
-    *{box-sizing:border-box}
-    html,body{margin:0;background:var(--bg);color:var(--text);font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial}
-    .container{max-width:1100px;margin:0 auto;padding:16px}
-    a{text-decoration:none;color:inherit;transition:.2s}
-    a:hover{color:var(--gold)}
-    header{border-bottom:1px solid var(--border);position:sticky;top:0;background:rgba(11,11,13,.85);backdrop-filter:saturate(120%) blur(8px);z-index:20}
-    .brand{display:flex;justify-content:space-between;align-items:center;gap:12px}
-    .brand h1{margin:0;color:var(--gold);font-size:1.4rem;font-weight:600}
-    nav{display:flex;gap:12px;font-size:.95rem;color:var(--muted);flex-wrap:wrap}
-    .tabs{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
-    .tab{border:1px solid var(--border);padding:8px 12px;border-radius:999px;color:var(--muted);cursor:pointer}
-    .tab.active{border-color:#d1b97a66;color:var(--text)}
-    .hero{height:42vh;min-height:260px;border:1px solid #d1b97a33;border-radius:14px;overflow:hidden}
-    .section-title{font-size:1.25rem;margin:18px 0;color:var(--gold);font-weight:600}
-    .badges{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:12px}
-    .badge{border:1px solid var(--border);border-radius:10px;padding:12px;display:flex;gap:10px;align-items:center;background:var(--card)}
-    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
-    .card{background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden;display:flex;flex-direction:column}
-    .imgwrap{width:100%;aspect-ratio:4/3;background:#0e0e10}
-    .imgwrap img{width:100%;height:100%;object-fit:cover;display:block}
-    .cardbody{padding:12px;display:flex;flex-direction:column;gap:8px}
-    .title{font-weight:600}
-    .price{display:flex;gap:8px;align-items:baseline}
-    .price .main{font-size:1.1rem}
-    .price .strike{color:#8a8a8a;text-decoration:line-through}
-    .desc{color:#c9c9c9;font-size:.92rem}
-    .actions{display:flex;gap:8px;margin-top:6px;flex-wrap:wrap}
-    .btn{flex:1;padding:10px 12px;border-radius:8px;text-align:center;font-weight:600;font-size:.95rem}
-    .btn.upi{background:var(--gold);color:#000}
-    .btn.wa{background:var(--ok);color:#fff}
-    .loading{border:1px dashed var(--border);border-radius:12px;padding:18px;text-align:center;color:#9aa0a6}
-    .empty{color:#9aa0a6}
-    .how{border:1px solid var(--border);background:var(--card);border-radius:12px;padding:16px;margin-top:18px}
-    .brand-pages{margin-top:8px;color:var(--muted);font-size:.93rem}
-    .category-header{display:flex;justify-content:space-between;align-items:center;gap:8px;margin:12px 0}
-    .category-title{font-size:1.1rem;color:var(--gold);font-weight:600}
-    .filter-bar{display:flex;gap:8px;flex-wrap:wrap}
-    .filter{border:1px solid var(--border);padding:6px 10px;border-radius:8px;cursor:pointer;color:var(--muted)}
-    .filter.active{border-color:#d1b97a66;color:var(--text)}
-    footer{border-top:1px solid var(--border)}
-    .foot{text-align:center;color:#aaa}
-    @media (max-width:640px){
-      .brand h1{font-size:1.2rem}
-      .hero{height:36vh}
+    html,body{height:100%;}
+    body{
+      margin:0;
+      font-family: var(--sans);
+      background:linear-gradient(180deg,var(--bg),#040403);
+      color:var(--accent);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.45;
+      padding:24px;
+      display:flex;
+      justify-content:center;
     }
+    .wrap{
+      width:100%;
+      max-width:var(--max-width);
+      box-sizing:border-box;
+    }
+
+    header{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      margin-bottom:20px;
+    }
+    .brand{
+      display:flex;
+      gap:12px;
+      align-items:center;
+      text-decoration:none;
+      color:var(--accent);
+    }
+    .logo{
+      width:56px;
+      height:56px;
+      border-radius:10px;
+      background:linear-gradient(135deg,var(--gold),#b88f2a);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:#111;
+      font-weight:700;
+      font-family:var(--serif);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.6);
+    }
+    .brand h1{
+      margin:0;
+      font-family:var(--serif);
+      font-size:20px;
+      letter-spacing:1px;
+    }
+    .brand p{margin:0;font-size:12px;color:var(--muted);}
+
+    nav.tabs{
+      display:flex;
+      gap:10px;
+      align-items:center;
+    }
+    .tab-btn{
+      background:transparent;
+      color:var(--accent);
+      border:1px solid transparent;
+      padding:8px 12px;
+      border-radius:999px;
+      cursor:pointer;
+      font-weight:600;
+      font-size:13px;
+      transition:all .18s ease;
+    }
+    .tab-btn[aria-pressed="true"]{
+      background:linear-gradient(90deg,var(--gold-weak),transparent);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.6), inset 0 -1px 0 rgba(255,255,255,0.02);
+      color:var(--gold);
+      border-color:rgba(212,175,55,0.16);
+      transform:translateY(-2px);
+    }
+
+    /* ---- Hero 3D ---- */
+    .hero{
+      display:grid;
+      grid-template-columns: 1fr 420px;
+      gap:24px;
+      align-items:stretch;
+      margin-bottom:28px;
+    }
+    @media (max-width:960px){
+      .hero{grid-template-columns:1fr; padding-bottom:12px;}
+    }
+    .hero-left{
+      background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
+      padding:20px;
+      border-radius: var(--radius);
+      box-shadow:var(--card-shadow);
+      min-height:320px;
+      position:relative;
+      overflow:hidden;
+    }
+    /* 3D canvas container */
+    #three-canvas{
+      width:100%;
+      height:100%;
+      min-height:320px;
+      display:block;
+    }
+    .hero-info{
+      position:absolute;
+      left:24px;
+      top:24px;
+      z-index:3;
+      max-width:48%;
+      backdrop-filter: blur(4px);
+      background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border-radius:12px;
+      padding:14px;
+      border:1px solid rgba(255,255,255,0.03);
+    }
+    .hero-info h2{
+      margin:0 0 6px 0;
+      font-family:var(--serif);
+      color:var(--gold);
+      font-size:20px;
+      letter-spacing:0.6px;
+    }
+    .hero-info p{margin:0;color:var(--muted);font-size:13px;}
+
+    .hero-right{
+      padding:20px;
+      border-radius:var(--radius);
+      background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent);
+      box-shadow:var(--card-shadow);
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+      justify-content:center;
+    }
+    .promo{
+      font-family:var(--serif);
+      color:var(--gold);
+      font-size:18px;
+    }
+    .promo-sub{color:var(--muted);font-size:13px;}
+    .cta-row{display:flex;gap:10px;flex-wrap:wrap;}
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:10px 14px;
+      border-radius:10px;
+      cursor:pointer;
+      border:1px solid rgba(255,255,255,0.06);
+      background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      font-weight:700;
+      font-size:13px;
+      color:var(--accent);
+      text-decoration:none;
+    }
+    .btn.gold{
+      color:#111;
+      background:linear-gradient(90deg,var(--gold),#b48f2b);
+      box-shadow: 0 6px 22px rgba(180,143,43,0.12);
+    }
+
+    /* ---- Product area ---- */
+    .controls{
+      display:flex;
+      gap:12px;
+      align-items:center;
+      margin:20px 0 12px;
+      flex-wrap:wrap;
+    }
+    .search{
+      flex:1 1 320px;
+      display:flex;
+      gap:8px;
+      align-items:center;
+      background:var(--glass);
+      padding:8px;
+      border-radius:10px;
+      border:1px solid rgba(255,255,255,0.02);
+    }
+    .search input{
+      border:0;background:transparent;color:var(--accent);outline:none;font-size:14px;width:100%;
+    }
+    .brand-chips{display:flex;gap:8px;flex-wrap:wrap;}
+    .chip{
+      padding:6px 10px;border-radius:999px;font-size:13px;border:1px solid rgba(255,255,255,0.03);
+      background:transparent;cursor:pointer;color:var(--muted);
+    }
+    .chip[aria-checked="true"]{
+      background:linear-gradient(90deg,var(--gold-weak),transparent);
+      color:var(--gold);
+      border-color:rgba(212,175,55,0.12);
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(3,1fr);
+      gap:18px;
+      margin-bottom:28px;
+    }
+    @media (max-width:1100px){ .grid{grid-template-columns:repeat(2,1fr);} }
+    @media (max-width:640px){ .grid{grid-template-columns:1fr;} .hero-right{order:2;} .hero-left{order:1;} }
+
+    .card{
+      background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
+      border-radius:12px;padding:14px;border:1px solid rgba(255,255,255,0.03);
+      box-shadow:var(--card-shadow);display:flex;gap:12px;align-items:flex-start;
+    }
+    .thumb{
+      width:120px;height:120px;border-radius:10px;flex:0 0 120px;overflow:hidden;
+      display:flex;align-items:center;justify-content:center;background:linear-gradient(180deg,#0a0a0a,#070707);
+    }
+    .thumb img{width:100%;height:100%;object-fit:cover;display:block;}
+
+    .meta{flex:1;display:flex;flex-direction:column;gap:8px;}
+    .meta h3{margin:0;font-size:16px;font-family:var(--serif);color:var(--gold);}
+    .meta .desc{margin:0;color:var(--muted);font-size:13px;}
+    .price-row{display:flex;gap:8px;align-items:center;flex-wrap:wrap;}
+    .price{font-weight:800;color:var(--accent);font-size:16px;}
+    .sale{color:var(--muted);text-decoration:line-through;font-size:13px;}
+    .meta .actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap;}
+    .small-btn{padding:8px 10px;border-radius:10px;font-size:13px;border:1px solid rgba(255,255,255,0.03);background:transparent;color:var(--accent);text-decoration:none;cursor:pointer;}
+    .small-btn.ghost{background:transparent}
+    .stock{font-size:12px;color:var(--muted);}
+
+    /* Loading & messages */
+    .loader{
+      width:48px;height:48px;border-radius:50%;
+      border:4px solid rgba(255,255,255,0.06);border-top-color:var(--gold);
+      animation:spin 1s linear infinite;margin:20px auto;border-right-color:transparent;
+    }
+    @keyframes spin{to{transform:rotate(360deg)}}
+
+    .center{display:flex;align-items:center;justify-content:center;flex-direction:column;padding:24px;color:var(--muted);}
+
+    /* Trust badges & policies */
+    .badges{display:flex;gap:12px;flex-wrap:wrap;margin:18px 0;}
+    .badge{
+      background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent);padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.03);
+      display:flex;gap:10px;align-items:center;min-width:160px;
+    }
+    .policies{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:12px;}
+    @media (max-width:860px){ .policies{grid-template-columns:1fr;} }
+
+    footer{
+      margin-top:28px;padding:18px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent);border:1px solid rgba(255,255,255,0.02);
+      display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;
+    }
+    footer small{color:var(--muted)}
+    a.link{color:var(--gold);text-decoration:none;font-weight:700}
+
+    /* Accessibility focus */
+    .tab-btn:focus, .chip:focus, .btn:focus, .small-btn:focus { outline:3px solid rgba(212,175,55,0.12); outline-offset:2px; }
+
   </style>
 </head>
 <body>
-  <header>
-    <div class="container brand">
-      <h1>High Choice</h1>
-      <nav>
-        <a href="#home">Home</a>
-        <a href="#men">Men</a>
-        <a href="#women">Women</a>
-        <a href="#children">Children</a>
-        <a href="#policies">Policies</a>
+  <div class="wrap" id="app">
+    <header>
+      <a class="brand" href="#" aria-label="HIGH CHOICE home">
+        <div class="logo" aria-hidden="true">HC</div>
+        <div>
+          <h1>HIGH CHOICE</h1>
+          <p>Luxury Collections • Curated</p>
+        </div>
+      </a>
+
+      <nav class="tabs" role="tablist" aria-label="Categories">
+        <button class="tab-btn" id="tab-men" data-target="men" role="tab" aria-pressed="false">Men</button>
+        <button class="tab-btn" id="tab-women" data-target="women" role="tab" aria-pressed="false">Women</button>
+        <button class="tab-btn" id="tab-children" data-target="children" role="tab" aria-pressed="false">Children</button>
       </nav>
-    </div>
-  </header>
+    </header>
 
-  <main class="container" id="home">
-    <section class="hero">
-      <canvas id="three-canvas"></canvas>
-    </section>
+    <main>
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-left" role="region" aria-label="3D product hero">
+          <div class="hero-info" aria-hidden="false">
+            <h2 id="hero-title">Elevate your style</h2>
+            <p>Handpicked premium pieces with showroom quality and warranty.</p>
+          </div>
+          <!-- Canvas for Three.js -->
+          <canvas id="three-canvas" role="img" aria-label="3D rotating gold sculpture showing brand elegance"></canvas>
+        </div>
 
-    <h2 class="section-title">Original Luxury Timepieces • Handpicked • Verified • Warranty</h2>
-    <div class="badges">
-      <div class="badge"><span>✅</span><span>Verified documentation</span></div>
-      <div class="badge"><span>🛡️</span><span>Warranty included</span></div>
-      <div class="badge"><span>✨</span><span>Showroom quality</span></div>
-    </div>
+        <aside class="hero-right" aria-labelledby="promo-heading">
+          <div>
+            <div class="promo" id="promo-heading">Seasonal Edit — Limited Releases</div>
+            <div class="promo-sub">Timeless silhouettes, crafted finishes, and exclusive designs.</div>
+          </div>
+          <div class="cta-row" role="group" aria-label="Call to actions">
+            <a class="btn gold" href="#men" id="shop-now">Shop Men</a>
+            <a class="btn" href="#women" id="shop-women">Shop Women</a>
+            <a class="btn" href="#children" id="shop-children">Shop Children</a>
+          </div>
+          <div style="margin-top:8px;color:var(--muted);font-size:13px">Secure payments • Fast WhatsApp ordering • Premium packaging</div>
+        </aside>
+      </section>
 
-    <div class="tabs" id="tabs">
-      <button class="tab active" data-tab="men">Men</button>
-      <button class="tab" data-tab="women">Women</button>
-      <button class="tab" data-tab="children">Children</button>
-    </div>
+      <!-- Controls -->
+      <section class="controls" aria-label="Product controls">
+        <div class="search" role="search" aria-label="Search products">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M21 21l-4.35-4.35" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><circle cx="11" cy="11" r="6" stroke="currentColor" stroke-width="1.5"></circle></svg>
+          <input id="search" placeholder="Search products, brand or description…" aria-label="Search products" />
+        </div>
 
-    <div id="status" class="loading" style="margin-top:16px">Loading products…</div>
+        <div style="display:flex;gap:8px;align-items:center;">
+          <div id="brandFilters" class="brand-chips" aria-label="Filter by brand" role="list"></div>
+        </div>
+      </section>
 
-    <section id="men" style="display:block">
-      <div class="category-header">
-        <div class="category-title">Men’s Collection</div>
-        <div class="filter-bar" id="men-filters"></div>
-      </div>
-      <div class="brand-pages">Rolex • Omega • Cartier • Audemars Piguet • Patek Philippe • Rado • Longines • Tissot</div>
-      <div id="men-grid" class="grid" style="margin-top:10px"></div>
-    </section>
+      <!-- Product sections -->
+      <section id="products-area" aria-live="polite">
+        <div id="message" class="center" style="display:none"></div>
 
-    <section id="women" style="display:none">
-      <div class="category-header">
-        <div class="category-title">Women’s Collection</div>
-        <div class="filter-bar" id="women-filters"></div>
-      </div>
-      <div class="brand-pages" style="color:#ddd">Michael Kors • Dior • Versace • Just Cavalli</div>
-      <div id="women-grid" class="grid" style="margin-top:10px"></div>
-    </section>
+        <div id="grids">
+          <div id="men-section" role="region" aria-labelledby="men-heading" style="display:none">
+            <h2 id="men-heading" style="font-family:var(--serif);color:var(--gold);margin:8px 0">Men</h2>
+            <div class="grid" id="men-grid" aria-live="polite"></div>
+          </div>
 
-    <section id="children" style="display:none">
-      <div class="category-header">
-        <div class="category-title">Children’s Collection</div>
-        <div class="filter-bar" id="children-filters"></div>
-      </div>
-      <div class="brand-pages" style="color:#4ef0e4">Casio • G‑Shock</div>
-      <div id="children-grid" class="grid" style="margin-top:10px"></div>
-    </section>
+          <div id="women-section" role="region" aria-labelledby="women-heading" style="display:none">
+            <h2 id="women-heading" style="font-family:var(--serif);color:var(--gold);margin:8px 0">Women</h2>
+            <div class="grid" id="women-grid" aria-live="polite"></div>
+          </div>
 
-    <section id="policies" class="how">
-      <h3 style="margin:0 0 8px 0;color:var(--gold)">How it works</h3>
-      <ol>
-        <li>Browse watches by collection and brand</li>
-        <li>Choose Prepaid (UPI) or COD</li>
-        <li>Confirm order on WhatsApp</li>
-        <li>Delivery with warranty and verification</li>
-      </ol>
-    </section>
-  </main>
+          <div id="children-section" role="region" aria-labelledby="children-heading" style="display:none">
+            <h2 id="children-heading" style="font-family:var(--serif);color:var(--gold);margin:8px 0">Children</h2>
+            <div class="grid" id="children-grid" aria-live="polite"></div>
+          </div>
+        </div>
+      </section>
 
-  <footer>
-    <div class="container foot">
-      <p>© 2025 High Choice</p>
-      <p>Luxury • Authentic • Guaranteed</p>
-    </div>
-  </footer>
-
-  <!-- Three.js -->
-  <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
-  <!-- Supabase UMD -->
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.46.1/dist/umd/supabase.min.js"></script>
-
-  <script>
-    // Config — replace if needed
-    const SUPABASE_URL = "https://vkapzhbghyjzhscxsxnh.supabase.co";
-    const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZrYXB6aGJnaHlqemhzY3hzeG5oIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjQ5ODQ0MjgsImV4cCI6MjA4MDU2MDQyOH0.izm4PRrrRS7cVsP7KCQIXls12QuzBb8YCCNtKLYDIak";
-    const WHATSAPP_NUMBER = "917869288078"; // country code, no plus
-    const UPI_HANDLE = "7869288078@kotak811";
-
-    const supa = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-
-    // Tabs
-    document.getElementById("tabs").addEventListener("click", (e) => {
-      const b = e.target.closest(".tab"); if(!b) return;
-      document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
-      b.classList.add("active");
-      const id = b.dataset.tab;
-      ["men","women","children"].forEach(sec => {
-        document.getElementById(sec).style.display = sec === id ? "block" : "none";
-      });
-      window.location.hash = id;
-    });
-
-    // Brand filters (dynamic from data)
-    function renderBrandFilters(category, brands) {
-      const bar = document.getElementById(`${category}-filters`);
-      bar.innerHTML = "";
-      const all = document.createElement("span");
-      all.className = "filter active";
-      all.textContent = "All";
-      all.dataset.brand = "";
-      bar.appendChild(all);
-      brands.forEach(b => {
-        const el = document.createElement("span");
-        el.className = "filter";
-        el.textContent = b;
-        el.dataset.brand = b;
-        bar.appendChild(el);
-      });
-      bar.addEventListener("click", (e) => {
-        const f = e.target.closest(".filter"); if(!f) return;
-        bar.querySelectorAll(".filter").forEach(x => x.classList.remove("active"));
-        f.classList.add("active");
-        const brand = f.dataset.brand || "";
-        filterGrid(category, brand);
-      });
-    }
-
-    const state = { products: [], byCat: { men:[], women:[], children:[] }, brands: { men:[], women:[], children:[] } };
-
-    function escapeHtml(s) {
-      return String(s || "").replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-    }
-
-    function cardHtml(p) {
-      const price = p.sale_price ?? p.price;
-      const img = (Array.isArray(p.images) && p.images[0]) ? p.images[0] : "https://via.placeholder.com/600x450?text=High+Choice";
-      const waText = `Order Request (COD)
-Product: ${p.title}
-Price: ₹${price}
-Name:
-Phone:
-Address:
-City:
-Pincode:`;
-      const upi = `upi://pay?pa=${encodeURIComponent(UPI_HANDLE)}&pn=${encodeURIComponent("High Choice")}&am=${price}&cu=INR&tn=${encodeURIComponent(p.title)}`;
-      const wa = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(waText)}`;
-      return `
-        <div class="card">
-          <div class="imgwrap"><img loading="lazy" src="${img}" alt="${escapeHtml(p.title)}"/></div>
-          <div class="cardbody">
-            <div class="title">${escapeHtml(p.title)}</div>
-            <div class="price">
-              <span class="main">₹${price}</span>
-              ${p.sale_price ? `<span class="strike">₹${p.price}</span>` : ""}
+      <!-- Badges -->
+      <section aria-label="Trust badges">
+        <div class="badges" id="badges">
+          <div class="badge" role="img" aria-label="Verified documentation">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2l2.4 4.8L20 8l-4 3.6L17.2 18 12 15.3 6.8 18 8 11.6 4 8l5.6-1.2L12 2z" fill="currentColor"/></svg>
+            <div>
+              <div style="font-weight:700">Verified Documentation</div>
+              <div style="font-size:13px;color:var(--muted)">Genuine product paperwork</div>
             </div>
-            <div class="desc">${escapeHtml(p.description || "Premium timepiece")}</div>
-            <div class="actions">
-              <a class="btn upi" href="${upi}">Buy Prepaid (UPI)</a>
-              <a class="btn wa" href="${wa}" target="_blank" rel="noopener">Buy COD (WhatsApp)</a>
+          </div>
+          <div class="badge" role="img" aria-label="Warranty included">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2l6 3v6c0 5-4 9-6 11-2-2-6-6-6-11V5l6-3z" fill="currentColor"/></svg>
+            <div>
+              <div style="font-weight:700">Warranty Included</div>
+              <div style="font-size:13px;color:var(--muted)">Standard warranty on all items</div>
+            </div>
+          </div>
+          <div class="badge" role="img" aria-label="Showroom quality">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 7h18v13H3zM7 3h10v4H7z" fill="currentColor"/></svg>
+            <div>
+              <div style="font-weight:700">Showroom Quality</div>
+              <div style="font-size:13px;color:var(--muted)">Photographed from showroom pieces</div>
             </div>
           </div>
         </div>
-      `;
+
+        <div class="policies" aria-label="Policies">
+          <div style="padding:12px;border-radius:10px;background:var(--glass);border:1px solid rgba(255,255,255,0.02)">
+            <strong>Cash On Delivery (COD)</strong>
+            <p style="margin:6px 0 0;color:var(--muted)">Available across India. Small COD charges may apply.</p>
+          </div>
+          <div style="padding:12px;border-radius:10px;background:var(--glass);border:1px solid rgba(255,255,255,0.02)">
+            <strong>Warranty</strong>
+            <p style="margin:6px 0 0;color:var(--muted)">Manufacturer warranty included where applicable.</p>
+          </div>
+          <div style="padding:12px;border-radius:10px;background:var(--glass);border:1px solid rgba(255,255,255,0.02)">
+            <strong>Returns</strong>
+            <p style="margin:6px 0 0;color:var(--muted)">30-day return policy for eligible items. Contact via WhatsApp for assistance.</p>
+          </div>
+        </div>
+      </section>
+
+      <footer>
+        <small>© <span id="year"></span> HIGH CHOICE — Curated Collections. All rights reserved.</small>
+        <div><a class="link" href="#" id="contact-link">Contact via WhatsApp</a></div>
+      </footer>
+    </main>
+  </div>
+<!-- === PART 2 of 3: Three.js 3D Animation (include this AFTER PART 1) === -->
+<!-- Three.js CDN and 3D hero code -->
+<script src="https://unpkg.com/three@0.152.2/build/three.min.js"></script>
+<script>
+(function init3D(){
+  const canvas = document.getElementById('three-canvas');
+  if(!canvas) return;
+
+  const renderer = new THREE.WebGLRenderer({ canvas, antialias:true, alpha:true });
+  const dpr = Math.min(window.devicePixelRatio || 1, 2);
+  renderer.setPixelRatio(dpr);
+  function resizeRendererToDisplaySize() {
+    const width = canvas.clientWidth || canvas.parentElement.clientWidth;
+    const height = canvas.clientHeight || 360;
+    if (canvas.width !== Math.floor(width * dpr) || canvas.height !== Math.floor(height * dpr)) {
+      renderer.setSize(width, height, false);
+      return true;
+    }
+    return false;
+  }
+
+  const scene = new THREE.Scene();
+  scene.background = new THREE.Color(0x000000);
+
+  const camera = new THREE.PerspectiveCamera(40, canvas.clientWidth / canvas.clientHeight, 0.1, 100);
+  camera.position.set(0,0,6);
+
+  // Lights (premium)
+  const hemi = new THREE.HemisphereLight(0xffffff, 0x151517, 0.2);
+  scene.add(hemi);
+  const rim = new THREE.DirectionalLight(0xfff1c7, 0.9);
+  rim.position.set(-5,2,8);
+  scene.add(rim);
+  const fill = new THREE.PointLight(0xffdf9b, 0.6, 40);
+  fill.position.set(4,-2,6);
+  scene.add(fill);
+
+  // Gold material
+  const goldMat = new THREE.MeshStandardMaterial({
+    color:0xd4af37,
+    metalness:1.0,
+    roughness:0.25,
+    emissive: 0x000000
+  });
+
+  // TorusKnot geometry
+  const geom = new THREE.TorusKnotGeometry(1.1, 0.32, 256, 24, 2, 3);
+  const mesh = new THREE.Mesh(geom, goldMat);
+  mesh.rotation.x = Math.PI * 0.15;
+  scene.add(mesh);
+
+  // subtle ambient
+  const ambient = new THREE.AmbientLight(0x222222, 0.8);
+  scene.add(ambient);
+
+  // animation loop
+  let t = 0;
+  function animate(){
+    t += 0.006;
+    mesh.rotation.y = t * 0.9;
+    mesh.rotation.x = Math.sin(t * 0.3) * 0.3;
+    if (resizeRendererToDisplaySize()) {
+      const w = canvas.clientWidth || canvas.parentElement.clientWidth;
+      const h = canvas.clientHeight || 360;
+      camera.aspect = Math.max(0.5, w/h);
+      camera.updateProjectionMatrix();
+    }
+    renderer.render(scene, camera);
+    requestAnimationFrame(animate);
+  }
+  requestAnimationFrame(animate);
+
+  // responsive
+  window.addEventListener('resize', () => {
+    // will be handled in animate loop
+  });
+})();
+</script><!-- === PART 3 of 3: Supabase + Product Rendering + Realtime + UPI & WhatsApp (place this LAST) === -->
+<!-- Supabase CDN -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js/dist/umd/supabase.min.js"></script>
+
+<script type="module">
+  // --- Config (provided) ---
+  const SUPABASE_URL = 'https://vkapzhbghyjzhscxsxnh.supabase.co';
+  const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZrYXB6aGJnaHlqemhzY3hzeG5oIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjQ5ODQ0MjgsImV4cCI6MjA4MDU2MDQyOH0.izm4PRrrRS7cVsP7KCQIXls12QuzBb8YCCNtKLYDIak';
+  const WHATSAPP_NUMBER = '917869288078';
+  const UPI_HANDLE = '7869288078@kotak811';
+
+  // --- State ---
+  const state = {
+    products: [],
+    filtered: { men: [], women: [], children: [] },
+    activeCategory: 'men',
+    activeBrand: null,
+    searchQuery: '',
+    brandsByCategory: { men: [], women: [], children: [] }
+  };
+
+  // --- Supabase init ---
+  const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+  // --- DOM refs ---
+  const yearEl = document.getElementById('year'); if(yearEl) yearEl.textContent = new Date().getFullYear();
+  const messageEl = document.getElementById('message');
+  const menGrid = document.getElementById('men-grid');
+  const womenGrid = document.getElementById('women-grid');
+  const childrenGrid = document.getElementById('children-grid');
+  const brandFiltersEl = document.getElementById('brandFilters');
+  const searchInput = document.getElementById('search');
+
+  // --- Tabs & deep links ---
+  function setActiveCategory(cat, pushHash=true){
+    state.activeCategory = cat;
+    document.querySelectorAll('.tab-btn').forEach(btn=>{
+      const t = btn.dataset.target;
+      const pressed = (t===cat).toString();
+      btn.setAttribute('aria-pressed', pressed);
+    });
+    document.getElementById('men-section').style.display = (cat==='men') ? '' : 'none';
+    document.getElementById('women-section').style.display = (cat==='women') ? '' : 'none';
+    document.getElementById('children-section').style.display = (cat==='children') ? '' : 'none';
+    if(pushHash) history.replaceState(null,'', `#${cat}`);
+    renderBrandChips();
+    renderGrids();
+  }
+
+  function initTabs(){
+    const hash = (location.hash || '#men').replace('#','').toLowerCase();
+    const initial = ['men','women','children'].includes(hash) ? hash : 'men';
+    setActiveCategory(initial, false);
+
+    document.querySelectorAll('.tab-btn').forEach(btn=>{
+      btn.addEventListener('click', ()=> setActiveCategory(btn.dataset.target));
+    });
+
+    window.addEventListener('hashchange', ()=> {
+      const h = (location.hash||'#men').replace('#','').toLowerCase();
+      if(['men','women','children'].includes(h)) setActiveCategory(h,false);
+    });
+  }
+
+  // --- UI helpers ---
+  function showMessage(html, opts={}){ if(messageEl){ messageEl.style.display='flex'; messageEl.innerHTML = html; if(opts.autoHide){ setTimeout(()=> messageEl.style.display='none', opts.autoHide); } } }
+  function hideMessage(){ if(messageEl){ messageEl.style.display='none'; messageEl.innerHTML=''; } }
+
+  // --- Products rendering ---
+  function formatPrice(v){ if(typeof v === 'number') return v.toFixed(2); return v; }
+
+  function placeholderDataURL(){
+    const svg = `<svg xmlns='http://www.w3.org/2000/svg' width='640' height='480'><rect width='100%' height='100%' fill='#0a0a0a'/><text x='50%' y='50%' fill='#444' font-size='24' font-family='Arial' dominant-baseline='middle' text-anchor='middle'>Image</text></svg>`;
+    return 'data:image/svg+xml;utf8,' + encodeURIComponent(svg);
+  }
+
+  function createProductCard(p){
+    const card = document.createElement('article');
+    card.className='card';
+    card.setAttribute('role','article');
+    card.setAttribute('aria-labelledby', `title-${p.id}`);
+
+    const thumb = document.createElement('div'); thumb.className='thumb';
+    const img = document.createElement('img');
+    img.alt = p.title + (p.brand ? ` — ${p.brand}` : '');
+    img.src = (Array.isArray(p.images) && p.images.length) ? p.images[0] : placeholderDataURL();
+    img.loading='lazy';
+    thumb.appendChild(img);
+
+    const meta = document.createElement('div'); meta.className='meta';
+    const h3 = document.createElement('h3'); h3.id = `title-${p.id}`; h3.textContent = p.title;
+    const desc = document.createElement('p'); desc.className='desc'; desc.textContent = p.description || '';
+    const brand = document.createElement('div'); brand.style.fontSize='12px'; brand.style.color='var(--muted)'; brand.textContent = p.brand || '';
+
+    const priceRow = document.createElement('div'); priceRow.className='price-row';
+    const price = document.createElement('div'); price.className='price';
+    const sale = document.createElement('div'); sale.className='sale';
+    price.textContent = '₹' + formatPrice(p.sale_price ?? p.price ?? 0);
+    if(p.sale_price && p.price && Number(p.sale_price) < Number(p.price)){
+      sale.textContent = '₹' + formatPrice(p.price);
+    } else {
+      sale.textContent = '';
+    }
+    priceRow.appendChild(price);
+    if(sale.textContent) priceRow.appendChild(sale);
+
+    const stock = document.createElement('div'); stock.className='stock';
+    stock.textContent = p.in_stock ? 'In stock' : 'Out of stock';
+
+    const actions = document.createElement('div'); actions.className='actions';
+    const prepaid = document.createElement('button');
+    prepaid.className='small-btn';
+    prepaid.innerHTML = 'Buy Prepaid (UPI)';
+    prepaid.addEventListener('click', ()=> openUPI(p));
+    prepaid.disabled = !p.visible || !p.in_stock;
+
+    const cod = document.createElement('a');
+    cod.className='small-btn';
+    cod.href = buildWhatsAppLink(p);
+    cod.target = '_blank';
+    cod.rel = 'noopener noreferrer';
+    cod.innerHTML = 'Buy COD (WhatsApp)';
+
+    actions.appendChild(prepaid);
+    actions.appendChild(cod);
+
+    meta.appendChild(h3);
+    meta.appendChild(brand);
+    meta.appendChild(desc);
+    meta.appendChild(priceRow);
+    meta.appendChild(stock);
+    meta.appendChild(actions);
+
+    card.appendChild(thumb);
+    card.appendChild(meta);
+    return card;
+  }
+
+  function buildWhatsAppLink(p){
+    const title = p.title;
+    const price = (p.sale_price && Number(p.sale_price) < Number(p.price)) ? p.sale_price : p.price;
+    const q = `Order: ${title}\nBrand: ${p.brand || '-'}\nPrice: ₹${formatPrice(price)}\nPayment: COD\nProduct ID: ${p.id}\nPlease process this order.`;
+    return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(q)}`;
+  }
+
+  function openUPI(p){
+    const amount = (p.sale_price && Number(p.sale_price) < Number(p.price)) ? p.sale_price : p.price;
+    const tn = `HIGH CHOICE - ${p.title}`;
+    const pa = UPI_HANDLE;
+    const pn = (p.brand || 'HIGH CHOICE');
+    const upiUrl = `upi://pay?pa=${encodeURIComponent(pa)}&pn=${encodeURIComponent(pn)}&am=${encodeURIComponent(amount)}&cu=INR&tn=${encodeURIComponent(tn)}`;
+    window.location.href = upiUrl;
+  }
+
+  // --- Filtering & brands ---
+  function computeBrands(){
+    const byCat = { men:new Set(), women:new Set(), children:new Set() };
+    state.products.forEach(p=>{
+      const c = (p.category||'').toLowerCase();
+      if(!['men','women','children'].includes(c)) return;
+      if(p.brand) byCat[c].add(p.brand);
+    });
+    Object.keys(byCat).forEach(k=> state.brandsByCategory[k] = Array.from(byCat[k]).sort());
+  }
+
+  function renderBrandChips(){
+    brandFiltersEl.innerHTML = '';
+    const brands = state.brandsByCategory[state.activeCategory] || [];
+    const allChip = document.createElement('button');
+    allChip.className='chip';
+    allChip.textContent = 'All Brands';
+    allChip.setAttribute('aria-checked', state.activeBrand ? 'false' : 'true');
+    allChip.addEventListener('click', ()=> { state.activeBrand = null; renderBrandChips(); renderGrids(); });
+    brandFiltersEl.appendChild(allChip);
+
+    brands.forEach(b=>{
+      const btn = document.createElement('button');
+      btn.className='chip';
+      btn.textContent = b;
+      btn.setAttribute('aria-checked', (state.activeBrand===b).toString());
+      btn.addEventListener('click', ()=> { state.activeBrand = (state.activeBrand===b? null : b); renderBrandChips(); renderGrids(); });
+      brandFiltersEl.appendChild(btn);
+    });
+  }
+
+  function applyFilters(){
+    const q = state.searchQuery.trim().toLowerCase();
+    const out = { men:[], women:[], children:[] };
+    state.products.forEach(p=>{
+      if(!p.visible) return;
+      const cat = (p.category||'').toLowerCase();
+      if(!['men','women','children'].includes(cat)) return;
+      if(state.activeBrand && p.brand !== state.activeBrand) return;
+      if(q){
+        const text = `${p.title || ''} ${p.brand || ''} ${p.description || ''}`.toLowerCase();
+        if(!text.includes(q)) return;
+      }
+      out[cat].push(p);
+    });
+    state.filtered = out;
+  }
+
+  function renderGrids(){
+    applyFilters();
+    menGrid.innerHTML = ''; womenGrid.innerHTML = ''; childrenGrid.innerHTML = '';
+
+    if(state.filtered.men.length === 0){
+      menGrid.innerHTML = `<div style="grid-column:1/-1" class="center">No products yet in Men category.</div>`;
+    } else {
+      state.filtered.men.forEach(p=> menGrid.appendChild(createProductCard(p)));
     }
 
-    function renderCategory(category) {
-      const grid = document.getElementById(`${category}-grid`);
-      const items = state.byCat[category];
-      grid.innerHTML = "";
-      if (!items || items.length === 0) {
-        const empty = document.createElement("div");
-        empty.className = "empty";
-        empty.textContent = "No products yet.";
-        grid.appendChild(empty);
+    if(state.filtered.women.length === 0){
+      womenGrid.innerHTML = `<div style="grid-column:1/-1" class="center">No products yet in Women category.</div>`;
+    } else {
+      state.filtered.women.forEach(p=> womenGrid.appendChild(createProductCard(p)));
+    }
+
+    if(state.filtered.children.length === 0){
+      childrenGrid.innerHTML = `<div style="grid-column:1/-1" class="center">No products yet in Children category.</div>`;
+    } else {
+      state.filtered.children.forEach(p=> childrenGrid.appendChild(createProductCard(p)));
+    }
+  }
+
+  // --- Fetch products ---
+  async function fetchProducts(showLoader=true){
+    try{
+      if(showLoader) showMessage('<div class="loader" aria-hidden="true"></div><div style="margin-top:12px;color:var(--muted)">Loading products…</div>');
+      const { data, error } = await supabase
+        .from('products')
+        .select('id,title,price,sale_price,description,category,brand,images,model_url,in_stock,visible,created_at')
+        .order('created_at', { ascending: false });
+
+      if(error){
+        hideMessage();
+        console.error('Supabase error', error);
+        showMessage(`<div style="color:tomato">Error fetching products: ${escapeHtml(error.message || String(error))}</div>`);
         return;
       }
-      items.forEach(p => {
-        const div = document.createElement("div");
-        div.innerHTML = cardHtml(p);
-        grid.appendChild(div.firstElementChild);
-      });
-    }
-
-    function filterGrid(category, brand) {
-      const grid = document.getElementById(`${category}-grid`);
-      grid.innerHTML = "";
-      const source = state.byCat[category];
-      const items = brand ? source.filter(p => (p.brand || "").toLowerCase() === brand.toLowerCase()) : source;
-      if (items.length === 0) {
-        const empty = document.createElement("div"); empty.className = "empty"; empty.textContent = "No products for this brand.";
-        grid.appendChild(empty); return;
+      if(!Array.isArray(data) || data.length===0){
+        state.products = [];
+        computeBrands();
+        hideMessage();
+        renderBrandChips();
+        renderGrids();
+        showMessage('<div>No products yet</div>');
+        return;
       }
-      items.forEach(p => {
-        const div = document.createElement("div");
-        div.innerHTML = cardHtml(p);
-        grid.appendChild(div.firstElementChild);
+
+      const normalized = data.map(d=>{
+        const copy = Object.assign({}, d);
+        if(!Array.isArray(copy.images)) {
+          try{
+            copy.images = copy.images ? JSON.parse(copy.images) : [];
+            if(!Array.isArray(copy.images)) copy.images = [];
+          }catch(e){
+            copy.images = [];
+          }
+        }
+        copy.in_stock = !!copy.in_stock;
+        copy.visible = copy.visible === undefined ? true : !!copy.visible;
+        return copy;
       });
+
+      state.products = normalized;
+      computeBrands();
+      hideMessage();
+      renderBrandChips();
+      renderGrids();
+    }catch(err){
+      hideMessage();
+      console.error(err);
+      showMessage(`<div style="color:tomato">Unexpected error: ${escapeHtml(String(err))}</div>`);
     }
+  }
 
-    async function loadProducts() {
-      const status = document.getElementById("status");
-      try {
-        status.textContent = "Loading products…";
-        const { data, error } = await supa
-          .from("products")
-          .select("*")
-          .eq("visible", true)
-          .eq("in_stock", true)
-          .order("created_at", { ascending: false });
-        if (error) throw error;
-
-        state.products = data || [];
-        state.byCat.men = state.products.filter(p => p.category === "men");
-        state.byCat.women = state.products.filter(p => p.category === "women");
-        state.byCat.children = state.products.filter(p => p.category === "children");
-
-        // collect brands per category
-        ["men","women","children"].forEach(cat => {
-          const set = new Set(state.byCat[cat].map(p => (p.brand || "").trim()).filter(Boolean));
-          state.brands[cat] = Array.from(set).sort();
-          renderBrandFilters(cat, state.brands[cat]);
+  // --- Realtime subscription ---
+  function startRealtime(){
+    try{
+      const channel = supabase.channel('public:products')
+        .on('postgres_changes', { event: '*', schema: 'public', table: 'products' }, payload => {
+          console.log('Realtime payload', payload);
+          fetchProducts(false);
+        }).subscribe((status) => {
+          console.log('Realtime status', status);
         });
 
-        status.style.display = "none";
-        renderCategory("men");
-        renderCategory("women");
-        renderCategory("children");
-
-        // realtime refresh on any change
-        const channel = supa.channel("public:products")
-          .on("postgres_changes", { event: "*", schema: "public", table: "products" }, async () => {
-            await loadProducts(); // simple refresh
-          })
-          .subscribe();
-      } catch (err) {
-        console.error(err);
-        status.textContent = "Error loading products. Please try again.";
-      }
+      window.addEventListener('beforeunload', ()=> {
+        try{ supabase.removeChannel && supabase.removeChannel(channel); }catch(e){}
+      });
+    }catch(e){
+      console.warn('Realtime setup failed', e);
     }
+  }
 
-    // 3D hero — gold torus knot
-    (function init3D(){
-      const canvas = document.getElementById("three-canvas");
-      const scene = new THREE.Scene();
-      const camera = new THREE.PerspectiveCamera(55, 16/9, 0.1, 1000);
-      const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+  // --- Utilities ---
+  function escapeHtml(s){ return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":"&#39;"}[c])); }
 
-      function resize(){
-        const rect = canvas.getBoundingClientRect();
-        const w = rect.width || canvas.parentElement.clientWidth;
-        const h = canvas.parentElement.clientHeight || 300;
-        renderer.setSize(w, h, false);
-        camera.aspect = w / h;
-        camera.updateProjectionMatrix();
-      }
-      resize(); window.addEventListener("resize", resize);
+  // --- Search & interactions ---
+  if(searchInput){
+    searchInput.addEventListener('input', (e) => {
+      state.searchQuery = e.target.value;
+      renderGrids();
+    });
+  }
 
-      const geometry = new THREE.TorusKnotGeometry(1.2, 0.35, 250, 32);
-      const material = new THREE.MeshPhysicalMaterial({
-        color: 0xd1b97a, metalness: 1, roughness: 0.2, clearcoat: 1, reflectivity: 1
-      });
-      const knot = new THREE.Mesh(geometry, material);
-      scene.add(knot);
+  document.getElementById('contact-link').href = `https://wa.me/${WHATSAPP_NUMBER}`;
 
-      const hemi = new THREE.HemisphereLight(0xffffff, 0x222233, 0.8);
-      scene.add(hemi);
-      const spot = new THREE.SpotLight(0xffffff, 1.4);
-      spot.position.set(4, 6, 8);
-      scene.add(spot);
+  document.getElementById('shop-now').addEventListener('click', (e)=>{ e.preventDefault(); setActiveCategory('men'); });
+  document.getElementById('shop-women').addEventListener('click', (e)=>{ e.preventDefault(); setActiveCategory('women'); });
+  document.getElementById('shop-children').addEventListener('click', (e)=>{ e.preventDefault(); setActiveCategory('children'); });
 
-      camera.position.set(0, 0.2, 3.6);
+  initTabs();
+  fetchProducts(true);
+  startRealtime();
 
-      const clock = new THREE.Clock();
-      function animate(){
-        requestAnimationFrame(animate);
-        const t = clock.getElapsedTime();
-        knot.rotation.x = 0.4 + Math.sin(t * 0.3) * 0.15;
-        knot.rotation.y += 0.01;
-        renderer.render(scene, camera);
-      }
-      animate();
-    })();
+  // --- End module ---
+</script>
 
-    // Start
-    loadProducts();
-
-    // Restore tab from hash
-    const hash = window.location.hash.replace("#","");
-    if (["men","women","children"].includes(hash)) {
-      document.querySelectorAll(".tab").forEach(t => {
-        t.classList.toggle("active", t.dataset.tab === hash);
-      });
-      ["men","women","children"].forEach(sec => {
-        document.getElementById(sec).style.display = sec === hash ? "block" : "none";
-      });
-    }
-  </script>
 </body>
-</html>                                              </html>
+</html>
+  <!-- NOTE: PART 2 (Three.js script)and PART 3 (Supabase + app logic) must be placed AFTER this block. -->
