@@ -1,507 +1,115 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>HIGH CHOICE — Aurora Premium • Home</title>
-<meta name="description" content="HIGH CHOICE — Creative Aurora 3D showroom. Premium watch showcase — 3D mockups, cinematic lighting, category pages." />
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;600;800&family=Playfair+Display:wght@500;700&display=swap" rel="stylesheet">
-
-<!-- GSAP -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-
-<!-- three.js -->
-<script src="https://unpkg.com/three@0.152.2/build/three.min.js"></script>
-<script src="https://unpkg.com/three@0.152.2/examples/js/loaders/GLTFLoader.js"></script>
-<script src="https://unpkg.com/three@0.152.2/examples/js/postprocessing/EffectComposer.js"></script>
-<script src="https://unpkg.com/three@0.152.2/examples/js/postprocessing/RenderPass.js"></script>
-<script src="https://unpkg.com/three@0.152.2/examples/js/postprocessing/UnrealBloomPass.js"></script>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>HIGH CHOICE — Premium Watches</title>
 
 <style>
-:root{
-  --bg-1:#071023;
-  --bg-2:#08111f;
-  --muted:#cbd5dd;
-  --accent1:#8be4ff;
-  --accent2:#b384ff;
-  --accent3:#7ef0b2;
-  --glass: rgba(255,255,255,0.03);
-  --panel: rgba(255,255,255,0.02);
-  --radius:18px;
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+body{background:#0b0f19;color:white;overflow-x:hidden;}
+
+header{
+    width:100%;padding:18px 24px;
+    display:flex;align-items:center;justify-content:space-between;
+    background:#0e1324;position:fixed;top:0;z-index:1000;
 }
-*{box-sizing:border-box}
-html,body{height:100%;margin:0;background:linear-gradient(180deg,var(--bg-1),var(--bg-2));color:#fff;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;-webkit-font-smoothing:antialiased}
-a{color:inherit;text-decoration:none}
-img{max-width:100%;display:block}
+.logo{font-size:22px;font-weight:600;color:#9bb8ff;letter-spacing:1px;}
 
-/* aurora canvas behind everything */
-#auroraCanvas{position:fixed;inset:0;z-index:0;pointer-events:none}
+.menu-btn{font-size:26px;color:white;cursor:pointer;}
 
-/* header */
-header{position:fixed;left:0;right:0;top:0;z-index:40;display:flex;align-items:center;gap:18px;padding:14px 28px;background:linear-gradient(180deg, rgba(4,6,12,0.36), transparent);backdrop-filter:blur(6px);border-bottom:1px solid rgba(255,255,255,0.03)}
-.brand{font-family:"Playfair Display",serif;font-weight:700;color:var(--accent2);font-size:20px}
-nav{margin-left:auto;display:flex;gap:12px;align-items:center}
-nav a{padding:8px 12px;border-radius:10px;color:var(--muted);font-weight:700}
-nav a.cta{background:linear-gradient(90deg,var(--accent1),var(--accent2));color:#041422;font-weight:800;box-shadow:0 10px 40px rgba(131,130,255,0.06)}
-
-/* page layout */
-main{position:relative;z-index:2;padding-top:92px}
-.container{max-width:1280px;margin:0 auto;padding:28px}
-.hero{display:grid;grid-template-columns:1fr 640px;gap:34px;align-items:center;min-height:86vh}
-@media(max-width:1000px){ .hero{grid-template-columns:1fr;padding:20px;gap:18px} }
-
-/* left column text */
-.eyebrow{color:var(--accent3);font-weight:800;letter-spacing:1.6px}
-h1{font-family:"Playfair Display",serif;font-size:44px;margin:8px 0;color:var(--accent2);line-height:1.02;text-shadow:0 8px 40px rgba(75,0,120,0.08)}
-.lead{color:var(--muted);max-width:640px;line-height:1.6;margin-top:12px}
-.cta-row{margin-top:18px;display:flex;gap:12px;flex-wrap:wrap}
-.btn{padding:12px 18px;border-radius:999px;font-weight:900;display:inline-flex;align-items:center;gap:10px;cursor:pointer;border:1px solid rgba(255,255,255,0.02);backdrop-filter:blur(4px)}
-.btn.primary{background:linear-gradient(90deg,var(--accent1),var(--accent2));color:#041422}
-.btn.ghost{background:transparent;color:var(--muted)}
-
-/* center 3 category cards (style B — big animated cards) */
-.category-grid{display:flex;gap:16px;margin-top:26px}
-@media(max-width:880px){ .category-grid{flex-direction:column} }
-.cat-card{
-  position:relative;
-  flex:1;
-  min-height:160px;
-  border-radius:14px;
-  overflow:hidden;
-  background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.12));
-  border:1px solid rgba(255,255,255,0.03);
-  display:flex;
-  align-items:center;
-  padding:18px;
-  gap:18px;
-  cursor:pointer;
-  transition:transform .45s cubic-bezier(.2,.9,.2,1), box-shadow .45s;
+nav{
+    position:fixed;top:0;right:-100%;
+    width:70%;height:100vh;background:#12182c;
+    padding:40px 24px;transition:0.3s ease;
 }
-.cat-card:hover{ transform: translateY(-10px) scale(1.02); box-shadow:0 40px 140px rgba(0,0,0,0.7); }
-.cat-left{flex:0 0 110px;display:flex;align-items:center;justify-content:center}
-.cat-left img{width:100px;height:100px;object-fit:cover;border-radius:12px;transform:translateZ(0);box-shadow:0 20px 60px rgba(0,0,0,0.6)}
-.cat-body h3{margin:0;font-size:20px;color:var(--accent1);font-weight:800}
-.cat-body p{margin:6px 0 0;color:var(--muted);font-size:13px}
+nav.active{right:0;}
 
-/* right: 3D viewer card */
-.viewer-card{position:relative;border-radius:var(--radius);overflow:hidden;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.14));border:1px solid rgba(255,255,255,0.03);box-shadow:0 60px 180px rgba(0,0,0,0.7);height:640px;display:flex;align-items:center;justify-content:center}
-@media(max-width:1000px){ .viewer-card{height:420px} }
-canvas#sceneCanvas{width:100%;height:100%;display:block}
-.viewer-ui{position:absolute;left:18px;bottom:18px;display:flex;flex-direction:column;gap:8px;z-index:40}
-.pill{background:var(--glass);padding:8px 12px;border-radius:999px;border:1px solid rgba(255,255,255,0.02);color:var(--muted);font-weight:700}
-.subtle-ring{position:absolute;inset:auto 12% 62% auto;width:260px;height:260px;border-radius:50%;filter:blur(46px);pointer-events:none;background:radial-gradient(circle at 30% 30%, rgba(139,228,255,0.12), transparent 28%);z-index:2}
+nav a{
+    display:block;margin:18px 0;font-size:18px;
+    color:#dce4ff;text-decoration:none;transition:0.3s;
+}
+nav a:hover{color:#8ab4ff;}
 
-/* featured strip */
-.strip{margin-top:36px}
-.strip h3{text-align:center;color:var(--accent2);margin-bottom:12px}
-.strip-inner{display:flex;gap:18px;align-items:center;overflow:hidden;padding:12px}
-.card{width:220px;height:240px;border-radius:12px;padding:12px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.03);box-shadow:0 20px 80px rgba(0,0,0,0.45);flex-shrink:0;transition:transform .28s}
-.card:hover{transform:translateY(-10px)}
-.card img{width:100%;height:140px;object-fit:cover;border-radius:8px}
-.card h4{color:var(--accent1);margin:10px 0 0;font-size:14px}
-.card p{color:var(--muted);font-size:12px;margin:6px 0 0}
+section{width:100%;padding:120px 24px 60px;}
 
-/* footer */
-footer{margin-top:36px;text-align:center;color:var(--muted);padding:20px;border-top:1px solid rgba(255,255,255,0.03)}
+/* 3D FLOATING CARD STYLE */
+.card-grid{
+    display:flex;gap:20px;justify-content:center;flex-wrap:wrap;margin-top:20px;
+}
 
-/* small screens */
-@media(max-width:720px){
-  h1{font-size:28px}
-  .cat-left img{width:84px;height:84px}
-  .category-grid{gap:12px}
+.card{
+    width:260px;height:180px;border-radius:16px;
+    background:linear-gradient(135deg,#1a2140,#101527);
+    box-shadow:0 10px 30px rgba(0,0,0,0.4);
+    display:flex;align-items:center;justify-content:center;
+    color:white;font-size:22px;font-weight:600;
+    transition:transform 0.4s ease, box-shadow 0.4s ease;
+    cursor:pointer;position:relative;overflow:hidden;
+}
+.card:hover{
+    transform:translateY(-12px) scale(1.04) rotateX(8deg);
+    box-shadow:0 25px 50px rgba(0,0,0,0.55);
+}
+.card span{position:relative;z-index:2;}
+
+.card::before{
+    content:"";
+    position:absolute;top:-50%;left:-50%;
+    width:200%;height:200%;
+    background:radial-gradient(circle,#5f7aff33,transparent 70%);
+    animation:floatGlow 6s infinite linear;
+}
+@keyframes floatGlow{
+    0%{transform:translate(0,0);}
+    100%{transform:translate(50px,80px);}
 }
 </style>
+
 </head>
 <body>
 
-<canvas id="auroraCanvas" aria-hidden="true"></canvas>
-
 <header>
-  <div class="brand">HIGH CHOICE</div>
-  <nav>
-    <a href="mens.html">Men</a>
-    <a href="womens.html">Women</a>
-    <a href="kids.html">Kids</a>
-    <a class="cta" href="contact.html">Contact</a>
-  </nav>
+    <div class="logo">HIGH CHOICE</div>
+    <div class="menu-btn" onclick="toggleMenu()">☰</div>
 </header>
 
-<main>
-  <div class="container">
-    <section class="hero">
-      <!-- LEFT: intro + categories -->
-      <div>
-        <div class="eyebrow">AURORA COLLECTION</div>
-        <h1>Creative Gradient Aurora — Premium Watches</h1>
-        <p class="lead">A cinematic 3D showroom experience with interactive mockups, creative aurora backdrop and smooth micro-animations. Explore Men, Women or Kids collections — each has dedicated brand & product pages.</p>
-
-        <div class="cta-row">
-          <a href="mens.html" class="btn primary">Shop Men</a>
-          <a href="womens.html" class="btn ghost">Shop Women</a>
-        </div>
-
-        <!-- Category cards -->
-        <div class="category-grid" style="margin-top:22px">
-          <div class="cat-card" onclick="location.href='mens.html'">
-            <div class="cat-left"><img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&w=900&q=80" alt="Men watches"></div>
-            <div class="cat-body">
-              <h3>MEN</h3>
-              <p>Rolex, Omega, Maserati, Audemars & more — curated for gents who choose the best.</p>
-            </div>
-          </div>
-
-          <div class="cat-card" onclick="location.href='womens.html'">
-            <div class="cat-left"><img src="https://images.unsplash.com/photo-1522312346375-d1a52e2b99b3?auto=format&w=900&q=80" alt="Women watches"></div>
-            <div class="cat-body">
-              <h3>WOMEN</h3>
-              <p>Elegant, refined pieces — Michael Kors, Dior, Cartier and premium ladies collection.</p>
-            </div>
-          </div>
-
-          <div class="cat-card" onclick="location.href='kids.html'">
-            <div class="cat-left"><img src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?auto=format&w=900&q=80" alt="Kids watches"></div>
-            <div class="cat-body">
-              <h3>KIDS</h3>
-              <p>Durable & stylish — Casio & G-Shock kids collection with trusted builds.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- RIGHT: 3D viewer -->
-      <div class="viewer-card" id="viewerCard" aria-label="3D viewer area">
-        <div class="subtle-ring" aria-hidden="true"></div>
-        <canvas id="sceneCanvas" aria-hidden="false"></canvas>
-        <div class="viewer-ui" aria-hidden="true">
-          <div class="pill">Drag to rotate</div>
-          <div class="pill">Scroll to zoom</div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Featured strip -->
-    <section class="strip" aria-label="Featured">
-      <h3>Featured — Handpicked</h3>
-      <div class="strip-inner" id="stripInner" role="list"></div>
-    </section>
-
-    <footer>© 2025 HIGH CHOICE • All Rights Reserved • WhatsApp: <a href="https://wa.me/917020966879" style="color:var(--accent1)">+91 70209 66879</a></footer>
-  </div>
-</main>
+<nav id="menu">
+    <a href="index.html">Home</a>
+    <a href="men.html">Men</a>
+    <a href="women.html">Women</a>
+    <a href="kids.html">Kids</a>
+    <a href="#">Policies</a>
+    <a href="#">About Us</a>
+    <a href="#">Contact</a>
+    <a href="#">Return Policy</a>
+</nav>
 
 <script>
-/* =========================
-   DEMO PRODUCTS for Featured Strip (first model of each brand)
-   Replace images with your assets when ready
-   ========================= */
-const PRODUCTS = {
-  "Rolex":[{name:"Rolex Yachtmaster", img:"https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&w=1200&q=90"}],
-  "Omega":[{name:"Omega Speedmaster", img:"https://images.unsplash.com/photo-1522312346375-d1a52e2b99b3?auto=format&w=1200&q=90"}],
-  "G-Shock":[{name:"G-Shock GA2100", img:"https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?auto=format&w=1200&q=90"}],
-  "Armani":[{name:"Armani Classic", img:"https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&w=1200&q=90"}],
-  "Patek":[{name:"Patek Cubitus Blue", img:"https://images.unsplash.com/photo-1521334884684-d80222895322?auto=format&w=1200&q=90"}]
-};
+function toggleMenu(){
+    document.getElementById("menu").classList.toggle("active");
+}
+</script>
 
-/* populate strip */
-(function populateStrip(){
-  const wrap = document.getElementById('stripInner');
-  const picks = [];
-  Object.keys(PRODUCTS).forEach(b=>{
-    if(PRODUCTS[b] && PRODUCTS[b].length) picks.push({brand:b, item:PRODUCTS[b][0]});
-  });
-  const repeated = [...picks, ...picks]; // repeat for smooth look
-  wrap.innerHTML = repeated.map(p=>`
-    <div class="card" role="button" onclick="location.href='brand.html?brand=${encodeURIComponent(p.brand)}'">
-      <img src="${p.item.img}" alt="${p.item.name}">
-      <h4>${p.item.name}</h4>
-      <p>${p.brand}</p>
+<section>
+    <h2 style="text-align:center;font-size:28px;color:#9bb8ff;">Choose Category</h2>
+
+    <div class="card-grid">
+        <a href="men.html" style="text-decoration:none;">
+            <div class="card"><span>Men</span></div>
+        </a>
+        <a href="women.html" style="text-decoration:none;">
+            <div class="card"><span>Women</span></div>
+        </a>
+        <a href="kids.html" style="text-decoration:none;">
+            <div class="card"><span>Kids</span></div>
+        </a>
     </div>
-  `).join('');
-})();
+</section>
 
-/* strip auto-scroll */
-(function stripLoop(){
-  const inner = document.getElementById('stripInner');
-  let pos=0, speed=0.55;
-  function loop(){
-    pos += speed;
-    const max = inner.scrollWidth/2;
-    if(pos > max) pos = 0;
-    inner.style.transform = `translateX(${-pos}px)`;
-    requestAnimationFrame(loop);
-  }
-  loop();
+<footer style="text-align:center;padding:20px;color:#7985b1;">
+    © HIGH CHOICE — All Rights Reserved
+</footer>
 
-  // pointer drag for strip
-  let down=false, startX=0, last=0;
-  inner.addEventListener('pointerdown', e=>{ down=true; startX=e.clientX; last=pos; inner.style.cursor='grabbing'; });
-  window.addEventListener('pointerup', ()=>{ down=false; inner.style.cursor='grab'; });
-  window.addEventListener('pointermove', e=>{ if(!down) return; const dx = e.clientX - startX; pos = Math.max(0, last - dx); });
-})();
-
-/* =========================
-   Aurora background (canvas)
-   lightweight multi-layer soft glow
-   ========================= */
-(function auroraBackground(){
-  const c = document.getElementById('auroraCanvas');
-  const ctx = c.getContext('2d');
-  let w = c.width = innerWidth, h = c.height = innerHeight;
-
-  const layers = [];
-  function rand(a,b){ return Math.random()*(b-a)+a; }
-  const hues = [200,260,160,220];
-  for(let i=0;i<4;i++){
-    layers.push({
-      x: rand(-w*0.4, w*0.8),
-      y: rand(-h*0.2, h*0.8),
-      r: rand(240,520),
-      sx: rand(0.12,0.5),
-      sy: rand(0.08,0.35),
-      hue: hues[i%hues.length],
-      alpha: rand(0.06,0.16)
-    });
-  }
-
-  function draw(){
-    ctx.clearRect(0,0,w,h);
-    // subtle base overlay
-    const g = ctx.createLinearGradient(0,0,0,h);
-    g.addColorStop(0,'rgba(4,6,12,0.2)');
-    g.addColorStop(1,'rgba(2,2,6,0.36)');
-    ctx.fillStyle = g; ctx.fillRect(0,0,w,h);
-
-    layers.forEach(L=>{
-      const grd = ctx.createRadialGradient(L.x, L.y, 0, L.x, L.y, L.r);
-      grd.addColorStop(0, `hsla(${L.hue},90%,60%,${L.alpha})`);
-      grd.addColorStop(0.4, `hsla(${L.hue},70%,45%,${L.alpha*0.75})`);
-      grd.addColorStop(1, 'rgba(0,0,0,0)');
-      ctx.globalCompositeOperation = 'screen';
-      ctx.fillStyle = grd;
-      ctx.beginPath();
-      ctx.ellipse(L.x, L.y, L.r * L.sx, L.r * L.sy, 0, 0, Math.PI*2);
-      ctx.fill();
-      ctx.globalCompositeOperation = 'source-over';
-    });
-  }
-
-  function step(ts){
-    layers.forEach((L,i)=>{
-      L.x += Math.sin(ts*0.0001*(i+1))*0.3 + (i%2?0.18:-0.15);
-      L.y += Math.cos(ts*0.00009*(i+1))*0.12;
-    });
-    draw();
-    requestAnimationFrame(step);
-  }
-
-  window.addEventListener('resize', ()=>{ w = c.width = innerWidth; h = c.height = innerHeight; });
-  requestAnimationFrame(step);
-})();
-
-/* =========================
-   Three.js 3D viewer (GLB if present else fallback image plane)
-   Cinematic lights + subtle bloom (if available)
-   ========================= */
-(function init3D(){
-  const wrapper = document.getElementById('viewerCard');
-  const canvas = document.getElementById('sceneCanvas');
-  const renderer = new THREE.WebGLRenderer({canvas, antialias:true, alpha:true});
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
-  renderer.setSize(wrapper.clientWidth, wrapper.clientHeight, false);
-  renderer.outputEncoding = THREE.sRGBEncoding;
-  renderer.toneMapping = THREE.ACESFilmicToneMapping;
-  renderer.toneMappingExposure = 1;
-
-  const scene = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(36, wrapper.clientWidth / wrapper.clientHeight, 0.1, 1000);
-  camera.position.set(0, 0, 3.1);
-
-  // lights
-  scene.add(new THREE.HemisphereLight(0xffffff, 0x040408, 0.36));
-  const key = new THREE.DirectionalLight(0xfff6e6, 1.1); key.position.set(4,6,4); scene.add(key);
-  const rim = new THREE.DirectionalLight(0x8be4ff, 0.38); rim.position.set(-4,3,-6); scene.add(rim);
-  scene.add(new THREE.AmbientLight(0x444444, 0.6));
-
-  // floor
-  const floor = new THREE.Mesh(new THREE.PlaneGeometry(8,8), new THREE.MeshStandardMaterial({color:0x030303, metalness:0.2, roughness:0.6}));
-  floor.rotation.x = -Math.PI/2; floor.position.y = -1.05; scene.add(floor);
-
-  const root = new THREE.Group(); scene.add(root);
-
-  // try bloom composer
-  let composer = null;
-  try {
-    composer = new THREE.EffectComposer(renderer);
-    const rp = new THREE.RenderPass(scene, camera); composer.addPass(rp);
-    const bloom = new THREE.UnrealBloomPass(new THREE.Vector2(wrapper.clientWidth, wrapper.clientHeight), 0.5, 0.6, 0.1);
-    bloom.threshold = 0.0; bloom.strength = 0.42; bloom.radius = 0.4;
-    composer.addPass(bloom);
-  } catch(e){ composer = null; }
-
-  // load GLB if present, else image plane fallback
-  const loader = new THREE.GLTFLoader();
-  loader.load('assets/models/watch.glb', (gltf)=>{
-    const obj = gltf.scene;
-    obj.traverse(n=>{ if(n.isMesh){ n.castShadow=true; n.receiveShadow=true; if(n.material){ n.material.metalness = n.material.metalness ?? 0.6; n.material.roughness = n.material.roughness ?? 0.35 } }});
-    const box = new THREE.Box3().setFromObject(obj);
-    const size = box.getSize(new THREE.Vector3()).length();
-    const center = box.getCenter(new THREE.Vector3());
-    obj.position.sub(center);
-    const scale = 1.05 / size;
-    obj.scale.setScalar(scale);
-    root.add(obj);
-  }, undefined, ()=>{
-    // fallback image: premium Unsplash hero
-    const url = 'https://images.unsplash.com/photo-1518544889289-f1c1a3a4e9c5?auto=format&w=1400&q=90';
-    const tex = new THREE.TextureLoader().load(url);
-    tex.encoding = THREE.sRGBEncoding;
-    const geo = new THREE.PlaneGeometry(1.9, 1.9);
-    const mat = new THREE.MeshStandardMaterial({map:tex, metalness:0.18, roughness:0.45});
-    const mesh = new THREE.Mesh(geo, mat); mesh.rotation.y = -0.18; root.add(mesh);
-  });
-
-  // pointer interaction: drag to rotate, wheel to zoom
-  let dragging=false, lastX=0, targetY=0;
-  wrapper.addEventListener('pointerdown', (e)=>{ dragging=true; lastX=e.clientX; wrapper.style.cursor='grabbing'; });
-  window.addEventListener('pointerup', ()=>{ dragging=false; wrapper.style.cursor='default'; });
-  window.addEventListener('pointermove', (e)=>{ if(!dragging) return; const dx = (e.clientX - lastX)/200; targetY += dx; lastX = e.clientX; });
-
-  wrapper.addEventListener('wheel', (e)=>{ e.preventDefault(); camera.position.z += e.deltaY*0.002; camera.position.z = Math.min(Math.max(camera.position.z, 1.5), 6); }, {passive:false});
-
-  // animate
-  let last = performance.now();
-  function animate(){
-    const now = performance.now();
-    const dt = (now - last)/1000; last = now;
-    root.rotation.y += dt * 0.12;
-    root.rotation.y += (targetY - root.rotation.y) * 0.08;
-    root.rotation.z = Math.sin(now*0.0006) * 0.015;
-    if(composer) composer.render(); else renderer.render(scene, camera);
-    requestAnimationFrame(animate);
-  }
-  animate();
-
-  // resize handler
-  window.addEventListener('resize', ()=>{
-    const w = wrapper.clientWidth, h = wrapper.clientHeight;
-    renderer.setSize(w,h,false);
-    if(composer) composer.setSize(w,h);
-    camera.aspect = w/h; camera.updateProjectionMatrix();
-  });
-
-  // subtle entrance
-  root.scale.setScalar(0.96);
-  gsap.to(root.scale, {x:1,y:1,z:1,duration:1.2,ease:"power3.out"});
-})();
-
-/* micro animations */
-gsap.from(".brand", {y:-8, opacity:0, duration:0.8});
-gsap.from("h1", {y:28, opacity:0, duration:1, delay:0.08, ease:"power3.out"});
-gsap.from(".lead", {y:18, opacity:0, duration:0.9, delay:0.18});
-gsap.from(".cat-card", {y:20, opacity:0, duration:0.9, delay:0.28, stagger:0.08});
-gsap.from(".strip h3", {y:12, opacity:0, duration:0.9, delay:0.4});
-
-/* small: allow keyboard focus for strip */
-document.getElementById('stripInner').addEventListener('keydown', (e)=>{
-  if(e.key === 'ArrowRight') window.scrollBy(200,0);
-});
-
-/* quick nav hooks */
-document.querySelectorAll('.cat-card').forEach(c=>c.addEventListener('keydown', e=>{ if(e.key==='Enter') c.click(); }));
-
-</script>
 </body>
-</html>
-  // Floor
-  const floor = new THREE.Mesh(new THREE.PlaneGeometry(8,8), new THREE.MeshStandardMaterial({color:0x000000, metalness:0.2, roughness:0.6}));
-  floor.rotation.x = -Math.PI/2; floor.position.y = -1.05; scene.add(floor);
-
-  const root = new THREE.Group(); scene.add(root);
-
-  // Try bloom composer
-  let composer = null;
-  try {
-    composer = new THREE.EffectComposer(renderer);
-    const rp = new THREE.RenderPass(scene, camera); composer.addPass(rp);
-    const bloom = new THREE.UnrealBloomPass(new THREE.Vector2(viewer.clientWidth, viewer.clientHeight), 0.5, 0.6, 0.1);
-    bloom.threshold = 0.0; bloom.strength = 0.45; bloom.radius = 0.4; composer.addPass(bloom);
-  } catch(e){ composer = null; }
-
-  // Load GLB if exists, else fallback to hero image textured plane
-  const loader = new THREE.GLTFLoader();
-  let modelLoaded = false;
-  loader.load('assets/models/watch.glb', (gltf)=>{
-    const obj = gltf.scene;
-    obj.traverse(n=>{ if(n.isMesh){ n.castShadow=true; n.receiveShadow=true; if(n.material){ n.material.metalness = n.material.metalness ?? 0.6; n.material.roughness = n.material.roughness ?? 0.35 } }});
-    // center and scale
-    const box = new THREE.Box3().setFromObject(obj);
-    const size = box.getSize(new THREE.Vector3()).length();
-    const center = box.getCenter(new THREE.Vector3());
-    obj.position.sub(center);
-    const scale = 1.05 / size;
-    obj.scale.setScalar(scale);
-    root.add(obj);
-    modelLoaded = true;
-  }, undefined, (err)=>{
-    // fallback plane with premium Unsplash image
-    const url = 'https://images.unsplash.com/photo-1518544889289-f1c1a3a4e9c5?auto=format&w=1400&q=90';
-    const tex = new THREE.TextureLoader().load(url);
-    tex.encoding = THREE.sRGBEncoding;
-    const geo = new THREE.PlaneGeometry(1.9,1.9);
-    const mat = new THREE.MeshStandardMaterial({map:tex, metalness:0.18, roughness:0.45});
-    const mesh = new THREE.Mesh(geo, mat); mesh.rotation.y = -0.18; root.add(mesh);
-    modelLoaded = true;
-  });
-
-  // interaction: drag rotate, wheel zoom
-  let dragging=false,lastX=0,targetY=0;
-  viewer.addEventListener('pointerdown', (e)=>{ dragging=true; lastX=e.clientX; viewer.style.cursor='grabbing'; });
-  window.addEventListener('pointerup', ()=>{ dragging=false; viewer.style.cursor='default'; });
-  window.addEventListener('pointermove', (e)=>{ if(!dragging) return; const dx=(e.clientX-lastX)/200; targetY += dx; lastX=e.clientX; });
-
-  viewer.addEventListener('wheel', (e)=>{ e.preventDefault(); camera.position.z += e.deltaY*0.002; camera.position.z = Math.min(Math.max(camera.position.z, 1.6), 6); }, {passive:false});
-
-  // animate
-  let last = performance.now();
-  function animate(){
-    const now = performance.now();
-    const dt = (now - last)/1000; last = now;
-    root.rotation.y += dt * 0.12;
-    root.rotation.y += (targetY - root.rotation.y) * 0.08;
-    root.rotation.z = Math.sin(now*0.0006) * 0.015;
-    if(composer) composer.render(); else renderer.render(scene,camera);
-    requestAnimationFrame(animate);
-  }
-  animate();
-
-  // resize support
-  window.addEventListener('resize', ()=>{
-    const w = viewer.clientWidth, h = viewer.clientHeight;
-    renderer.setSize(w,h,false);
-    if(composer) composer.setSize(w,h);
-    camera.aspect = w/h; camera.updateProjectionMatrix();
-  });
-
-  // entrance
-  root.scale.setScalar(0.96);
-  gsap.to(root.scale, {x:1,y:1,z:1,duration:1.2,ease:"power3.out"});
-})();
-
-/* ---------------------------
-   Small UI: nav buttons
-----------------------------*/
-document.getElementById('goMen').addEventListener('click', ()=> window.location.href='mens.html');
-document.getElementById('goRolex').addEventListener('click', ()=> window.location.href='brand.html?brand=Rolex');
-
-/* ---------------------------
-   Initial micro-animations
-----------------------------*/
-gsap.from(".brand", {y:-8, opacity:0, duration:0.7});
-gsap.from("h1", {y:26, opacity:0, duration:1, delay:0.12, ease:"power3.out"});
-gsap.from(".lead", {y:18, opacity:0, duration:0.9, delay:0.22});
-gsap.from(".btn", {y:16, opacity:0, duration:0.9, delay:0.32, stagger:0.08});
-
-</script>
-</body>
-</html>
+      </html>
