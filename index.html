@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>HIGH CHOICE — Premium 3D Watches</title>
-<meta name="description" content="HIGH CHOICE — Premium watch showroom. 3D mockups, UPI checkout & WhatsApp orders." />
+<title>HIGH CHOICE — Aurora Premium • Home</title>
+<meta name="description" content="HIGH CHOICE — Creative Aurora 3D showroom. Premium watch showcase — 3D mockups, cinematic lighting, category pages." />
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;600;800&family=Playfair+Display:wght@500;700&display=swap" rel="stylesheet">
 
 <!-- GSAP -->
@@ -20,121 +20,159 @@
 
 <style>
 :root{
-  --bg:#060606;
-  --gold:#c7a16a;
-  --gold-2:#e6c88a;
-  --muted:#b6bcc0;
+  --bg-1:#071023;
+  --bg-2:#08111f;
+  --muted:#cbd5dd;
+  --accent1:#8be4ff;
+  --accent2:#b384ff;
+  --accent3:#7ef0b2;
   --glass: rgba(255,255,255,0.03);
+  --panel: rgba(255,255,255,0.02);
+  --radius:18px;
 }
 *{box-sizing:border-box}
-html,body{height:100%;margin:0;background:
-  radial-gradient(1200px 600px at 8% 10%, rgba(199,161,106,0.04), transparent),
-  linear-gradient(180deg,var(--bg),#020202);
-  color:#fff;font-family:Inter,system-ui,Arial;-webkit-font-smoothing:antialiased}
+html,body{height:100%;margin:0;background:linear-gradient(180deg,var(--bg-1),var(--bg-2));color:#fff;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;-webkit-font-smoothing:antialiased}
 a{color:inherit;text-decoration:none}
-img{display:block;max-width:100%}
+img{max-width:100%;display:block}
 
-/* Header */
-header{position:fixed;top:0;left:0;right:0;z-index:200;padding:14px 28px;display:flex;align-items:center;
-  backdrop-filter: blur(6px);
-  background:linear-gradient(180deg, rgba(0,0,0,0.6), transparent);
-  border-bottom:1px solid rgba(255,255,255,0.02)}
-.brand{font-family:"Playfair Display",serif;color:var(--gold);font-weight:800;letter-spacing:0.8px}
+/* aurora canvas behind everything */
+#auroraCanvas{position:fixed;inset:0;z-index:0;pointer-events:none}
+
+/* header */
+header{position:fixed;left:0;right:0;top:0;z-index:40;display:flex;align-items:center;gap:18px;padding:14px 28px;background:linear-gradient(180deg, rgba(4,6,12,0.36), transparent);backdrop-filter:blur(6px);border-bottom:1px solid rgba(255,255,255,0.03)}
+.brand{font-family:"Playfair Display",serif;font-weight:700;color:var(--accent2);font-size:20px}
 nav{margin-left:auto;display:flex;gap:12px;align-items:center}
-nav a{padding:8px 12px;border-radius:8px;color:var(--muted);font-weight:700}
-nav a.cta{background:linear-gradient(90deg,var(--gold),var(--gold-2));color:#071018;font-weight:900}
+nav a{padding:8px 12px;border-radius:10px;color:var(--muted);font-weight:700}
+nav a.cta{background:linear-gradient(90deg,var(--accent1),var(--accent2));color:#041422;font-weight:800;box-shadow:0 10px 40px rgba(131,130,255,0.06)}
 
-/* Layout */
-main{padding-top:86px}
+/* page layout */
+main{position:relative;z-index:2;padding-top:92px}
 .container{max-width:1280px;margin:0 auto;padding:28px}
-.hero{display:grid;grid-template-columns:1fr 640px;gap:36px;align-items:center;min-height:82vh}
+.hero{display:grid;grid-template-columns:1fr 640px;gap:34px;align-items:center;min-height:86vh}
 @media(max-width:1000px){ .hero{grid-template-columns:1fr;padding:20px;gap:18px} }
 
-/* Left */
-.eyebrow{color:var(--gold);font-weight:900;letter-spacing:1.4px}
-h1{font-family:"Playfair Display",serif;font-size:44px;margin:8px 0;color:var(--gold);line-height:1.02}
+/* left column text */
+.eyebrow{color:var(--accent3);font-weight:800;letter-spacing:1.6px}
+h1{font-family:"Playfair Display",serif;font-size:44px;margin:8px 0;color:var(--accent2);line-height:1.02;text-shadow:0 8px 40px rgba(75,0,120,0.08)}
 .lead{color:var(--muted);max-width:640px;line-height:1.6;margin-top:12px}
 .cta-row{margin-top:18px;display:flex;gap:12px;flex-wrap:wrap}
-.btn{padding:12px 18px;border-radius:999px;font-weight:900;display:inline-flex;align-items:center;gap:10px;cursor:pointer}
-.btn.primary{background:linear-gradient(90deg,var(--gold),var(--gold-2));color:#071018}
-.btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.04);color:var(--muted)}
+.btn{padding:12px 18px;border-radius:999px;font-weight:900;display:inline-flex;align-items:center;gap:10px;cursor:pointer;border:1px solid rgba(255,255,255,0.02);backdrop-filter:blur(4px)}
+.btn.primary{background:linear-gradient(90deg,var(--accent1),var(--accent2));color:#041422}
+.btn.ghost{background:transparent;color:var(--muted)}
 
-/* Viewer (right) */
-.viewer-wrap{position:relative;border-radius:18px;overflow:hidden;background:linear-gradient(180deg,#050505,#0a0a0a);border:1px solid rgba(255,255,255,0.03);box-shadow:0 60px 180px rgba(0,0,0,0.7);height:640px;display:flex;align-items:center;justify-content:center}
-@media(max-width:1000px){ .viewer-wrap{height:420px} }
-canvas#viewerCanvas{width:100%;height:100%;display:block}
+/* center 3 category cards (style B — big animated cards) */
+.category-grid{display:flex;gap:16px;margin-top:26px}
+@media(max-width:880px){ .category-grid{flex-direction:column} }
+.cat-card{
+  position:relative;
+  flex:1;
+  min-height:160px;
+  border-radius:14px;
+  overflow:hidden;
+  background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.12));
+  border:1px solid rgba(255,255,255,0.03);
+  display:flex;
+  align-items:center;
+  padding:18px;
+  gap:18px;
+  cursor:pointer;
+  transition:transform .45s cubic-bezier(.2,.9,.2,1), box-shadow .45s;
+}
+.cat-card:hover{ transform: translateY(-10px) scale(1.02); box-shadow:0 40px 140px rgba(0,0,0,0.7); }
+.cat-left{flex:0 0 110px;display:flex;align-items:center;justify-content:center}
+.cat-left img{width:100px;height:100px;object-fit:cover;border-radius:12px;transform:translateZ(0);box-shadow:0 20px 60px rgba(0,0,0,0.6)}
+.cat-body h3{margin:0;font-size:20px;color:var(--accent1);font-weight:800}
+.cat-body p{margin:6px 0 0;color:var(--muted);font-size:13px}
+
+/* right: 3D viewer card */
+.viewer-card{position:relative;border-radius:var(--radius);overflow:hidden;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.14));border:1px solid rgba(255,255,255,0.03);box-shadow:0 60px 180px rgba(0,0,0,0.7);height:640px;display:flex;align-items:center;justify-content:center}
+@media(max-width:1000px){ .viewer-card{height:420px} }
+canvas#sceneCanvas{width:100%;height:100%;display:block}
 .viewer-ui{position:absolute;left:18px;bottom:18px;display:flex;flex-direction:column;gap:8px;z-index:40}
 .pill{background:var(--glass);padding:8px 12px;border-radius:999px;border:1px solid rgba(255,255,255,0.02);color:var(--muted);font-weight:700}
-.glow{position:absolute;inset:auto 12% 60% auto;width:220px;height:220px;border-radius:50%;filter:blur(40px);pointer-events:none;background:radial-gradient(circle at 30% 30%, rgba(199,161,106,0.16), transparent 28%)}
+.subtle-ring{position:absolute;inset:auto 12% 62% auto;width:260px;height:260px;border-radius:50%;filter:blur(46px);pointer-events:none;background:radial-gradient(circle at 30% 30%, rgba(139,228,255,0.12), transparent 28%);z-index:2}
 
-/* Strip */
-.strip{margin-top:28px}
+/* featured strip */
+.strip{margin-top:36px}
+.strip h3{text-align:center;color:var(--accent2);margin-bottom:12px}
 .strip-inner{display:flex;gap:18px;align-items:center;overflow:hidden;padding:12px}
-.card{width:240px;height:260px;border-radius:16px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.03);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:12px;flex-shrink:0;transition:transform .28s,box-shadow .28s}
-.card:hover{transform:translateY(-12px) scale(1.03);box-shadow:0 44px 120px rgba(0,0,0,0.75)}
-.card img{width:86%;height:140px;object-fit:cover;border-radius:10px}
-.card h4{margin:10px 0 0;font-size:15px;font-weight:800;color:var(--gold)}
-.card p{margin:6px 0 0;color:var(--muted);font-size:13px}
+.card{width:220px;height:240px;border-radius:12px;padding:12px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.03);box-shadow:0 20px 80px rgba(0,0,0,0.45);flex-shrink:0;transition:transform .28s}
+.card:hover{transform:translateY(-10px)}
+.card img{width:100%;height:140px;object-fit:cover;border-radius:8px}
+.card h4{color:var(--accent1);margin:10px 0 0;font-size:14px}
+.card p{color:var(--muted);font-size:12px;margin:6px 0 0}
 
-/* Modal */
-.modal-back{position:fixed;inset:0;background:rgba(0,0,0,0.6);display:flex;align-items:center;justify-content:center;z-index:999;backdrop-filter:blur(4px);padding:24px}
-.modal{width:960px;max-width:98%;background:#070707;border-radius:14px;padding:18px;border:1px solid rgba(255,255,255,0.04);box-shadow:0 40px 140px rgba(0,0,0,0.8)}
-.modal-grid{display:grid;grid-template-columns:1fr 360px;gap:18px}
-.modal-left img{width:100%;border-radius:12px}
-.product-title{font-family:"Playfair Display",serif;font-size:22px;color:var(--gold);margin:0}
-.price{font-weight:900;color:var(--gold);margin-top:8px}
-.qr{width:220px;height:220px;border-radius:8px;background:#0b0b0b;display:flex;align-items:center;justify-content:center;border:1px solid rgba(255,255,255,0.03)}
+/* footer */
+footer{margin-top:36px;text-align:center;color:var(--muted);padding:20px;border-top:1px solid rgba(255,255,255,0.03)}
 
-/* Footer */
-footer{padding:28px;text-align:center;color:var(--muted);margin-top:32px;border-top:1px solid rgba(255,255,255,0.03) }
-
-/* small screen */
-@media(max-width:780px){
-  .modal-grid{grid-template-columns:1fr}
-  .hero{grid-template-columns:1fr}
-  h1{font-size:32px}
+/* small screens */
+@media(max-width:720px){
+  h1{font-size:28px}
+  .cat-left img{width:84px;height:84px}
+  .category-grid{gap:12px}
 }
 </style>
 </head>
 <body>
 
+<canvas id="auroraCanvas" aria-hidden="true"></canvas>
+
 <header>
   <div class="brand">HIGH CHOICE</div>
   <nav>
-    <a href="index.html">Home</a>
     <a href="mens.html">Men</a>
     <a href="womens.html">Women</a>
     <a href="kids.html">Kids</a>
-    <a href="360.html">360°</a>
-    <a class="cta" href="contact.html">WhatsApp</a>
+    <a class="cta" href="contact.html">Contact</a>
   </nav>
 </header>
 
 <main>
   <div class="container">
     <section class="hero">
-      <!-- LEFT -->
+      <!-- LEFT: intro + categories -->
       <div>
-        <div class="eyebrow">CINEMATIC • CREATIVE</div>
-        <h1>High Choice — Unique International<br>Premium Watch Experience</h1>
-        <div class="lead">Ultra-premium 3D mockups, cinematic lighting and trusted checkout. Click any product to preview, generate UPI QR and send order via WhatsApp. This demo uses high-quality Unsplash photos — replace with your assets for final production.</div>
+        <div class="eyebrow">AURORA COLLECTION</div>
+        <h1>Creative Gradient Aurora — Premium Watches</h1>
+        <p class="lead">A cinematic 3D showroom experience with interactive mockups, creative aurora backdrop and smooth micro-animations. Explore Men, Women or Kids collections — each has dedicated brand & product pages.</p>
 
         <div class="cta-row">
-          <button class="btn primary" id="goMen">Shop Men</button>
-          <button class="btn ghost" id="goRolex">Explore Rolex</button>
+          <a href="mens.html" class="btn primary">Shop Men</a>
+          <a href="womens.html" class="btn ghost">Shop Women</a>
         </div>
 
-        <div style="display:flex;gap:10px;margin-top:18px">
-          <div class="pill">360° Viewer</div>
-          <div class="pill">UPI + COD</div>
-          <div class="pill">Instant WhatsApp Order</div>
+        <!-- Category cards -->
+        <div class="category-grid" style="margin-top:22px">
+          <div class="cat-card" onclick="location.href='mens.html'">
+            <div class="cat-left"><img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&w=900&q=80" alt="Men watches"></div>
+            <div class="cat-body">
+              <h3>MEN</h3>
+              <p>Rolex, Omega, Maserati, Audemars & more — curated for gents who choose the best.</p>
+            </div>
+          </div>
+
+          <div class="cat-card" onclick="location.href='womens.html'">
+            <div class="cat-left"><img src="https://images.unsplash.com/photo-1522312346375-d1a52e2b99b3?auto=format&w=900&q=80" alt="Women watches"></div>
+            <div class="cat-body">
+              <h3>WOMEN</h3>
+              <p>Elegant, refined pieces — Michael Kors, Dior, Cartier and premium ladies collection.</p>
+            </div>
+          </div>
+
+          <div class="cat-card" onclick="location.href='kids.html'">
+            <div class="cat-left"><img src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?auto=format&w=900&q=80" alt="Kids watches"></div>
+            <div class="cat-body">
+              <h3>KIDS</h3>
+              <p>Durable & stylish — Casio & G-Shock kids collection with trusted builds.</p>
+            </div>
+          </div>
         </div>
       </div>
 
-      <!-- RIGHT: VIEWER -->
-      <div class="viewer-wrap" id="viewerWrap" aria-label="3D viewer">
-        <div class="glow"></div>
-        <canvas id="viewerCanvas"></canvas>
+      <!-- RIGHT: 3D viewer -->
+      <div class="viewer-card" id="viewerCard" aria-label="3D viewer area">
+        <div class="subtle-ring" aria-hidden="true"></div>
+        <canvas id="sceneCanvas" aria-hidden="false"></canvas>
         <div class="viewer-ui" aria-hidden="true">
           <div class="pill">Drag to rotate</div>
           <div class="pill">Scroll to zoom</div>
@@ -144,257 +182,237 @@ footer{padding:28px;text-align:center;color:var(--muted);margin-top:32px;border-
 
     <!-- Featured strip -->
     <section class="strip" aria-label="Featured">
-      <h3 style="text-align:center;color:var(--gold);margin-bottom:12px">Featured — Handpicked</h3>
-      <div class="strip-inner" id="stripInner" tabindex="0" role="list"></div>
+      <h3>Featured — Handpicked</h3>
+      <div class="strip-inner" id="stripInner" role="list"></div>
     </section>
 
-    <footer>© 2025 HIGH CHOICE • WhatsApp: <a href="https://wa.me/917020966879" style="color:var(--gold)">+91 70209 66879</a></footer>
+    <footer>© 2025 HIGH CHOICE • All Rights Reserved • WhatsApp: <a href="https://wa.me/917020966879" style="color:var(--accent1)">+91 70209 66879</a></footer>
   </div>
 </main>
 
-<!-- PRODUCT MODAL -->
-<div id="modalRoot" class="modal-back" style="display:none">
-  <div class="modal" role="dialog" aria-modal="true">
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
-      <div style="font-weight:900;color:var(--muted)">Product Preview</div>
-      <button id="closeModal" style="background:transparent;border:0;color:var(--muted);font-weight:800;cursor:pointer">✕</button>
-    </div>
-
-    <div class="modal-grid">
-      <div class="modal-left">
-        <img id="modalImg" src="" alt="product image">
-      </div>
-      <div class="modal-right">
-        <h3 class="product-title" id="modalTitle"></h3>
-        <div class="price" id="modalPrice"></div>
-        <div style="color:var(--muted);margin-top:8px" id="modalDesc">Fine stainless steel, sapphire crystal, premium finish. Replace description per model.</div>
-
-        <div style="margin-top:12px">
-          <label style="color:var(--muted);font-weight:700">Payment</label>
-          <select id="payMethod" style="padding:10px;border-radius:10px;background:transparent;border:1px solid rgba(255,255,255,0.04);color:var(--muted);width:100%;margin-top:8px">
-            <option value="upi">Prepaid (UPI)</option>
-            <option value="cod">Cash on Delivery (COD)</option>
-          </select>
-
-          <div id="qrBlock" style="display:block;margin-top:12px">
-            <div style="font-weight:800;color:var(--muted);margin-bottom:8px">Scan to pay (UPI)</div>
-            <div class="qr" id="qrImage"><img id="qrImg" src="" alt="QR" style="width:90%;height:90%"></div>
-          </div>
-
-          <div style="display:flex;gap:10px;margin-top:12px">
-            <button id="confirmOrder" class="btn primary">Confirm & WhatsApp</button>
-            <button id="addToCart" class="btn ghost">Add to Cart</button>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </div>
-</div>
-
 <script>
-/* ---------------------------
-   CONFIG
-----------------------------*/
-const UPI_ID = "7869288078@kotak811"; // user-provided
-const BUSINESS_NAME = "HIGH CHOICE";
-
-/* ---------------------------
-   PRODUCTS (prices from user list)
-   Price units: rupees (integer)
-----------------------------*/
+/* =========================
+   DEMO PRODUCTS for Featured Strip (first model of each brand)
+   Replace images with your assets when ready
+   ========================= */
 const PRODUCTS = {
-  "Rolex": [
-    {slug:"rolex-yachtmaster", name:"Rolex yachtmaster automatic", price:2499, image:"https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&w=1200&q=90"},
-    {slug:"rolex-daudate-shift", name:"Rolex daudate shift movement", price:1699, image:"https://images.unsplash.com/photo-1522312346375-d1a52e2b99b3?auto=format&w=1200&q=90"},
-    {slug:"rolex-submariner-shift", name:"Rolex submariner shift movement", price:1599, image:"https://images.unsplash.com/photo-1518544889289-f1c1a3a4e9c5?auto=format&w=1200&q=90"},
-    {slug:"rolex-daytona", name:"Rolex Daytona", price:2199, image:"https://images.unsplash.com/photo-1524749292158-c90489c5afd2?auto=format&w=1200&q=90"},
-    {slug:"rolex-sun-moon", name:"Rolex sun moon edition", price:1699, image:"https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?auto=format&w=1200&q=90"},
-    {slug:"rolex-datejust", name:"Rolex Datejust Automatic", price:3499, image:"https://images.unsplash.com/photo-1543163521-1bf539c55f7b?auto=format&w=1200&q=90"},
-    {slug:"rolex-explorer2", name:"Rolex explorer 2", price:3999, image:"https://images.unsplash.com/photo-1504712598893-24159a89200e?auto=format&w=1200&q=90"},
-    {slug:"rolex-king-automatic", name:"Rolex king automatic", price:1899, image:"https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&w=1200&q=90"},
-    {slug:"rolex-gmt", name:"Rolex GMT shift movement", price:1699, image:"https://images.unsplash.com/photo-1511379938547-c1f69419868d?auto=format&w=1200&q=90"},
-    {slug:"rolex-sky-dweller", name:"Rolex sky dweller shift movement", price:1499, image:"https://images.unsplash.com/photo-1521334884684-d80222895322?auto=format&w=1200&q=90"}
-  ],
-  "Maserati":[
-    {slug:"maserati-1", name:"Maserati automatic skeleton", price:2199, image:"https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?auto=format&w=1200&q=90"},
-    {slug:"maserati-2", name:"Maserati attraziane", price:1999, image:"https://images.unsplash.com/photo-1522312346375-d1a52e2b99b3?auto=format&w=1200&q=90"},
-    {slug:"maserati-3", name:"Maserati classic automatic", price:2499, image:"https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&w=1200&q=90"},
-    {slug:"maserati-4", name:"Maserati potenza automatic", price:2299, image:"https://images.unsplash.com/photo-1504712598893-24159a89200e?auto=format&w=1200&q=90"}
-  ],
-  "Omega":[
-    {slug:"omega-worldmap", name:"Omega Worldmap", price:1799, image:"https://images.unsplash.com/photo-1522312346375-d1a52e2b99b3?auto=format&w=1200&q=90"},
-    {slug:"omega-speedmaster", name:"Omega speedmaster", price:4299, image:"https://images.unsplash.com/photo-1524749292158-c90489c5afd2?auto=format&w=1200&q=90"},
-    {slug:"omega-seemaster", name:"Omega seemaster", price:1899, image:"https://images.unsplash.com/photo-1518544889289-f1c1a3a4e9c5?auto=format&w=1200&q=90"},
-    {slug:"omega-worldmap2", name:"Omega Worldmap 2", price:2099, image:"https://images.unsplash.com/photo-1504712598893-24159a89200e?auto=format&w=1200&q=90"},
-    {slug:"omega-seamaster-auto", name:"Omega Seamaster Automatic", price:4899, image:"https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&w=1200&q=90"},
-    {slug:"omega-sunmoon", name:"Omega sun moon edition", price:1799, image:"https://images.unsplash.com/photo-1521334884684-d80222895322?auto=format&w=1200&q=90"}
-  ],
-  "G-Shock":[
-    {slug:"gsh-ga-v01", name:"G shock Ga V01", price:1849, image:"https://images.unsplash.com/photo-1543163521-1bf539c55f7b?auto=format&w=1200&q=90"},
-    {slug:"gsh-ga2100", name:"G shock Ga2100", price:1299, image:"https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?auto=format&w=1200&q=90"},
-    {slug:"gsh-gm2100", name:"G shock Gm2100", price:1499, image:"https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&w=1200&q=90"},
-    {slug:"gsh-ga2300", name:"G shock Ga2300", price:1199, image:"https://images.unsplash.com/photo-1522312346375-d1a52e2b99b3?auto=format&w=1200&q=90"}
-  ],
-  "Armani":[
-    {slug:"armani-ax", name:"Armani Ax", price:1499, image:"https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&w=1200&q=90"},
-    {slug:"armani-dante", name:"Armani Exchange Dante", price:1999, image:"https://images.unsplash.com/photo-1524749292158-c90489c5afd2?auto=format&w=1200&q=90"}
-  ],
-  "Patek":[
-    {slug:"patek-cubitus-blue", name:"Patek Philippe Cubitus Blue", price:3299, image:"https://images.unsplash.com/photo-1521334884684-d80222895322?auto=format&w=1200&q=90"},
-    {slug:"patek-nautilus", name:"Patek Philippe Nautilus Sun moon Automatic", price:5999, image:"https://images.unsplash.com/photo-1504712598893-24159a89200e?auto=format&w=1200&q=90"}
-  ],
-  "Audemars":[
-    {slug:"ap-aura", name:"Audemars Piguet Aura", price:1299, image:"https://images.unsplash.com/photo-1522312346375-d1a52e2b99b3?auto=format&w=1200&q=90"},
-    {slug:"ap-diamond", name:"Audemars Piguet Diamond Automatic", price:6499, image:"https://images.unsplash.com/photo-1524749292158-c90489c5afd2?auto=format&w=1200&q=90"}
-  ],
-  "Cartier":[
-    {slug:"cartier-santos", name:"Cartier Santos Automatic", price:4099, image:"https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&w=1200&q=90"},
-    {slug:"cartier-ballon", name:"Cartier Ballon", price:1399, image:"https://images.unsplash.com/photo-1518544889289-f1c1a3a4e9c5?auto=format&w=1200&q=90"}
-  ],
-  "Tissot":[
-    {slug:"tissot-leather", name:"Tissot 1853 leather belt", price:1399, image:"https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&w=1200&q=90"},
-    {slug:"tissot-prx", name:"Tissot Prx BackOpen", price:1699, image:"https://images.unsplash.com/photo-1522312346375-d1a52e2b99b3?auto=format&w=1200&q=90"}
-  ],
-  "Rado":[
-    {slug:"rado-centrix", name:"Rado Centrix", price:2699, image:"https://images.unsplash.com/photo-1524749292158-c90489c5afd2?auto=format&w=1200&q=90"}
-  ],
-  "Longines":[
-    {slug:"longines-master", name:"Longines Master Collection Moonphase", price:2499, image:"https://images.unsplash.com/photo-1504712598893-24159a89200e?auto=format&w=1200&q=90"}
-  ],
-  /* Women / Kids (short samples) */
-  "Women": [
-    {slug:"mk-1", name:"MICHAEL KORS - Classic", price:1699, image:"https://images.unsplash.com/photo-1522312346375-d1a52e2b99b3?auto=format&w=1200&q=90"},
-    {slug:"dior-1", name:"DIOR - Signature", price:1849, image:"https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&w=1200&q=90"}
-  ],
-  "Kids":[
-    {slug:"casio-kids", name:"Casio Kids", price:999, image:"https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?auto=format&w=1200&q=90"}
-  ]
+  "Rolex":[{name:"Rolex Yachtmaster", img:"https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&w=1200&q=90"}],
+  "Omega":[{name:"Omega Speedmaster", img:"https://images.unsplash.com/photo-1522312346375-d1a52e2b99b3?auto=format&w=1200&q=90"}],
+  "G-Shock":[{name:"G-Shock GA2100", img:"https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?auto=format&w=1200&q=90"}],
+  "Armani":[{name:"Armani Classic", img:"https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&w=1200&q=90"}],
+  "Patek":[{name:"Patek Cubitus Blue", img:"https://images.unsplash.com/photo-1521334884684-d80222895322?auto=format&w=1200&q=90"}]
 };
 
-/* ---------------------------
-   UTILITIES
-----------------------------*/
-function formatINR(n){
-  return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-}
-
-/* ---------------------------
-   Populate featured strip (first item of each brand)
-----------------------------*/
+/* populate strip */
 (function populateStrip(){
   const wrap = document.getElementById('stripInner');
   const picks = [];
   Object.keys(PRODUCTS).forEach(b=>{
-    const list = PRODUCTS[b];
-    if(list && list.length) picks.push({brand:b, item:list[0]});
+    if(PRODUCTS[b] && PRODUCTS[b].length) picks.push({brand:b, item:PRODUCTS[b][0]});
   });
-  const repeated = [...picks, ...picks, ...picks];
-  wrap.innerHTML = repeated.map(p=>{
-    return `<div class="card" role="button" data-brand="${p.brand}" data-slug="${p.item.slug}" data-price="${p.item.price}" data-name="${p.item.name}" data-img="${p.item.image}">
-      <img src="${p.item.image}" alt="${p.item.name}">
+  const repeated = [...picks, ...picks]; // repeat for smooth look
+  wrap.innerHTML = repeated.map(p=>`
+    <div class="card" role="button" onclick="location.href='brand.html?brand=${encodeURIComponent(p.brand)}'">
+      <img src="${p.item.img}" alt="${p.item.name}">
       <h4>${p.item.name}</h4>
-      <p>₹ ${formatINR(p.item.price)}</p>
-    </div>`;
-  }).join('');
+      <p>${p.brand}</p>
+    </div>
+  `).join('');
 })();
 
-/* ---------------------------
-   Carousel auto-scroll + drag
-----------------------------*/
-(function carouselLoop(){
+/* strip auto-scroll */
+(function stripLoop(){
   const inner = document.getElementById('stripInner');
-  let pos = 0, speed = 0.6;
-  function loop(){ pos += speed; const max = inner.scrollWidth/3; if(pos > max) pos = 0; inner.style.transform = `translateX(${-pos}px)`; requestAnimationFrame(loop); }
-  requestAnimationFrame(loop);
+  let pos=0, speed=0.55;
+  function loop(){
+    pos += speed;
+    const max = inner.scrollWidth/2;
+    if(pos > max) pos = 0;
+    inner.style.transform = `translateX(${-pos}px)`;
+    requestAnimationFrame(loop);
+  }
+  loop();
+
+  // pointer drag for strip
   let down=false, startX=0, last=0;
   inner.addEventListener('pointerdown', e=>{ down=true; startX=e.clientX; last=pos; inner.style.cursor='grabbing'; });
   window.addEventListener('pointerup', ()=>{ down=false; inner.style.cursor='grab'; });
   window.addEventListener('pointermove', e=>{ if(!down) return; const dx = e.clientX - startX; pos = Math.max(0, last - dx); });
 })();
 
-/* ---------------------------
-   Modal (product preview + UPI QR + WhatsApp)
-----------------------------*/
-const modalRoot = document.getElementById('modalRoot');
-const modalImg = document.getElementById('modalImg');
-const modalTitle = document.getElementById('modalTitle');
-const modalPrice = document.getElementById('modalPrice');
-const qrImg = document.getElementById('qrImg');
-const payMethod = document.getElementById('payMethod');
+/* =========================
+   Aurora background (canvas)
+   lightweight multi-layer soft glow
+   ========================= */
+(function auroraBackground(){
+  const c = document.getElementById('auroraCanvas');
+  const ctx = c.getContext('2d');
+  let w = c.width = innerWidth, h = c.height = innerHeight;
 
-document.getElementById('stripInner').addEventListener('click', (e)=>{
-  const card = e.target.closest('.card');
-  if(!card) return;
-  openProductModal({
-    slug: card.dataset.slug,
-    name: card.dataset.name,
-    price: Number(card.dataset.price),
-    image: card.dataset.img
-  });
-});
-
-document.getElementById('closeModal').addEventListener('click', ()=> modalRoot.style.display='none');
-payMethod.addEventListener('change', ()=> {
-  document.getElementById('qrBlock').style.display = (payMethod.value === 'upi') ? 'block' : 'none';
-});
-
-function generateUPIQR(amount){
-  // Build UPI deep link
-  const upiLink = `upi://pay?pa=${encodeURIComponent(UPI_ID)}&pn=${encodeURIComponent(BUSINESS_NAME)}&am=${encodeURIComponent(amount)}&cu=INR`;
-  const qrUrl = 'https://chart.googleapis.com/chart?cht=qr&chs=300x300&chl=' + encodeURIComponent(upiLink);
-  qrImg.src = qrUrl;
-  qrImg.alt = 'UPI QR';
-}
-
-function openProductModal(product){
-  modalRoot.style.display='flex';
-  modalImg.src = product.image;
-  modalTitle.textContent = product.name;
-  modalPrice.textContent = "₹ " + formatINR(product.price);
-  generateUPIQR(product.price);
-  document.getElementById('confirmOrder').onclick = ()=> confirmOrder(product);
-  document.getElementById('addToCart').onclick = ()=> { alert('Added to cart (demo).'); };
-}
-
-function confirmOrder(product){
-  const method = payMethod.value;
-  if(method === 'upi'){
-    // Ask user to scan and confirm — then open WhatsApp with filled message (demo flow)
-    const proceed = confirm('Scan QR and complete payment. Press OK after payment to send order via WhatsApp.');
-    if(!proceed) return;
+  const layers = [];
+  function rand(a,b){ return Math.random()*(b-a)+a; }
+  const hues = [200,260,160,220];
+  for(let i=0;i<4;i++){
+    layers.push({
+      x: rand(-w*0.4, w*0.8),
+      y: rand(-h*0.2, h*0.8),
+      r: rand(240,520),
+      sx: rand(0.12,0.5),
+      sy: rand(0.08,0.35),
+      hue: hues[i%hues.length],
+      alpha: rand(0.06,0.16)
+    });
   }
-  // Build WhatsApp message
-  const text = `New order from HIGH CHOICE\nProduct: ${product.name}\nPrice: ₹${product.price}\nPayment: ${method}\nUPI: ${UPI_ID}\nName:\nContact:\nAddress:`;
-  const wa = `https://wa.me/91${'7020966879'.replace(/\D/g,'')}?text=${encodeURIComponent(text)}`;
-  window.open(wa,'_blank');
-  modalRoot.style.display='none';
-}
 
-/* ---------------------------
-   3D Viewer — loads GLB else falls back to textured plane (image)
-   Cinematic lighting + GSAP entrance
-----------------------------*/
+  function draw(){
+    ctx.clearRect(0,0,w,h);
+    // subtle base overlay
+    const g = ctx.createLinearGradient(0,0,0,h);
+    g.addColorStop(0,'rgba(4,6,12,0.2)');
+    g.addColorStop(1,'rgba(2,2,6,0.36)');
+    ctx.fillStyle = g; ctx.fillRect(0,0,w,h);
+
+    layers.forEach(L=>{
+      const grd = ctx.createRadialGradient(L.x, L.y, 0, L.x, L.y, L.r);
+      grd.addColorStop(0, `hsla(${L.hue},90%,60%,${L.alpha})`);
+      grd.addColorStop(0.4, `hsla(${L.hue},70%,45%,${L.alpha*0.75})`);
+      grd.addColorStop(1, 'rgba(0,0,0,0)');
+      ctx.globalCompositeOperation = 'screen';
+      ctx.fillStyle = grd;
+      ctx.beginPath();
+      ctx.ellipse(L.x, L.y, L.r * L.sx, L.r * L.sy, 0, 0, Math.PI*2);
+      ctx.fill();
+      ctx.globalCompositeOperation = 'source-over';
+    });
+  }
+
+  function step(ts){
+    layers.forEach((L,i)=>{
+      L.x += Math.sin(ts*0.0001*(i+1))*0.3 + (i%2?0.18:-0.15);
+      L.y += Math.cos(ts*0.00009*(i+1))*0.12;
+    });
+    draw();
+    requestAnimationFrame(step);
+  }
+
+  window.addEventListener('resize', ()=>{ w = c.width = innerWidth; h = c.height = innerHeight; });
+  requestAnimationFrame(step);
+})();
+
+/* =========================
+   Three.js 3D viewer (GLB if present else fallback image plane)
+   Cinematic lights + subtle bloom (if available)
+   ========================= */
 (function init3D(){
-  const viewer = document.getElementById('viewerWrap');
-  const canvas = document.getElementById('viewerCanvas');
+  const wrapper = document.getElementById('viewerCard');
+  const canvas = document.getElementById('sceneCanvas');
   const renderer = new THREE.WebGLRenderer({canvas, antialias:true, alpha:true});
   renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
-  renderer.setSize(viewer.clientWidth, viewer.clientHeight, false);
+  renderer.setSize(wrapper.clientWidth, wrapper.clientHeight, false);
   renderer.outputEncoding = THREE.sRGBEncoding;
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
   renderer.toneMappingExposure = 1;
 
   const scene = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(36, viewer.clientWidth / viewer.clientHeight, 0.1, 1000);
-  camera.position.set(0,0,3.2);
+  const camera = new THREE.PerspectiveCamera(36, wrapper.clientWidth / wrapper.clientHeight, 0.1, 1000);
+  camera.position.set(0, 0, 3.1);
 
-  // Lights
-  scene.add(new THREE.HemisphereLight(0xffffff, 0x080808, 0.35));
-  const key = new THREE.DirectionalLight(0xfff3d1, 1.2); key.position.set(5,6,4); scene.add(key);
-  const rim = new THREE.DirectionalLight(0xffe6b3, 0.45); rim.position.set(-5,4,-6); scene.add(rim);
-  scene.add(new THREE.AmbientLight(0x404040, 0.7));
+  // lights
+  scene.add(new THREE.HemisphereLight(0xffffff, 0x040408, 0.36));
+  const key = new THREE.DirectionalLight(0xfff6e6, 1.1); key.position.set(4,6,4); scene.add(key);
+  const rim = new THREE.DirectionalLight(0x8be4ff, 0.38); rim.position.set(-4,3,-6); scene.add(rim);
+  scene.add(new THREE.AmbientLight(0x444444, 0.6));
 
+  // floor
+  const floor = new THREE.Mesh(new THREE.PlaneGeometry(8,8), new THREE.MeshStandardMaterial({color:0x030303, metalness:0.2, roughness:0.6}));
+  floor.rotation.x = -Math.PI/2; floor.position.y = -1.05; scene.add(floor);
+
+  const root = new THREE.Group(); scene.add(root);
+
+  // try bloom composer
+  let composer = null;
+  try {
+    composer = new THREE.EffectComposer(renderer);
+    const rp = new THREE.RenderPass(scene, camera); composer.addPass(rp);
+    const bloom = new THREE.UnrealBloomPass(new THREE.Vector2(wrapper.clientWidth, wrapper.clientHeight), 0.5, 0.6, 0.1);
+    bloom.threshold = 0.0; bloom.strength = 0.42; bloom.radius = 0.4;
+    composer.addPass(bloom);
+  } catch(e){ composer = null; }
+
+  // load GLB if present, else image plane fallback
+  const loader = new THREE.GLTFLoader();
+  loader.load('assets/models/watch.glb', (gltf)=>{
+    const obj = gltf.scene;
+    obj.traverse(n=>{ if(n.isMesh){ n.castShadow=true; n.receiveShadow=true; if(n.material){ n.material.metalness = n.material.metalness ?? 0.6; n.material.roughness = n.material.roughness ?? 0.35 } }});
+    const box = new THREE.Box3().setFromObject(obj);
+    const size = box.getSize(new THREE.Vector3()).length();
+    const center = box.getCenter(new THREE.Vector3());
+    obj.position.sub(center);
+    const scale = 1.05 / size;
+    obj.scale.setScalar(scale);
+    root.add(obj);
+  }, undefined, ()=>{
+    // fallback image: premium Unsplash hero
+    const url = 'https://images.unsplash.com/photo-1518544889289-f1c1a3a4e9c5?auto=format&w=1400&q=90';
+    const tex = new THREE.TextureLoader().load(url);
+    tex.encoding = THREE.sRGBEncoding;
+    const geo = new THREE.PlaneGeometry(1.9, 1.9);
+    const mat = new THREE.MeshStandardMaterial({map:tex, metalness:0.18, roughness:0.45});
+    const mesh = new THREE.Mesh(geo, mat); mesh.rotation.y = -0.18; root.add(mesh);
+  });
+
+  // pointer interaction: drag to rotate, wheel to zoom
+  let dragging=false, lastX=0, targetY=0;
+  wrapper.addEventListener('pointerdown', (e)=>{ dragging=true; lastX=e.clientX; wrapper.style.cursor='grabbing'; });
+  window.addEventListener('pointerup', ()=>{ dragging=false; wrapper.style.cursor='default'; });
+  window.addEventListener('pointermove', (e)=>{ if(!dragging) return; const dx = (e.clientX - lastX)/200; targetY += dx; lastX = e.clientX; });
+
+  wrapper.addEventListener('wheel', (e)=>{ e.preventDefault(); camera.position.z += e.deltaY*0.002; camera.position.z = Math.min(Math.max(camera.position.z, 1.5), 6); }, {passive:false});
+
+  // animate
+  let last = performance.now();
+  function animate(){
+    const now = performance.now();
+    const dt = (now - last)/1000; last = now;
+    root.rotation.y += dt * 0.12;
+    root.rotation.y += (targetY - root.rotation.y) * 0.08;
+    root.rotation.z = Math.sin(now*0.0006) * 0.015;
+    if(composer) composer.render(); else renderer.render(scene, camera);
+    requestAnimationFrame(animate);
+  }
+  animate();
+
+  // resize handler
+  window.addEventListener('resize', ()=>{
+    const w = wrapper.clientWidth, h = wrapper.clientHeight;
+    renderer.setSize(w,h,false);
+    if(composer) composer.setSize(w,h);
+    camera.aspect = w/h; camera.updateProjectionMatrix();
+  });
+
+  // subtle entrance
+  root.scale.setScalar(0.96);
+  gsap.to(root.scale, {x:1,y:1,z:1,duration:1.2,ease:"power3.out"});
+})();
+
+/* micro animations */
+gsap.from(".brand", {y:-8, opacity:0, duration:0.8});
+gsap.from("h1", {y:28, opacity:0, duration:1, delay:0.08, ease:"power3.out"});
+gsap.from(".lead", {y:18, opacity:0, duration:0.9, delay:0.18});
+gsap.from(".cat-card", {y:20, opacity:0, duration:0.9, delay:0.28, stagger:0.08});
+gsap.from(".strip h3", {y:12, opacity:0, duration:0.9, delay:0.4});
+
+/* small: allow keyboard focus for strip */
+document.getElementById('stripInner').addEventListener('keydown', (e)=>{
+  if(e.key === 'ArrowRight') window.scrollBy(200,0);
+});
+
+/* quick nav hooks */
+document.querySelectorAll('.cat-card').forEach(c=>c.addEventListener('keydown', e=>{ if(e.key==='Enter') c.click(); }));
+
+</script>
+</body>
+</html>
   // Floor
   const floor = new THREE.Mesh(new THREE.PlaneGeometry(8,8), new THREE.MeshStandardMaterial({color:0x000000, metalness:0.2, roughness:0.6}));
   floor.rotation.x = -Math.PI/2; floor.position.y = -1.05; scene.add(floor);
