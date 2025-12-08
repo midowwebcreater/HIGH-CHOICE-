@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UPI Payment – HIGH CHOICE</title>
+<link rel="icon" type="image/png" href="favicon.png">
+
+<style>
+:root{
+  --bg:#0e0f19;
+  --text:#ffffff;
+  --muted:#bfbfd2;
+  --accent:#7effc9;
+  --card:rgba(255,255,255,0.08);
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  background:var(--bg);
+  font-family:"Poppins",system-ui,Roboto;
+  color:var(--text);
+}
+
+header{
+  padding:14px 18px;
+  display:flex;justify-content:center;align-items:center;
+  background:rgba(0,0,0,0.35);
+  border-bottom:1px solid rgba(255,255,255,0.05);
+  backdrop-filter:blur(8px);
+}
+header img{height:38px}
+
+main{
+  max-width:600px;margin:auto;padding:22px;
+}
+
+h2{
+  text-align:center;font-size:26px;font-weight:800;
+  color:var(--accent);margin-bottom:16px;
+}
+
+.card{
+  background:var(--card);
+  padding:20px;border-radius:16px;
+  border:1px solid rgba(255,255,255,0.05);
+  text-align:center;
+}
+
+.qr-box{
+  padding:16px;background:#fff;border-radius:16px;
+  margin-bottom:16px;
+}
+.qr-box img{
+  width:260px;height:260px;object-fit:contain;
+}
+
+p{color:var(--muted);margin:8px 0}
+
+.upi{
+  font-size:18px;font-weight:700;color:var(--accent);
+}
+
+.btn{
+  width:100%;padding:14px;margin-top:18px;
+  background:var(--accent);border:none;border-radius:12px;
+  color:#000;font-weight:800;font-size:16px;cursor:pointer;
+}
+
+footer{
+  text-align:center;color:var(--muted);
+  padding:26px 10px;margin-top:24px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <img src="highchoice_logo.png">
+</header>
+
+<main>
+
+  <h2>Complete Your Payment</h2>
+
+  <div class="card">
+
+    <div class="qr-box">
+      <img src="upi_qr.png" alt="UPI QR">
+    </div>
+
+    <p><strong>Payable Amount:</strong></p>
+    <p class="upi" id="amount"></p>
+
+    <p><strong>UPI ID:</strong></p>
+    <p class="upi">7869288078@kotak811</p>
+
+    <button class="btn" onclick="paymentDone()">I Have Paid</button>
+
+  </div>
+
+</main>
+
+<footer>© 2025 HIGH CHOICE — All Rights Reserved</footer>
+
+<script>
+// read values
+const url = new URLSearchParams(window.location.search);
+const model = url.get("model");
+const price = url.get("price");
+const name = url.get("name");
+const phone = url.get("phone");
+
+document.getElementById("amount").innerText = "₹" + price + "/-";
+
+function paymentDone(){
+  window.location.href =
+    `success.html?model=${model}&price=${price}&name=${name}&phone=${phone}`;
+}
+</script>
+
+</body>
+</html>
