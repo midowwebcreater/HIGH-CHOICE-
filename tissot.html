@@ -1,199 +1,215 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tissot — HIGH CHOICE</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+<title>Tissot Watches – HIGH CHOICE</title>
 
 <style>
-:root{
-  --bg-1:#050814;
-  --bg-2:#061127;
-  --accent:#b9aaff;
-  --muted:#94a0c9;
-  --card:rgba(255,255,255,0.04);
-  --radius:18px;
-}
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
-body{
-  background:linear-gradient(180deg,var(--bg-1),var(--bg-2));
-  color:white;overflow-x:hidden;
-}
+    :root {
+        --bg: #0e0f19;
+        --card: rgba(255,255,255,0.06);
+        --text: #ffffff;
+        --muted: #c1c1d2;
+        --primary: #7ac7ff;
+        --primary-dark: #47afff;
+    }
 
-/* Background Bubbles */
-.bg{position:fixed;inset:0;z-index:0;pointer-events:none;}
-.bubble{
-  position:absolute;border-radius:50%;filter:blur(44px);
-  opacity:.9;mix-blend-mode:screen;
-  animation:float 16s infinite linear;
-}
-@keyframes float{
-  0%{transform:translateY(0)}
-  50%{transform:translateY(20px) translateX(20px)}
-  100%{transform:translateY(0)}
-}
-.b1{width:420px;height:240px;left:-5%;top:10%;background:radial-gradient(circle,#9b63ff,transparent 40%);}
-.b2{width:460px;height:260px;right:5%;top:6%;background:radial-gradient(circle,#4dcaff,transparent 40%);}
-.b3{width:360px;height:200px;left:20%;top:18%;background:radial-gradient(circle,#c16dff,transparent 40%);}
+    body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--text);
+        font-family: 'Poppins', sans-serif;
+        overflow-x: hidden;
+    }
 
-/* Header */
-header{
-  position:fixed;top:0;left:0;right:0;height:68px;
-  display:flex;align-items:center;justify-content:space-between;
-  padding:12px 22px;z-index:50;
-  background:linear-gradient(180deg,rgba(6,10,18,0.35),rgba(6,10,18,0.05));
-  border-bottom:1px solid rgba(255,255,255,0.03);
-}
-.logo{font-size:20px;font-weight:700;color:var(--accent);}
-.hamb{
-  font-size:22px;color:white;padding:8px;border-radius:8px;
-  background:rgba(255,255,255,0.02);cursor:pointer;
-}
+    header {
+        padding: 14px 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: rgba(0,0,0,0.35);
+        backdrop-filter: blur(10px);
+        position: sticky;
+        top: 0;
+        z-index: 999;
+    }
 
-/* Nav */
-nav{
-  position:fixed;top:0;right:-100%;width:70%;max-width:380px;height:100vh;
-  background:#0b1120;z-index:80;padding:40px 22px;transition:0.3s;
-}
-nav.open{right:0;}
-nav a{
-  display:block;margin:14px 0;color:#d7e0ff;text-decoration:none;
-  font-weight:600;border-bottom:1px solid rgba(255,255,255,0.03);padding-bottom:8px;
-}
+    .logo {
+        font-size: 20px;
+        font-weight: 700;
+        color: var(--primary);
+    }
 
-/* Layout */
-main{padding-top:100px;position:relative;z-index:5;}
-.container{max-width:1100px;margin:auto;padding:20px;}
+    .menu-btn {
+        width: 40px;
+        height: 40px;
+        background: rgba(255,255,255,0.08);
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 22px;
+        cursor: pointer;
+    }
 
-/* Product Grid */
-.product-grid{
-  display:flex;flex-wrap:wrap;gap:20px;justify-content:center;margin-top:20px;
-}
-.product{
-  width:300px;border-radius:var(--radius);background:var(--card);
-  padding:14px;transition:.35s;
-  border:1px solid rgba(255,255,255,0.05);
-  box-shadow:0 20px 60px rgba(0,0,0,.45);
-}
-.product:hover{transform:translateY(-8px) scale(1.02);}
-.product img{
-  width:100%;height:220px;object-fit:cover;border-radius:12px;
-}
-.product h3{margin:12px 0 4px;}
-.product p{color:var(--muted);margin-bottom:10px;}
-.buy-btn{
-  display:block;width:100%;padding:10px;background:var(--accent);
-  color:#050814;font-weight:700;border-radius:10px;text-align:center;
-  margin-top:8px;text-decoration:none;
-}
-.buy-btn:hover{opacity:.85;}
+    .page-title {
+        text-align: center;
+        padding: 25px 20px 10px;
+        font-size: 28px;
+        font-weight: 700;
+    }
+
+    .subtitle {
+        text-align: center;
+        margin-top: -10px;
+        color: var(--muted);
+        font-size: 15px;
+    }
+
+    /* GRID */
+    .product-grid {
+        padding: 20px;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    @media (min-width: 700px) {
+        .product-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (min-width: 1100px) {
+        .product-grid { grid-template-columns: 1fr 1fr 1fr; }
+    }
+
+    .product-card {
+        background: var(--card);
+        border-radius: 16px;
+        padding: 16px;
+        border: 1px solid rgba(255,255,255,0.1);
+        text-align: center;
+        transition: 0.25s;
+    }
+
+    .product-card:hover {
+        transform: scale(1.03);
+        border-color: var(--primary-dark);
+    }
+
+    .product-card img {
+        width: 100%;
+        height: 180px;
+        object-fit: cover;
+        border-radius: 12px;
+    }
+
+    .product-name {
+        font-size: 17px;
+        margin-top: 12px;
+        font-weight: 600;
+    }
+
+    .price {
+        margin-top: 6px;
+        color: var(--primary);
+        font-size: 16px;
+        font-weight: 600;
+    }
+
+    .buy-btn {
+        margin-top: 12px;
+        background: var(--primary-dark);
+        border: none;
+        padding: 10px 16px;
+        color: #fff;
+        border-radius: 10px;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: 600;
+        width: 100%;
+    }
+
+    footer {
+        padding: 20px;
+        text-align: center;
+        color: var(--muted);
+        margin-top: 30px;
+    }
 </style>
-</head>
 
+</head>
 <body>
 
-<!-- Background Glow -->
-<div class="bg">
-  <div class="bubble b1"></div>
-  <div class="bubble b2"></div>
-  <div class="bubble b3"></div>
-</div>
-
 <header>
-  <div class="logo">HIGH CHOICE</div>
-  <div class="hamb" onclick="toggleMenu()">☰</div>
+    <div class="logo">HIGH CHOICE</div>
+    <div class="menu-btn" onclick="location.href='men.html'">☰</div>
 </header>
 
-<nav id="menu">
-  <a href="index.html">Home</a>
-  <a href="men.html">Men</a>
-  <a href="women.html">Women</a>
-  <a href="kids.html">Kids</a>
-  <a href="#">Policies</a>
-  <a href="#">About Us</a>
-  <a href="#">Contact</a>
-  <a href="#">Return Policy</a>
-</nav>
+<div class="page-title">Tissot Collection</div>
+<div class="subtitle">Premium Tissot Watches</div>
 
-<script>
-function toggleMenu(){
-  document.getElementById("menu").classList.toggle("open");
-}
-</script>
+<section class="product-grid">
 
-<main>
-<div class="container">
-
-  <h2 style="text-align:center;color:var(--accent);font-size:26px;">
-    Tissot — Men's Collection
-  </h2>
-
-  <div class="product-grid">
-
-    <div class="product">
-      <img src="https://images.unsplash.com/photo-1518544889289-f1c1a3a4e9c5?auto=format&w=900&q=80">
-      <h3>Tissot 1853 Leather Belt</h3>
-      <p>₹1399</p>
-      <a class="buy-btn" href="order.html?product=Tissot%201853%20Leather&price=1399">Buy Now</a>
+    <div class="product-card">
+        <img src="images/tissot/leather_belt.jpg">
+        <div class="product-name">Tissot 1853 Leather Belt</div>
+        <div class="price">₹1399</div>
+        <button class="buy-btn" onclick="location.href='order.html?product=Tissot 1853 Leather Belt&price=1399'">Buy Now</button>
     </div>
 
-    <div class="product">
-      <img src="https://images.unsplash.com/photo-1543163521-1bf5391b7c1f?auto=format&w=900&q=80">
-      <h3>Tissot PRX BackOpen</h3>
-      <p>₹1699</p>
-      <a class="buy-btn" href="order.html?product=Tissot%20PRX%20BackOpen&price=1699">Buy Now</a>
+    <div class="product-card">
+        <img src="images/tissot/prx_backopen.jpg">
+        <div class="product-name">Tissot PRX BackOpen</div>
+        <div class="price">₹1699</div>
+        <button class="buy-btn" onclick="location.href='order.html?product=Tissot PRX BackOpen&price=1699'">Buy Now</button>
     </div>
 
-    <div class="product">
-      <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&w=900&q=80">
-      <h3>Tissot Powermatic80 Gents</h3>
-      <p>₹2999</p>
-      <a class="buy-btn" href="order.html?product=Tissot%20Powermatic80&price=2999">Buy Now</a>
+    <div class="product-card">
+        <img src="images/tissot/powermatic80.jpg">
+        <div class="product-name">Tissot Powermatic 80 Gents</div>
+        <div class="price">₹2999</div>
+        <button class="buy-btn" onclick="location.href='order.html?product=Tissot Powermatic 80 Gents&price=2999'">Buy Now</button>
     </div>
 
-    <div class="product">
-      <img src="https://images.unsplash.com/photo-1472417583565-62e7bdeda490?auto=format&w=900&q=80">
-      <h3>Tissot 1853 Chain</h3>
-      <p>₹1649</p>
-      <a class="buy-btn" href="order.html?product=Tissot%201853%20Chain&price=1649">Buy Now</a>
+    <div class="product-card">
+        <img src="images/tissot/chain1853.jpg">
+        <div class="product-name">Tissot 1853 Chain</div>
+        <div class="price">₹1649</div>
+        <button class="buy-btn" onclick="location.href='order.html?product=Tissot 1853 Chain&price=1649'">Buy Now</button>
     </div>
 
-    <div class="product">
-      <img src="https://images.unsplash.com/photo-1511381939415-e44015466834?auto=format&w=900&q=80">
-      <h3>Tissot Skeleton</h3>
-      <p>₹2749</p>
-      <a class="buy-btn" href="order.html?product=Tissot%20Skeleton&price=2749">Buy Now</a>
+    <div class="product-card">
+        <img src="images/tissot/skeleton.jpg">
+        <div class="product-name">Tissot Skeleton</div>
+        <div class="price">₹2749</div>
+        <button class="buy-btn" onclick="location.href='order.html?product=Tissot Skeleton&price=2749'">Buy Now</button>
     </div>
 
-    <div class="product">
-      <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&w=900&q=80">
-      <h3>Tissot PRX Powermatic</h3>
-      <p>₹1599</p>
-      <a class="buy-btn" href="order.html?product=Tissot%20PRX%20Powermatic&price=1599">Buy Now</a>
+    <div class="product-card">
+        <img src="images/tissot/prx_powermatic.jpg">
+        <div class="product-name">Tissot PRX Powermatic</div>
+        <div class="price">₹1599</div>
+        <button class="buy-btn" onclick="location.href='order.html?product=Tissot PRX Powermatic&price=1599'">Buy Now</button>
     </div>
 
-    <div class="product">
-      <img src="https://images.unsplash.com/photo-1518544801958-efcbf8a7ec10?auto=format&w=900&q=80">
-      <h3>Tissot PRX</h3>
-      <p>₹1999</p>
-      <a class="buy-btn" href="order.html?product=Tissot%20PRX&price=1999">Buy Now</a>
+    <div class="product-card">
+        <img src="images/tissot/prx.jpg">
+        <div class="product-name">Tissot PRX</div>
+        <div class="price">₹1999</div>
+        <button class="buy-btn" onclick="location.href='order.html?product=Tissot PRX&price=1999'">Buy Now</button>
     </div>
 
-    <div class="product">
-      <img src="https://images.unsplash.com/photo-1539883205402-a5f4770fd9f8?auto=format&w=900&q=80">
-      <h3>Tissot 1853 Japan</h3>
-      <p>₹3199</p>
-      <a class="buy-btn" href="order.html?product=Tissot%201853%20Japan&price=3199">Buy Now</a>
+    <div class="product-card">
+        <img src="images/tissot/japan.jpg">
+        <div class="product-name">Tissot 1853 Japan</div>
+        <div class="price">₹3199</div>
+        <button class="buy-btn" onclick="location.href='order.html?product=Tissot 1853 Japan&price=3199'">Buy Now</button>
     </div>
 
-  </div>
+</section>
 
-</div>
-</main>
-
-<footer style="text-align:center;color:var(--muted);padding:30px 10px;">
-  © HIGH CHOICE — All Rights Reserved
+<footer>
+    © 2025 HIGH CHOICE — All Rights Reserved
 </footer>
 
 </body>
