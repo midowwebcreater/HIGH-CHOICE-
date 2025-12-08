@@ -1,24 +1,190 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<title>Return Policy — HIGH CHOICE</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Return & Replace – HIGH CHOICE</title>
+<link rel="icon" type="image/png" href="favicon.png" />
 <style>
-body{margin:0;background:#050814;color:white;font-family:'Poppins';padding:20px;}
-h1{color:#b9aaff;text-align:center;}
-p{color:#c7c9d9;margin-bottom:14px;line-height:1.6;}
+  :root{
+    --bg:#0e0f19;
+    --card:rgba(255,255,255,0.06);
+    --text:#ffffff;
+    --muted:#bfbfd2;
+    --accent:#7ee2ff;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0;
+    font-family:"Poppins",system-ui,Roboto,Arial;
+    background:var(--bg);
+    color:var(--text);
+    -webkit-font-smoothing:antialiased;
+  }
+  header{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:14px 18px;background:rgba(0,0,0,0.36);
+    backdrop-filter:blur(8px);position:sticky;top:0;z-index:999;
+    border-bottom:1px solid rgba(255,255,255,0.04);
+  }
+  .logo{display:flex;align-items:center;gap:10px}
+  .logo img{height:36px}
+  .logo span{font-weight:700;color:var(--accent)}
+  .menu-btn{width:40px;height:40px;border-radius:8px;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,0.06);cursor:pointer}
+  main{max-width:940px;margin:20px auto;padding:18px}
+  .hero{display:flex;flex-direction:column;gap:12px;margin-bottom:16px}
+  .hero h1{margin:0;font-size:22px;font-weight:800;color:var(--accent)}
+  .hero p{margin:0;color:var(--muted);line-height:1.5}
+
+  .card{background:var(--card);padding:18px;border-radius:14px;border:1px solid rgba(255,255,255,0.04)}
+  label{display:block;font-weight:700;margin:12px 0 6px;color:var(--muted)}
+  input,select,textarea{width:100%;padding:12px;border-radius:10px;border:none;background:rgba(255,255,255,0.04);color:var(--text);font-size:15px}
+  textarea{min-height:120px;resize:vertical}
+  .row{display:grid;grid-template-columns:1fr;gap:12px}
+  .small{grid-template-columns:1fr 1fr}
+  .note{font-size:13px;color:var(--muted);margin-top:8px}
+
+  .policy{margin-top:14px;padding:12px;background:rgba(255,255,255,0.03);border-radius:10px;color:var(--muted);font-size:14px;line-height:1.45}
+
+  .btn{
+    margin-top:14px;width:100%;padding:14px;border-radius:10px;border:0;
+    background:var(--accent);color:#000;font-weight:800;font-size:16px;cursor:pointer;
+  }
+
+  .muted-center{text-align:center;color:var(--muted);margin-top:14px;font-size:13px}
+
+  footer{padding:26px 10px;text-align:center;color:var(--muted)}
+
+  @media(min-width:880px){
+    .row.small{grid-template-columns:1fr 1fr}
+    .hero{flex-direction:row;align-items:center;justify-content:space-between}
+  }
 </style>
 </head>
-
 <body>
 
-<h1>Return & Replacement Policy</h1>
+<header>
+  <div class="logo">
+    <img src="highchoice_logo.png" alt="HIGH CHOICE">
+    <span>HIGH CHOICE</span>
+  </div>
+  <div class="menu-btn" onclick="toggleMenu()">☰</div>
+</header>
 
-<p>1. Only manufacturing defects are eligible for replacement.</p>
-<p>2. Customer must provide unboxing video for verification.</p>
-<p>3. Replacement window: 48 hours after delivery.</p>
-<p>4. No refunds. Only exchange applicable.</p>
-<p>5. Damage due to mishandling is not covered.</p>
+<nav id="drawer" style="position:fixed;right:-100%;top:0;height:100%;width:72%;max-width:320px;background:#070b12;padding:22px;transition:.34s;z-index:998">
+  <a href="index.html" style="display:block;color:var(--text);padding:12px 6px;text-decoration:none">Home</a>
+  <a href="men.html" style="display:block;color:var(--text);padding:12px 6px;text-decoration:none">Men</a>
+  <a href="women.html" style="display:block;color:var(--text);padding:12px 6px;text-decoration:none">Women</a>
+  <a href="kids.html" style="display:block;color:var(--text);padding:12px 6px;text-decoration:none">Kids</a>
+  <a href="contact.html" style="display:block;color:var(--text);padding:12px 6px;text-decoration:none">Contact</a>
+</nav>
 
+<main>
+  <div class="hero">
+    <div>
+      <h1>Return & Replace</h1>
+      <p>If you want to return or replace a product, fill the form below and press <strong>Send Request on WhatsApp</strong>. Our team will respond and you can attach photos on WhatsApp for faster processing.</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <form id="returnForm" onsubmit="return sendReturn(event)">
+      <div class="row small">
+        <div>
+          <label>Order ID (if any)</label>
+          <input id="orderId" type="text" placeholder="Order ID or Invoice No (optional)">
+        </div>
+
+        <div>
+          <label>Product (Name / Model)</label>
+          <input id="product" type="text" placeholder="e.g. Rolex Submariner">
+        </div>
+      </div>
+
+      <div class="row small" style="margin-top:6px">
+        <div>
+          <label>Your Name</label>
+          <input id="custName" type="text" placeholder="Full name">
+        </div>
+        <div>
+          <label>Phone Number</label>
+          <input id="custPhone" type="tel" placeholder="Phone number">
+        </div>
+      </div>
+
+      <label>Reason</label>
+      <select id="reason">
+        <option value="defective">Received defective/damaged item</option>
+        <option value="wrong_item">Received wrong item</option>
+        <option value="size_issue">Size / Fit issue</option>
+        <option value="changed_mind">Changed my mind</option>
+        <option value="other">Other (explain below)</option>
+      </select>
+
+      <label>Details (explain issue — tell us which part is damaged / what you want)</label>
+      <textarea id="details" placeholder="Write details here..."></textarea>
+
+      <p class="note">Please attach clear photos of the product & packaging on WhatsApp after opening the chat — attachments cannot be sent via this form.</p>
+
+      <div class="policy">
+        <strong>Return & Replace Policy (brief)</strong>
+        <ul style="margin:8px 0 0 18px;padding:0;color:var(--muted)">
+          <li>Returns accepted within 7 days of delivery for manufacturing defects only.</li>
+          <li>Replacement / refund processed after inspection.</li>
+          <li>Customer must share clear photos on WhatsApp for faster approval.</li>
+          <li>Products must be unused (except to verify defect) and with original packaging.</li>
+        </ul>
+      </div>
+
+      <button class="btn" type="submit">Send Request on WhatsApp</button>
+
+      <p class="muted-center">After sending, open WhatsApp and attach photos — our team will guide next steps.</p>
+    </form>
+  </div>
+</main>
+
+<footer>© 2025 HIGH CHOICE — All Rights Reserved</footer>
+
+<script>
+  function toggleMenu(){
+    const d = document.getElementById('drawer');
+    d.style.right = (d.style.right === '0px') ? '-100%' : '0px';
+  }
+
+  // Client WhatsApp (international format, no plus)
+  const clientNumber = "917869288078";
+
+  function sendReturn(e){
+    e.preventDefault();
+    const orderId = document.getElementById('orderId').value.trim();
+    const product = document.getElementById('product').value.trim();
+    const name = document.getElementById('custName').value.trim();
+    const phone = document.getElementById('custPhone').value.trim();
+    const reasonSelect = document.getElementById('reason');
+    const reason = reasonSelect.options[reasonSelect.selectedIndex].text;
+    const details = document.getElementById('details').value.trim();
+
+    if(!product || !name || !phone){
+      alert('Please provide Product, Name and Phone number.');
+      return false;
+    }
+
+    // Compose message
+    let msg = "Return / Replace Request%0A%0A";
+    if(orderId) msg += "Order ID: " + encodeURIComponent(orderId) + "%0A";
+    msg += "Product: " + encodeURIComponent(product) + "%0A";
+    msg += "Reason: " + encodeURIComponent(reason) + "%0A";
+    if(details) msg += "Details: " + encodeURIComponent(details) + "%0A";
+    msg += "%0ACustomer%20Name:%20" + encodeURIComponent(name) + "%0A";
+    msg += "Customer%20Phone:%20" + encodeURIComponent(phone) + "%0A";
+    msg += "%0APlease%20attach%20product%20photos%20%26%20package%20photos%20in%20this%20chat.";
+
+    // Open WhatsApp (web or mobile)
+    const waUrl = `https://wa.me/${clientNumber}?text=${msg}`;
+
+    window.open(waUrl, '_blank');
+    return false;
+  }
+</script>
 </body>
-</html>
+    </html>
