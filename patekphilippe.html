@@ -1,1 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Patek Philippe Collection – HIGH CHOICE</title>
+<link rel="icon" type="image/png" href="favicon.png">
 
+<style>
+    :root {
+        --bg:#0e0f19;
+        --card:rgba(255,255,255,0.08);
+        --text:#ffffff;
+        --muted:#bfbfd2;
+        --accent:#ffd56b;
+    }
+
+    body {
+        margin:0;
+        background:var(--bg);
+        color:var(--text);
+        font-family:'Poppins',sans-serif;
+    }
+
+    header {
+        padding:14px 20px;
+        background:rgba(0,0,0,0.35);
+        backdrop-filter:blur(10px);
+        display:flex;justify-content:space-between;align-items:center;
+        position:sticky;top:0;z-index:999;
+        border-bottom:1px solid rgba(255,255,255,0.06);
+    }
+
+    .logo {display:flex;align-items:center;gap:10px;}
+    .logo img {height:36px;}
+    .logo span {font-size:20px;font-weight:700;color:var(--accent);}
+
+    .menu-btn {
+        width:40px;height:40px;border-radius:8px;
+        background:rgba(255,255,255,0.08);
+        display:flex;align-items:center;justify-content:center;
+        cursor:pointer;font-size:22px;
+    }
+
+    #drawer {
+        position:fixed;right:-100%;top:0;width:70%;max-width:300px;
+        height:100%;background:#070b12;padding:25px;transition:.4s;z-index:900;
+    }
+    #drawer.open {right:0;}
+
+    #drawer a {
+        display:block;padding:12px 4px;
+        border-bottom:1px solid rgba(255,255,255,0.08);
+        margin-bottom:8px;font-weight:600;color:var(--text);
+    }
+
+    .title {
+        text-align:center;font-size:28px;font-weight:800;margin-top:25px;
+        color:var(--accent);
+    }
+
+    .brand-logo {
+        display:flex;
+        justify-content:center;
+        margin-top:15px;
+    }
+    .brand-logo img {height:65px;}
+
+    .models {
+        padding:20px;
+        display:flex;
+        flex-direction:column;
+        gap:20px;
+    }
+
+    .card {
+        background:var(--card);
+        padding:15px;
+        border-radius:14px;
+        border:1px solid rgba(255,255,255,0.08);
+    }
+
+    .slider {
+        position:relative;
+        height:260px;
+        overflow:hidden;
+        border-radius:10px;
+        background:#000;
+    }
+
+    .slide {
+        position:absolute;
+        inset:0;
+        opacity:0;
+        transition:opacity .6s ease;
+    }
+    .slide.visible {opacity:1;}
+
+    .slide img {
+        width:100%;
+        height:100%;
+        object-fit:cover;
+        border-radius:10px;
+    }
+
+    .dots {
+        display:flex;
+        gap:6px;
+        justify-content:center;
+        margin-top:8px;
+    }
+
+    .dot {
+        width:10px;
+        height:10px;
+        border-radius:50%;
+        background:rgba(255,255,255,0.3);
+        cursor:pointer;
+    }
+
+    .dot.active {background:var(--accent);}
+
+    .card h3 {margin:10px 0 6px;}
+    .price {color:var(--muted);margin-bottom:10px;font-weight:600;}
+
+    .btn {
+        width:100%;
+        padding:12px;
+        border:none;
+        border-radius:10px;
+        font-weight:700;
+        background:var(--accent);
+        color:#000;
+        cursor:pointer;
+    }
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">
+        <img src="highchoice_logo.png">
+        <span>HIGH CHOICE</span>
+    </div>
+    <div class="menu-btn" onclick="toggleMenu()">☰</div>
+</header>
+
+<nav id="drawer">
+    <a href="index.html">Home</a>
+    <a href="men.html">Men</a>
+    <a href="women.html">Women</a>
+    <a href="kids.html">Kids</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+    <a href="return.html">Return & Replace</a>
+</nav>
+
+<script>
+function toggleMenu(){
+    document.getElementById("drawer").classList.toggle("open");
+}
+</script>
+
+<div class="title">Patek Philippe Collection</div>
+
+<div class="brand-logo">
+    <img src="patek_logo.png">
+</div>
+
+<section class="models">
+
+    <!-- 1. Cubitus Blue -->
+    <div class="card">
+        <div class="slider">
+            <div class="slide visible"><img src="patek_cubitus_blue1.jpg"></div>
+            <div class="slide"><img src="patek_cubitus_blue2.jpg"></div>
+            <div class="slide"><img src="patek_cubitus_blue3.jpg"></div>
+        </div>
+        <div class="dots"></div>
+        <h3>Patek Philippe Cubitus Blue</h3>
+        <div class="price">₹3299/-</div>
+        <button class="btn" onclick="location.href='order.html?model=Patek Cubitus Blue&price=3299'">Buy Now</button>
+    </div>
+
+    <!-- 2. Standard -->
+    <div class="card">
+        <div class="slider">
+            <div class="slide visible"><img src="patek_standard1.jpg"></div>
+            <div class="slide"><img src="patek_standard2.jpg"></div>
+            <div class="slide"><img src="patek_standard3.jpg"></div>
+        </div>
+        <div class="dots"></div>
+        <h3>Patek Philippe</h3>
+        <div class="price">₹3599/-</div>
+        <button class="btn" onclick="location.href='order.html?model=Patek Philippe&price=3599'">Buy Now</button>
+    </div>
+
+    <!-- 3. Cubitus Automatic -->
+    <div class="card">
+        <div class="slider">
+            <div class="slide visible"><img src="patek_cubitus_auto1.jpg"></div>
+            <div class="slide"><img src="patek_cubitus_auto2.jpg"></div>
+            <div class="slide"><img src="patek_cubitus_auto3.jpg"></div>
+        </div>
+        <div class="dots"></div>
+        <h3>Patek Philippe Cubitus Automatic</h3>
+        <div class="price">₹3999/-</div>
+        <button class="btn" onclick="location.href='order.html?model=Patek Cubitus Automatic&price=3999'">Buy Now</button>
+    </div>
+
+    <!-- 4. Belt -->
+    <div class="card">
+        <div class="slider">
+            <div class="slide visible"><img src="patek_belt1.jpg"></div>
+            <div class="slide"><img src="patek_belt2.jpg"></div>
+            <div class="slide"><img src="patek_belt3.jpg"></div>
+        </div>
+        <div class="dots"></div>
+        <h3>Patek Philippe Belt</h3>
+        <div class="price">₹1899/-</div>
+        <button class="btn" onclick="location.href='order.html?model=Patek Belt&price=1899'">Buy Now</button>
+    </div>
+
+    <!-- 5. Aura -->
+    <div class="card">
+        <div class="slider">
+            <div class="slide visible"><img src="patek_aura1.jpg"></div>
+            <div class="slide"><img src="patek_aura2.jpg"></div>
+            <div class="slide"><img src="patek_aura3.jpg"></div>
+        </div>
+        <div class="dots"></div>
+        <h3>Patek Philippe Aura</h3>
+        <div class="price">₹1299/-</div>
+        <button class="btn" onclick="location.href='order.html?model=Patek Aura&price=1299'">Buy Now</button>
+    </div>
+
+    <!-- 6. Openheart -->
+    <div class="card">
+        <div class="slider">
+            <div class="slide visible"><img src="patek_openheart1.jpg"></div>
+            <div class="slide"><img src="patek_openheart2.jpg"></div>
+            <div class="slide"><img src="patek_openheart3.jpg"></div>
+        </div>
+        <div class="dots"></div>
+        <h3>Patek Philippe Openheart</h3>
+        <div class="price">₹2699/-</div>
+        <button class="btn" onclick="location.href='order.html?model=Patek Openheart&price=2699'">Buy Now</button>
+    </div>
+
+    <!-- 7. Matt -->
+    <div class="card">
+        <div class="slider">
+            <div class="slide visible"><img src="patek_matt1.jpg"></div>
+            <div class="slide"><img src="patek_matt2.jpg"></div>
+            <div class="slide"><img src="patek_matt3.jpg"></div>
+        </div>
+        <div class="dots"></div>
+        <h3>Patek Philippe Matt</h3>
+        <div class="price">₹1299/-</div>
+        <button class="btn" onclick="location.href='order.html?model=Patek Matt&price=1299'">Buy Now</button>
+    </div>
+
+    <!-- 8. Skeleton -->
+    <div class="card">
+        <div class="slider">
+            <div class="slide visible"><img src="patek_skeleton1.jpg"></div>
+            <div class="slide"><img src="patek_skeleton2.jpg"></div>
+            <div class="slide"><img src="patek_skeleton3.jpg"></div>
+        </div>
+        <div class="dots"></div>
+        <h3>Patek Philippe Skeleton</h3>
+        <div class="price">₹2499/-</div>
+        <button class="btn" onclick="location.href='order.html?model=Patek Skeleton&price=2499'">Buy Now</button>
+    </div>
+
+    <!-- 9. Nautilus Sun Moon -->
+    <div class="card">
+        <div class="slider">
+            <div class="slide visible"><img src="patek_nautilus_sunmoon1.jpg"></div>
+            <div class="slide"><img src="patek_nautilus_sunmoon2.jpg"></div>
+            <div class="slide"><img src="patek_nautilus_sunmoon3.jpg"></div>
+        </div>
+        <div class="dots"></div>
+        <h3>Patek Philippe Nautilus Sun Moon Automatic</h3>
+        <div class="price">₹5999/-</div>
+        <button class="btn" onclick="location.href='order.html?model=Nautilus Sun Moon&price=5999'">Buy Now</button>
+    </div>
+
+    <!-- 10. Nautilus -->
+    <div class="card">
+        <div class="slider">
+            <div class="slide visible"><img src="patek_nautilus1.jpg"></div>
+            <div class="slide"><img src="patek_nautilus2.jpg"></div>
+            <div class="slide"><img src="patek_nautilus3.jpg"></div>
+        </div>
+        <div class="dots"></div>
+        <h3>Patek Philippe Nautilus</h3>
+        <div class="price">₹3299/-</div>
+        <button class="btn" onclick="location.href='order.html?model=Patek Nautilus&price=3299'">Buy Now</button>
+    </div>
+
+    <!-- 11. SM -->
+    <div class="card">
+        <div class="slider">
+            <div class="slide visible"><img src="patek_sm1.jpg"></div>
+            <div class="slide"><img src="patek_sm2.jpg"></div>
+            <div class="slide"><img src="patek_sm3.jpg"></div>
+        </div>
+        <div class="dots"></div>
+        <h3>Patek Philippe SM</h3>
+        <div class="price">₹1499/-</div>
+        <button class="btn" onclick="location.href='order.html?model=Patek SM&price=1499'">Buy Now</button>
+    </div>
+
+</section>
+
+<script>
+// slider logic
+document.querySelectorAll(".card").forEach(card=>{
+    const slides = card.querySelectorAll(".slide");
+    const dotsBox = card.querySelector(".dots");
+
+    slides.forEach((slide,i)=>{
+        const dot = document.createElement("div");
+        dot.className = "dot";
+        if(i===0) dot.classList.add("active");
+
+        dot.onclick = ()=>{
+            slides.forEach(s=>s.classList.remove("visible"));
+            slides[i].classList.add("visible");
+            dotsBox.querySelectorAll(".dot").forEach(d=>d.classList.remove("active"));
+            dot.classList.add("active");
+        };
+
+        dotsBox.appendChild(dot);
+    });
+});
+</script>
+
+</body>
+          </html>
