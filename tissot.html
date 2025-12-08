@@ -3,214 +3,297 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tissot Watches – HIGH CHOICE</title>
+<title>Tissot Collection – HIGH CHOICE</title>
+<link rel="icon" type="image/png" href="favicon.png">
 
 <style>
     :root {
-        --bg: #0e0f19;
-        --card: rgba(255,255,255,0.06);
-        --text: #ffffff;
-        --muted: #c1c1d2;
-        --primary: #7ac7ff;
-        --primary-dark: #47afff;
+        --bg:#0e0f19;
+        --card:rgba(255,255,255,0.08);
+        --text:#ffffff;
+        --muted:#bfbfd2;
+        --accent:#ff5656;
     }
 
     body {
-        margin: 0;
-        background: var(--bg);
-        color: var(--text);
-        font-family: 'Poppins', sans-serif;
-        overflow-x: hidden;
+        margin:0;
+        background:var(--bg);
+        color:var(--text);
+        font-family:'Poppins',sans-serif;
     }
 
     header {
-        padding: 14px 20px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        background: rgba(0,0,0,0.35);
-        backdrop-filter: blur(10px);
-        position: sticky;
-        top: 0;
-        z-index: 999;
+        padding:14px 20px;
+        background:rgba(0,0,0,0.35);
+        backdrop-filter:blur(10px);
+        display:flex;justify-content:space-between;align-items:center;
+        position:sticky;top:0;z-index:999;
+        border-bottom:1px solid rgba(255,255,255,0.06);
     }
 
-    .logo {
-        font-size: 20px;
-        font-weight: 700;
-        color: var(--primary);
-    }
+    .logo {display:flex;align-items:center;gap:10px;}
+    .logo img {height:36px;}
+    .logo span {font-size:20px;font-weight:700;color:var(--accent);}
 
     .menu-btn {
-        width: 40px;
-        height: 40px;
-        background: rgba(255,255,255,0.08);
-        border-radius: 8px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 22px;
-        cursor: pointer;
+        width:40px;height:40px;border-radius:8px;
+        background:rgba(255,255,255,0.08);
+        display:flex;align-items:center;justify-content:center;
+        cursor:pointer;font-size:22px;
     }
 
-    .page-title {
-        text-align: center;
-        padding: 25px 20px 10px;
-        font-size: 28px;
-        font-weight: 700;
+    #drawer {
+        position:fixed;right:-100%;top:0;width:70%;max-width:300px;
+        height:100%;background:#070b12;padding:25px;transition:.4s;z-index:900;
+    }
+    #drawer.open {right:0;}
+
+    #drawer a {
+        display:block;padding:12px 4px;
+        border-bottom:1px solid rgba(255,255,255,0.08);
+        margin-bottom:8px;font-weight:600;color:var(--text);
     }
 
-    .subtitle {
-        text-align: center;
-        margin-top: -10px;
-        color: var(--muted);
-        font-size: 15px;
+    .title {
+        text-align:center;font-size:28px;font-weight:800;margin-top:25px;
+        color:var(--accent);
     }
 
-    /* GRID */
-    .product-grid {
-        padding: 20px;
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 20px;
+    .brand-logo {display:flex;justify-content:center;margin-top:15px;}
+    .brand-logo img {height:65px;}
+
+    .models {
+        padding:20px;
+        display:flex;
+        flex-direction:column;
+        gap:20px;
     }
 
-    @media (min-width: 700px) {
-        .product-grid { grid-template-columns: 1fr 1fr; }
-    }
-    @media (min-width: 1100px) {
-        .product-grid { grid-template-columns: 1fr 1fr 1fr; }
-    }
-
-    .product-card {
-        background: var(--card);
-        border-radius: 16px;
-        padding: 16px;
-        border: 1px solid rgba(255,255,255,0.1);
-        text-align: center;
-        transition: 0.25s;
+    .card {
+        background:var(--card);
+        padding:15px;
+        border-radius:14px;
+        border:1px solid rgba(255,255,255,0.08);
     }
 
-    .product-card:hover {
-        transform: scale(1.03);
-        border-color: var(--primary-dark);
+    .slider {
+        position:relative;
+        height:240px;
+        overflow:hidden;
+        border-radius:10px;
+        background:#000;
     }
 
-    .product-card img {
-        width: 100%;
-        height: 180px;
-        object-fit: cover;
-        border-radius: 12px;
+    .slide {
+        position:absolute;
+        inset:0;
+        opacity:0;
+        transition:opacity .6s ease;
+    }
+    .slide.visible {opacity:1;}
+
+    .slide img {
+        width:100%;
+        height:100%;
+        object-fit:cover;
+        border-radius:10px;
     }
 
-    .product-name {
-        font-size: 17px;
-        margin-top: 12px;
-        font-weight: 600;
+    .dots {
+        display:flex;
+        gap:6px;
+        justify-content:center;
+        margin-top:8px;
     }
-
-    .price {
-        margin-top: 6px;
-        color: var(--primary);
-        font-size: 16px;
-        font-weight: 600;
+    .dot {
+        width:10px;
+        height:10px;
+        border-radius:50%;
+        background:rgba(255,255,255,0.3);
+        cursor:pointer;
     }
+    .dot.active {background:var(--accent);}
 
-    .buy-btn {
-        margin-top: 12px;
-        background: var(--primary-dark);
-        border: none;
-        padding: 10px 16px;
-        color: #fff;
-        border-radius: 10px;
-        cursor: pointer;
-        font-size: 14px;
-        font-weight: 600;
-        width: 100%;
-    }
+    .card h3 {margin:10px 0 6px;}
+    .price {color:var(--muted);margin-bottom:10px;font-weight:600;}
 
-    footer {
-        padding: 20px;
-        text-align: center;
-        color: var(--muted);
-        margin-top: 30px;
+    .btn {
+        width:100%;
+        padding:12px;
+        border:none;
+        border-radius:10px;
+        font-weight:700;
+        background:var(--accent);
+        color:#000;
+        cursor:pointer;
     }
 </style>
-
 </head>
+
 <body>
 
 <header>
-    <div class="logo">HIGH CHOICE</div>
-    <div class="menu-btn" onclick="location.href='men.html'">☰</div>
+    <div class="logo">
+        <img src="highchoice_logo.png">
+        <span>HIGH CHOICE</span>
+    </div>
+    <div class="menu-btn" onclick="toggleMenu()">☰</div>
 </header>
 
-<div class="page-title">Tissot Collection</div>
-<div class="subtitle">Premium Tissot Watches</div>
+<nav id="drawer">
+    <a href="index.html">Home</a>
+    <a href="men.html">Men</a>
+    <a href="women.html">Women</a>
+    <a href="kids.html">Kids</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+    <a href="return.html">Return & Replace</a>
+</nav>
 
-<section class="product-grid">
+<script>
+function toggleMenu(){
+    document.getElementById("drawer").classList.toggle("open");
+}
+</script>
 
-    <div class="product-card">
-        <img src="images/tissot/leather_belt.jpg">
-        <div class="product-name">Tissot 1853 Leather Belt</div>
-        <div class="price">₹1399</div>
-        <button class="buy-btn" onclick="location.href='order.html?product=Tissot 1853 Leather Belt&price=1399'">Buy Now</button>
+<div class="title">Tissot Collection</div>
+
+<div class="brand-logo">
+    <img src="tissot_logo.png">
+</div>
+
+<section class="models">
+
+    <!-- 1. Tissot 1853 Leather -->
+    <div class="card">
+        <div class="slider">
+            <div class="slide visible"><img src="tissot_1853_leather1.jpg"></div>
+            <div class="slide"><img src="tissot_1853_leather2.jpg"></div>
+            <div class="slide"><img src="tissot_1853_leather3.jpg"></div>
+        </div>
+        <div class="dots"></div>
+        <h3>Tissot 1853 Leather Belt</h3>
+        <div class="price">₹1399/-</div>
+        <button class="btn" onclick="location.href='order.html?model=Tissot 1853 Leather Belt&price=1399'">Buy Now</button>
     </div>
 
-    <div class="product-card">
-        <img src="images/tissot/prx_backopen.jpg">
-        <div class="product-name">Tissot PRX BackOpen</div>
-        <div class="price">₹1699</div>
-        <button class="buy-btn" onclick="location.href='order.html?product=Tissot PRX BackOpen&price=1699'">Buy Now</button>
+    <!-- 2. Tissot PRX BackOpen -->
+    <div class="card">
+        <div class="slider">
+            <div class="slide visible"><img src="tissot_prx_backopen1.jpg"></div>
+            <div class="slide"><img src="tissot_prx_backopen2.jpg"></div>
+            <div class="slide"><img src="tissot_prx_backopen3.jpg"></div>
+        </div>
+        <div class="dots"></div>
+        <h3>Tissot PRX BackOpen</h3>
+        <div class="price">₹1699/-</div>
+        <button class="btn" onclick="location.href='order.html?model=Tissot PRX BackOpen&price=1699'">Buy Now</button>
     </div>
 
-    <div class="product-card">
-        <img src="images/tissot/powermatic80.jpg">
-        <div class="product-name">Tissot Powermatic 80 Gents</div>
-        <div class="price">₹2999</div>
-        <button class="buy-btn" onclick="location.href='order.html?product=Tissot Powermatic 80 Gents&price=2999'">Buy Now</button>
+    <!-- 3. Powermatic 80 -->
+    <div class="card">
+        <div class="slider">
+            <div class="slide visible"><img src="tissot_powermatic80_1.jpg"></div>
+            <div class="slide"><img src="tissot_powermatic80_2.jpg"></div>
+            <div class="slide"><img src="tissot_powermatic80_3.jpg"></div>
+        </div>
+        <div class="dots"></div>
+        <h3>Tissot Powermatic 80 Gents</h3>
+        <div class="price">₹2999/-</div>
+        <button class="btn" onclick="location.href='order.html?model=Tissot Powermatic 80&price=2999'">Buy Now</button>
     </div>
 
-    <div class="product-card">
-        <img src="images/tissot/chain1853.jpg">
-        <div class="product-name">Tissot 1853 Chain</div>
-        <div class="price">₹1649</div>
-        <button class="buy-btn" onclick="location.href='order.html?product=Tissot 1853 Chain&price=1649'">Buy Now</button>
+    <!-- 4. Tissot 1853 Chain -->
+    <div class="card">
+        <div class="slider">
+            <div class="slide visible"><img src="tissot_1853_chain1.jpg"></div>
+            <div class="slide"><img src="tissot_1853_chain2.jpg"></div>
+            <div class="slide"><img src="tissot_1853_chain3.jpg"></div>
+        </div>
+        <div class="dots"></div>
+        <h3>Tissot 1853 Chain</h3>
+        <div class="price">₹1649/-</div>
+        <button class="btn" onclick="location.href='order.html?model=Tissot 1853 Chain&price=1649'">Buy Now</button>
     </div>
 
-    <div class="product-card">
-        <img src="images/tissot/skeleton.jpg">
-        <div class="product-name">Tissot Skeleton</div>
-        <div class="price">₹2749</div>
-        <button class="buy-btn" onclick="location.href='order.html?product=Tissot Skeleton&price=2749'">Buy Now</button>
+    <!-- 5. Tissot Skeleton -->
+    <div class="card">
+        <div class="slider">
+            <div class="slide visible"><img src="tissot_skeleton1.jpg"></div>
+            <div class="slide"><img src="tissot_skeleton2.jpg"></div>
+            <div class="slide"><img src="tissot_skeleton3.jpg"></div>
+        </div>
+        <div class="dots"></div>
+        <h3>Tissot Skeleton</h3>
+        <div class="price">₹2749/-</div>
+        <button class="btn" onclick="location.href='order.html?model=Tissot Skeleton&price=2749'">Buy Now</button>
     </div>
 
-    <div class="product-card">
-        <img src="images/tissot/prx_powermatic.jpg">
-        <div class="product-name">Tissot PRX Powermatic</div>
-        <div class="price">₹1599</div>
-        <button class="buy-btn" onclick="location.href='order.html?product=Tissot PRX Powermatic&price=1599'">Buy Now</button>
+    <!-- 6. PRX Powermatic -->
+    <div class="card">
+        <div class="slider">
+            <div class="slide visible"><img src="tissot_prx_power1.jpg"></div>
+            <div class="slide"><img src="tissot_prx_power2.jpg"></div>
+            <div class="slide"><img src="tissot_prx_power3.jpg"></div>
+        </div>
+        <div class="dots"></div>
+        <h3>Tissot PRX Powermatic</h3>
+        <div class="price">₹1599/-</div>
+        <button class="btn" onclick="location.href='order.html?model=Tissot PRX Powermatic&price=1599'">Buy Now</button>
     </div>
 
-    <div class="product-card">
-        <img src="images/tissot/prx.jpg">
-        <div class="product-name">Tissot PRX</div>
-        <div class="price">₹1999</div>
-        <button class="buy-btn" onclick="location.href='order.html?product=Tissot PRX&price=1999'">Buy Now</button>
+    <!-- 7. Tissot PRX -->
+    <div class="card">
+        <div class="slider">
+            <div class="slide visible"><img src="tissot_prx1.jpg"></div>
+            <div class="slide"><img src="tissot_prx2.jpg"></div>
+            <div class="slide"><img src="tissot_prx3.jpg"></div>
+        </div>
+        <div class="dots"></div>
+        <h3>Tissot PRX</h3>
+        <div class="price">₹1999/-</div>
+        <button class="btn" onclick="location.href='order.html?model=Tissot PRX&price=1999'">Buy Now</button>
     </div>
 
-    <div class="product-card">
-        <img src="images/tissot/japan.jpg">
-        <div class="product-name">Tissot 1853 Japan</div>
-        <div class="price">₹3199</div>
-        <button class="buy-btn" onclick="location.href='order.html?product=Tissot 1853 Japan&price=3199'">Buy Now</button>
+    <!-- 8. Tissot 1853 Japan -->
+    <div class="card">
+        <div class="slider">
+            <div class="slide visible"><img src="tissot_1853_japan1.jpg"></div>
+            <div class="slide"><img src="tissot_1853_japan2.jpg"></div>
+            <div class="slide"><img src="tissot_1853_japan3.jpg"></div>
+        </div>
+        <div class="dots"></div>
+        <h3>Tissot 1853 Japan</h3>
+        <div class="price">₹3199/-</div>
+        <button class="btn" onclick="location.href='order.html?model=Tissot 1853 Japan&price=3199'">Buy Now</button>
     </div>
 
 </section>
 
-<footer>
-    © 2025 HIGH CHOICE — All Rights Reserved
-</footer>
+<script>
+// slider logic
+document.querySelectorAll(".card").forEach(card=>{
+    const slider = card.querySelector(".slider");
+    const slides = slider.querySelectorAll(".slide");
+    const dotsBox = card.querySelector(".dots");
+
+    slides.forEach((slide,i)=>{
+        const dot = document.createElement("div");
+        dot.className = "dot";
+        if(i===0) dot.classList.add("active");
+
+        dot.onclick = ()=>{
+            slides.forEach(s=>s.classList.remove("visible"));
+            slides[i].classList.add("visible");
+
+            dotsBox.querySelectorAll(".dot").forEach(d=>d.classList.remove("active"));
+            dot.classList.add("active");
+        };
+
+        dotsBox.appendChild(dot);
+    });
+});
+</script>
 
 </body>
 </html>
