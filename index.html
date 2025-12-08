@@ -1,242 +1,359 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>HIGH CHOICE – Premium Watches</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>HIGH CHOICE — Premium Watches</title>
+  <link rel="icon" type="image/png" href="favicon.png">
 
-<style>
-    :root {
-        --bg: #0e0f19;
-        --card: rgba(255,255,255,0.06);
-        --text: #ffffff;
-        --muted: #c1c1d2;
-        --primary: #b792ff;
-        --primary-dark: #8d63ff;
+  <style>
+    :root{
+      --bg:#0e0f19;
+      --card:rgba(255,255,255,0.06);
+      --text:#ffffff;
+      --muted:#b9b9c9;
+      --accent:#b792ff;
+      --accent-2:#7a4fff;
+      --glass: rgba(255,255,255,0.03);
+      --radius:14px;
     }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Inter, Poppins, system-ui, sans-serif;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased}
+    a{text-decoration:none;color:inherit}
 
-    body {
-        margin: 0;
-        background: var(--bg);
-        color: var(--text);
-        font-family: 'Poppins', sans-serif;
-        overflow-x: hidden;
-    }
+    /* Header */
+    header{position:sticky;top:0;z-index:60;background:linear-gradient(180deg, rgba(6,7,12,0.6), rgba(6,7,12,0.2));backdrop-filter:blur(8px);border-bottom:1px solid rgba(255,255,255,0.03)}
+    .bar{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:12px 18px}
+    .brand{display:flex;align-items:center;gap:10px}
+    .brand img{height:36px;object-fit:contain}
+    .brand .txt{font-weight:800;color:var(--accent);letter-spacing:1px}
+    .hamb{width:44px;height:44px;border-radius:10px;background:rgba(255,255,255,0.03);display:flex;align-items:center;justify-content:center;font-size:20px;cursor:pointer}
 
-    /* ---------------- HEADER ---------------- */
-    header {
-        width: 100%;
-        padding: 12px 18px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        background: rgba(0,0,0,0.35);
-        backdrop-filter: blur(10px);
-        position: sticky;
-        top: 0;
-        z-index: 9999;
-    }
-    .logo {
-        font-size: 19px;
-        font-weight: 700;
-        color: var(--primary);
-        letter-spacing: 1px;
-    }
-    .menu-btn {
-        width: 40px;
-        height: 40px;
-        background: rgba(255,255,255,0.08);
-        border-radius: 8px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 20px;
-        cursor: pointer;
-    }
+    /* Nav drawer (simple) */
+    #drawer{position:fixed;right:-100%;top:0;height:100vh;width:78%;max-width:360px;background:#071021;padding:28px 18px;transition:0.28s;z-index:80;box-shadow:-30px 60px 120px rgba(2,6,12,0.6)}
+    #drawer.open{right:0}
+    #drawer a{display:block;padding:14px 6px;color:#dbe9ff;font-weight:600;border-bottom:1px solid rgba(255,255,255,0.02)}
 
-    /* ---------------- HERO ---------------- */
-    .hero {
-        padding: 25px 18px;
-        max-width: 1100px;
-        margin: auto;
-        display: flex;
-        flex-direction: column;
-        gap: 25px;
-    }
-    .hero h1 {
-        font-size: 28px;
-        margin: 0;
-        line-height: 1.3;
-    }
-    .hero p {
-        margin-top: 8px;
-        font-size: 14px;
-        color: var(--muted);
-    }
+    /* Container */
+    .wrap{max-width:1200px;margin:0 auto;padding:18px}
 
-    .hero-buttons button {
-        padding: 12px 16px;
-        margin-right: 10px;
-        margin-top: 12px;
-        background: var(--primary-dark);
-        border-radius: 8px;
-        color: white;
-        border: none;
-        font-size: 14px;
-        cursor: pointer;
-    }
+    /* Hero */
+    .hero{display:flex;flex-direction:column;gap:18px;padding:6px}
+    .hero .left{display:flex;flex-direction:column;gap:12px}
+    .kicker{color:var(--muted);font-weight:700;font-size:13px}
+    .title{font-size:28px;line-height:1.05;margin:0;font-weight:800}
+    .desc{color:var(--muted);max-width:900px;font-size:14px}
+    .cta-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:8px}
+    .btn{background:var(--accent);border:none;padding:11px 16px;border-radius:12px;font-weight:700;color:#050814;cursor:pointer}
+    .btn.outline{background:transparent;border:1px solid rgba(255,255,255,0.06);color:#e8edff}
 
-    /* ---------------- VIDEO ---------------- */
-    .video-frame {
-        width: 100%;
-        background: rgba(255,255,255,0.05);
-        padding: 10px;
-        border-radius: 18px;
-        border: 1px solid rgba(255,255,255,0.08);
-    }
-    video {
-        width: 100%;
-        height: auto;
-        border-radius: 12px;
-    }
+    /* badges */
+    .badges{display:flex;gap:12px;margin-top:12px}
+    .badge{background:rgba(255,255,255,0.03);padding:8px 12px;border-radius:10px;color:var(--muted);font-weight:600;font-size:13px}
 
-    /* ---------------- BADGES ---------------- */
-    .badge-row {
-        display: flex;
-        gap: 10px;
-        margin-top: 15px;
-        flex-wrap: wrap;
-    }
-    .badge {
-        padding: 8px 12px;
-        background: rgba(255,255,255,0.1);
-        border-radius: 10px;
-        font-size: 12px;
-        color: var(--muted);
-        font-weight: 600;
-    }
+    /* Video slider frame */
+    .media-wrap{background:var(--card);border-radius:18px;padding:10px;border:1px solid rgba(255,255,255,0.04);box-shadow:0 30px 80px rgba(2,6,12,0.7)}
+    .slider{position:relative;overflow:hidden;border-radius:12px;height:calc(56vw);max-height:520px;background:#000}
+    .slide{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .9s ease}
+    .slide.visible{opacity:1;z-index:2}
+    .slide video{width:100%;height:100%;object-fit:cover;border-radius:8px}
+    .slide .fallback{width:100%;height:100%;object-fit:cover;border-radius:8px}
 
-    /* ---------------- CATEGORY GRID ---------------- */
-    .category-section {
-        padding: 20px 18px 40px 18px;
-        max-width: 1200px;
-        margin: auto;
-    }
-    .category-section h2 {
-        font-size: 22px;
-        margin-bottom: 15px;
-    }
+    /* slider controls */
+    .slider-controls{position:absolute;left:0;right:0;bottom:12px;display:flex;justify-content:center;gap:10px;z-index:6}
+    .dot{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,0.22);cursor:pointer}
+    .dot.active{background:var(--accent)}
 
-    .cat-grid {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 16px;
-    }
+    /* categories */
+    .categories{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:18px}
+    .card{background:var(--card);padding:12px;border-radius:12px;display:flex;flex-direction:column;align-items:center;gap:12px;border:1px solid rgba(255,255,255,0.04);cursor:pointer}
+    .card img{width:100%;height:120px;object-fit:cover;border-radius:10px}
+    .card h4{margin:0;font-size:15px;color:var(--muted);font-weight:700}
 
-    .cat-card {
-        background: var(--card);
-        padding: 15px;
-        border-radius: 14px;
-        text-align: center;
-        border: 1px solid rgba(255,255,255,0.1);
-        cursor: pointer;
-        transition: 0.3s;
-    }
-    .cat-card img {
-        width: 100%;
-        height: 120px;
-        object-fit: cover;
-        border-radius: 10px;
-    }
-    .cat-card h3 {
-        margin-top: 10px;
-        font-size: 15px;
-    }
-    .cat-card:hover {
-        transform: scale(1.03);
-        border-color: var(--primary-dark);
-    }
+    /* About & Contact */
+    .section{margin-top:28px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.00));padding:18px;border-radius:12px;border:1px solid rgba(255,255,255,0.02)}
+    .section h3{margin:0 0 8px 0}
+    .form-row{display:flex;flex-direction:column;gap:10px}
+    input,textarea{width:100%;padding:10px;border-radius:10px;border:1px solid rgba(255,255,255,0.05);background:transparent;color:var(--text)}
+    .small{font-size:13px;color:var(--muted)}
 
-    /* FOOTER */
-    footer {
-        padding: 15px;
-        text-align: center;
-        color: var(--muted);
-        font-size: 13px;
-    }
+    footer{text-align:center;padding:26px 6px;color:var(--muted);font-size:14px;margin-top:24px}
 
-    /* Laptop Responsive */
-    @media (min-width: 768px) {
-        .hero {
-            flex-direction: row;
-        }
-        .hero h1 {
-            font-size: 36px;
-        }
-        .cat-grid {
-            grid-template-columns: repeat(3, 1fr);
-        }
+    /* responsiveness */
+    @media (min-width:900px){
+      .hero{flex-direction:row;align-items:center}
+      .hero .left{flex:1}
+      .media-wrap{flex:0 0 480px}
+      .slider{height:340px}
+      .categories{margin-top:34px}
     }
-</style>
+    @media (max-width:899px){
+      .categories{grid-template-columns:repeat(2,1fr)}
+      .slider{height:48vw}
+    }
+    @media (max-width:520px){
+      .categories{grid-template-columns:1fr}
+      .title{font-size:22px}
+      .card img{height:160px}
+    }
+  </style>
 </head>
-
 <body>
 
-<header>
-    <div class="logo">HIGH CHOICE</div>
-    <div class="menu-btn">☰</div>
-</header>
-
-<section class="hero">
-
-    <div>
-        <h1>High Choice — Premium Curated Watches</h1>
-        <p>Explore Men, Women and Kids premium luxury watches.</p>
-
-        <div class="hero-buttons">
-            <button onclick="location.href='men.html'">Shop Men</button>
-            <button onclick="location.href='women.html'">Shop Women</button>
-            <button onclick="location.href='kids.html'">Shop Kids</button>
-        </div>
-
-        <div class="badge-row">
-            <div class="badge">Secure Payments</div>
-            <div class="badge">7-day Replacement</div>
-        </div>
+  <!-- header -->
+  <header>
+    <div class="bar">
+      <div class="brand">
+        <img src="highchoice_logo.png" alt="High Choice Logo">
+        <div class="txt">HIGH CHOICE</div>
+      </div>
+      <div class="hamb" id="hambBtn" aria-label="menu">☰</div>
     </div>
+  </header>
 
-    <div class="video-frame">
-        <video autoplay muted playsinline loop>
-            <source src="/videos/Featured1.mp4" type="video/mp4">
-        </video>
-    </div>
+  <!-- drawer -->
+  <nav id="drawer" aria-hidden="true">
+    <a href="index.html">Home</a>
+    <a href="men.html">Men</a>
+    <a href="women.html">Women</a>
+    <a href="kids.html">Kids</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+    <a href="return.html">Return Policy</a>
+  </nav>
 
-</section>
+  <main class="wrap">
 
-<section class="category-section">
-    <h2>Shop by Category</h2>
+    <!-- HERO -->
+    <section class="hero">
+      <div class="left">
+        <div class="kicker">PREMIUM LUXURY WATCHES</div>
+        <h1 class="title">High Choice — Premium Curated Watches</h1>
+        <p class="desc">Hand-picked models presented in a clean premium UI. Explore Men, Women and Kids collections — each brand has its own page with full model lists and Buy Now flow.</p>
 
-    <div class="cat-grid">
-        <div class="cat-card" onclick="location.href='men.html'">
-            <img src="images/men/men_category.jpg">
-            <h3>Men</h3>
+        <div class="cta-row">
+          <button class="btn" onclick="location.href='men.html'">Shop Men</button>
+          <button class="btn outline" onclick="location.href='women.html'">Shop Women</button>
+          <button class="btn outline" onclick="location.href='kids.html'">Shop Kids</button>
         </div>
 
-        <div class="cat-card" onclick="location.href='women.html'">
-            <img src="images/women/women_category.jpg">
-            <h3>Women</h3>
+        <div class="badges" aria-hidden="false">
+          <div class="badge">Secure Payments</div>
+          <div class="badge">7-day Replacement</div>
         </div>
+      </div>
 
-        <div class="cat-card" onclick="location.href='kids.html'">
-            <img src="images/kids/kids_category.jpg">
-            <h3>Kids</h3>
+      <div class="media-wrap" aria-hidden="false">
+        <div class="slider" id="slider" aria-live="polite">
+          <!-- slides will be injected by JS -->
+          <div class="slider-controls" id="dots"></div>
         </div>
-    </div>
-</section>
+      </div>
+    </section>
 
-<footer>
-    © 2025 HIGH CHOICE — All Rights Reserved
-</footer>
+    <!-- CATEGORIES -->
+    <section class="categories" aria-label="categories">
+      <a class="card" href="men.html">
+        <img src="mens.jpg" alt="Men collection">
+        <h4>Men</h4>
+      </a>
+
+      <a class="card" href="women.html">
+        <img src="women.jpg" alt="Women collection">
+        <h4>Women</h4>
+      </a>
+
+      <a class="card" href="kids.html">
+        <img src="kids.jpg" alt="Kids collection">
+        <h4>Kids</h4>
+      </a>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="section" aria-labelledby="about">
+      <h3 id="about">About HIGH CHOICE</h3>
+      <p class="small">High Choice curates premium, high-value watches with stellar presentation. We focus on clean product pages, accurate model info and a seamless Buy Now flow that opens the order form for quick checkout.</p>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="section" aria-labelledby="contact">
+      <h3 id="contact">Contact</h3>
+      <p class="small">For partnerships or bulk orders, message us using the form below. WhatsApp will be used only after order submission in the checkout flow.</p>
+
+      <form id="contactForm" onsubmit="handleContact(event)" class="form-row" novalidate>
+        <input id="cname" placeholder="Your name" required>
+        <input id="cphone" placeholder="Phone number" required>
+        <input id="cemail" placeholder="Email (optional)">
+        <textarea id="cmessage" rows="3" placeholder="Message (optional)"></textarea>
+        <div style="display:flex;gap:8px">
+          <button class="btn" type="submit">Send message</button>
+          <button class="btn outline" type="button" onclick="resetContact()">Reset</button>
+        </div>
+        <div id="contactStatus" class="small" aria-live="polite"></div>
+      </form>
+    </section>
+
+  </main>
+
+  <footer>
+    <div>© HIGH CHOICE — All Rights Reserved</div>
+  </footer>
+
+<script>
+/* ---------- NAV DRAWER ---------- */
+const hamb = document.getElementById('hambBtn');
+const drawer = document.getElementById('drawer');
+hamb.addEventListener('click', ()=> { drawer.classList.toggle('open'); drawer.setAttribute('aria-hidden', drawer.classList.contains('open') ? 'false':'true'); });
+
+/* ---------- VIDEO SLIDER CONFIG ---------- */
+/* List video files (root). Put your videos here named video1.mp4 ... video10.mp4 */
+const videoFiles = [
+  'video1.mp4','video2.mp4','video3.mp4','video4.mp4','video5.mp4',
+  'video6.mp4','video7.mp4','video8.mp4','video9.mp4','video10.mp4'
+];
+
+const slider = document.getElementById('slider');
+const dotsWrap = document.getElementById('dots');
+let slides = [];
+let current = 0;
+let autoTimer = null;
+const AUTO_MS = 4500;
+
+/* Helper: create a slide (video or fallback poster) */
+function createSlide(src) {
+  const slide = document.createElement('div');
+  slide.className = 'slide';
+  // video element
+  const vid = document.createElement('video');
+  vid.src = src;
+  vid.autoplay = false;
+  vid.muted = true;
+  vid.loop = true;
+  vid.playsInline = true;
+  vid.setAttribute('preload','metadata');
+  // fallback image shown until video ready or if error
+  const fallback = document.createElement('img');
+  fallback.src = 'hero_poster.jpg';
+  fallback.className = 'fallback';
+  // If video errors, keep fallback visible; else show video
+  vid.addEventListener('loadeddata', ()=> {
+    // only show video if it has duration > 0
+    if (vid.duration && !isNaN(vid.duration)) {
+      slide.replaceChild(vid, fallback);
+      vid.play().catch(()=>{ /* autoplay may be blocked; muted is set so should be fine */ });
+    }
+  });
+  vid.addEventListener('error', ()=> {
+    // leave fallback
+  });
+  // initially put fallback
+  slide.appendChild(fallback);
+  return {el: slide, media: vid, src};
+}
+
+/* Build slides for only the files that exist (we attempt to load; errors will fallback) */
+(function initSlider(){
+  // create slides for all videoFiles; if file missing, fallback remains
+  videoFiles.forEach((vf, i) => {
+    const s = createSlide(vf);
+    slider.appendChild(s.el);
+    slides.push(s);
+    // create dot
+    const dot = document.createElement('div');
+    dot.className = 'dot';
+    dot.addEventListener('click', ()=> goTo(i));
+    dotsWrap.appendChild(dot);
+  });
+
+  // if no video file at all (user didn't upload), show single poster slide
+  if(slides.length === 0){
+    const poster = document.createElement('img');
+    poster.src = 'hero_poster.jpg';
+    poster.style.width='100%'; poster.style.height='100%'; poster.style.objectFit='cover';
+    slider.appendChild(poster);
+    return;
+  }
+  // make first visible
+  showSlide(0);
+  startAuto();
+  // swipe support
+  addSwipe(slider);
+})();
+
+function showSlide(index){
+  if(!slides[index]) return;
+  slides.forEach((s, i)=> {
+    s.el.classList.toggle('visible', i===index);
+    dotsWrap.children[i] && dotsWrap.children[i].classList.toggle('active', i===index);
+    // play/pause video elements for performance
+    if(i===index){
+      const media = s.media;
+      if(media && media.tagName === 'VIDEO'){ media.play().catch(()=>{}); }
+    } else {
+      const pm = s.media;
+      if(pm && pm.tagName === 'VIDEO'){ pm.pause(); pm.currentTime = 0; }
+    }
+  });
+  current = index;
+}
+
+function nextSlide(){ let nx = (current+1) % slides.length; showSlide(nx); }
+function prevSlide(){ let px = (current-1+slides.length) % slides.length; showSlide(px); }
+
+function goTo(i){
+  stopAuto();
+  showSlide(i);
+  startAuto();
+}
+
+/* Auto play */
+function startAuto(){
+  stopAuto();
+  autoTimer = setInterval(()=> { nextSlide(); }, AUTO_MS);
+}
+function stopAuto(){ if(autoTimer) clearInterval(autoTimer); autoTimer = null; }
+
+/* swipe support */
+function addSwipe(el){
+  let startX=0, startY=0, dist=0;
+  el.addEventListener('touchstart', e => { startX = e.touches[0].clientX; startY = e.touches[0].clientY; stopAuto(); }, {passive:true});
+  el.addEventListener('touchmove', e => { dist = e.touches[0].clientX - startX; }, {passive:true});
+  el.addEventListener('touchend', e => {
+    if(Math.abs(dist) > 40){
+      if(dist < 0) nextSlide(); else prevSlide();
+    }
+    dist = 0; startAuto();
+  });
+}
+
+/* ---------- Contact form simple handler ---------- */
+function handleContact(e){
+  e.preventDefault();
+  const name = document.getElementById('cname').value.trim();
+  const phone = document.getElementById('cphone').value.trim();
+  const email = document.getElementById('cemail').value.trim();
+  const msg = document.getElementById('cmessage').value.trim();
+  const status = document.getElementById('contactStatus');
+
+  if(!name || !phone){
+    status.innerText = 'Please enter name and phone.';
+    return;
+  }
+  // We are not sending to server here — just confirm to user. Client wants contact form local.
+  status.innerText = 'Message received. We will contact you soon.';
+  // reset after short time
+  setTimeout(()=> { status.innerText=''; document.getElementById('contactForm').reset(); }, 2000);
+}
+
+function resetContact(){ document.getElementById('contactForm').reset(); document.getElementById('contactStatus').innerText=''; }
+
+/* Accessibility: close drawer on outside click */
+document.addEventListener('click', (ev)=> {
+  if(!drawer.classList.contains('open')) return;
+  const target = ev.target;
+  if(!drawer.contains(target) && target !== hamb){ drawer.classList.remove('open'); drawer.setAttribute('aria-hidden','true'); }
+});
+</script>
 
 </body>
-</html>
+    </html>
