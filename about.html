@@ -1,22 +1,185 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<title>About — HIGH CHOICE</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About – HIGH CHOICE</title>
+<link rel="icon" type="image/png" href="favicon.png">
+
 <style>
-body{margin:0;background:#050814;color:white;font-family:'Poppins';padding:20px;}
-h1{text-align:center;color:#b9aaff;}
-p{color:#c7c9d9;line-height:1.6;margin-bottom:12px;}
+:root{
+  --bg:#0e0f19;
+  --text:#ffffff;
+  --muted:#bfbfd2;
+  --accent:#7ee2ff;
+  --card:rgba(255,255,255,0.08);
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:"Poppins",system-ui,Roboto,Arial;
+}
+
+header{
+  padding:14px 18px;
+  display:flex;justify-content:space-between;align-items:center;
+  background:rgba(0,0,0,0.35);
+  border-bottom:1px solid rgba(255,255,255,0.05);
+  backdrop-filter:blur(8px);
+  position:sticky;top:0;z-index:999;
+}
+.logo{display:flex;gap:10px;align-items:center}
+.logo img{height:36px}
+.logo span{font-weight:700;font-size:18px;color:var(--accent)}
+.menu-btn{
+  width:40px;height:40px;border-radius:8px;
+  background:rgba(255,255,255,0.08);
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;font-size:20px;
+}
+
+#drawer{
+  position:fixed;right:-100%;top:0;height:100%;width:72%;
+  max-width:320px;background:#070b12;padding:22px;transition:.34s;
+  z-index:998;
+}
+#drawer.open{right:0}
+#drawer a{
+  display:block;color:var(--text);text-decoration:none;
+  padding:12px 6px;border-bottom:1px solid rgba(255,255,255,0.06);
+  font-weight:600;
+}
+
+main{
+  padding:20px;max-width:900px;margin:auto;
+}
+
+h1{
+  text-align:center;margin:20px 0 12px;font-weight:800;
+  font-size:30px;color:var(--accent);
+}
+
+.section{
+  background:var(--card);
+  padding:20px;border-radius:16px;
+  border:1px solid rgba(255,255,255,0.05);
+  margin-bottom:20px;line-height:28px;
+}
+
+h2{
+  margin-bottom:10px;font-size:22px;font-weight:700;
+  color:var(--accent);
+}
+
+.features{
+  display:grid;gap:14px;margin-top:14px;
+}
+.feature-card{
+  background:rgba(255,255,255,0.05);
+  padding:18px;border-radius:12px;
+  border:1px solid rgba(255,255,255,0.06);
+  backdrop-filter:blur(10px);
+  transition:.3s;
+}
+.feature-card:hover{
+  transform:translateY(-4px);
+  background:rgba(255,255,255,0.12);
+}
+.feature-card h3{
+  margin-bottom:6px;font-size:18px;color:var(--accent);
+}
+
+footer{
+  text-align:center;color:var(--muted);padding:26px 10px;margin-top:20px;
+}
+
+@media(min-width:820px){
+  .features{
+    grid-template-columns:repeat(3,1fr);
+  }
+}
 </style>
 </head>
 
 <body>
 
-<h1>About HIGH CHOICE</h1>
+<header>
+  <div class="logo">
+    <img src="highchoice_logo.png">
+    <span>HIGH CHOICE</span>
+  </div>
+  <div class="menu-btn" onclick="toggleMenu()">☰</div>
+</header>
 
-<p>HIGH CHOICE is a premium curated watch store delivering stylish, luxury-inspired watches at affordable prices.</p>
-<p>Every watch is quality-checked before shipping.</p>
-<p>We focus on premium experience, premium packaging, and premium customer support.</p>
+<nav id="drawer">
+  <a href="index.html">Home</a>
+  <a href="men.html">Men</a>
+  <a href="women.html">Women</a>
+  <a href="kids.html">Kids</a>
+  <a href="about.html">About</a>
+  <a href="contact.html">Contact</a>
+  <a href="return.html">Return & Replace</a>
+</nav>
+
+<main>
+
+  <h1>About HIGH CHOICE</h1>
+
+  <section class="section">
+    <h2>Who We Are</h2>
+    <p>
+      HIGH CHOICE is a premium watch marketplace delivering top-quality luxury,
+      branded and designer timepieces at unbeatable prices.  
+      Our goal is simple — **Luxury should be accessible, authentic and trusted**.
+    </p>
+  </section>
+
+  <section class="section">
+    <h2>Our Mission</h2>
+    <p>
+      We strive to provide every customer with a premium buying experience —
+      from detailed product pages to fast support and smooth delivery.  
+      Every watch is checked and packaged with care to ensure **100% customer satisfaction**.
+    </p>
+  </section>
+
+  <section class="section">
+    <h2>Why Customers Choose HIGH CHOICE</h2>
+
+    <div class="features">
+
+      <div class="feature-card">
+        <h3>Premium Quality</h3>
+        <p>Each watch is inspected for top-grade finishing, movement precision and durability.</p>
+      </div>
+
+      <div class="feature-card">
+        <h3>Trusted by Thousands</h3>
+        <p>Our fast support, affordable pricing and genuine products build long-term trust.</p>
+      </div>
+
+      <div class="feature-card">
+        <h3>Fast Delivery</h3>
+        <p>Orders are shipped quickly with full protection and guaranteed safe packaging.</p>
+      </div>
+
+    </div>
+
+  </section>
+
+</main>
+
+<footer>
+  © 2025 HIGH CHOICE — All Rights Reserved
+</footer>
+
+<script>
+function toggleMenu(){
+  document.getElementById("drawer").classList.toggle("open");
+}
+</script>
 
 </body>
 </html>
