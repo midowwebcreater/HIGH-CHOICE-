@@ -107,35 +107,42 @@ footer{
 <footer>© 2025 HIGH CHOICE — All Rights Reserved</footer>
 
 <script>
-// extract URL data
-const url = new URLSearchParams(window.location.search);
-const model = url.get("model");
-const price = url.get("price");
-const name = url.get("name");
-const phone = url.get("phone");
+// SAFELY extract URL data (no undefined error)
+const params = new URLSearchParams(window.location.search);
 
-// set text
-document.getElementById("pName").innerText = model;
+const model  = params.get("model") || "Unknown Product";
+const price  = params.get("price") || "0";
+const name   = params.get("name") || "Customer";
+const phone  = params.get("phone") || "Not Provided";
+
+// Put values on page
+document.getElementById("pName").innerText  = model;
 document.getElementById("pPrice").innerText = price;
-document.getElementById("cName").innerText = name;
+document.getElementById("cName").innerText  = name;
 document.getElementById("cPhone").innerText = phone;
 
-// client WhatsApp number
+// FIXED WhatsApp Number (NO +91)
 const clientNumber = "917869288078";
 
-// open WhatsApp
+// FIXED WhatsApp Message System
 function sendWhatsApp(){
-  let msg =
-    `New Order\n\n` +
-    `Product: ${model}\n` +
-    `Price: ₹${price}\n\n` +
-    `Customer Name: ${name}\n` +
-    `Phone: ${phone}\n`;
 
-  window.open(
-    `https://wa.me/${clientNumber}?text=${encodeURIComponent(msg)}`,
-    "_blank"
-  );
+  let msg = 
+`🟢 *NEW ORDER RECEIVED*
+
+📦 *Product:* ${model}
+💰 *Price:* ₹${price}
+
+👤 *Customer:* ${name}
+📞 *Phone:* ${phone}
+
+Please confirm the order.`;
+
+
+  const waURL = "https://wa.me/" + clientNumber + "?text=" + encodeURIComponent(msg);
+
+  // Direct redirect (no popup block)
+  window.location.href = waURL;
 }
 </script>
 
