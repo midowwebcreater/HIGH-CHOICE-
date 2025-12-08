@@ -1,31 +1,229 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<title>Omega Women — HIGH CHOICE</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Omega Women – HIGH CHOICE</title>
+<link rel="icon" type="image/png" href="favicon.png" />
+
 <style>
-body{margin:0;background:#050814;color:white;font-family:'Poppins';}
-header{text-align:center;padding:18px;background:rgba(255,255,255,0.05);color:#b9aaff;font-weight:700;}
-.container{padding:20px;}
-.card{width:300px;margin:auto;background:rgba(255,255,255,0.05);padding:15px;border-radius:14px;}
-.card img{width:100%;height:220px;border-radius:12px;object-fit:cover;}
-.price{color:#c7c9d9;}
-.btn{display:block;background:#b9aaff;color:#050814;padding:10px;text-align:center;border-radius:10px;text-decoration:none;font-weight:700;margin-top:10px;}
+  :root{
+    --bg:#0e0f19;
+    --card:rgba(255,255,255,0.08);
+    --text:#fff;
+    --muted:#bfbfd2;
+    --accent:#ff9e9e;
+  }
+
+  *{box-sizing:border-box}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:"Poppins",system-ui,Roboto,Arial;
+  }
+
+  header{
+    padding:14px 18px;
+    background:rgba(0,0,0,0.35);
+    backdrop-filter:blur(8px);
+    display:flex;justify-content:space-between;align-items:center;
+    border-bottom:1px solid rgba(255,255,255,0.06);
+    position:sticky;top:0;z-index:999;
+  }
+
+  .logo{display:flex;align-items:center;gap:10px}
+  .logo img{height:36px}
+  .logo span{font-size:18px;font-weight:700;color:var(--accent)}
+
+  .menu-btn{
+    width:40px;height:40px;
+    border-radius:8px;
+    display:flex;align-items:center;justify-content:center;
+    background:rgba(255,255,255,0.06);cursor:pointer;font-size:20px;
+  }
+
+  #drawer{
+    position:fixed;right:-100%;top:0;height:100%;
+    width:72%;max-width:320px;
+    background:#070b12;
+    padding:22px;
+    transition:.34s;
+    z-index:998;
+  }
+  #drawer.open{right:0}
+  #drawer a{
+    display:block;
+    padding:12px 6px;
+    border-bottom:1px solid rgba(255,255,255,0.06);
+    text-decoration:none;
+    color:var(--text);
+    font-weight:600;
+  }
+
+  .page-title{
+    text-align:center;
+    margin:22px 0 8px;
+    font-size:26px;
+    font-weight:800;
+    color:var(--accent);
+  }
+
+  .brand-logo{
+    display:flex;justify-content:center;margin-bottom:12px;
+  }
+  .brand-logo img{height:65px}
+
+  main{
+    padding:18px;
+    max-width:1100px;
+    margin:auto;
+  }
+
+  .models{display:flex;flex-direction:column;gap:18px}
+
+  .card{
+    background:var(--card);
+    padding:14px;
+    border-radius:14px;
+    border:1px solid rgba(255,255,255,0.05);
+  }
+
+  .slider{
+    position:relative;
+    height:260px;
+    border-radius:12px;
+    background:#000;
+    overflow:hidden;
+  }
+
+  .slide{
+    position:absolute;inset:0;
+    opacity:0;
+    transition:opacity .5s ease;
+  }
+  .slide.visible{opacity:1}
+
+  .slide img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+  }
+
+  .dots{
+    display:flex;gap:8px;justify-content:center;
+    margin-top:10px;
+  }
+  .dot{
+    width:10px;height:10px;border-radius:50%;
+    background:rgba(255,255,255,0.3);
+    cursor:pointer;
+  }
+  .dot.active{background:var(--accent)}
+
+  h3{margin:12px 0 6px;font-size:18px}
+  .price{color:var(--muted);font-weight:700;margin-bottom:10px}
+
+  .btn{
+    width:100%;padding:12px;border-radius:10px;border:none;
+    background:var(--accent);
+    color:#000;font-weight:800;font-size:15px;cursor:pointer;
+  }
+
+  footer{
+    text-align:center;
+    padding:26px 10px;
+    color:var(--muted);
+  }
+
+  @media(min-width:900px){
+    .models{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+    .slider{height:220px}
+  }
 </style>
 </head>
 
 <body>
 
-<header>HIGH CHOICE — Omega Women</header>
+<header>
+  <div class="logo">
+    <img src="highchoice_logo.png" alt="">
+    <span>HIGH CHOICE</span>
+  </div>
+  <div class="menu-btn" onclick="toggleMenu()">☰</div>
+</header>
 
-<div class="container">
-<div class="card">
-  <img src="https://images.unsplash.com/photo-1518544889289-f1c1a3a4e9c5?auto=format&w=900">
-  <h3>Omega Women</h3>
-  <p class="price">₹2399</p>
-  <a class="btn" href="order.html?product=Omega%20Women&price=2399">Buy Now</a>
-</div>
-</div>
+<nav id="drawer">
+  <a href="index.html">Home</a>
+  <a href="men.html">Men</a>
+  <a href="women.html">Women</a>
+  <a href="kids.html">Kids</a>
+  <a href="about.html">About</a>
+  <a href="contact.html">Contact</a>
+  <a href="return.html">Return & Replace</a>
+</nav>
+
+<main>
+  <div class="page-title">Omega Women</div>
+  <div class="brand-logo">
+    <img src="omega_women_logo.png" alt="">
+  </div>
+
+  <section class="models">
+
+    <!-- Only model (₹2399) -->
+    <article class="card">
+      <div class="slider">
+        <div class="slide visible"><img src="omega_women1.jpg"></div>
+        <div class="slide"><img src="omega_women2.jpg"></div>
+        <div class="slide"><img src="omega_women3.jpg"></div>
+      </div>
+
+      <div class="dots"></div>
+
+      <h3>Omega Women Collection</h3>
+      <div class="price">₹2399/-</div>
+
+      <button class="btn"
+        onclick="location.href='order.html?model=Omega Women Collection&price=2399'">
+        Buy Now
+      </button>
+    </article>
+
+  </section>
+</main>
+
+<footer>
+  © 2025 HIGH CHOICE — All Rights Reserved
+</footer>
+
+<script>
+function toggleMenu(){
+  document.getElementById("drawer").classList.toggle("open");
+}
+
+// slider logic
+document.querySelectorAll(".slider").forEach(slider=>{
+  const slides = slider.querySelectorAll(".slide");
+  const dotsBox = slider.parentElement.querySelector(".dots");
+
+  slides.forEach((s,i)=>{
+    const dot=document.createElement("div");
+    dot.className="dot";
+    if(i===0) dot.classList.add("active");
+
+    dot.onclick=()=>{
+      slides.forEach(x=>x.classList.remove("visible"));
+      slides[i].classList.add("visible");
+
+      dotsBox.querySelectorAll(".dot").forEach(d=>d.classList.remove("active"));
+      dot.classList.add("active");
+    };
+
+    dotsBox.appendChild(dot);
+  });
+});
+</script>
 
 </body>
-</html>
+  </html>
