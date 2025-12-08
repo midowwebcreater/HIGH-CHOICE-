@@ -3,219 +3,300 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Armani Watches – HIGH CHOICE</title>
+<title>Armani Collection – HIGH CHOICE</title>
+<link rel="icon" type="image/png" href="favicon.png">
 
 <style>
     :root {
-        --bg: #0e0f19;
-        --card: rgba(255,255,255,0.06);
-        --text: #ffffff;
-        --muted: #c1c1d2;
-        --primary: #ff93a5;
-        --primary-dark: #ff6f86;
+        --bg:#0e0f19;
+        --card:rgba(255,255,255,0.08);
+        --text:#ffffff;
+        --muted:#bfbfd2;
+        --accent:#9ef7ff;
     }
 
     body {
-        margin: 0;
-        background: var(--bg);
-        color: var(--text);
-        font-family: 'Poppins', sans-serif;
-        overflow-x: hidden;
+        margin:0;
+        background:var(--bg);
+        color:var(--text);
+        font-family:'Poppins',sans-serif;
     }
 
     header {
-        padding: 14px 20px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        background: rgba(0,0,0,0.35);
-        backdrop-filter: blur(10px);
-        position: sticky;
-        top: 0;
-        z-index: 999;
+        padding:14px 20px;
+        background:rgba(0,0,0,0.35);
+        backdrop-filter:blur(10px);
+        display:flex;justify-content:space-between;align-items:center;
+        position:sticky;top:0;z-index:999;
+        border-bottom:1px solid rgba(255,255,255,0.06);
     }
 
-    .logo {
-        font-size: 20px;
-        font-weight: 700;
-        color: var(--primary);
-    }
+    .logo {display:flex;align-items:center;gap:10px;}
+    .logo img {height:36px;}
+    .logo span {font-size:20px;font-weight:700;color:var(--accent);}
 
     .menu-btn {
-        width: 40px;
-        height: 40px;
-        background: rgba(255,255,255,0.08);
-        border-radius: 8px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 22px;
-        cursor: pointer;
+        width:40px;height:40px;border-radius:8px;
+        background:rgba(255,255,255,0.08);
+        display:flex;align-items:center;justify-content:center;
+        cursor:pointer;font-size:22px;
     }
 
-    .page-title {
-        text-align: center;
-        padding: 25px 20px 10px 20px;
-        font-size: 28px;
-        font-weight: 700;
+    #drawer {
+        position:fixed;right:-100%;top:0;width:70%;max-width:300px;
+        height:100%;background:#070b12;padding:25px;transition:.4s;z-index:900;
+    }
+    #drawer.open {right:0;}
+
+    #drawer a {
+        display:block;padding:12px 4px;
+        border-bottom:1px solid rgba(255,255,255,0.08);
+        margin-bottom:8px;font-weight:600;color:var(--text);
     }
 
-    .subtitle {
-        text-align: center;
-        margin-top: -10px;
-        color: var(--muted);
-        font-size: 15px;
+    .title {
+        text-align:center;font-size:28px;font-weight:800;margin-top:25px;
+        color:var(--accent);
     }
 
-    /* GRID */
-    .product-grid {
-        padding: 20px;
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 20px;
+    .brand-logo {display:flex;justify-content:center;margin-top:15px;}
+    .brand-logo img {height:65px;}
+
+    .models {
+        padding:20px;
+        display:flex;
+        flex-direction:column;
+        gap:20px;
     }
 
-    @media (min-width: 700px) {
-        .product-grid {
-            grid-template-columns: 1fr 1fr;
-        }
+    .card {
+        background:var(--card);
+        padding:15px;
+        border-radius:14px;
+        border:1px solid rgba(255,255,255,0.08);
     }
 
-    @media (min-width: 1100px) {
-        .product-grid {
-            grid-template-columns: 1fr 1fr 1fr;
-        }
+    .slider {
+        position:relative;
+        height:240px;
+        overflow:hidden;
+        border-radius:10px;
+        background:#000;
     }
 
-    .product-card {
-        background: var(--card);
-        border-radius: 16px;
-        padding: 16px;
-        border: 1px solid rgba(255,255,255,0.1);
-        text-align: center;
-        transition: 0.25s;
+    .slide {
+        position:absolute;
+        inset:0;
+        opacity:0;
+        transition:opacity .6s ease;
     }
 
-    .product-card:hover {
-        transform: scale(1.03);
-        border-color: var(--primary-dark);
+    .slide.visible {opacity:1;}
+
+    .slide img {
+        width:100%;
+        height:100%;
+        object-fit:cover;
+        border-radius:10px;
     }
 
-    .product-card img {
-        width: 100%;
-        height: 180px;
-        object-fit: cover;
-        border-radius: 12px;
+    .dots {
+        display:flex;
+        gap:6px;
+        justify-content:center;
+        margin-top:8px;
     }
 
-    .product-name {
-        font-size: 17px;
-        margin-top: 12px;
-        font-weight: 600;
+    .dot {
+        width:10px;
+        height:10px;
+        border-radius:50%;
+        background:rgba(255,255,255,0.3);
+        cursor:pointer;
     }
 
-    .price {
-        margin-top: 6px;
-        color: var(--primary);
-        font-size: 16px;
-        font-weight: 600;
-    }
+    .dot.active {background:var(--accent);}
 
-    .buy-btn {
-        margin-top: 12px;
-        background: var(--primary-dark);
-        border: none;
-        padding: 10px 16px;
-        color: #fff;
-        border-radius: 10px;
-        cursor: pointer;
-        font-size: 14px;
-        font-weight: 600;
-        width: 100%;
-    }
+    .card h3 {margin:10px 0 6px;}
+    .price {color:var(--muted);margin-bottom:10px;font-weight:600;}
 
-    footer {
-        padding: 20px;
-        text-align: center;
-        color: var(--muted);
-        margin-top: 30px;
+    .btn {
+        width:100%;
+        padding:12px;
+        border:none;
+        border-radius:10px;
+        font-weight:700;
+        background:var(--accent);
+        color:#000;
+        cursor:pointer;
     }
 </style>
-
 </head>
+
 <body>
 
 <header>
-    <div class="logo">HIGH CHOICE</div>
-    <div class="menu-btn" onclick="location.href='men.html'">☰</div>
+    <div class="logo">
+        <img src="highchoice_logo.png">
+        <span>HIGH CHOICE</span>
+    </div>
+    <div class="menu-btn" onclick="toggleMenu()">☰</div>
 </header>
 
-<div class="page-title">Armani Collection</div>
-<div class="subtitle">Premium Armani Watches</div>
+<nav id="drawer">
+    <a href="index.html">Home</a>
+    <a href="men.html">Men</a>
+    <a href="women.html">Women</a>
+    <a href="kids.html">Kids</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+    <a href="return.html">Return & Replace</a>
+</nav>
 
-<section class="product-grid">
+<script>
+function toggleMenu(){
+    document.getElementById("drawer").classList.toggle("open");
+}
+</script>
 
-    <div class="product-card">
-        <img src="images/armani/ax.jpg">
-        <div class="product-name">Armani AX</div>
-        <div class="price">₹1499</div>
-        <button class="buy-btn" onclick="location.href='order.html?product=Armani AX&price=1499'">Buy Now</button>
+<div class="title">Armani Collection</div>
+
+<div class="brand-logo">
+    <img src="armani_logo.png">
+</div>
+
+<section class="models">
+
+    <!-- 1. Armani AX -->
+    <div class="card">
+        <div class="slider">
+            <div class="slide visible"><img src="armani_ax1.jpg"></div>
+            <div class="slide"><img src="armani_ax2.jpg"></div>
+            <div class="slide"><img src="armani_ax3.jpg"></div>
+        </div>
+        <div class="dots"></div>
+        <h3>Armani AX</h3>
+        <div class="price">₹1499/-</div>
+        <button class="btn" onclick="location.href='order.html?model=Armani AX&price=1499'">Buy Now</button>
     </div>
 
-    <div class="product-card">
-        <img src="images/armani/dante.jpg">
-        <div class="product-name">Armani Exchange Dante</div>
-        <div class="price">₹1999</div>
-        <button class="buy-btn" onclick="location.href='order.html?product=Armani Dante&price=1999'">Buy Now</button>
+    <!-- 2. Armani Dante -->
+    <div class="card">
+        <div class="slider">
+            <div class="slide visible"><img src="armani_dante1.jpg"></div>
+            <div class="slide"><img src="armani_dante2.jpg"></div>
+            <div class="slide"><img src="armani_dante3.jpg"></div>
+        </div>
+        <div class="dots"></div>
+        <h3>Armani Exchange Dante</h3>
+        <div class="price">₹1999/-</div>
+        <button class="btn" onclick="location.href='order.html?model=Armani Dante&price=1999'">Buy Now</button>
     </div>
 
-    <div class="product-card">
-        <img src="images/armani/outerbanks.jpg">
-        <div class="product-name">Armani Exchange Outerbanks</div>
-        <div class="price">₹1899</div>
-        <button class="buy-btn" onclick="location.href='order.html?product=Armani Outerbanks&price=1899'">Buy Now</button>
+    <!-- 3. Armani Outerbanks -->
+    <div class="card">
+        <div class="slider">
+            <div class="slide visible"><img src="armani_outerbanks1.jpg"></div>
+            <div class="slide"><img src="armani_outerbanks2.jpg"></div>
+            <div class="slide"><img src="armani_outerbanks3.jpg"></div>
+        </div>
+        <div class="dots"></div>
+        <h3>Armani Exchange Outerbanks</h3>
+        <div class="price">₹1899/-</div>
+        <button class="btn" onclick="location.href='order.html?model=Armani Outerbanks&price=1899'">Buy Now</button>
     </div>
 
-    <div class="product-card">
-        <img src="images/armani/automatic.jpg">
-        <div class="product-name">Armani Exchange Automatic</div>
-        <div class="price">₹2499</div>
-        <button class="buy-btn" onclick="location.href='order.html?product=Armani Automatic&price=2499'">Buy Now</button>
+    <!-- 4. Armani Automatic -->
+    <div class="card">
+        <div class="slider">
+            <div class="slide visible"><img src="armani_auto1.jpg"></div>
+            <div class="slide"><img src="armani_auto2.jpg"></div>
+            <div class="slide"><img src="armani_auto3.jpg"></div>
+        </div>
+        <div class="dots"></div>
+        <h3>Armani Exchange Automatic</h3>
+        <div class="price">₹2499/-</div>
+        <button class="btn" onclick="location.href='order.html?model=Armani Automatic&price=2499'">Buy Now</button>
     </div>
 
-    <div class="product-card">
-        <img src="images/armani/ar1968.jpg">
-        <div class="product-name">Armani AR1968</div>
-        <div class="price">₹1799</div>
-        <button class="buy-btn" onclick="location.href='order.html?product=Armani AR1968&price=1799'">Buy Now</button>
+    <!-- 5. AR1968 -->
+    <div class="card">
+        <div class="slider">
+            <div class="slide visible"><img src="armani_1968_1.jpg"></div>
+            <div class="slide"><img src="armani_1968_2.jpg"></div>
+            <div class="slide"><img src="armani_1968_3.jpg"></div>
+        </div>
+        <div class="dots"></div>
+        <h3>Armani AR1968</h3>
+        <div class="price">₹1799/-</div>
+        <button class="btn" onclick="location.href='order.html?model=Armani AR1968&price=1799'">Buy Now</button>
     </div>
 
-    <div class="product-card">
-        <img src="images/armani/classic.jpg">
-        <div class="product-name">Armani Classic</div>
-        <div class="price">₹1349</div>
-        <button class="buy-btn" onclick="location.href='order.html?product=Armani Classic&price=1349'">Buy Now</button>
+    <!-- 6. Armani Classic -->
+    <div class="card">
+        <div class="slider">
+            <div class="slide visible"><img src="armani_classic1.jpg"></div>
+            <div class="slide"><img src="armani_classic2.jpg"></div>
+            <div class="slide"><img src="armani_classic3.jpg"></div>
+        </div>
+        <div class="dots"></div>
+        <h3>Armani Classic</h3>
+        <div class="price">₹1349/-</div>
+        <button class="btn" onclick="location.href='order.html?model=Armani Classic&price=1349'">Buy Now</button>
     </div>
 
-    <div class="product-card">
-        <img src="images/armani/alligator.jpg">
-        <div class="product-name">Armani Alligator</div>
-        <div class="price">₹2499</div>
-        <button class="buy-btn" onclick="location.href='order.html?product=Armani Alligator&price=2499'">Buy Now</button>
+    <!-- 7. Armani Alligator -->
+    <div class="card">
+        <div class="slider">
+            <div class="slide visible"><img src="armani_alligator1.jpg"></div>
+            <div class="slide"><img src="armani_alligator2.jpg"></div>
+            <div class="slide"><img src="armani_alligator3.jpg"></div>
+        </div>
+        <div class="dots"></div>
+        <h3>Armani Alligator</h3>
+        <div class="price">₹2499/-</div>
+        <button class="btn" onclick="location.href='order.html?model=Armani Alligator&price=2499'">Buy Now</button>
     </div>
 
-    <div class="product-card">
-        <img src="images/armani/morocco.jpg">
-        <div class="product-name">Armani Morocco</div>
-        <div class="price">₹1899</div>
-        <button class="buy-btn" onclick="location.href='order.html?product=Armani Morocco&price=1899'">Buy Now</button>
+    <!-- 8. Armani Morocco -->
+    <div class="card">
+        <div class="slider">
+            <div class="slide visible"><img src="armani_morocco1.jpg"></div>
+            <div class="slide"><img src="armani_morocco2.jpg"></div>
+            <div class="slide"><img src="armani_morocco3.jpg"></div>
+        </div>
+        <div class="dots"></div>
+        <h3>Armani Morocco</h3>
+        <div class="price">₹1899/-</div>
+        <button class="btn" onclick="location.href='order.html?model=Armani Morocco&price=1899'">Buy Now</button>
     </div>
 
 </section>
 
-<footer>
-    © 2025 HIGH CHOICE — All Rights Reserved
-</footer>
+<script>
+// slider logic
+document.querySelectorAll(".card").forEach(card=>{
+    const slider = card.querySelector(".slider");
+    const slides = slider.querySelectorAll(".slide");
+    const dotsBox = card.querySelector(".dots");
+
+    slides.forEach((slide,i)=>{
+        const dot = document.createElement("div");
+        dot.className = "dot";
+        if(i===0) dot.classList.add("active");
+
+        dot.onclick = ()=>{
+            slides.forEach(s=>s.classList.remove("visible"));
+            slides[i].classList.add("visible");
+
+            dotsBox.querySelectorAll(".dot").forEach(d=>d.classList.remove("active"));
+            dot.classList.add("active");
+        };
+
+        dotsBox.appendChild(dot);
+    });
+});
+</script>
 
 </body>
-  </html>
+    </html>
