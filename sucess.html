@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Order Successful – HIGH CHOICE</title>
+<link rel="icon" type="image/png" href="favicon.png">
+
+<style>
+:root{
+  --bg:#0e0f19;
+  --text:#ffffff;
+  --muted:#bfbfd2;
+  --accent:#7effc9;
+  --card:rgba(255,255,255,0.1);
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  background:var(--bg);
+  font-family:"Poppins",system-ui,Roboto;
+  color:var(--text);
+}
+
+header{
+  padding:14px 18px;
+  display:flex;justify-content:center;
+  background:rgba(0,0,0,0.35);
+  border-bottom:1px solid rgba(255,255,255,0.05);
+  backdrop-filter:blur(8px);
+}
+header img{height:38px}
+
+main{
+  max-width:600px;margin:auto;padding:24px;
+  text-align:center;
+}
+
+.success-icon{
+  font-size:80px;
+  color:var(--accent);
+  margin-bottom:14px;
+}
+
+h2{
+  font-size:26px;
+  font-weight:800;
+  color:var(--accent);
+  margin-bottom:10px;
+}
+
+.details{
+  background:var(--card);
+  padding:20px;
+  border-radius:16px;
+  border:1px solid rgba(255,255,255,0.08);
+  margin-top:18px;
+  text-align:left;
+  font-size:16px;
+  line-height:28px;
+}
+
+.btn{
+  width:100%;
+  padding:14px;
+  margin-top:20px;
+  border:none;
+  border-radius:12px;
+  background:var(--accent);
+  color:#000;
+  font-weight:800;
+  cursor:pointer;
+  font-size:16px;
+}
+
+footer{
+  text-align:center;color:var(--muted);
+  padding:26px 10px;margin-top:30px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <img src="highchoice_logo.png">
+</header>
+
+<main>
+
+  <div class="success-icon">✔</div>
+
+  <h2>Order Placed Successfully!</h2>
+  <p>Thank you for shopping with <strong>HIGH CHOICE</strong>.</p>
+
+  <div class="details">
+    <p><strong>Product:</strong> <span id="pName"></span></p>
+    <p><strong>Price:</strong> ₹<span id="pPrice"></span></p>
+    <p><strong>Name:</strong> <span id="cName"></span></p>
+    <p><strong>Phone:</strong> <span id="cPhone"></span></p>
+  </div>
+
+  <button class="btn" onclick="sendWhatsApp()">View Order on WhatsApp</button>
+
+</main>
+
+<footer>© 2025 HIGH CHOICE — All Rights Reserved</footer>
+
+<script>
+// extract URL data
+const url = new URLSearchParams(window.location.search);
+const model = url.get("model");
+const price = url.get("price");
+const name = url.get("name");
+const phone = url.get("phone");
+
+// set text
+document.getElementById("pName").innerText = model;
+document.getElementById("pPrice").innerText = price;
+document.getElementById("cName").innerText = name;
+document.getElementById("cPhone").innerText = phone;
+
+// client WhatsApp number
+const clientNumber = "917869288078"; 
+
+// open WhatsApp
+function sendWhatsApp(){
+  let msg =
+    `New Order\n\n` +
+    `Product: ${model}\n` +
+    `Price: ₹${price}\n\n` +
+    `Customer Name: ${name}\n` +
+    `Phone: ${phone}\n`;
+
+  window.open(
+    `https://wa.me/${clientNumber}?text=${encodeURIComponent(msg)}`,
+    "_blank"
+  );
+}
+</script>
+
+</body>
+</html>
