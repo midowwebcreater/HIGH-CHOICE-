@@ -1,211 +1,242 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>HIGH CHOICE — Premium Watches</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HIGH CHOICE – Premium Watches</title>
 
-  <style>
-    :root{
-      --bg-1:#050814;
-      --bg-2:#061127;
-      --accent:#b9aaff;
-      --muted:#9fb0da;
-      --card:rgba(255,255,255,0.04);
-      --radius:16px;
-      --glass: rgba(255,255,255,0.03);
-    }
-    *{box-sizing:border-box}
-    body{
-      margin:0;
-      font-family:'Poppins',sans-serif;
-      background:linear-gradient(180deg,var(--bg-1),var(--bg-2));
-      color:#fff;
-      min-height:100vh;
+<style>
+    :root {
+        --bg: #0e0f19;
+        --card: rgba(255,255,255,0.06);
+        --text: #ffffff;
+        --muted: #c1c1d2;
+        --primary: #b792ff;
+        --primary-dark: #8d63ff;
     }
 
-    /* Header */
-    header{
-      position:fixed;top:0;left:0;right:0;height:70px;
-      display:flex;align-items:center;justify-content:space-between;
-      padding:12px 20px;z-index:80;
-      background:rgba(4,6,12,0.55);
-      border-bottom:1px solid rgba(255,255,255,0.03);
-      backdrop-filter: blur(6px);
-    }
-    .header-left{display:flex;align-items:center;gap:12px}
-    .logo-img{height:38px;object-fit:contain}
-    .logo-text{color:var(--accent);font-weight:700;font-size:18px}
-    .hamb{font-size:22px;padding:9px;border-radius:10px;background:rgba(255,255,255,0.02);cursor:pointer}
-
-    /* Side menu */
-    nav{
-      position:fixed;top:0;right:-100%;width:74%;max-width:380px;height:100vh;
-      background:#071021;padding:44px 22px;z-index:95;transition:0.28s;
-      box-shadow:-20px 60px 120px rgba(2,6,12,0.6);
-    }
-    nav.open{right:0}
-    nav a{
-      display:block;color:#dbe9ff;text-decoration:none;padding:14px 6px;
-      border-bottom:1px solid rgba(255,255,255,0.02);font-weight:600;margin-bottom:4px;
+    body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--text);
+        font-family: 'Poppins', sans-serif;
+        overflow-x: hidden;
     }
 
-    /* Background glows */
-    .bg { position:fixed; inset:0; z-index:0; pointer-events:none; }
-    .glow{ position:absolute;border-radius:50%; filter: blur(60px); opacity:0.95; mix-blend-mode:screen }
-    .g1{width:560px;height:300px;left:-6%;top:8%;background:radial-gradient(circle,#7b63ff,transparent 35%);}
-    .g2{width:520px;height:280px;right:4%;top:6%;background:radial-gradient(circle,#4bd4ff,transparent 35%);}
-    .g3{width:360px;height:220px;left:18%;top:20%;background:radial-gradient(circle,#c26dff,transparent 35%);}
-
-    main{padding-top:100px;position:relative;z-index:1}
-    .container{max-width:1180px;margin:0 auto;padding:20px}
-
-    /* Hero */
-    .hero{
-      display:grid;
-      grid-template-columns: 1fr 480px;
-      gap:28px;
-      align-items:center;
+    /* ---------------- HEADER ---------------- */
+    header {
+        width: 100%;
+        padding: 12px 18px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: rgba(0,0,0,0.35);
+        backdrop-filter: blur(10px);
+        position: sticky;
+        top: 0;
+        z-index: 9999;
     }
-    .kicker{color:var(--muted);font-weight:600}
-    .title{font-size:46px;font-weight:800;margin:12px 0}
-    .subtitle{color:var(--muted);max-width:620px;margin-bottom:20px}
-
-    .hero-cta{display:flex;gap:12px;flex-wrap:wrap}
-    .btn{
-      padding:12px 18px;border-radius:12px;font-weight:700;border:none;cursor:pointer;
-      background:var(--accent);color:#050814;text-decoration:none;
+    .logo {
+        font-size: 19px;
+        font-weight: 700;
+        color: var(--primary);
+        letter-spacing: 1px;
     }
-    .btn.secondary{background:transparent;border:1px solid rgba(255,255,255,0.06);color:#dfe9ff}
-
-    /* Featured video box */
-    .media-frame{
-      border-radius:18px;
-      padding:10px;
-      background:rgba(255,255,255,0.02);
-      border:1px solid rgba(255,255,255,0.04);
-      box-shadow:0 30px 80px rgba(2,6,12,0.7);
-    }
-    .hero-media{
-      width:100%;
-      height:420px;
-      object-fit:cover;
-      border-radius:12px;
-      background:#000;
+    .menu-btn {
+        width: 40px;
+        height: 40px;
+        background: rgba(255,255,255,0.08);
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 20px;
+        cursor: pointer;
     }
 
-    /* Categories */
-    .categories{display:flex;gap:16px;margin-top:30px;flex-wrap:wrap;justify-content:center}
-    .cat{
-      flex:1 1 280px;min-width:240px;background:var(--card);padding:14px;border-radius:14px;
-      border:1px solid rgba(255,255,255,0.04);cursor:pointer;transition:0.25s;
+    /* ---------------- HERO ---------------- */
+    .hero {
+        padding: 25px 18px;
+        max-width: 1100px;
+        margin: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 25px;
     }
-    .cat:hover{transform:translateY(-6px)}
-    .cat img{width:100%;height:160px;object-fit:cover;border-radius:10px}
-    .cat h4{margin:10px 0 0;color:var(--muted);font-weight:700}
+    .hero h1 {
+        font-size: 28px;
+        margin: 0;
+        line-height: 1.3;
+    }
+    .hero p {
+        margin-top: 8px;
+        font-size: 14px;
+        color: var(--muted);
+    }
 
-    footer{text-align:center;padding:40px 20px;color:var(--muted)}
-  </style>
+    .hero-buttons button {
+        padding: 12px 16px;
+        margin-right: 10px;
+        margin-top: 12px;
+        background: var(--primary-dark);
+        border-radius: 8px;
+        color: white;
+        border: none;
+        font-size: 14px;
+        cursor: pointer;
+    }
+
+    /* ---------------- VIDEO ---------------- */
+    .video-frame {
+        width: 100%;
+        background: rgba(255,255,255,0.05);
+        padding: 10px;
+        border-radius: 18px;
+        border: 1px solid rgba(255,255,255,0.08);
+    }
+    video {
+        width: 100%;
+        height: auto;
+        border-radius: 12px;
+    }
+
+    /* ---------------- BADGES ---------------- */
+    .badge-row {
+        display: flex;
+        gap: 10px;
+        margin-top: 15px;
+        flex-wrap: wrap;
+    }
+    .badge {
+        padding: 8px 12px;
+        background: rgba(255,255,255,0.1);
+        border-radius: 10px;
+        font-size: 12px;
+        color: var(--muted);
+        font-weight: 600;
+    }
+
+    /* ---------------- CATEGORY GRID ---------------- */
+    .category-section {
+        padding: 20px 18px 40px 18px;
+        max-width: 1200px;
+        margin: auto;
+    }
+    .category-section h2 {
+        font-size: 22px;
+        margin-bottom: 15px;
+    }
+
+    .cat-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+    }
+
+    .cat-card {
+        background: var(--card);
+        padding: 15px;
+        border-radius: 14px;
+        text-align: center;
+        border: 1px solid rgba(255,255,255,0.1);
+        cursor: pointer;
+        transition: 0.3s;
+    }
+    .cat-card img {
+        width: 100%;
+        height: 120px;
+        object-fit: cover;
+        border-radius: 10px;
+    }
+    .cat-card h3 {
+        margin-top: 10px;
+        font-size: 15px;
+    }
+    .cat-card:hover {
+        transform: scale(1.03);
+        border-color: var(--primary-dark);
+    }
+
+    /* FOOTER */
+    footer {
+        padding: 15px;
+        text-align: center;
+        color: var(--muted);
+        font-size: 13px;
+    }
+
+    /* Laptop Responsive */
+    @media (min-width: 768px) {
+        .hero {
+            flex-direction: row;
+        }
+        .hero h1 {
+            font-size: 36px;
+        }
+        .cat-grid {
+            grid-template-columns: repeat(3, 1fr);
+        }
+    }
+</style>
 </head>
 
 <body>
 
-  <!-- Background glows -->
-  <div class="bg">
-    <div class="glow g1"></div>
-    <div class="glow g2"></div>
-    <div class="glow g3"></div>
-  </div>
+<header>
+    <div class="logo">HIGH CHOICE</div>
+    <div class="menu-btn">☰</div>
+</header>
 
-  <!-- Header -->
-  <header>
-    <div class="header-left">
-      <img class="logo-img" src="images/logo/highchoice_logo.png" alt="">
-      <div class="logo-text">HIGH CHOICE</div>
+<section class="hero">
+
+    <div>
+        <h1>High Choice — Premium Curated Watches</h1>
+        <p>Explore Men, Women and Kids premium luxury watches.</p>
+
+        <div class="hero-buttons">
+            <button onclick="location.href='men.html'">Shop Men</button>
+            <button onclick="location.href='women.html'">Shop Women</button>
+            <button onclick="location.href='kids.html'">Shop Kids</button>
+        </div>
+
+        <div class="badge-row">
+            <div class="badge">Secure Payments</div>
+            <div class="badge">7-day Replacement</div>
+        </div>
     </div>
-    <div class="hamb" onclick="toggleMenu()">☰</div>
-  </header>
 
-  <!-- Menu -->
-  <nav id="menu">
-    <a href="index.html">Home</a>
-    <a href="men.html">Men</a>
-    <a href="women.html">Women</a>
-    <a href="kids.html">Kids</a>
-    <a href="about.html">About</a>
-    <a href="contact.html">Contact</a>
-    <a href="return.html">Return Policy</a>
-  </nav>
-
-  <main>
-    <div class="container">
-
-      <!-- HERO -->
-      <section class="hero">
-        <div>
-          <div class="kicker">PREMIUM LUXURY WATCHES</div>
-          <h1 class="title">High Choice — Premium Curated Watches</h1>
-          <p class="subtitle">Hand-picked models with premium presentation. Explore Men, Women and Kids exclusive collections.</p>
-
-          <div class="hero-cta">
-            <a class="btn" href="men.html">Shop Men</a>
-            <a class="btn secondary" href="women.html">Shop Women</a>
-            <a class="btn secondary" href="kids.html">Shop Kids</a>
-          </div>
-
-          <!-- ONLY Secure Payments & 7-day Replacement -->
-          <div style="display:flex;gap:12px;margin-top:18px;flex-wrap:wrap">
-            <div style="background:rgba(255,255,255,0.02);padding:8px 12px;border-radius:10px;color:var(--muted);font-weight:600">Secure Payments</div>
-            <div style="background:rgba(255,255,255,0.02);padding:8px 12px;border-radius:10px;color:var(--muted);font-weight:600">7-day Replacement</div>
-          </div>
-        </div>
-
-        <!-- VIDEO SECTION -->
-        <div>
-          <div class="media-frame">
-            <video class="hero-media" autoplay muted playsinline loop>
-              <source src="videos/Featured1.mp4" type="video/mp4">
-            </video>
-          </div>
-        </div>
-      </section>
-
-      <!-- CATEGORIES -->
-      <section style="margin-top:40px">
-        <h2 style="color:var(--accent);text-align:center;margin-bottom:20px">Shop By Category</h2>
-
-        <div class="categories">
-          <a class="cat" href="men.html">
-            <img src="images/men/men_category.jpg" alt="">
-            <h4>Men</h4>
-          </a>
-
-          <a class="cat" href="women.html">
-            <img src="images/women/women_category.jpg" alt="">
-            <h4>Women</h4>
-          </a>
-
-          <a class="cat" href="kids.html">
-            <img src="images/kids/kids_category.jpg" alt="">
-            <h4>Kids</h4>
-          </a>
-        </div>
-      </section>
-
+    <div class="video-frame">
+        <video autoplay muted playsinline loop>
+            <source src="/videos/Featured1.mp4" type="video/mp4">
+        </video>
     </div>
-  </main>
 
-  <footer>
-    <img src="images/logo/highchoice_logo.png" style="height:42px;opacity:0.8;margin-bottom:10px">
-    <div>© HIGH CHOICE — All Rights Reserved</div>
-  </footer>
+</section>
 
-  <script>
-    function toggleMenu(){
-      document.getElementById("menu").classList.toggle("open");
-    }
-  </script>
+<section class="category-section">
+    <h2>Shop by Category</h2>
+
+    <div class="cat-grid">
+        <div class="cat-card" onclick="location.href='men.html'">
+            <img src="images/men/men_category.jpg">
+            <h3>Men</h3>
+        </div>
+
+        <div class="cat-card" onclick="location.href='women.html'">
+            <img src="images/women/women_category.jpg">
+            <h3>Women</h3>
+        </div>
+
+        <div class="cat-card" onclick="location.href='kids.html'">
+            <img src="images/kids/kids_category.jpg">
+            <h3>Kids</h3>
+        </div>
+    </div>
+</section>
+
+<footer>
+    © 2025 HIGH CHOICE — All Rights Reserved
+</footer>
 
 </body>
 </html>
