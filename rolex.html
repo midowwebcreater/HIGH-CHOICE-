@@ -3,16 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Rolex Watches – HIGH CHOICE</title>
+<title>Rolex Collection – HIGH CHOICE</title>
+<link rel="icon" type="image/png" href="favicon.png">
 
 <style>
     :root {
         --bg: #0e0f19;
-        --card: rgba(255,255,255,0.06);
+        --card: rgba(255,255,255,0.08);
         --text: #ffffff;
-        --muted: #c1c1d2;
-        --primary: #7adbff;
-        --primary-dark: #4dbbee;
+        --muted: #bfbfd2;
+        --accent: #b2ff72;
     }
 
     body {
@@ -20,226 +20,285 @@
         background: var(--bg);
         color: var(--text);
         font-family: 'Poppins', sans-serif;
-        overflow-x: hidden;
     }
 
     header {
         padding: 14px 20px;
+        background: rgba(0,0,0,0.35);
+        backdrop-filter: blur(10px);
         display: flex;
         justify-content: space-between;
         align-items: center;
-        background: rgba(0,0,0,0.35);
-        backdrop-filter: blur(10px);
         position: sticky;
         top: 0;
         z-index: 999;
+        border-bottom: 1px solid rgba(255,255,255,0.06);
     }
 
-    .logo {
-        font-size: 20px;
-        font-weight: 700;
-        color: var(--primary);
-    }
+    .logo { display:flex;align-items:center;gap:10px; }
+    .logo img { height:36px; }
+    .logo span { font-size:20px;font-weight:700;color:var(--accent); }
 
     .menu-btn {
-        width: 40px;
-        height: 40px;
-        background: rgba(255,255,255,0.08);
-        border-radius: 8px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 22px;
-        cursor: pointer;
+        width:40px;height:40px;border-radius:8px;
+        background:rgba(255,255,255,0.08);
+        display:flex;align-items:center;justify-content:center;
+        cursor:pointer;font-size:22px;
     }
 
-    .page-title {
-        text-align: center;
-        padding: 25px 20px 10px 20px;
-        font-size: 28px;
-        font-weight: 700;
+    #drawer {
+        position:fixed;right:-100%;top:0;width:70%;max-width:300px;
+        height:100%;background:#070b12;padding:25px;transition:0.4s;z-index:900;
+    }
+    #drawer.open { right:0; }
+
+    #drawer a {
+        display:block;padding:12px 4px;
+        border-bottom:1px solid rgba(255,255,255,0.08);
+        margin-bottom:8px;font-weight:600;color:var(--text);
     }
 
-    .subtitle {
-        text-align: center;
-        margin-top: -10px;
-        color: var(--muted);
-        font-size: 15px;
+    .title {
+        font-size:28px;font-weight:800;text-align:center;margin-top:25px;
+        color:var(--accent);
     }
 
-    /* GRID */
-    .product-grid {
-        padding: 20px;
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 20px;
+    .brand-logo {
+        display:flex;justify-content:center;margin-top:15px;
+    }
+    .brand-logo img { height:60px; }
+
+    .models {
+        padding:20px;display:flex;flex-direction:column;gap:20px;
     }
 
-    @media (min-width: 700px) {
-        .product-grid {
-            grid-template-columns: 1fr 1fr;
-        }
+    .card {
+        background:var(--card);
+        padding:15px;border-radius:14px;
+        border:1px solid rgba(255,255,255,0.08);
     }
 
-    @media (min-width: 1100px) {
-        .product-grid {
-            grid-template-columns: 1fr 1fr 1fr;
-        }
+    .slider {
+        position:relative;overflow:hidden;border-radius:10px;
+        height:240px;background:#000;
+    }
+    .slide {
+        position:absolute;inset:0;opacity:0;
+        transition:opacity .6s ease;
+    }
+    .slide.visible { opacity:1; }
+    .slide img {
+        width:100%;height:100%;object-fit:cover;
+        border-radius:10px;
     }
 
-    .product-card {
-        background: var(--card);
-        border-radius: 16px;
-        padding: 16px;
-        border: 1px solid rgba(255,255,255,0.1);
-        text-align: center;
-        transition: 0.25s;
+    .dots { display:flex;gap:6px;justify-content:center;margin-top:8px; }
+    .dot {
+        width:10px;height:10px;border-radius:50%;
+        background:rgba(255,255,255,0.3);cursor:pointer;
+    }
+    .dot.active { background:var(--accent); }
+
+    .card h3 { margin:10px 0 6px; }
+    .price { color:var(--muted);font-weight:600;margin-bottom:10px; }
+
+    .btn {
+        width:100%;padding:12px;border:none;
+        border-radius:10px;font-weight:700;
+        background:var(--accent);color:#000;cursor:pointer;
     }
 
-    .product-card:hover {
-        transform: scale(1.03);
-        border-color: var(--primary-dark);
-    }
-
-    .product-card img {
-        width: 100%;
-        height: 180px;
-        object-fit: cover;
-        border-radius: 12px;
-    }
-
-    .product-name {
-        font-size: 17px;
-        margin-top: 12px;
-        font-weight: 600;
-    }
-
-    .price {
-        margin-top: 6px;
-        color: var(--primary);
-        font-size: 16px;
-        font-weight: 600;
-    }
-
-    .buy-btn {
-        margin-top: 12px;
-        background: var(--primary-dark);
-        border: none;
-        padding: 10px 16px;
-        color: #fff;
-        border-radius: 10px;
-        cursor: pointer;
-        font-size: 14px;
-        font-weight: 600;
-        width: 100%;
-    }
-
-    footer {
-        padding: 20px;
-        text-align: center;
-        color: var(--muted);
-        margin-top: 30px;
-    }
 </style>
 
 </head>
 <body>
 
 <header>
-    <div class="logo">HIGH CHOICE</div>
-    <div class="menu-btn" onclick="location.href='men.html'">☰</div>
+    <div class="logo">
+        <img src="highchoice_logo.png" alt="">
+        <span>HIGH CHOICE</span>
+    </div>
+    <div class="menu-btn" onclick="toggleMenu()">☰</div>
 </header>
 
-<div class="page-title">Rolex Collection</div>
-<div class="subtitle">Premium Men’s Rolex Watches</div>
+<nav id="drawer">
+    <a href="index.html">Home</a>
+    <a href="men.html">Men</a>
+    <a href="women.html">Women</a>
+    <a href="kids.html">Kids</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+    <a href="return.html">Return & Replace</a>
+</nav>
 
-<section class="product-grid">
+<script>
+function toggleMenu(){
+    document.getElementById("drawer").classList.toggle("open");
+}
+</script>
 
+<div class="title">Rolex Collection</div>
+
+<div class="brand-logo">
+    <img src="rolex_logo.png" alt="">
+</div>
+
+<section class="models">
+
+    <!-- MODEL TEMPLATE -->
     <!-- 1 -->
-    <div class="product-card">
-        <img src="images/rolex/yachtmaster.jpg">
-        <div class="product-name">Rolex Yachtmaster Automatic</div>
-        <div class="price">₹2499</div>
-        <button class="buy-btn" onclick="location.href='order.html?product=Rolex Yachtmaster Automatic&price=2499'">Buy Now</button>
+    <div class="card">
+        <div class="slider" data-model="yachtmaster">
+            <div class="slide visible"><img src="yachtmaster1.jpg"></div>
+            <div class="slide"><img src="yachtmaster2.jpg"></div>
+            <div class="slide"><img src="yachtmaster3.jpg"></div>
+        </div>
+        <div class="dots"></div>
+        <h3>Rolex Yachtmaster Automatic</h3>
+        <div class="price">₹2499/-</div>
+        <button class="btn" onclick="location.href='order.html?model=Rolex Yachtmaster Automatic&price=2499'">Buy Now</button>
     </div>
 
     <!-- 2 -->
-    <div class="product-card">
-        <img src="images/rolex/daydate.jpg">
-        <div class="product-name">Rolex Daydate Shift Movement</div>
-        <div class="price">₹1699</div>
-        <button class="buy-btn" onclick="location.href='order.html?product=Rolex Daydate&price=1699'">Buy Now</button>
+    <div class="card">
+        <div class="slider" data-model="datedate_shift">
+            <div class="slide visible"><img src="datedate_shift1.jpg"></div>
+            <div class="slide"><img src="datedate_shift2.jpg"></div>
+            <div class="slide"><img src="datedate_shift3.jpg"></div>
+        </div>
+        <div class="dots"></div>
+        <h3>Rolex Datedate Shift Movement</h3>
+        <div class="price">₹1699/-</div>
+        <button class="btn" onclick="location.href='order.html?model=Rolex Datedate Shift&price=1699'">Buy Now</button>
     </div>
 
     <!-- 3 -->
-    <div class="product-card">
-        <img src="images/rolex/submariner.jpg">
-        <div class="product-name">Rolex Submariner Shift Movement</div>
-        <div class="price">₹1599</div>
-        <button class="buy-btn" onclick="location.href='order.html?product=Rolex Submariner&price=1599'">Buy Now</button>
+    <div class="card">
+        <div class="slider" data-model="submariner">
+            <div class="slide visible"><img src="submariner1.jpg"></div>
+            <div class="slide"><img src="submariner2.jpg"></div>
+            <div class="slide"><img src="submariner3.jpg"></div>
+        </div>
+        <div class="dots"></div>
+        <h3>Rolex Submariner Shift Movement</h3>
+        <div class="price">₹1599/-</div>
+        <button class="btn" onclick="location.href='order.html?model=Rolex Submariner&price=1599'">Buy Now</button>
     </div>
 
     <!-- 4 -->
-    <div class="product-card">
-        <img src="images/rolex/daytona.jpg">
-        <div class="product-name">Rolex Daytona</div>
-        <div class="price">₹2199</div>
-        <button class="buy-btn" onclick="location.href='order.html?product=Rolex Daytona&price=2199'">Buy Now</button>
+    <div class="card">
+        <div class="slider" data-model="daytona">
+            <div class="slide visible"><img src="daytona1.jpg"></div>
+            <div class="slide"><img src="daytona2.jpg"></div>
+            <div class="slide"><img src="daytona3.jpg"></div>
+        </div>
+        <div class="dots"></div>
+        <h3>Rolex Daytona</h3>
+        <div class="price">₹2199/-</div>
+        <button class="btn" onclick="location.href='order.html?model=Rolex Daytona&price=2199'">Buy Now</button>
     </div>
 
     <!-- 5 -->
-    <div class="product-card">
-        <img src="images/rolex/sunmoon.jpg">
-        <div class="product-name">Rolex Sun Moon Edition</div>
-        <div class="price">₹1699</div>
-        <button class="buy-btn" onclick="location.href='order.html?product=Rolex Sun Moon&price=1699'">Buy Now</button>
+    <div class="card">
+        <div class="slider" data-model="sunmoon">
+            <div class="slide visible"><img src="sunmoon1.jpg"></div>
+            <div class="slide"><img src="sunmoon2.jpg"></div>
+            <div class="slide"><img src="sunmoon3.jpg"></div>
+        </div>
+        <div class="dots"></div>
+        <h3>Rolex Sun Moon Edition</h3>
+        <div class="price">₹1699/-</div>
+        <button class="btn" onclick="location.href='order.html?model=Rolex Sun Moon&price=1699'">Buy Now</button>
     </div>
 
     <!-- 6 -->
-    <div class="product-card">
-        <img src="images/rolex/datejust.jpg">
-        <div class="product-name">Rolex Datejust Automatic</div>
-        <div class="price">₹3499</div>
-        <button class="buy-btn" onclick="location.href='order.html?product=Rolex Datejust Automatic&price=3499'">Buy Now</button>
+    <div class="card">
+        <div class="slider" data-model="datejust">
+            <div class="slide visible"><img src="datejust1.jpg"></div>
+            <div class="slide"><img src="datejust2.jpg"></div>
+            <div class="slide"><img src="datejust3.jpg"></div>
+        </div>
+        <div class="dots"></div>
+        <h3>Rolex Datejust Automatic</h3>
+        <div class="price">₹3499/-</div>
+        <button class="btn" onclick="location.href='order.html?model=Rolex Datejust&price=3499'">Buy Now</button>
     </div>
 
     <!-- 7 -->
-    <div class="product-card">
-        <img src="images/rolex/explorer2.jpg">
-        <div class="product-name">Rolex Explorer 2</div>
-        <div class="price">₹3999</div>
-        <button class="buy-btn" onclick="location.href='order.html?product=Rolex Explorer 2&price=3999'">Buy Now</button>
+    <div class="card">
+        <div class="slider" data-model="explorer2">
+            <div class="slide visible"><img src="explorer2_1.jpg"></div>
+            <div class="slide"><img src="explorer2_2.jpg"></div>
+            <div class="slide"><img src="explorer2_3.jpg"></div>
+        </div>
+        <div class="dots"></div>
+        <h3>Rolex Explorer II</h3>
+        <div class="price">₹3999/-</div>
+        <button class="btn" onclick="location.href='order.html?model=Rolex Explorer II&price=3999'">Buy Now</button>
     </div>
 
     <!-- 8 -->
-    <div class="product-card">
-        <img src="images/rolex/king.jpg">
-        <div class="product-name">Rolex King Automatic</div>
-        <div class="price">₹1899</div>
-        <button class="buy-btn" onclick="location.href='order.html?product=Rolex King Automatic&price=1899'">Buy Now</button>
+    <div class="card">
+        <div class="slider" data-model="kingauto">
+            <div class="slide visible"><img src="kingauto1.jpg"></div>
+            <div class="slide"><img src="kingauto2.jpg"></div>
+            <div class="slide"><img src="kingauto3.jpg"></div>
+        </div>
+        <div class="dots"></div>
+        <h3>Rolex King Automatic</h3>
+        <div class="price">₹1899/-</div>
+        <button class="btn" onclick="location.href='order.html?model=Rolex King Automatic&price=1899'">Buy Now</button>
     </div>
 
     <!-- 9 -->
-    <div class="product-card">
-        <img src="images/rolex/gmt.jpg">
-        <div class="product-name">Rolex GMT Shift Movement</div>
-        <div class="price">₹1699</div>
-        <button class="buy-btn" onclick="location.href='order.html?product=Rolex GMT&price=1699'">Buy Now</button>
+    <div class="card">
+        <div class="slider" data-model="gmt">
+            <div class="slide visible"><img src="gmt1.jpg"></div>
+            <div class="slide"><img src="gmt2.jpg"></div>
+            <div class="slide"><img src="gmt3.jpg"></div>
+        </div>
+        <div class="dots"></div>
+        <h3>Rolex GMT Shift Movement</h3>
+        <div class="price">₹1699/-</div>
+        <button class="btn" onclick="location.href='order.html?model=Rolex GMT&price=1699'">Buy Now</button>
     </div>
 
     <!-- 10 -->
-    <div class="product-card">
-        <img src="images/rolex/skydweller.jpg">
-        <div class="product-name">Rolex Sky Dweller Shift Movement</div>
-        <div class="price">₹1499</div>
-        <button class="buy-btn" onclick="location.href='order.html?product=Rolex Sky Dweller&price=1499'">Buy Now</button>
+    <div class="card">
+        <div class="slider" data-model="skydweller">
+            <div class="slide visible"><img src="skydweller1.jpg"></div>
+            <div class="slide"><img src="skydweller2.jpg"></div>
+            <div class="slide"><img src="skydweller3.jpg"></div>
+        </div>
+        <div class="dots"></div>
+        <h3>Rolex Sky Dweller Shift Movement</h3>
+        <div class="price">₹1499/-</div>
+        <button class="btn" onclick="location.href='order.html?model=Rolex Sky Dweller&price=1499'">Buy Now</button>
     </div>
 
 </section>
 
-<footer>
-    © 2025 HIGH CHOICE — All Rights Reserved
-</footer>
+<script>
+// Create sliders
+document.querySelectorAll(".slider").forEach((slider)=>{
+    let slides = slider.querySelectorAll(".slide");
+    let dotsBox = slider.parentElement.querySelector(".dots");
+
+    slides.forEach((s,i)=>{
+        let dot = document.createElement("div");
+        dot.className = "dot";
+        if(i===0) dot.classList.add("active");
+        dot.onclick = ()=>{
+            slides.forEach(x=>x.classList.remove("visible"));
+            slides[i].classList.add("visible");
+
+            dotsBox.querySelectorAll(".dot").forEach(d=>d.classList.remove("active"));
+            dot.classList.add("active");
+        };
+        dotsBox.appendChild(dot);
+    });
+});
+</script>
 
 </body>
 </html>
