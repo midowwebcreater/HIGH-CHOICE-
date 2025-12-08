@@ -1,31 +1,201 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<title>G-Shock Kids — HIGH CHOICE</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>G-Shock Kids – HIGH CHOICE</title>
+<link rel="icon" type="image/png" href="favicon.png">
+
 <style>
-body{margin:0;background:#050814;color:white;font-family:'Poppins';}
-header{text-align:center;padding:18px;background:rgba(255,255,255,0.05);color:#b9aaff;font-weight:700;}
-.container{padding:20px;}
-.card{width:300px;margin:auto;background:rgba(255,255,255,0.05);padding:15px;border-radius:14px;}
-.card img{width:100%;height:220px;border-radius:12px;object-fit:cover;}
-.price{color:#c7c9d9;}
-.btn{display:block;background:#b9aaff;color:#050814;padding:10px;margin-top:10px;text-align:center;text-decoration:none;border-radius:10px;font-weight:700;}
+:root{
+  --bg:#0e0f19;
+  --text:#ffffff;
+  --muted:#bfbfd2;
+  --accent:#ffa07a;
+  --card:rgba(255,255,255,0.08);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:"Poppins",system-ui,Roboto,Arial;
+}
+
+header{
+  padding:14px 18px;
+  display:flex;justify-content:space-between;align-items:center;
+  background:rgba(0,0,0,0.35);
+  backdrop-filter:blur(8px);
+  border-bottom:1px solid rgba(255,255,255,0.05);
+  position:sticky;top:0;z-index:999;
+}
+.logo{display:flex;align-items:center;gap:10px}
+.logo img{height:36px}
+.logo span{font-size:18px;font-weight:700;color:var(--accent)}
+
+.menu-btn{
+  width:40px;height:40px;
+  background:rgba(255,255,255,0.08);
+  border-radius:8px;display:flex;align-items:center;justify-content:center;
+  cursor:pointer;font-size:20px;
+}
+
+#drawer{
+  position:fixed;right:-100%;top:0;height:100%;
+  width:72%;max-width:320px;background:#070b12;
+  padding:22px;transition:.35s;z-index:998;
+}
+#drawer.open{right:0}
+#drawer a{
+  display:block;text-decoration:none;color:var(--text);
+  padding:12px 6px;border-bottom:1px solid rgba(255,255,255,0.06);
+  font-weight:600;
+}
+
+.page-title{
+  text-align:center;margin:22px 0 12px;
+  font-size:26px;font-weight:800;color:var(--accent);
+}
+
+.brand-logo{
+  display:flex;justify-content:center;margin-bottom:12px;
+}
+.brand-logo img{height:65px}
+
+main{
+  padding:18px;max-width:1100px;margin:auto;
+}
+
+.card{
+  background:var(--card);
+  padding:16px;border-radius:14px;
+  border:1px solid rgba(255,255,255,0.06);
+}
+
+.slider{
+  height:260px;border-radius:12px;position:relative;
+  overflow:hidden;background:#000;
+}
+.slide{
+  position:absolute;inset:0;opacity:0;
+  transition:opacity .45s ease;
+}
+.slide.visible{opacity:1;}
+.slide img{
+  width:100%;height:100%;object-fit:cover;
+}
+
+.dots{
+  display:flex;gap:8px;justify-content:center;margin-top:10px;
+}
+.dot{
+  width:10px;height:10px;border-radius:50%;
+  background:rgba(255,255,255,0.3);
+  cursor:pointer;
+}
+.dot.active{background:var(--accent)}
+
+h3{margin:12px 0 6px;font-size:18px}
+.price{color:var(--muted);font-weight:700;margin-bottom:12px}
+
+.btn{
+  width:100%;padding:12px;border-radius:10px;border:none;
+  background:var(--accent);color:#000;font-weight:800;
+  cursor:pointer;font-size:15px;
+}
+
+footer{
+  text-align:center;color:var(--muted);
+  padding:26px 10px;margin-top:20px;
+}
+
+@media(min-width:900px){
+  .slider{height:220px}
+}
 </style>
 </head>
 
 <body>
 
-<header>HIGH CHOICE — G-Shock Kids</header>
+<header>
+  <div class="logo">
+    <img src="highchoice_logo.png">
+    <span>HIGH CHOICE</span>
+  </div>
+  <div class="menu-btn" onclick="toggleMenu()">☰</div>
+</header>
 
-<div class="container">
-<div class="card">
-  <img src="https://images.unsplash.com/photo-1511381939415-e44015466834?auto=format&w=900">
-  <h3>G-Shock Kids</h3>
-  <p class="price">₹999 – ₹1999</p>
-  <a class="btn" href="order.html?product=GShock%20Kids&price=999">Buy Now</a>
-</div>
-</div>
+<nav id="drawer">
+  <a href="index.html">Home</a>
+  <a href="men.html">Men</a>
+  <a href="women.html">Women</a>
+  <a href="kids.html">Kids</a>
+  <a href="about.html">About</a>
+  <a href="contact.html">Contact</a>
+  <a href="return.html">Return & Replace</a>
+</nav>
+
+<main>
+
+  <div class="page-title">G-Shock Kids</div>
+
+  <div class="brand-logo">
+    <img src="gshock_kids_logo.png">
+  </div>
+
+  <article class="card">
+
+    <div class="slider">
+      <div class="slide visible"><img src="gshock_kids1.jpg"></div>
+      <div class="slide"><img src="gshock_kids2.jpg"></div>
+      <div class="slide"><img src="gshock_kids3.jpg"></div>
+    </div>
+
+    <div class="dots"></div>
+
+    <h3>G-Shock Kids Collection</h3>
+    <div class="price">Premium Kids Edition</div>
+
+    <button class="btn"
+      onclick="location.href='order.html?model=GShock Kids&price=Premium'">
+      Buy Now
+    </button>
+
+  </article>
+
+</main>
+
+<footer>
+  © 2025 HIGH CHOICE — All Rights Reserved
+</footer>
+
+<script>
+function toggleMenu(){
+  document.getElementById("drawer").classList.toggle("open");
+}
+
+// slider
+document.querySelectorAll(".slider").forEach(slider=>{
+  const slides = slider.querySelectorAll(".slide");
+  const dotsBox = slider.parentElement.querySelector(".dots");
+
+  slides.forEach((s,i)=>{
+    const dot=document.createElement("div");
+    dot.className="dot";
+    if(i===0) dot.classList.add("active");
+
+    dot.onclick=()=>{
+      slides.forEach(x=>x.classList.remove("visible"));
+      slides[i].classList.add("visible");
+
+      dotsBox.querySelectorAll(".dot").forEach(d=>d.classList.remove("active"));
+      dot.classList.add("active");
+    };
+
+    dotsBox.appendChild(dot);
+  });
+});
+</script>
 
 </body>
 </html>
