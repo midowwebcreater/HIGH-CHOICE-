@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Kids Watches – HIGH CHOICE</title>
+<title>Kids Collection – HIGH CHOICE</title>
+<link rel="icon" type="image/png" href="favicon.png">
 
 <style>
     :root {
@@ -11,8 +12,7 @@
         --card: rgba(255,255,255,0.06);
         --text: #ffffff;
         --muted: #c1c1d2;
-        --primary: #7adbff;
-        --primary-dark: #4dbbee;
+        --accent: #7dd3ff;
     }
 
     body {
@@ -20,135 +20,189 @@
         background: var(--bg);
         color: var(--text);
         font-family: 'Poppins', sans-serif;
-        overflow-x: hidden;
     }
 
-    /* HEADER */
     header {
         padding: 14px 20px;
+        background: rgba(0,0,0,0.35);
+        backdrop-filter: blur(10px);
         display: flex;
         justify-content: space-between;
         align-items: center;
-        background: rgba(0,0,0,0.35);
-        backdrop-filter: blur(10px);
-        position: sticky; 
+        position: sticky;
         top: 0;
         z-index: 999;
+        border-bottom: 1px solid rgba(255,255,255,0.05);
     }
+
     .logo {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .logo img {
+        height: 36px;
+    }
+
+    .logo span {
         font-size: 20px;
         font-weight: 700;
-        color: var(--primary);
+        color: var(--accent);
     }
+
     .menu-btn {
         width: 40px;
         height: 40px;
         background: rgba(255,255,255,0.08);
-        border-radius: 8px;
         display: flex;
-        justify-content: center;
         align-items: center;
-        font-size: 20px;
+        justify-content: center;
+        border-radius: 8px;
         cursor: pointer;
+        font-size: 22px;
     }
 
-    /* TITLE */
-    .page-title {
-        padding: 25px 20px 10px 20px;
+    /* Drawer */
+    #drawer {
+        position: fixed;
+        right: -100%;
+        top: 0;
+        width: 70%;
+        max-width: 300px;
+        height: 100%;
+        background: #070b12;
+        padding: 25px;
+        transition: 0.4s;
+        z-index: 900;
+    }
+
+    #drawer.open {
+        right: 0;
+    }
+
+    #drawer a {
+        display: block;
+        padding: 12px 4px;
+        border-bottom: 1px solid rgba(255,255,255,0.08);
+        color: var(--text);
+        margin-bottom: 8px;
+        font-weight: 600;
+    }
+
+    /* Title */
+    .title {
         text-align: center;
         font-size: 26px;
-        font-weight: bold;
-    }
-    .subtitle {
-        text-align: center;
-        margin-top: -10px;
-        color: var(--muted);
-        font-size: 14px;
+        font-weight: 700;
+        margin-top: 25px;
+        color: var(--accent);
     }
 
-    /* BRAND GRID */
-    .brand-grid {
+    .subtitle {
+        text-align: center;
+        color: var(--muted);
+        margin-bottom: 20px;
+    }
+
+    /* Grid */
+    .grid {
         padding: 20px;
         display: grid;
         grid-template-columns: 1fr;
-        gap: 18px;
+        gap: 20px;
     }
 
-    @media (min-width: 600px) {
-        .brand-grid {
-            grid-template-columns: 1fr 1fr;
-        }
+    @media (min-width: 700px) {
+        .grid { grid-template-columns: 1fr 1fr; }
     }
 
-    @media (min-width: 900px) {
-        .brand-grid {
-            grid-template-columns: 1fr 1fr 1fr;
-        }
+    @media (min-width: 1100px) {
+        .grid { grid-template-columns: 1fr 1fr 1fr; }
     }
 
-    .brand-card {
+    .card {
         background: var(--card);
-        border-radius: 16px;
-        padding: 16px;
-        border: 1px solid rgba(255,255,255,0.1);
+        padding: 12px;
+        border-radius: 14px;
+        border: 1px solid rgba(255,255,255,0.08);
         cursor: pointer;
         transition: 0.25s;
         text-align: center;
     }
-    .brand-card img {
+
+    .card:hover {
+        transform: scale(1.04);
+        border-color: var(--accent);
+    }
+
+    .card img {
         width: 100%;
         height: 150px;
         object-fit: cover;
-        border-radius: 12px;
+        border-radius: 10px;
     }
-    .brand-card h3 {
-        margin-top: 12px;
-        font-size: 17px;
-    }
-    .brand-card:hover {
-        transform: scale(1.05);
-        border-color: var(--primary-dark);
+
+    .card h4 {
+        margin-top: 10px;
+        font-size: 16px;
+        font-weight: 600;
+        color: var(--text);
     }
 
     footer {
-        padding: 15px;
         text-align: center;
         color: var(--muted);
-        font-size: 13px;
+        padding: 25px;
+        margin-top: 25px;
     }
 </style>
-</head>
 
+</head>
 <body>
 
-<!-- HEADER -->
 <header>
-    <div class="logo">HIGH CHOICE</div>
-    <div class="menu-btn" onclick="location.href='index.html'">☰</div>
+    <div class="logo">
+        <img src="highchoice_logo.png" alt="High Choice">
+        <span>HIGH CHOICE</span>
+    </div>
+    <div class="menu-btn" onclick="toggleMenu()">☰</div>
 </header>
 
-<!-- PAGE TITLE -->
-<div class="page-title">Kids Watch Brands</div>
-<div class="subtitle">Fun & durable watches for kids</div>
+<nav id="drawer">
+    <a href="index.html">Home</a>
+    <a href="men.html">Men</a>
+    <a href="women.html">Women</a>
+    <a href="kids.html">Kids</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+    <a href="return.html">Return & Replace</a>
+</nav>
 
-<!-- BRAND GRID -->
-<section class="brand-grid">
+<script>
+function toggleMenu() {
+    document.getElementById("drawer").classList.toggle("open");
+}
+</script>
 
-    <div class="brand-card" onclick="location.href='casio_kids.html'">
-        <img src="images/kids/casio.jpg">
-        <h3>Casio Kids</h3>
-    </div>
+<div class="title">Kids' Luxury Collection</div>
+<div class="subtitle">Select a brand to view all models</div>
 
-    <div class="brand-card" onclick="location.href='gshock_kids.html'">
-        <img src="images/kids/gshock.jpg">
-        <h3>G-Shock Kids</h3>
-    </div>
+<section class="grid">
+
+    <a class="card" href="casio_kids.html">
+        <img src="casio_kids.jpg">
+        <h4>Casio Kids</h4>
+    </a>
+
+    <a class="card" href="gshock_kids.html">
+        <img src="gshock_kids.jpg">
+        <h4>G-Shock Kids</h4>
+    </a>
 
 </section>
 
-<footer>
-    © 2025 HIGH CHOICE — All Rights Reserved
-</footer>
+<footer>© 2025 HIGH CHOICE — All Rights Reserved</footer>
 
 </body>
 </html>
