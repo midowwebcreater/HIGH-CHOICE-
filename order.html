@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
+<meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Place Order – HIGH CHOICE</title>
 <link rel="icon" type="image/png" href="favicon.png">
@@ -112,26 +112,25 @@ footer{
 
 <div class="form-box">
 
-  <!-- CUSTOMER NAME -->
   <label>Full Name</label>
-  <input type="text" id="customerName" placeholder="Enter your full name">
+  <input type="text" id="name" placeholder="Enter your full name">
 
-  <!-- CUSTOMER PHONE -->
   <label>Phone Number</label>
-  <input type="tel" id="customerPhone" placeholder="Enter your phone number">
+  <input type="tel" id="phone" placeholder="Enter your phone number">
 
-  <!-- ADDRESS -->
   <label>Address</label>
-  <input type="text" id="customerAddress" placeholder="Enter full address">
+  <input type="text" id="address" placeholder="Enter full address">
 
-  <!-- PAYMENT METHOD -->
-  <label style="margin-top:20px;">Choose Payment Method</label>
+  <label>City</label>
+  <input type="text" id="city" placeholder="Enter your city">
+
+  <label style="margin-top:20px;">Payment Method</label>
   <div class="radio-group">
-    <label><input type="radio" name="payment" value="cod" checked> Cash on Delivery (COD)</label>
-    <label><input type="radio" name="payment" value="prepaid"> Prepaid (UPI Payment)</label>
+    <label><input type="radio" name="payment" value="Cash on Delivery" checked> Cash on Delivery (COD)</label>
+    <label><input type="radio" name="payment" value="Prepaid"> Prepaid (UPI Payment)</label>
   </div>
 
-  <button class="btn" onclick="placeOrder()">Place Order</button>
+  <button class="btn" id="placeOrderBtn">Place Order</button>
 
 </div>
 
@@ -140,39 +139,50 @@ footer{
 <footer>© 2025 HIGH CHOICE — All Rights Reserved</footer>
 
 <script>
-// GET PRODUCT DETAILS FROM URL
-const url = new URLSearchParams(window.location.search);
-const product = url.get("model") || "Unknown Product";
-const price   = url.get("price") || "0";
+// PRODUCT DETAILS from URL
+const params = new URLSearchParams(window.location.search);
+let product = params.get("model") || "Unknown Product";
+let price   = params.get("price") || "0";
 
-// PROCESS ORDER
-function placeOrder(){
+// PLACE ORDER
+document.getElementById("placeOrderBtn").onclick = function(){
 
-  let name    = document.getElementById("customerName").value.trim();
-  let phone   = document.getElementById("customerPhone").value.trim();
-  let address = document.getElementById("customerAddress").value.trim();
+  let name    = document.getElementById("name").value.trim();
+  let phone   = document.getElementById("phone").value.trim();
+  let address = document.getElementById("address").value.trim();
+  let city    = document.getElementById("city").value.trim();
   let payment = document.querySelector("input[name='payment']:checked").value;
 
-  // VALIDATION
-  if(name === "" || phone === "" || address === ""){
-    alert("Please fill all details.");
+  if(name==="" || phone==="" || address==="" || city===""){
+    alert("Please fill complete details.");
     return;
   }
 
-  // COD → Success Page
-  if(payment === "cod"){
-    window.location.href =
-      `success.html?model=${encodeURIComponent(product)}&price=${encodeURIComponent(price)}&name=${encodeURIComponent(name)}&phone=${encodeURIComponent(phone)}`;
-    return;
-  }
+  // WhatsApp Message
+  let msg =
+`🟢 *NEW ORDER RECEIVED*
 
-  // PREPAID → UPI PAGE
-  if(payment === "prepaid"){
-    window.location.href =
-      `upi.html?model=${encodeURIComponent(product)}&price=${encodeURIComponent(price)}&name=${encodeURIComponent(name)}&phone=${encodeURIComponent(phone)}`;
-    return;
-  }
-}
+📦 *Product:* ${product}
+💰 *Price:* ₹${price}
+
+👤 *Customer:* ${name}
+📞 *Phone:* ${phone}
+🏠 *Address:* ${address}, ${city}
+
+💳 *Payment Mode:* ${payment}
+`;
+
+  let number = "917869288078"; // WHATSAPP NUMBER
+
+  // Open WhatsApp
+  window.open("https://wa.me/" + number + "?text=" + encodeURIComponent(msg), "_blank");
+
+  // Redirect to success page
+  window.location.href =
+    "success.html?model=" + encodeURIComponent(product) +
+    "&price=" + encodeURIComponent(price) +
+    "&payment=" + encodeURIComponent(payment);
+};
 </script>
 
 </body>
