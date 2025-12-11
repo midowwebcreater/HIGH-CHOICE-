@@ -4,356 +4,318 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>HIGH CHOICE — Premium Watches</title>
-  <link rel="icon" type="image/png" href="favicon.png">
-
+  <meta name="description" content="High Choice — curated premium watches. Men, Women, Kids collections."/>
+  <link rel="icon" href="favicon.png" />
   <style>
+    /* ---------------------------
+       Minimal light premium theme
+       Helios-like style, responsive
+       --------------------------- */
     :root{
-      --bg:#0e0f19;
-      --card:rgba(255,255,255,0.06);
-      --text:#ffffff;
-      --muted:#b9b9c9;
-      --accent:#b792ff;
-      --accent-2:#7a4fff;
-      --glass: rgba(255,255,255,0.03);
+      --bg:#ffffff;
+      --muted:#7a7a7a;
+      --accent:#0b3a50; /* deep teal */
+      --accent-2:#111827;
+      --card:#f7f7f7;
+      --glass:rgba(10,20,28,0.04);
       --radius:14px;
+      --maxw:1150px;
+      --fw-sans: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
     }
     *{box-sizing:border-box}
-    body{margin:0;font-family:Inter, Poppins, system-ui, sans-serif;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased}
-    a{text-decoration:none;color:inherit}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:var(--fw-sans);
+      background:var(--bg);
+      color:#111;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.45;
+    }
 
-    /* Header */
-    header{position:sticky;top:0;z-index:60;background:linear-gradient(180deg, rgba(6,7,12,0.6), rgba(6,7,12,0.2));backdrop-filter:blur(8px);border-bottom:1px solid rgba(255,255,255,0.03)}
-    .bar{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:12px 18px}
-    .brand{display:flex;align-items:center;gap:10px}
-    .brand img{height:36px;object-fit:contain}
-    .brand .txt{font-weight:800;color:var(--accent);letter-spacing:1px}
-    .hamb{width:44px;height:44px;border-radius:10px;background:rgba(255,255,255,0.03);display:flex;align-items:center;justify-content:center;font-size:20px;cursor:pointer}
+    .container{max-width:var(--maxw);margin:0 auto;padding:0 20px;}
 
-    /* Nav drawer (simple) */
-    #drawer{position:fixed;right:-100%;top:0;height:100vh;width:78%;max-width:360px;background:#071021;padding:28px 18px;transition:0.28s;z-index:80;box-shadow:-30px 60px 120px rgba(2,6,12,0.6)}
-    #drawer.open{right:0}
-    #drawer a{display:block;padding:14px 6px;color:#dbe9ff;font-weight:600;border-bottom:1px solid rgba(255,255,255,0.02)}
+    header{
+      border-bottom:1px solid #eee;
+      background:#fff;
+      position:sticky;top:0;z-index:60;
+      backdrop-filter: blur(6px);
+    }
+    .nav-row{display:flex;align-items:center;justify-content:space-between;padding:14px 0;}
+    .brand{display:flex;gap:12px;align-items:center}
+    .brand img{height:34px;width:34px;object-fit:contain;border-radius:6px}
+    .brand h1{font-size:20px;margin:0;color:var(--accent-2);letter-spacing:0.8px}
+    nav ul{display:flex;gap:18px;align-items:center;margin:0;padding:0;list-style:none}
+    nav a{color:var(--muted);text-decoration:none;font-weight:600;font-size:14px}
+    .cta{background:var(--accent);color:#fff;padding:8px 14px;border-radius:8px;text-decoration:none}
 
-    /* Container */
-    .wrap{max-width:1200px;margin:0 auto;padding:18px}
+    /* hero */
+    .hero{display:grid;grid-template-columns:1fr 520px;gap:32px;align-items:center;padding:36px 0}
+    .hero-left h2{font-size:40px;margin:0 0 18px 0;color:var(--accent-2)}
+    .hero-left p{color:var(--muted);margin:0 0 18px 0;max-width:520px}
+    .hero-left .actions{display:flex;gap:12px}
 
-    /* Hero */
-    .hero{display:flex;flex-direction:column;gap:18px;padding:6px}
-    .hero .left{display:flex;flex-direction:column;gap:12px}
-    .kicker{color:var(--muted);font-weight:700;font-size:13px}
-    .title{font-size:28px;line-height:1.05;margin:0;font-weight:800}
-    .desc{color:var(--muted);max-width:900px;font-size:14px}
-    .cta-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:8px}
-    .btn{background:var(--accent);border:none;padding:11px 16px;border-radius:12px;font-weight:700;color:#050814;cursor:pointer}
-    .btn.outline{background:transparent;border:1px solid rgba(255,255,255,0.06);color:#e8edff}
-
-    /* badges */
-    .badges{display:flex;gap:12px;margin-top:12px}
-    .badge{background:rgba(255,255,255,0.03);padding:8px 12px;border-radius:10px;color:var(--muted);font-weight:600;font-size:13px}
-
-    /* Video slider frame */
-    .media-wrap{background:var(--card);border-radius:18px;padding:10px;border:1px solid rgba(255,255,255,0.04);box-shadow:0 30px 80px rgba(2,6,12,0.7)}
-    .slider{position:relative;overflow:hidden;border-radius:12px;height:calc(56vw);max-height:520px;background:#000}
-    .slide{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .9s ease}
-    .slide.visible{opacity:1;z-index:2}
-    .slide video{width:100%;height:100%;object-fit:cover;border-radius:8px}
-    .slide .fallback{width:100%;height:100%;object-fit:cover;border-radius:8px}
-
-    /* slider controls */
-    .slider-controls{position:absolute;left:0;right:0;bottom:12px;display:flex;justify-content:center;gap:10px;z-index:6}
-    .dot{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,0.22);cursor:pointer}
-    .dot.active{background:var(--accent)}
+    .video-box{background:#000;border-radius:18px;overflow:hidden;min-height:320px;display:flex;align-items:center;justify-content:center}
+    .video-box video{width:100%;height:100%;object-fit:cover;display:block}
 
     /* categories */
-    .categories{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:18px}
-    .card{background:var(--card);padding:12px;border-radius:12px;display:flex;flex-direction:column;align-items:center;gap:12px;border:1px solid rgba(255,255,255,0.04);cursor:pointer}
-    .card img{width:100%;height:120px;object-fit:cover;border-radius:10px}
-    .card h4{margin:0;font-size:15px;color:var(--muted);font-weight:700}
+    .cats{display:flex;gap:18px;margin:36px 0}
+    .cat{flex:1;background:var(--card);border-radius:12px;padding:20px;text-align:center;box-shadow:0 6px 18px rgba(10,10,10,0.04);cursor:pointer}
+    .cat img{max-width:100%;height:140px;object-fit:cover;border-radius:10px}
+    .cat h3{margin:12px 0 0 0;color:var(--accent-2)}
 
-    /* About & Contact */
-    .section{margin-top:28px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.00));padding:18px;border-radius:12px;border:1px solid rgba(255,255,255,0.02)}
-    .section h3{margin:0 0 8px 0}
-    .form-row{display:flex;flex-direction:column;gap:10px}
-    input,textarea{width:100%;padding:10px;border-radius:10px;border:1px solid rgba(255,255,255,0.05);background:transparent;color:var(--text)}
-    .small{font-size:13px;color:var(--muted)}
+    /* brands */
+    .brands-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:18px;margin:28px 0}
+    .brand-card{background:var(--card);padding:18px;border-radius:12px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:12px;min-height:140px;justify-content:center}
+    .brand-card img{height:62px;object-fit:contain}
 
-    footer{text-align:center;padding:26px 6px;color:var(--muted);font-size:14px;margin-top:24px}
+    /* products */
+    .products{margin:28px 0}
+    .products-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:18px}
+    .product{background:#fff;border-radius:12px;padding:12px;border:1px solid #eee;display:flex;flex-direction:column;gap:10px;align-items:center}
+    .product img{width:100%;height:160px;object-fit:contain;border-radius:8px;background:linear-gradient(180deg,#f6f6f6,#fff)}
+    .product h4{margin:0;font-size:16px}
+    .price{color:var(--accent);font-weight:700}
+    .btn{padding:10px 12px;border-radius:10px;border:none;background:var(--accent);color:#fff;cursor:pointer}
 
-    /* responsiveness */
-    @media (min-width:900px){
-      .hero{flex-direction:row;align-items:center}
-      .hero .left{flex:1}
-      .media-wrap{flex:0 0 480px}
-      .slider{height:340px}
-      .categories{margin-top:34px}
+    footer{border-top:1px solid #eee;padding:18px 0;margin-top:36px;color:var(--muted)}
+    .small{font-size:13px;color:#888}
+
+    /* responsive */
+    @media (max-width:900px){
+      .hero{grid-template-columns:1fr;gap:18px}
+      .video-box{min-height:260px}
+      .hero-left h2{font-size:32px}
+      nav ul{display:none}
     }
-    @media (max-width:899px){
-      .categories{grid-template-columns:repeat(2,1fr)}
-      .slider{height:48vw}
-    }
-    @media (max-width:520px){
-      .categories{grid-template-columns:1fr}
-      .title{font-size:22px}
-      .card img{height:160px}
-    }
+
+    /* hamburger */
+    .hambtn{display:none}
+    @media (max-width:900px){.hambtn{display:block}}
+    /* lightweight modal */
+    .modal{position:fixed;inset:0;background:rgba(0,0,0,0.45);display:flex;align-items:center;justify-content:center;z-index:80;opacity:0;pointer-events:none;transition:all .18s}
+    .modal.open{opacity:1;pointer-events:auto}
+    .modal .card{background:#fff;padding:18px;border-radius:12px;max-width:540px;width:96%}
   </style>
 </head>
 <body>
-
-  <!-- header -->
   <header>
-    <div class="bar">
+    <div class="container nav-row">
       <div class="brand">
-        <img src="highchoice_logo.png" alt="High Choice Logo">
-        <div class="txt">HIGH CHOICE</div>
+        <img src="logo.png" alt="HIGH CHOICE logo" onerror="this.style.display='none'"/>
+        <h1>HIGH CHOICE</h1>
       </div>
-      <div class="hamb" id="hambBtn" aria-label="menu">☰</div>
+
+      <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="store.html">Store</a></li>
+          <li><a href="brands.html">Brands</a></li>
+          <li><a href="kids.html"><strong>Kids</strong></a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+
+      <div style="display:flex;align-items:center;gap:12px">
+        <a class="cta" href="store.html">Shop</a>
+        <button class="hambtn" aria-label="menu" onclick="openMenu()">☰</button>
+      </div>
     </div>
   </header>
 
-  <!-- drawer -->
-  <nav id="drawer" aria-hidden="true">
-    <a href="index.html">Home</a>
-    <a href="men.html">Men</a>
-    <a href="women.html">Women</a>
-    <a href="kids.html">Kids</a>
-    <a href="about.html">About</a>
-    <a href="contact.html">Contact</a>
-    <a href="return.html">Return Policy</a>
-  </nav>
-
-  <main class="wrap">
-
+  <main class="container">
     <!-- HERO -->
     <section class="hero">
-      <div class="left">
-        <div class="kicker">PREMIUM LUXURY WATCHES</div>
-        <h1 class="title">High Choice — Premium Curated Watches</h1>
-        <p class="desc">Hand-picked models presented in a clean premium UI. Explore Men, Women and Kids collections — each brand has its own page with full model lists and Buy Now flow.</p>
+      <div class="hero-left">
+        <p style="color:var(--muted);font-weight:700;letter-spacing:1px;margin-bottom:6px">PREMIUM LUXURY WATCHES</p>
+        <h2>High Choice — Curated premium watches</h2>
+        <p>Hand-picked international brands. Shop Men, Women and Kids with trusted checkout — quick order via WhatsApp and UPI payment option.</p>
 
-        <div class="cta-row">
-          <button class="btn" onclick="location.href='men.html'">Shop Men</button>
-          <button class="btn outline" onclick="location.href='women.html'">Shop Women</button>
-          <button class="btn outline" onclick="location.href='kids.html'">Shop Kids</button>
-        </div>
-
-        <div class="badges" aria-hidden="false">
-          <div class="badge">Secure Payments</div>
-          <div class="badge">7-day Replacement</div>
+        <div class="actions">
+          <a class="btn" href="store.html">Shop Men</a>
+          <a class="btn" style="background:#f3f3f3;color:#111" href="women.html">Shop Women</a>
+          <a class="btn" style="background:#f3f3f3;color:#111" href="kids.html">Shop Kids</a>
         </div>
       </div>
 
-      <div class="media-wrap" aria-hidden="false">
-        <div class="slider" id="slider" aria-live="polite">
-          <!-- slides will be injected by JS -->
-          <div class="slider-controls" id="dots"></div>
+      <div class="video-box">
+        <!-- Video fallback: Featured1.mp4 (upload) or hero.jpg -->
+        <video id="heroVideo" autoplay muted loop playsinline>
+          <source src="Featured1.mp4" type="video/mp4">
+          <img src="hero.jpg" alt="Hero" style="width:100%;height:auto">
+        </video>
+      </div>
+    </section>
+
+    <!-- Categories -->
+    <section>
+      <h3 style="margin:10px 0 14px 0;color:var(--muted);font-weight:700">Shop By Category</h3>
+      <div class="cats">
+        <div class="cat" onclick="location.href='store.html'">
+          <img src="men.jpg" alt="Men category" onerror="this.src='men.jpg'">
+          <h3>Men</h3>
+        </div>
+        <div class="cat" onclick="location.href='women.html'">
+          <img src="women.jpg" alt="Women category">
+          <h3>Women</h3>
+        </div>
+        <div class="cat" onclick="location.href='kids.html'">
+          <img src="kids.jpg" alt="Kids category">
+          <h3>Kids</h3>
         </div>
       </div>
     </section>
 
-    <!-- CATEGORIES -->
-    <section class="categories" aria-label="categories">
-      <a class="card" href="men.html">
-        <img src="mens.jpg" alt="Men collection">
-        <h4>Men</h4>
-      </a>
-
-      <a class="card" href="women.html">
-        <img src="women.jpg" alt="Women collection">
-        <h4>Women</h4>
-      </a>
-
-      <a class="card" href="kids.html">
-        <img src="kids.jpg" alt="Kids collection">
-        <h4>Kids</h4>
-      </a>
+    <!-- Brands -->
+    <section>
+      <h3 style="margin:6px 0 14px 0;color:var(--muted);font-weight:700">Brands</h3>
+      <div class="brands-grid" id="brandsGrid">
+        <!-- Brand cards injected by JS. Upload brand logos (see list above). -->
+      </div>
     </section>
 
-    <!-- ABOUT -->
-    <section class="section" aria-labelledby="about">
-      <h3 id="about">About HIGH CHOICE</h3>
-      <p class="small">High Choice curates premium, high-value watches with stellar presentation. We focus on clean product pages, accurate model info and a seamless Buy Now flow that opens the order form for quick checkout.</p>
+    <!-- Featured products -->
+    <section class="products">
+      <div style="display:flex;align-items:center;justify-content:space-between">
+        <h3>Featured — Handpicked</h3>
+        <div class="small">Showing curated selections</div>
+      </div>
+
+      <div class="products-grid" id="productsGrid">
+        <!-- Products inserted by JS -->
+      </div>
     </section>
 
-    <!-- CONTACT -->
-    <section class="section" aria-labelledby="contact">
-      <h3 id="contact">Contact</h3>
-      <p class="small">For partnerships or bulk orders, message us using the form below. WhatsApp will be used only after order submission in the checkout flow.</p>
-
-      <form id="contactForm" onsubmit="handleContact(event)" class="form-row" novalidate>
-        <input id="cname" placeholder="Your name" required>
-        <input id="cphone" placeholder="Phone number" required>
-        <input id="cemail" placeholder="Email (optional)">
-        <textarea id="cmessage" rows="3" placeholder="Message (optional)"></textarea>
-        <div style="display:flex;gap:8px">
-          <button class="btn" type="submit">Send message</button>
-          <button class="btn outline" type="button" onclick="resetContact()">Reset</button>
-        </div>
-        <div id="contactStatus" class="small" aria-live="polite"></div>
-      </form>
-    </section>
-
+    <footer>
+      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap">
+        <div class="small">© 2025 HIGH CHOICE — All Rights Reserved</div>
+        <div class="small">Designed for premium product showcase</div>
+      </div>
+    </footer>
   </main>
 
-  <footer>
-    <div>© HIGH CHOICE — All Rights Reserved</div>
-  </footer>
+  <!-- Product quick modal -->
+  <div class="modal" id="modal">
+    <div class="card">
+      <div id="modalContent"></div>
+      <div style="display:flex;gap:10px;justify-content:flex-end;margin-top:12px">
+        <button onclick="closeModal()" class="btn" style="background:#ccc;color:#111">Close</button>
+        <button class="btn" id="quickBuy">Quick Order</button>
+      </div>
+    </div>
+  </div>
 
 <script>
-/* ---------- NAV DRAWER ---------- */
-const hamb = document.getElementById('hambBtn');
-const drawer = document.getElementById('drawer');
-hamb.addEventListener('click', ()=> { drawer.classList.toggle('open'); drawer.setAttribute('aria-hidden', drawer.classList.contains('open') ? 'false':'true'); });
+/* --------------------------
+  Basic data + UI wiring
+   - Replace with realtime Firebase later
+   - Edit WHATSAPP & UPI below if needed
+   -------------------------- */
+const WHATSAPP_NUMBER = "+917020966879"; // Change if needed (E.164)
+const UPI_ID = "7869288078@kotak811";     // display on prepaid modal
 
-/* ---------- VIDEO SLIDER CONFIG ---------- */
-/* List video files (root). Put your videos here named video1.mp4 ... video10.mp4 */
-const videoFiles = [
-  'video1.mp4','video2.mp4','video3.mp4','video4.mp4','video5.mp4',
-  'video6.mp4','video7.mp4','video8.mp4','video9.mp4','video10.mp4'
+// Brands data (match logo files)
+const brands = [
+  {id:'rolex', name:'Rolex', logo:'rolex_logo.png'},
+  {id:'omega', name:'Omega', logo:'omega_logo.png'},
+  {id:'maserati', name:'Maserati', logo:'maserati_logo.png'},
+  {id:'armani', name:'Armani', logo:'armani_logo.png'},
+  {id:'tissot', name:'Tissot', logo:'tissot_logo.png'},
+  {id:'rado', name:'Rado', logo:'rado_logo.png'},
+  {id:'longines', name:'Longines', logo:'longines_logo.png'},
+  {id:'gshock', name:'G-Shock', logo:'gshock_logo.png'},
+  {id:'patek', name:'Patek Philippe', logo:'patek_logo.png'},
+  {id:'ap', name:'Audemars Piguet', logo:'ap_logo.png'},
+  {id:'cartier', name:'Cartier', logo:'cartier_logo.png'}
 ];
 
-const slider = document.getElementById('slider');
-const dotsWrap = document.getElementById('dots');
-let slides = [];
-let current = 0;
-let autoTimer = null;
-const AUTO_MS = 4500;
+// Sample products (use your actual models + prices)
+const products = [
+  {id:'yachtmaster', brand:'rolex', title:'Rolex Yachtmaster Automatic', price:2499, images:['yachtmaster_1.jpg']},
+  {id:'daytona', brand:'rolex', title:'Rolex Daytona', price:2199, images:['daytona_1.jpg']},
+  {id:'submariner', brand:'rolex', title:'Rolex Submariner Shift Movement', price:1599, images:['submariner_1.jpg']},
+  {id:'omega_speed', brand:'omega', title:'Omega Speedmaster', price:4299, images:['omega_speed_1.jpg']},
+  {id:'gshock_ga', brand:'gshock', title:'G-Shock GA2100', price:1299, images:['gshock_ga_1.jpg']},
+  {id:'maserati_skel', brand:'maserati', title:'Maserati Automatic Skeleton', price:2199, images:['maserati_1.jpg']}
+];
 
-/* Helper: create a slide (video or fallback poster) */
-function createSlide(src) {
-  const slide = document.createElement('div');
-  slide.className = 'slide';
-  // video element
-  const vid = document.createElement('video');
-  vid.src = src;
-  vid.autoplay = false;
-  vid.muted = true;
-  vid.loop = true;
-  vid.playsInline = true;
-  vid.setAttribute('preload','metadata');
-  // fallback image shown until video ready or if error
-  const fallback = document.createElement('img');
-  fallback.src = 'hero_poster.jpg';
-  fallback.className = 'fallback';
-  // If video errors, keep fallback visible; else show video
-  vid.addEventListener('loadeddata', ()=> {
-    // only show video if it has duration > 0
-    if (vid.duration && !isNaN(vid.duration)) {
-      slide.replaceChild(vid, fallback);
-      vid.play().catch(()=>{ /* autoplay may be blocked; muted is set so should be fine */ });
-    }
-  });
-  vid.addEventListener('error', ()=> {
-    // leave fallback
-  });
-  // initially put fallback
-  slide.appendChild(fallback);
-  return {el: slide, media: vid, src};
-}
-
-/* Build slides for only the files that exist (we attempt to load; errors will fallback) */
-(function initSlider(){
-  // create slides for all videoFiles; if file missing, fallback remains
-  videoFiles.forEach((vf, i) => {
-    const s = createSlide(vf);
-    slider.appendChild(s.el);
-    slides.push(s);
-    // create dot
-    const dot = document.createElement('div');
-    dot.className = 'dot';
-    dot.addEventListener('click', ()=> goTo(i));
-    dotsWrap.appendChild(dot);
-  });
-
-  // if no video file at all (user didn't upload), show single poster slide
-  if(slides.length === 0){
-    const poster = document.createElement('img');
-    poster.src = 'hero_poster.jpg';
-    poster.style.width='100%'; poster.style.height='100%'; poster.style.objectFit='cover';
-    slider.appendChild(poster);
-    return;
-  }
-  // make first visible
-  showSlide(0);
-  startAuto();
-  // swipe support
-  addSwipe(slider);
-})();
-
-function showSlide(index){
-  if(!slides[index]) return;
-  slides.forEach((s, i)=> {
-    s.el.classList.toggle('visible', i===index);
-    dotsWrap.children[i] && dotsWrap.children[i].classList.toggle('active', i===index);
-    // play/pause video elements for performance
-    if(i===index){
-      const media = s.media;
-      if(media && media.tagName === 'VIDEO'){ media.play().catch(()=>{}); }
-    } else {
-      const pm = s.media;
-      if(pm && pm.tagName === 'VIDEO'){ pm.pause(); pm.currentTime = 0; }
-    }
-  });
-  current = index;
-}
-
-function nextSlide(){ let nx = (current+1) % slides.length; showSlide(nx); }
-function prevSlide(){ let px = (current-1+slides.length) % slides.length; showSlide(px); }
-
-function goTo(i){
-  stopAuto();
-  showSlide(i);
-  startAuto();
-}
-
-/* Auto play */
-function startAuto(){
-  stopAuto();
-  autoTimer = setInterval(()=> { nextSlide(); }, AUTO_MS);
-}
-function stopAuto(){ if(autoTimer) clearInterval(autoTimer); autoTimer = null; }
-
-/* swipe support */
-function addSwipe(el){
-  let startX=0, startY=0, dist=0;
-  el.addEventListener('touchstart', e => { startX = e.touches[0].clientX; startY = e.touches[0].clientY; stopAuto(); }, {passive:true});
-  el.addEventListener('touchmove', e => { dist = e.touches[0].clientX - startX; }, {passive:true});
-  el.addEventListener('touchend', e => {
-    if(Math.abs(dist) > 40){
-      if(dist < 0) nextSlide(); else prevSlide();
-    }
-    dist = 0; startAuto();
+// Render brands
+function renderBrands(){
+  const grid = document.getElementById('brandsGrid');
+  grid.innerHTML = '';
+  brands.forEach(b=>{
+    const el = document.createElement('div');
+    el.className = 'brand-card';
+    el.innerHTML = `<img src="${b.logo}" alt="${b.name}" onerror="this.style.opacity=.35"><div style="font-weight:700;margin-top:6px">${b.name}</div>`;
+    el.onclick = ()=>{ window.location.href = `brand-${b.id}.html`; };
+    grid.appendChild(el);
   });
 }
 
-/* ---------- Contact form simple handler ---------- */
-function handleContact(e){
-  e.preventDefault();
-  const name = document.getElementById('cname').value.trim();
-  const phone = document.getElementById('cphone').value.trim();
-  const email = document.getElementById('cemail').value.trim();
-  const msg = document.getElementById('cmessage').value.trim();
-  const status = document.getElementById('contactStatus');
-
-  if(!name || !phone){
-    status.innerText = 'Please enter name and phone.';
-    return;
-  }
-  // We are not sending to server here — just confirm to user. Client wants contact form local.
-  status.innerText = 'Message received. We will contact you soon.';
-  // reset after short time
-  setTimeout(()=> { status.innerText=''; document.getElementById('contactForm').reset(); }, 2000);
+// Render products
+function renderProducts(){
+  const grid = document.getElementById('productsGrid');
+  grid.innerHTML = '';
+  products.forEach(p=>{
+    const div = document.createElement('div'); div.className='product';
+    const img = p.images && p.images.length ? p.images[0] : 'hero.jpg';
+    div.innerHTML = `<img src="${img}" alt="${p.title}" onerror="this.src='hero.jpg'">
+      <h4>${p.title}</h4>
+      <div class="price">₹${p.price.toLocaleString()}</div>
+      <div style="display:flex;gap:8px;width:100%">
+        <button class="btn" onclick='openModal("${p.id}")'>View</button>
+        <button style="flex:1;border-radius:10px;border:1px solid #ddd;background:#fff" onclick='openBuy("${p.id}")'>Buy</button>
+      </div>`;
+    grid.appendChild(div);
+  });
 }
 
-function resetContact(){ document.getElementById('contactForm').reset(); document.getElementById('contactStatus').innerText=''; }
+// Modal logic
+function openModal(pid){
+  const p = products.find(x=>x.id===pid);
+  if(!p) return alert('Product not found');
+  const c = document.getElementById('modalContent');
+  c.innerHTML = `<div style="display:flex;gap:12px">
+    <img src="${p.images[0]||'hero.jpg'}" style="width:140px;height:120px;object-fit:contain;border-radius:8px" onerror="this.src='hero.jpg'">
+    <div>
+      <h3 style="margin:0">${p.title}</h3>
+      <p style="color:var(--muted);margin:8px 0">Brand: ${p.brand}</p>
+      <div style="font-weight:700;color:var(--accent)">₹${p.price.toLocaleString()}</div>
+      <p style="margin-top:8px;color:var(--muted)">Payment: COD or Prepaid (UPI)</p>
+    </div>
+  </div>`;
+  document.getElementById('modal').classList.add('open');
+  document.getElementById('quickBuy').onclick = ()=> openBuy(pid);
+}
+function closeModal(){ document.getElementById('modal').classList.remove('open'); }
 
-/* Accessibility: close drawer on outside click */
-document.addEventListener('click', (ev)=> {
-  if(!drawer.classList.contains('open')) return;
-  const target = ev.target;
-  if(!drawer.contains(target) && target !== hamb){ drawer.classList.remove('open'); drawer.setAttribute('aria-hidden','true'); }
-});
+// Buy flow (opens WhatsApp with prefilled order)
+function openBuy(pid){
+  const p = products.find(x=>x.id===pid);
+  if(!p) return;
+  // show a simple prompt for customer name + address (for demo)
+  const name = prompt('Your name (required)');
+  if(!name) return alert('Name required');
+  const phone = prompt('Phone number (required)');
+  if(!phone) return alert('Phone required');
+  const address = prompt('Deliver address (optional)') || '';
+  const payment = confirm('Click OK for PREPAID (UPI). Cancel for COD') ? 'PREPAID' : 'COD';
+  let orderMsg = `*NEW ORDER — HIGH CHOICE*%0AProduct: ${p.title}%0APrice: ₹${p.price}%0AName: ${name}%0APhone: ${phone}%0AAddress: ${address}%0APayment: ${payment}`;
+  if(payment==='PREPAID'){ orderMsg += `%0AUPI: ${UPI_ID}`; }
+  // open whatsapp
+  const wa = `https://wa.me/${WHATSAPP_NUMBER.replace(/\D/g,'')}?text=${orderMsg}`;
+  window.open(wa,'_blank');
+  // For demo we don't save orders yet. Later: save to Firestore here.
+  closeModal();
+}
+
+// init
+renderBrands();
+renderProducts();
+
+/* Small helper to open mobile nav (not used heavily) */
+function openMenu(){ alert('Use the top nav links — mobile nav not implemented in demo file.'); }
 </script>
-
 </body>
-    </html>
+  </html>
